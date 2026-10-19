@@ -62,12 +62,12 @@ button {
   background-size: cover;
   background-position: center;
   transform: scale(1.04);
-  animation: slowCamera 18s ease-in-out infinite alternate;
+  animation: slowCamera 35s ease-out forwards;
 }
 
 @keyframes slowCamera {
   from { transform: scale(1.04); }
-  to { transform: scale(1.12); }
+  to { transform: scale(1.10); }
 }
 
 .entrance-shade {
@@ -250,6 +250,28 @@ button {
     animation: none;
   }
 }
+
+.entrance-content {
+  bottom: clamp(30px, 6vh, 65px);
+}
+
+.subtitle {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(17px, 2vw, 23px);
+  font-weight: 400;
+  letter-spacing: .035em;
+  margin-bottom: 22px;
+  text-shadow: 0 2px 15px #000;
+}
+
+.enter-button {
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: .2em;
+  padding: 13px 30px;
+  background: rgba(15, 11, 9, .55);
+  border: 1px solid rgba(225, 192, 146, .65);
+}
 </style>
 </head>
 
@@ -261,18 +283,16 @@ button {
   <div class="entrance-shade"></div>
 
   <div class="entrance-content">
-    <div class="eyebrow">Established 2024 · Still collecting memories</div>
 
-    <h1>The Museum<br>of Us</h1>
+  <p class="subtitle">
+    An exhibition of a love story still being made.
+  </p>
 
-    <p class="subtitle">
-      An exhibition of a love story still being made.
-    </p>
+  <button class="enter-button" id="enterButton" onclick="enterMuseum()">
+    ENTER THE MUSEUM →
+  </button>
 
-    <button class="enter-button" id="enterButton" onclick="enterMuseum()">
-      ENTER THE MUSEUM
-    </button>
-  </div>
+</div>
 
   <div class="camera-overlay"></div>
 
