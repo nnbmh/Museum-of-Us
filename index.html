@@ -22,7 +22,7 @@ html, body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: #100b08;
+  background: #090807;
 }
 
 body {
@@ -50,7 +50,7 @@ button {
   visibility: visible;
 }
 
-/* ENTRANCE */
+/* MUSEUM ENTRANCE */
 
 #entrance {
   background: #080909;
@@ -100,16 +100,28 @@ button {
   text-shadow: 0 2px 15px #000;
 }
 
-.enter-button {
-  padding: 13px 30px;
-  background: rgba(15,11,9,.55);
-  border: 1px solid rgba(225,192,146,.65);
+.enter-button,
+.explore-button {
+  padding: 14px 32px;
+  background: rgba(15,11,9,.65);
+  border: 1px solid rgba(225,192,146,.7);
   color: var(--cream);
   font-size: 10px;
   font-weight: 300;
   letter-spacing: .2em;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  transition: background .3s ease, transform .3s ease;
+}
+
+.enter-button:hover,
+.explore-button:hover {
+  background: rgba(100,65,35,.8);
+  transform: translateY(-3px);
+}
+
+.enter-button:disabled {
+  opacity: .5;
 }
 
 .camera-overlay {
@@ -141,7 +153,7 @@ button {
   to { transform: scale(1.7); }
 }
 
-/* LOBBY */
+/* MUSEUM LOBBY */
 
 #lobby {
   background: #100c09;
@@ -155,7 +167,6 @@ button {
   object-fit: cover;
   object-position: center;
   animation: lobbyReveal 3s ease-out both;
-  transition: transform 1.2s ease;
 }
 
 @keyframes lobbyReveal {
@@ -163,6 +174,7 @@ button {
     transform: scale(1.08);
     filter: brightness(.45);
   }
+
   to {
     transform: scale(1);
     filter: brightness(1);
@@ -181,6 +193,8 @@ button {
   );
 }
 
+/* WELCOME MESSAGE */
+
 .lobby-caption {
   position: absolute;
   top: 15%;
@@ -198,7 +212,6 @@ button {
     transparent 75%
   );
   text-shadow: 0 3px 15px #000, 0 1px 4px #000;
-  transition: opacity .35s ease;
 }
 
 .eyebrow {
@@ -225,144 +238,36 @@ button {
   margin: 0;
 }
 
-/* CLICKABLE TICKET */
+/* BEGIN EXPLORING BUTTON */
 
-.ticket-hotspot {
+.explore-container {
   position: absolute;
-  z-index: 4;
-  border: 0;
-  padding: 0;
-  background: transparent;
-  touch-action: manipulation;
-}
-
-.ticket-hotspot:focus-visible {
-  outline: 2px solid var(--gold);
-}
-
-.ticket-hint {
-  position: absolute;
-  z-index: 4;
-  bottom: 3%;
+  bottom: clamp(24px, 5vh, 60px);
   left: 50%;
   transform: translateX(-50%);
-  color: #f1d8b1;
-  font-size: 10px;
-  letter-spacing: .18em;
-  text-shadow: 0 2px 12px #000;
+  z-index: 5;
+  text-align: center;
+}
+
+.explore-button {
   white-space: nowrap;
-  pointer-events: none;
-  transition: opacity .35s ease;
+  box-shadow: 0 8px 35px rgba(0,0,0,.4);
+  animation: exploreAppear 1.5s ease 1.5s both;
 }
 
-/* SMALL CAMERA MOVEMENT */
+@keyframes exploreAppear {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
 
-#lobby.inspecting .lobby-art {
-  animation: none;
-  transform: scale(1.12);
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-#lobby.inspecting .lobby-caption,
-#lobby.inspecting .ticket-hint {
-  opacity: 0;
-}
-
-#lobby.inspecting .ticket-hotspot {
-  pointer-events: none;
-}
-
-/* TICKET CLOSE-UP */
-
-.ticket-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  opacity: 0;
-  visibility: hidden;
-  background: #100b08;
-  transition: opacity .85s ease, visibility .85s;
-}
-
-.ticket-overlay.open {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Fills empty space with a blurred version of the close-up */
-
-.ticket-backdrop {
-  position: absolute;
-  inset: -5%;
-  background: url("museum-ticket.PNG") center / cover no-repeat;
-  filter: blur(28px) brightness(.48);
-  transform: scale(1.08);
-}
-
-/* Complete image, never cropped */
-
-.ticket-photo {
-  position: relative;
-  z-index: 1;
-  display: block;
-  width: auto;
-  height: auto;
-  max-width: min(94vw, 1100px);
-  max-height: 76dvh;
-  object-fit: contain;
-  box-shadow: 0 15px 55px rgba(0,0,0,.3);
-  transform: scale(.96);
-  transition: transform 1s ease;
-}
-
-.ticket-overlay.open .ticket-photo {
-  transform: scale(1);
-}
-
-.ticket-close {
-  position: absolute;
-  top: max(22px, env(safe-area-inset-top));
-  right: 25px;
-  z-index: 3;
-  width: 42px;
-  height: 42px;
-  border: 1px solid rgba(255,235,205,.55);
-  border-radius: 50%;
-  background: rgba(15,10,7,.65);
-  color: #fff1df;
-  font-size: 25px;
-}
-
-.visit-button {
-  position: absolute;
-  z-index: 3;
-  bottom: max(22px, env(safe-area-inset-bottom));
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 15px 28px;
-  border: 1px solid rgba(225,192,146,.8);
-  background: rgba(20,13,9,.88);
-  color: #f6ead8;
-  font-size: 10px;
-  letter-spacing: .18em;
-  white-space: nowrap;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-.ticket-close,
-.visit-button {
-  opacity: 0;
-  transition: opacity .4s ease .55s;
-}
-
-.ticket-overlay.open .ticket-close,
-.ticket-overlay.open .visit-button {
-  opacity: 1;
-}
+/* SMALL SCREENS */
 
 @media (max-width: 600px) {
   .lobby-caption {
@@ -370,15 +275,15 @@ button {
     padding: 20px;
   }
 
-  .ticket-photo {
-    max-width: 96vw;
-    max-height: 72dvh;
+  .explore-container {
+    bottom: 4vh;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .entrance-art,
-  .lobby-art {
+  .lobby-art,
+  .explore-button {
     animation: none;
   }
 }
@@ -390,6 +295,7 @@ button {
 <!-- ENTRANCE -->
 
 <section id="entrance" class="scene active">
+
   <div class="entrance-art"></div>
   <div class="entrance-shade"></div>
 
@@ -407,6 +313,7 @@ button {
   </div>
 
   <div class="camera-overlay"></div>
+
 </section>
 
 <!-- LOBBY -->
@@ -415,72 +322,32 @@ button {
 
   <img
     class="lobby-art"
-    id="lobbyArt"
     src="museum-lobby.PNG"
-    alt="Grand museum lobby with an admission ticket on the desk">
+    alt="Grand museum lobby with an admission ticket on the reception desk">
 
   <div class="lobby-shade"></div>
 
   <div class="lobby-caption">
     <div class="eyebrow">Welcome, Faris</div>
+
     <h2>A Collection of Us</h2>
+
     <p>Some things are too special to leave forgotten.</p>
   </div>
 
-  <button
-    class="ticket-hotspot"
-    id="ticketHotspot"
-    onclick="openTicket()"
-    aria-label="Examine your admission ticket">
-  </button>
-
-  <div class="ticket-hint">
-    ✦ TAP THE TICKET ✦
+  <div class="explore-container">
+    <button
+      class="explore-button"
+      onclick="beginExploring()">
+      BEGIN EXPLORING →
+    </button>
   </div>
 
-  <!-- TICKET CLOSE-UP -->
-
-  <div
-    class="ticket-overlay"
-    id="ticketOverlay"
-    role="dialog"
-    aria-modal="true"
-    aria-label="Museum admission ticket"
-    aria-hidden="true">
-
-    <div class="ticket-backdrop"></div>
-
-    <img
-      class="ticket-photo"
-      src="museum-ticket.PNG"
-      alt="Museum admission ticket for Faris">
-
-    <button
-      class="ticket-close"
-      onclick="closeTicket()"
-      aria-label="Close ticket">
-      ×
-    </button>
-
-    <button
-      class="visit-button"
-      onclick="beginVisit()">
-      BEGIN YOUR VISIT →
-    </button>
-
-  </div>
 </section>
 
 <script>
-const entrance = document.getElementById("entrance");
-const lobby = document.getElementById("lobby");
-const overlay = document.getElementById("ticketOverlay");
-const lobbyArt = document.getElementById("lobbyArt");
-const hotspot = document.getElementById("ticketHotspot");
-
-let transitioning = false;
-
 function enterMuseum() {
+  const entrance = document.getElementById("entrance");
   const button = document.getElementById("enterButton");
 
   if (entrance.classList.contains("entering")) return;
@@ -489,78 +356,13 @@ function enterMuseum() {
   entrance.classList.add("entering");
 
   setTimeout(() => {
-    lobby.classList.add("active");
+    document.getElementById("lobby").classList.add("active");
     entrance.classList.remove("active");
-    positionTicketHotspot();
   }, 2700);
 }
 
-/* POSITION HOTSPOT OVER EXISTING TICKET */
-
-function positionTicketHotspot() {
-  const iw = lobbyArt.naturalWidth;
-  const ih = lobbyArt.naturalHeight;
-
-  if (!iw || !ih) return;
-
-  const vw = lobbyArt.clientWidth;
-  const vh = lobbyArt.clientHeight;
-
-  const scale = Math.max(vw / iw, vh / ih);
-  const dw = iw * scale;
-  const dh = ih * scale;
-
-  const ox = (vw - dw) / 2;
-  const oy = (vh - dh) / 2;
-
-  const x = .36;
-  const y = .62;
-  const w = .38;
-  const h = .24;
-
-  hotspot.style.left = (ox + x * dw) + "px";
-  hotspot.style.top = (oy + y * dh) + "px";
-  hotspot.style.width = (w * dw) + "px";
-  hotspot.style.height = (h * dh) + "px";
-}
-
-/* OPEN TICKET */
-
-function openTicket() {
-  if (transitioning) return;
-  transitioning = true;
-
-  lobby.classList.add("inspecting");
-
-  setTimeout(() => {
-    overlay.classList.add("open");
-    overlay.setAttribute("aria-hidden", "false");
-  }, 450);
-}
-
-/* CLOSE TICKET */
-
-function closeTicket() {
-  overlay.classList.remove("open");
-  overlay.setAttribute("aria-hidden", "true");
-
-  setTimeout(() => {
-    lobby.classList.remove("inspecting");
-    transitioning = false;
-  }, 850);
-}
-
-function beginVisit() {
-  closeTicket();
-
+function beginExploring() {
   // Gallery I will be connected here.
-}
-
-lobbyArt.addEventListener("load", positionTicketHotspot);
-window.addEventListener("resize", positionTicketHotspot);
-
-if (lobbyArt.complete) {
-  positionTicketHotspot();
 }
 </script>
 
