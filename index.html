@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Museum of Us</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 :root {
@@ -33,6 +33,7 @@ body {
 button {
   font: inherit;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .scene {
@@ -41,7 +42,7 @@ button {
   overflow: hidden;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 1.1s ease, visibility 1.1s;
+  transition: opacity 1s ease, visibility 1s;
 }
 
 .scene.active {
@@ -49,7 +50,7 @@ button {
   visibility: visible;
 }
 
-/* CINEMATIC ENTRANCE */
+/* ENTRANCE */
 
 #entrance {
   background: #080909;
@@ -58,10 +59,7 @@ button {
 .entrance-art {
   position: absolute;
   inset: -3%;
-  background-image: url("museum-entrance.PNG");
-  background-size: cover;
-  background-position: center;
-  transform: scale(1.04);
+  background: url("museum-entrance.PNG") center / cover no-repeat;
   animation: slowCamera 35s ease-out forwards;
 }
 
@@ -73,19 +71,18 @@ button {
 .entrance-shade {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(0,0,0,.38),
-      transparent 30%,
-      transparent 55%,
-      rgba(0,0,0,.78)
-    );
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,.38),
+    transparent 30%,
+    transparent 55%,
+    rgba(0,0,0,.78)
+  );
 }
 
 .entrance-content {
   position: absolute;
-  bottom: clamp(45px, 9vh, 100px);
+  bottom: clamp(30px, 6vh, 65px);
   left: 50%;
   transform: translateX(-50%);
   width: min(90%, 560px);
@@ -93,50 +90,27 @@ button {
   z-index: 5;
 }
 
-.eyebrow {
-  font-size: 10px;
-  letter-spacing: .32em;
-  text-transform: uppercase;
-  color: var(--gold);
-}
-
-.entrance-content h1 {
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(45px, 8vw, 90px);
-  font-weight: 500;
-  letter-spacing: .045em;
-  line-height: .95;
-  margin: 15px 0;
-  text-shadow: 0 4px 25px #000;
-}
-
 .subtitle {
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(19px, 3vw, 26px);
+  font-size: clamp(17px, 2vw, 23px);
   font-style: italic;
+  font-weight: 400;
+  letter-spacing: .035em;
   color: #e0d0bb;
-  margin: 0 0 30px;
+  margin: 0 0 22px;
+  text-shadow: 0 2px 15px #000;
 }
 
 .enter-button {
-  background: rgba(19, 13, 9, .72);
+  padding: 13px 30px;
+  background: rgba(15,11,9,.55);
+  border: 1px solid rgba(225,192,146,.65);
   color: var(--cream);
-  border: 1px solid rgba(225, 192, 146, .8);
-  padding: 15px 35px;
-  font-size: 11px;
-  letter-spacing: .22em;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: .2em;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  transition: background .3s, transform .3s;
-}
-
-.enter-button:hover {
-  background: rgba(110, 72, 37, .8);
-  transform: translateY(-3px);
-}
-
-.enter-button:disabled {
-  opacity: .5;
 }
 
 .camera-overlay {
@@ -168,7 +142,7 @@ button {
   to { transform: scale(1.7); }
 }
 
-/* CINEMATIC MUSEUM LOBBY */
+/* LOBBY */
 
 #lobby {
   background: #100c09;
@@ -176,22 +150,21 @@ button {
 
 .lobby-art {
   position: absolute;
-  inset: -3%;
-  background-image: url("museum-lobby.PNG");
-  background-size: cover;
-  background-position: center;
-  transform: scale(1.04);
-  animation: lobbyReveal 3s ease-out forwards;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  animation: lobbyReveal 3s ease-out both;
 }
 
 @keyframes lobbyReveal {
   from {
-    transform: scale(1.13);
+    transform: scale(1.08);
     filter: brightness(.45);
   }
-
   to {
-    transform: scale(1.04);
+    transform: scale(1);
     filter: brightness(1);
   }
 }
@@ -199,13 +172,13 @@ button {
 .lobby-shade {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(0,0,0,.2),
-      transparent 35%,
-      rgba(0,0,0,.45)
-    );
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,.18),
+    transparent 35%,
+    rgba(0,0,0,.25)
+  );
 }
 
 .lobby-caption {
@@ -216,6 +189,14 @@ button {
   width: 90%;
   text-align: center;
   text-shadow: 0 3px 18px #000;
+  pointer-events: none;
+}
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--gold);
 }
 
 .lobby-caption h2 {
@@ -234,70 +215,47 @@ button {
   margin: 0;
 }
 
-/* TICKET ON RECEPTION DESK */
+/* INVISIBLE HOTSPOT OVER THE REAL TICKET */
 
-.ticket-object {
+.ticket-hotspot {
   position: absolute;
-  left: 50%;
-  bottom: 12%;
-  width: clamp(160px, 25vw, 300px);
-  aspect-ratio: 1.75;
-  transform: translateX(-50%) rotate(-5deg);
-  background:
-    url("museum-ticket.PNG") center / contain no-repeat,
-    linear-gradient(135deg, #f0dfc1, #b99b70);
-  border: 1px solid #b79565;
-  box-shadow: 0 15px 35px #0008;
+  z-index: 4;
+  padding: 0;
+  border: 0;
+  background: transparent;
   cursor: pointer;
-  transition: transform .4s ease, filter .4s ease;
-  animation: ticketAppear 1.5s ease 1s both;
+  touch-action: manipulation;
 }
 
-@keyframes ticketAppear {
-  from {
-    opacity: 0;
-    transform: translate(-50%, 20px) rotate(-5deg);
-  }
-
-  to {
-    opacity: 1;
-    transform: translate(-50%, 0) rotate(-5deg);
-  }
-}
-
-.ticket-object:hover {
-  transform: translateX(-50%) rotate(-2deg) scale(1.06);
-  filter: brightness(1.1);
+.ticket-hotspot:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
 }
 
 .ticket-hint {
   position: absolute;
-  bottom: 5%;
+  z-index: 4;
+  bottom: 3%;
   left: 50%;
   transform: translateX(-50%);
+  color: #f1d8b1;
   font-size: 10px;
   letter-spacing: .18em;
-  color: #f1d8b1;
   text-shadow: 0 2px 12px #000;
   white-space: nowrap;
+  pointer-events: none;
 }
 
-/* TICKET CLOSE-UP */
+/* PHOTOGRAPHIC TICKET CLOSE-UP */
 
 .ticket-overlay {
   position: absolute;
   inset: 0;
   z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background: rgba(8, 6, 5, .83);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: #100b08;
   opacity: 0;
   visibility: hidden;
-  transition: opacity .5s, visibility .5s;
+  transition: opacity .75s ease, visibility .75s;
 }
 
 .ticket-overlay.open {
@@ -305,117 +263,85 @@ button {
   visibility: visible;
 }
 
-.ticket-closeup {
-  position: relative;
-  width: min(88vw, 470px);
-  padding: 35px 30px;
-  text-align: center;
-  color: #3b2a1d;
-  background:
-    linear-gradient(145deg, #f4e6cc, #d7bd91);
-  border: 2px solid #b58d57;
-  outline: 5px solid #e6d2ad;
-  box-shadow: 0 25px 90px #000b;
-  transform: translateY(30px) scale(.9);
-  transition: transform .6s ease;
-}
-
-.ticket-overlay.open .ticket-closeup {
-  transform: translateY(0) scale(1);
-}
-
-.ticket-closeup::before {
-  content: "";
+.ticket-photo {
   position: absolute;
-  inset: 9px;
-  border: 1px solid #a98454;
-  pointer-events: none;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  transform: scale(1.08);
+  opacity: .5;
+  transition: transform 1s ease, opacity .8s ease;
 }
 
-.ticket-closeup h3 {
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(31px, 6vw, 46px);
-  font-weight: 500;
-  margin: 18px 0;
-}
-
-.ticket-closeup .ticket-details {
-  font-size: 10px;
-  line-height: 2.5;
-  letter-spacing: .14em;
-  color: #5b4630;
-}
-
-.ticket-closeup .ticket-line {
-  height: 1px;
-  margin: 22px 0;
-  background: #b59467;
-}
-
-.ticket-closeup button {
-  margin-top: 20px;
-  padding: 13px 25px;
-  background: #3c2b1f;
-  border: 1px solid #967246;
-  color: #f1e1c7;
-  font-size: 10px;
-  letter-spacing: .15em;
+.ticket-overlay.open .ticket-photo {
+  transform: scale(1);
+  opacity: 1;
 }
 
 .ticket-close {
   position: absolute;
-  top: 14px;
-  right: 17px;
-  background: none !important;
-  border: none !important;
-  color: #6b4e31 !important;
-  font-size: 22px !important;
-  padding: 0 !important;
+  top: max(22px, env(safe-area-inset-top));
+  right: 25px;
+  z-index: 3;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255,235,205,.55);
+  border-radius: 50%;
+  background: rgba(15,10,7,.65);
+  color: #fff1df;
+  font-size: 25px;
+  line-height: 1;
 }
-  
-/* SMALL SCREENS */
+
+.visit-button {
+  position: absolute;
+  z-index: 3;
+  bottom: max(25px, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px 28px;
+  border: 1px solid rgba(225,192,146,.8);
+  background: rgba(20,13,9,.88);
+  color: #f6ead8;
+  font-size: 10px;
+  letter-spacing: .18em;
+  white-space: nowrap;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
 
 @media (max-width: 600px) {
-  .entrance-art {
-    background-position: center;
+  .lobby-caption {
+    top: 5%;
   }
 
-  .entrance-content {
-    bottom: 8vh;
+  .ticket-hint {
+    bottom: 2%;
+  }
+
+  .visit-button {
+    bottom: 5%;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .entrance-art {
+  .entrance-art,
+  .lobby-art {
     animation: none;
   }
-}
 
-.entrance-content {
-  bottom: clamp(30px, 6vh, 65px);
-}
-
-.subtitle {
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(17px, 2vw, 23px);
-  font-weight: 400;
-  letter-spacing: .035em;
-  margin-bottom: 22px;
-  text-shadow: 0 2px 15px #000;
-}
-
-.enter-button {
-  font-size: 10px;
-  font-weight: 300;
-  letter-spacing: .2em;
-  padding: 13px 30px;
-  background: rgba(15, 11, 9, .55);
-  border: 1px solid rgba(225, 192, 146, .65);
+  .ticket-photo {
+    transform: none;
+  }
 }
 </style>
 </head>
 
 <body>
+
+<!-- ENTRANCE -->
 
 <section id="entrance" class="scene active">
 
@@ -423,85 +349,93 @@ button {
   <div class="entrance-shade"></div>
 
   <div class="entrance-content">
+    <p class="subtitle">
+      An exhibition of a love story still being made.
+    </p>
 
-  <p class="subtitle">
-    An exhibition of a love story still being made.
-  </p>
-
-  <button class="enter-button" id="enterButton" onclick="enterMuseum()">
-    ENTER THE MUSEUM →
-  </button>
-
-</div>
+    <button
+      class="enter-button"
+      id="enterButton"
+      onclick="enterMuseum()">
+      ENTER THE MUSEUM →
+    </button>
+  </div>
 
   <div class="camera-overlay"></div>
 
 </section>
 
+<!-- LOBBY -->
+
 <section id="lobby" class="scene">
 
-  <div class="lobby-art"></div>
+  <img
+    class="lobby-art"
+    id="lobbyArt"
+    src="museum-lobby.PNG"
+    alt="Grand museum lobby with an admission ticket on the reception desk"
+  >
+
   <div class="lobby-shade"></div>
 
   <div class="lobby-caption">
     <div class="eyebrow">Welcome, Faris</div>
-
     <h2>A Collection of Us</h2>
-
     <p>Some things are too special to leave forgotten.</p>
   </div>
 
   <button
-    class="ticket-object"
+    class="ticket-hotspot"
+    id="ticketHotspot"
     onclick="openTicket()"
-    aria-label="Examine your admission ticket">
+    aria-label="Pick up your admission ticket">
   </button>
 
   <div class="ticket-hint">
     ✦ TAP THE TICKET ✦
   </div>
 
-  <div class="ticket-overlay" id="ticketOverlay">
+  <!-- TICKET CLOSE-UP -->
 
-    <div class="ticket-closeup">
+  <div
+    class="ticket-overlay"
+    id="ticketOverlay"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Museum admission ticket"
+    aria-hidden="true">
 
-      <button
-        class="ticket-close"
-        onclick="closeTicket()"
-        aria-label="Close ticket">
-        ×
-      </button>
+    <img
+      class="ticket-photo"
+      src="museum-ticket.PNG"
+      alt="The Museum of Us admission ticket for Faris, dated 02.12.2026"
+    >
 
-      <div class="eyebrow" style="color:#8b693d">
-        ADMISSION TICKET
-      </div>
+    <button
+      class="ticket-close"
+      onclick="closeTicket()"
+      aria-label="Close ticket">
+      ×
+    </button>
 
-      <h3>The Museum of Us</h3>
-
-      <div class="ticket-line"></div>
-
-      <div class="ticket-details">
-        VISITOR: FARIS<br>
-        EXHIBITION: A COLLECTION OF US<br>
-        DATE: 02.12.2026<br>
-        ADMISSION: ONE VERY SPECIAL GUEST
-      </div>
-
-      <div class="ticket-line"></div>
-
-      <button onclick="beginVisit()">
-        BEGIN YOUR VISIT →
-      </button>
-
-    </div>
+    <button
+      class="visit-button"
+      onclick="beginVisit()">
+      BEGIN YOUR VISIT →
+    </button>
 
   </div>
 
 </section>
 
 <script>
+const entrance = document.getElementById("entrance");
+const lobby = document.getElementById("lobby");
+const overlay = document.getElementById("ticketOverlay");
+const lobbyArt = document.getElementById("lobbyArt");
+const hotspot = document.getElementById("ticketHotspot");
+
 function enterMuseum() {
-  const entrance = document.getElementById("entrance");
   const button = document.getElementById("enterButton");
 
   if (entrance.classList.contains("entering")) return;
@@ -510,23 +444,87 @@ function enterMuseum() {
   entrance.classList.add("entering");
 
   setTimeout(() => {
-    document.getElementById("lobby").classList.add("active");
+    lobby.classList.add("active");
     entrance.classList.remove("active");
+    positionTicketHotspot();
   }, 2700);
 }
-  function openTicket() {
-  document.getElementById("ticketOverlay").classList.add("open");
+
+/*
+  Align the invisible button with the ticket
+  inside the original lobby artwork.
+
+  The coordinates are percentages of the source image,
+  so they remain aligned when the image is cropped.
+*/
+
+function positionTicketHotspot() {
+  const imageWidth = lobbyArt.naturalWidth;
+  const imageHeight = lobbyArt.naturalHeight;
+
+  if (!imageWidth || !imageHeight) return;
+
+  const viewWidth = lobbyArt.clientWidth;
+  const viewHeight = lobbyArt.clientHeight;
+
+  const scale = Math.max(
+    viewWidth / imageWidth,
+    viewHeight / imageHeight
+  );
+
+  const displayedWidth = imageWidth * scale;
+  const displayedHeight = imageHeight * scale;
+
+  const offsetX = (viewWidth - displayedWidth) / 2;
+  const offsetY = (viewHeight - displayedHeight) / 2;
+
+  /*
+    Approximate ticket bounds in the lobby artwork.
+    Adjust only these four values if the artwork changes.
+  */
+
+  const x = 0.36;
+  const y = 0.62;
+  const w = 0.38;
+  const h = 0.24;
+
+  hotspot.style.left =
+    (offsetX + x * displayedWidth) + "px";
+
+  hotspot.style.top =
+    (offsetY + y * displayedHeight) + "px";
+
+  hotspot.style.width =
+    (w * displayedWidth) + "px";
+
+  hotspot.style.height =
+    (h * displayedHeight) + "px";
+}
+
+function openTicket() {
+  overlay.classList.add("open");
+  overlay.setAttribute("aria-hidden", "false");
 }
 
 function closeTicket() {
-  document.getElementById("ticketOverlay").classList.remove("open");
+  overlay.classList.remove("open");
+  overlay.setAttribute("aria-hidden", "true");
 }
 
 function beginVisit() {
   closeTicket();
 
-  // Gallery scene will be connected next.
-  alert("Gallery I — The Beginning");
+  /*
+    Gallery I will be connected here
+    once we create its artwork.
+  */
+}
+
+lobbyArt.addEventListener("load", positionTicketHotspot);
+window.addEventListener("resize", positionTicketHotspot);
+
+if (lobbyArt.complete) {
+  positionTicketHotspot();
 }
 </script>
 
