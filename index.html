@@ -13,9 +13,7 @@
   --cream: #f6ead8;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 html, body {
   margin: 0;
@@ -52,9 +50,7 @@ button {
 
 /* ENTRANCE */
 
-#entrance {
-  background: #080909;
-}
+#entrance { background: #080909; }
 
 .entrance-art {
   position: absolute;
@@ -94,7 +90,6 @@ button {
   font-family: "Cormorant Garamond", serif;
   font-size: clamp(17px, 2vw, 23px);
   font-style: italic;
-  font-weight: 400;
   letter-spacing: .035em;
   color: #e0d0bb;
   margin: 0 0 22px;
@@ -144,9 +139,7 @@ button {
 
 /* LOBBY */
 
-#lobby {
-  background: #100c09;
-}
+#lobby { background: #100c09; }
 
 .lobby-art {
   position: absolute;
@@ -156,6 +149,8 @@ button {
   object-fit: cover;
   object-position: center;
   animation: lobbyReveal 3s ease-out both;
+  transition: transform 1.6s cubic-bezier(.2,.7,.2,1),
+              filter 1.6s ease;
 }
 
 @keyframes lobbyReveal {
@@ -181,41 +176,53 @@ button {
   );
 }
 
+/* READABLE LOBBY TITLE */
+
 .lobby-caption {
   position: absolute;
-  top: 7%;
+  top: 15%;
   left: 50%;
   transform: translateX(-50%);
-  width: 90%;
+  width: min(90%, 620px);
   text-align: center;
-  text-shadow: 0 3px 18px #000;
+  z-index: 3;
+  padding: 24px 35px;
   pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(15,10,7,.72) 0%,
+    rgba(15,10,7,.38) 45%,
+    transparent 75%
+  );
+  text-shadow: 0 3px 15px #000, 0 1px 4px #000;
+  transition: opacity .5s ease;
 }
 
 .eyebrow {
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: .32em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: #f2d7ad;
 }
 
 .lobby-caption h2 {
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(27px, 4vw, 44px);
-  font-weight: 400;
-  margin: 10px 0;
+  font-size: clamp(30px, 4vw, 46px);
+  font-weight: 500;
+  margin: 12px 0;
   letter-spacing: .045em;
+  color: #fff0da;
 }
 
 .lobby-caption p {
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(16px, 2vw, 21px);
+  font-size: clamp(17px, 2vw, 22px);
   font-style: italic;
-  color: #e0cdb5;
+  color: #f0dcc1;
   margin: 0;
 }
 
-/* INVISIBLE HOTSPOT OVER THE REAL TICKET */
+/* INVISIBLE TICKET HOTSPOT */
 
 .ticket-hotspot {
   position: absolute;
@@ -244,6 +251,61 @@ button {
   text-shadow: 0 2px 12px #000;
   white-space: nowrap;
   pointer-events: none;
+  transition: opacity .4s ease;
+}
+
+/* PICKUP ANIMATION */
+
+.ticket-lift {
+  position: absolute;
+  z-index: 8;
+  display: none;
+  overflow: hidden;
+  pointer-events: none;
+  transform-origin: center;
+  background-image: url("museum-lobby.PNG");
+  background-repeat: no-repeat;
+  box-shadow: 0 15px 40px rgba(0,0,0,.35);
+  will-change: transform, opacity;
+}
+
+#lobby.picking-up .ticket-lift {
+  display: block;
+  animation: liftTicket 1.6s cubic-bezier(.2,.65,.2,1) forwards;
+}
+
+@keyframes liftTicket {
+  0% {
+    transform: perspective(900px) translateY(0) scale(1) rotateX(0deg);
+    opacity: 1;
+  }
+  35% {
+    transform: perspective(900px) translateY(-45px) scale(1.18) rotateX(6deg);
+    opacity: 1;
+  }
+  75% {
+    transform: perspective(900px) translateY(-100px) scale(1.8) rotateX(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: perspective(900px) translateY(-120px) scale(2.3);
+    opacity: 0;
+  }
+}
+
+#lobby.picking-up .lobby-art {
+  animation: none;
+  transform: scale(1.12);
+  filter: blur(8px) brightness(.65);
+}
+
+#lobby.picking-up .lobby-caption,
+#lobby.picking-up .ticket-hint {
+  opacity: 0;
+}
+
+#lobby.picking-up .ticket-hotspot {
+  pointer-events: none;
 }
 
 /* PHOTOGRAPHIC TICKET CLOSE-UP */
@@ -255,7 +317,7 @@ button {
   background: #100b08;
   opacity: 0;
   visibility: hidden;
-  transition: opacity .75s ease, visibility .75s;
+  transition: opacity .9s ease, visibility .9s;
 }
 
 .ticket-overlay.open {
@@ -270,9 +332,9 @@ button {
   height: 100%;
   object-fit: contain;
   object-position: center;
-  transform: scale(1.08);
+  transform: scale(1.12);
   opacity: .5;
-  transition: transform 1s ease, opacity .8s ease;
+  transition: transform 1.2s ease, opacity 1s ease;
 }
 
 .ticket-overlay.open .ticket-photo {
@@ -312,28 +374,29 @@ button {
   -webkit-backdrop-filter: blur(10px);
 }
 
+.ticket-overlay .ticket-close,
+.ticket-overlay .visit-button {
+  opacity: 0;
+  transition: opacity .5s ease .65s;
+}
+
+.ticket-overlay.open .ticket-close,
+.ticket-overlay.open .visit-button {
+  opacity: 1;
+}
+
 @media (max-width: 600px) {
   .lobby-caption {
-    top: 5%;
-  }
-
-  .ticket-hint {
-    bottom: 2%;
-  }
-
-  .visit-button {
-    bottom: 5%;
+    top: 12%;
+    padding: 20px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .entrance-art,
-  .lobby-art {
-    animation: none;
-  }
-
-  .ticket-photo {
-    transform: none;
+  .lobby-art,
+  .ticket-lift {
+    animation: none !important;
   }
 }
 </style>
@@ -391,6 +454,8 @@ button {
     aria-label="Pick up your admission ticket">
   </button>
 
+  <div class="ticket-lift" id="ticketLift"></div>
+
   <div class="ticket-hint">
     ✦ TAP THE TICKET ✦
   </div>
@@ -434,6 +499,9 @@ const lobby = document.getElementById("lobby");
 const overlay = document.getElementById("ticketOverlay");
 const lobbyArt = document.getElementById("lobbyArt");
 const hotspot = document.getElementById("ticketHotspot");
+const ticketLift = document.getElementById("ticketLift");
+
+let pickingUp = false;
 
 function enterMuseum() {
   const button = document.getElementById("enterButton");
@@ -450,13 +518,7 @@ function enterMuseum() {
   }, 2700);
 }
 
-/*
-  Align the invisible button with the ticket
-  inside the original lobby artwork.
-
-  The coordinates are percentages of the source image,
-  so they remain aligned when the image is cropped.
-*/
+/* POSITION HOTSPOT AND TICKET CUTOUT */
 
 function positionTicketHotspot() {
   const imageWidth = lobbyArt.naturalWidth;
@@ -478,46 +540,62 @@ function positionTicketHotspot() {
   const offsetX = (viewWidth - displayedWidth) / 2;
   const offsetY = (viewHeight - displayedHeight) / 2;
 
-  /*
-    Approximate ticket bounds in the lobby artwork.
-    Adjust only these four values if the artwork changes.
-  */
-
   const x = 0.36;
   const y = 0.62;
   const w = 0.38;
   const h = 0.24;
 
-  hotspot.style.left =
-    (offsetX + x * displayedWidth) + "px";
+  const left = offsetX + x * displayedWidth;
+  const top = offsetY + y * displayedHeight;
+  const width = w * displayedWidth;
+  const height = h * displayedHeight;
 
-  hotspot.style.top =
-    (offsetY + y * displayedHeight) + "px";
+  hotspot.style.left = left + "px";
+  hotspot.style.top = top + "px";
+  hotspot.style.width = width + "px";
+  hotspot.style.height = height + "px";
 
-  hotspot.style.width =
-    (w * displayedWidth) + "px";
+  ticketLift.style.left = left + "px";
+  ticketLift.style.top = top + "px";
+  ticketLift.style.width = width + "px";
+  ticketLift.style.height = height + "px";
 
-  hotspot.style.height =
-    (h * displayedHeight) + "px";
+  ticketLift.style.backgroundSize =
+    displayedWidth + "px " + displayedHeight + "px";
+
+  ticketLift.style.backgroundPosition =
+    (-left + offsetX) + "px " + (-top + offsetY) + "px";
 }
 
+/* PICK UP THE TICKET */
+
 function openTicket() {
-  overlay.classList.add("open");
-  overlay.setAttribute("aria-hidden", "false");
+  if (pickingUp) return;
+  pickingUp = true;
+
+  positionTicketHotspot();
+  lobby.classList.add("picking-up");
+
+  setTimeout(() => {
+    overlay.classList.add("open");
+    overlay.setAttribute("aria-hidden", "false");
+  }, 950);
 }
 
 function closeTicket() {
   overlay.classList.remove("open");
   overlay.setAttribute("aria-hidden", "true");
+
+  setTimeout(() => {
+    lobby.classList.remove("picking-up");
+    pickingUp = false;
+  }, 900);
 }
 
 function beginVisit() {
   closeTicket();
 
-  /*
-    Gallery I will be connected here
-    once we create its artwork.
-  */
+  // Gallery I will be connected here.
 }
 
 lobbyArt.addEventListener("load", positionTicketHotspot);
