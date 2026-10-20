@@ -514,6 +514,48 @@ button {
     opacity: 0;
   }
 }
+
+/* SUBTLE BOOK GLOW */
+
+.book-hotspot {
+  overflow: visible;
+}
+
+.book-glow {
+  position: absolute;
+  inset: 8% 10%;
+  border-radius: 50%;
+  pointer-events: none;
+
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 221, 151, .30) 0%,
+    rgba(245, 188, 94, .13) 38%,
+    rgba(225, 170, 83, 0) 75%
+  );
+
+  filter: blur(13px);
+  opacity: 0;
+
+  animation: bookGlowPulse 4.5s ease-in-out infinite;
+}
+
+@keyframes bookGlowPulse {
+  0%, 100% {
+    opacity: 0;
+  }
+
+  45%, 60% {
+    opacity: .8;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .book-glow {
+    animation: none;
+    opacity: .35;
+  }
+}
 </style>
 </head>
 
@@ -581,15 +623,18 @@ button {
     src="gallery-1.PNG"
     alt="Gallery I — The Beginning">
 
-  <button
+ <button
   class="book-hotspot"
   onclick="openBook()"
   aria-label="Examine The First Entry">
+
+  <span class="book-glow"></span>
+
 </button>
 
   <div class="gallery1-shade"></div>
   <div class="gallery-hint">
-  ✧ TAP AN EXHIBIT TO EXPLORE ✧
+  ✧ SOME STORIES ARE WAITING TO BE DISCOVERED ✧
 </div>
 
   <div class="gallery1-label">
