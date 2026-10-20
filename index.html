@@ -457,38 +457,39 @@ button {
   position: absolute;
   top: 4%;
   left: 3%;
-  z-index: 20;
+  z-index: 30;
 
-  padding: 12px 18px;
-
-  border: 1px solid rgba(225, 192, 146, .65);
-  border-radius: 3px;
-
-  background: rgba(18, 13, 10, .85);
+  padding: 12px 8px;
+  border: none;
+  background: transparent;
 
   color: #f6ead8;
-  font-family: "DM Sans", sans-serif;
-  font-size: 11px;
-  letter-spacing: .15em;
-  white-space: nowrap;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.16em;
 
-  text-shadow: 0 1px 4px rgba(0,0,0,.8);
-
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  text-shadow:
+    0 1px 5px rgba(0, 0, 0, 0.85),
+    0 2px 12px rgba(0, 0, 0, 0.55);
 
   cursor: pointer;
-
-  transition:
-    background .3s ease,
-    border-color .3s ease;
+  transition: opacity 0.3s ease;
 }
 
 .exhibit-back:hover {
-  background: rgba(45, 30, 20, .95);
-  border-color: #e1c092;
+  opacity: 0.75;
 }
 
+.exhibit-back .back-arrow {
+  display: inline-block;
+  margin-right: 10px;
+  transition: transform 0.3s ease;
+}
+
+.exhibit-back:hover .back-arrow {
+  transform: translateX(-4px);
+}
   /* GALLERY INTERACTION HINT */
 
 .gallery-hint {
@@ -1193,10 +1194,8 @@ button {
     REVEAL THE FIRST ENTRY →
   </button>
 
-  <button
-    class="exhibit-back"
-    onclick="closeBook()">
-    ← RETURN TO GALLERY
+  <button class="exhibit-back" onclick="closeBook()">
+    <span class="back-arrow">←</span> GALLERY I
   </button>
 
 </section>
@@ -1235,10 +1234,8 @@ button {
     ✧ TAP THE WATCH ✧
   </div>
 
-  <button
-    class="exhibit-back"
-    onclick="closeWatch()">
-    ← RETURN TO GALLERY
+  <button class="exhibit-back" onclick="closeWatch()">
+    <span class="back-arrow">←</span> GALLERY I
   </button>
 
 </section>
@@ -1255,10 +1252,8 @@ button {
     src="gallery-1-conversation.PNG"
     alt="Fragments of conversations displayed as a constellation">
 
-  <button
-    class="exhibit-back"
-    onclick="closeConversation()">
-    ← RETURN TO GALLERY
+  <button class="exhibit-back" onclick="closeConversation()">
+    <span class="back-arrow">←</span> GALLERY I
   </button>
 
 </section>
