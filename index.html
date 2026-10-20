@@ -403,6 +403,68 @@ button {
     animation: none;
   }
 }
+
+/* EXHIBIT 01 — BOOK INTERACTION */
+
+.book-hotspot {
+  position: absolute;
+  left: 39%;
+  top: 52%;
+  width: 22%;
+  height: 14%;
+  z-index: 5;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.book-hotspot:focus-visible {
+  outline: 2px solid #e1c092;
+}
+
+#bookExhibit {
+  background: #100c09;
+}
+
+.book-exhibit-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+#bookExhibit.active .book-exhibit-art {
+  animation: bookArrival 1.8s ease-out both;
+}
+
+@keyframes bookArrival {
+  from {
+    transform: scale(1.06);
+    filter: brightness(.55);
+  }
+
+  to {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
+.exhibit-back {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  padding: 12px 18px;
+  border: 1px solid rgba(225,192,146,.45);
+  background: rgba(18,12,9,.8);
+  color: #f6ead8;
+  font-size: 10px;
+  letter-spacing: .18em;
+  white-space: nowrap;
+}
 </style>
 </head>
 
@@ -470,6 +532,12 @@ button {
     src="gallery-1.PNG"
     alt="Gallery I — The Beginning">
 
+  <button
+  class="book-hotspot"
+  onclick="openBook()"
+  aria-label="Examine The First Entry">
+</button>
+
   <div class="gallery1-shade"></div>
 
   <div class="gallery1-label">
@@ -479,6 +547,23 @@ button {
 
 </section>
 
+<!-- EXHIBIT 01 — THE FIRST ENTRY -->
+
+<section id="bookExhibit" class="scene">
+
+  <img
+    class="book-exhibit-art"
+    src="gallery-1-book.PNG"
+    alt="The First Entry collection register">
+
+  <button
+    class="exhibit-back"
+    onclick="closeBook()">
+    ← RETURN TO GALLERY
+  </button>
+
+</section>
+  
 <script>
 function enterMuseum() {
   const entrance = document.getElementById("entrance");
@@ -505,6 +590,28 @@ function beginExploring() {
 
   setTimeout(() => {
     lobby.classList.remove("active");
+  }, 1000);
+}
+
+function openBook() {
+  const gallery = document.getElementById("gallery1");
+  const book = document.getElementById("bookExhibit");
+
+  book.classList.add("active");
+
+  setTimeout(() => {
+    gallery.classList.remove("active");
+  }, 1000);
+}
+
+function closeBook() {
+  const gallery = document.getElementById("gallery1");
+  const book = document.getElementById("bookExhibit");
+
+  gallery.classList.add("active");
+
+  setTimeout(() => {
+    book.classList.remove("active");
   }, 1000);
 }
 </script>
