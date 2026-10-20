@@ -778,6 +778,158 @@ button {
     transition: none;
   }
 }
+
+/* ==========================================
+   GALLERY I — WATCH & CONVERSATION EXHIBITS
+========================================== */
+
+/* Invisible clickable exhibit areas */
+
+.watch-hotspot,
+.conversation-hotspot {
+  position: absolute;
+  z-index: 9;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* Left display case */
+
+.watch-hotspot {
+  left: 3%;
+  top: 30%;
+  width: 14%;
+  height: 31%;
+}
+
+/* Right display case */
+
+.conversation-hotspot {
+  right: 3%;
+  top: 30%;
+  width: 14%;
+  height: 31%;
+}
+
+/* Exhibit scenes */
+
+#watchExhibit,
+#conversationExhibit {
+  background: #100c09;
+}
+
+/* Keep images aligned */
+
+.watch-exhibit-art,
+.conversation-exhibit-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Smooth camera arrival */
+
+#watchExhibit.active .watch-exhibit-art,
+#conversationExhibit.active .conversation-exhibit-art {
+  animation: exhibitCameraArrival 2.2s
+    cubic-bezier(.22, 1, .36, 1) both;
+}
+
+@keyframes exhibitCameraArrival {
+  from {
+    transform: scale(1.045);
+    filter: brightness(.65);
+  }
+
+  to {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
+/* Watch notification image overlay */
+
+.watch-notification {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease;
+}
+
+.watch-notification.visible {
+  opacity: 1;
+}
+
+/* Watch interaction hotspot */
+
+.watch-screen-hotspot {
+  position: absolute;
+  left: 46%;
+  top: 34%;
+  width: 8%;
+  height: 18%;
+  z-index: 8;
+
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* Subtle notification vibration */
+
+.watch-notification.vibrating {
+  animation: watchBuzz .35s ease;
+}
+
+@keyframes watchBuzz {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-1px); }
+  50% { transform: translateX(1px); }
+  75% { transform: translateX(-1px); }
+}
+
+/* Hint */
+
+.watch-hint {
+  position: absolute;
+  bottom: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 8;
+
+  font-size: 10px;
+  letter-spacing: .2em;
+  color: #f6ead8;
+  text-shadow: 0 2px 12px #000;
+
+  opacity: .85;
+  pointer-events: none;
+  transition: opacity .5s ease;
+}
+
+.watch-hint.hidden {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #watchExhibit.active .watch-exhibit-art,
+  #conversationExhibit.active .conversation-exhibit-art,
+  .watch-notification.vibrating {
+    animation: none;
+  }
+}
+  
 </style>
 </head>
 
@@ -844,6 +996,23 @@ button {
     class="gallery1-art"
     src="gallery-1.PNG"
     alt="Gallery I — The Beginning">
+
+  <!-- EXHIBIT 02 — WATCH HOTSPOT -->
+
+<button
+  class="watch-hotspot"
+  onclick="openWatch()"
+  aria-label="Examine The First Date">
+</button>
+
+
+<!-- EXHIBIT 03 — CONVERSATION HOTSPOT -->
+
+<button
+  class="conversation-hotspot"
+  onclick="openConversation()"
+  aria-label="Examine Somewhere Along the Conversation">
+</button>
 
  <button
   class="book-hotspot"
@@ -1003,6 +1172,68 @@ button {
   </button>
 
 </section>
+
+<!-- ==========================================
+     EXHIBIT 02 — THE FIRST DATE
+========================================== -->
+
+<section id="watchExhibit" class="scene">
+
+  <!-- Sleeping watch -->
+
+  <img
+    class="watch-exhibit-art"
+    src="gallery-1-watch-asleep.png"
+    alt="A sleeping Apple Watch inside a museum display case">
+
+  <!-- OKC notification -->
+
+  <img
+    id="watchNotification"
+    class="watch-notification"
+    src="gallery-1-watch-okc.PNG"
+    alt=""
+    aria-hidden="true">
+
+  <!-- Tap watch -->
+
+  <button
+    class="watch-screen-hotspot"
+    onclick="triggerWatchNotification()"
+    aria-label="Tap the watch">
+  </button>
+
+  <div id="watchHint" class="watch-hint">
+    ✧ TAP THE WATCH ✧
+  </div>
+
+  <button
+    class="exhibit-back"
+    onclick="closeWatch()">
+    ← RETURN TO GALLERY
+  </button>
+
+</section>
+
+
+<!-- ==========================================
+     EXHIBIT 03 — CONVERSATION
+========================================== -->
+
+<section id="conversationExhibit" class="scene">
+
+  <img
+    class="conversation-exhibit-art"
+    src="gallery-1-conversation.PNG"
+    alt="Fragments of conversations displayed as a constellation">
+
+  <button
+    class="exhibit-back"
+    onclick="closeConversation()">
+    ← RETURN TO GALLERY
+  </button>
+
+</section>
   
 <script>
 function enterMuseum() {
@@ -1135,6 +1366,124 @@ function closeBook() {
 
   setTimeout(() => {
     book.classList.remove("active");
+  }, 1000);
+}
+
+/* ==========================================
+   EXHIBIT 02 — WATCH
+========================================== */
+
+let watchBusy = false;
+let watchTimer = null;
+
+function openWatch() {
+  const gallery = document.getElementById("gallery1");
+  const watch = document.getElementById("watchExhibit");
+  const notification = document.getElementById("watchNotification");
+  const hint = document.getElementById("watchHint");
+
+  clearTimeout(watchTimer);
+
+  watchBusy = false;
+
+  notification.classList.remove(
+    "visible",
+    "vibrating"
+  );
+
+  hint.classList.remove("hidden");
+
+  watch.classList.add("active");
+
+  setTimeout(() => {
+    gallery.classList.remove("active");
+  }, 1000);
+}
+
+
+function triggerWatchNotification() {
+  if (watchBusy) return;
+
+  watchBusy = true;
+
+  const notification = document.getElementById(
+    "watchNotification"
+  );
+
+  const hint = document.getElementById("watchHint");
+
+  hint.classList.add("hidden");
+
+  // Small pause before the unexpected notification
+
+  watchTimer = setTimeout(() => {
+
+    notification.classList.add("visible");
+
+    notification.classList.add("vibrating");
+
+    setTimeout(() => {
+      notification.classList.remove("vibrating");
+    }, 400);
+
+    // Notification disappears after 3 seconds
+
+    watchTimer = setTimeout(() => {
+
+      notification.classList.remove("visible");
+
+      watchBusy = false;
+
+      hint.classList.remove("hidden");
+
+    }, 3000);
+
+  }, 1800);
+}
+
+
+function closeWatch() {
+  clearTimeout(watchTimer);
+
+  const gallery = document.getElementById("gallery1");
+  const watch = document.getElementById("watchExhibit");
+
+  gallery.classList.add("active");
+
+  setTimeout(() => {
+    watch.classList.remove("active");
+  }, 1000);
+}
+
+
+/* ==========================================
+   EXHIBIT 03 — CONVERSATION
+========================================== */
+
+function openConversation() {
+  const gallery = document.getElementById("gallery1");
+  const conversation = document.getElementById(
+    "conversationExhibit"
+  );
+
+  conversation.classList.add("active");
+
+  setTimeout(() => {
+    gallery.classList.remove("active");
+  }, 1000);
+}
+
+
+function closeConversation() {
+  const gallery = document.getElementById("gallery1");
+  const conversation = document.getElementById(
+    "conversationExhibit"
+  );
+
+  gallery.classList.add("active");
+
+  setTimeout(() => {
+    conversation.classList.remove("active");
   }, 1000);
 }
 </script>
