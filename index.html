@@ -525,25 +525,20 @@ button {
 
 .book-glow {
   position: absolute;
-
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 65%;
-
-  border-radius: 50%;
+  inset: 0;
+  border-radius: 45%;
   pointer-events: none;
 
   background: transparent;
 
   box-shadow:
-    0 0 8px 3px rgba(255, 215, 140, .25),
-    0 0 18px 6px rgba(255, 195, 100, .12);
+    0 0 8px 2px rgba(255, 215, 140, .3),
+    0 0 16px 4px rgba(255, 195, 100, .12);
 
   opacity: 0;
   animation: bookGlowPulse 4s ease-in-out infinite;
 }
-
+  
 @keyframes bookGlowPulse {
   0%, 100% {
     opacity: 0;
