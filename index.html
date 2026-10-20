@@ -517,42 +517,265 @@ button {
   }
 }
 
-/* BOOK EDGE GLOW */
+/* BOOK SHIMMERS */
 
 .book-hotspot {
-  overflow: visible;
+  position: absolute;
+  left: 38.5%;
+  top: 46.5%;
+  width: 23%;
+  height: 12%;
+  z-index: 7;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  clip-path: polygon(
+    0% 25%,
+    8% 15%,
+    43% 0%,
+    50% 9%,
+    57% 0%,
+    92% 15%,
+    100% 25%,
+    97% 90%,
+    50% 100%,
+    3% 90%
+  );
 }
 
-.book-glow {
+.book-hotspot:focus-visible {
+  outline: 2px solid #e1c092;
+}
+
+.book-sparkles {
+  position: absolute;
+  left: 38.5%;
+  top: 46.5%;
+  width: 23%;
+  height: 12%;
+  z-index: 8;
+  pointer-events: none;
+}
+
+.book-sparkles span {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  opacity: 0;
+  animation: bookTwinkle 5.5s ease-in-out infinite;
+}
+
+.book-sparkles span::before,
+.book-sparkles span::after {
+  content: "";
+  position: absolute;
+  background: #ffe4a5;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(255, 207, 124, .8);
+}
+
+.book-sparkles span::before {
+  width: 2px;
+  height: 100%;
+  left: 3px;
+}
+
+.book-sparkles span::after {
+  width: 100%;
+  height: 2px;
+  top: 3px;
+}
+
+.book-sparkles span:nth-child(1) {
+  left: 4%;
+  top: 25%;
+  animation-delay: 0s;
+}
+
+.book-sparkles span:nth-child(2) {
+  left: 17%;
+  top: 13%;
+  animation-delay: .4s;
+}
+
+.book-sparkles span:nth-child(3) {
+  left: 40%;
+  top: 2%;
+  animation-delay: .8s;
+}
+
+.book-sparkles span:nth-child(4) {
+  left: 55%;
+  top: 5%;
+  animation-delay: 1.2s;
+}
+
+.book-sparkles span:nth-child(5) {
+  left: 78%;
+  top: 13%;
+  animation-delay: 1.6s;
+}
+
+.book-sparkles span:nth-child(6) {
+  left: 96%;
+  top: 25%;
+  animation-delay: 2s;
+}
+
+.book-sparkles span:nth-child(7) {
+  left: 90%;
+  top: 88%;
+  animation-delay: 2.4s;
+}
+
+.book-sparkles span:nth-child(8) {
+  left: 10%;
+  top: 88%;
+  animation-delay: 2.8s;
+}
+
+@keyframes bookTwinkle {
+  0%, 12%, 30%, 100% {
+    opacity: 0;
+    transform: scale(.4);
+  }
+
+  19% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* BOOK REGISTER */
+
+.book-writing {
   position: absolute;
   inset: 0;
-  border-radius: 45%;
+  z-index: 5;
   pointer-events: none;
-
-  background: transparent;
-
-  box-shadow:
-    0 0 8px 2px rgba(255, 215, 140, .3),
-    0 0 16px 4px rgba(255, 195, 100, .12);
-
-  opacity: 0;
-  animation: bookGlowPulse 4s ease-in-out infinite;
 }
-  
-@keyframes bookGlowPulse {
-  0%, 100% {
-    opacity: 0;
-  }
 
-  50% {
-    opacity: .85;
-  }
+.book-entry {
+  position: absolute;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: clamp(11px, 1.25vw, 19px);
+  color: #603d27;
+  opacity: 0;
+  transform: translateY(5px);
+  transition:
+    opacity 1.2s ease,
+    transform 1.2s ease;
+  text-shadow: 0 0 1px rgba(80, 45, 20, .2);
+}
+
+.book-entry.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* HANDWRITTEN MARGIN NOTES */
+
+.handwritten-note {
+  position: absolute;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: clamp(12px, 1.5vw, 23px);
+  line-height: 1.1;
+  color: #81502e;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+  text-align: center;
+}
+
+.handwritten-note.revealed {
+  opacity: .85;
+}
+
+.note-one {
+  left: 20%;
+  top: 35%;
+  width: 20%;
+  transform: rotate(-7deg);
+}
+
+.note-two {
+  left: 18%;
+  top: 57%;
+  width: 24%;
+  transform: rotate(5deg);
+}
+
+.note-three {
+  left: 61%;
+  top: 75%;
+  width: 19%;
+  transform: rotate(-5deg);
+}
+
+/* REVEAL BUTTON */
+
+.book-reveal-button {
+  position: absolute;
+  right: 5%;
+  bottom: 5%;
+  z-index: 10;
+  padding: 12px 18px;
+  border: 1px solid rgba(225, 192, 146, .5);
+  background: rgba(25, 16, 10, .78);
+  color: #f6ead8;
+  font-size: 10px;
+  letter-spacing: .16em;
+  transition: background .3s, opacity .3s;
+}
+
+.book-reveal-button:hover {
+  background: rgba(65, 42, 23, .9);
+}
+
+.book-reveal-button:disabled {
+  opacity: .5;
+  cursor: default;
+}
+
+/* PORTRAIT NAME REVEAL */
+
+.portrait-reveal {
+  position: absolute;
+  z-index: 6;
+  top: 48%;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(11px, 1.3vw, 20px);
+  letter-spacing: .08em;
+  color: #f4d8ad;
+  text-shadow: 0 2px 8px #100906;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+  pointer-events: none;
+}
+
+.portrait-reveal.revealed {
+  opacity: 1;
+}
+
+.portrait-her {
+  left: 34%;
+}
+
+.portrait-him {
+  left: 61%;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .book-glow {
+  .book-sparkles span {
     animation: none;
-    opacity: .4;
+  }
+
+  .book-entry,
+  .handwritten-note,
+  .portrait-reveal {
+    transition: none;
   }
 }
 </style>
@@ -626,10 +849,30 @@ button {
   class="book-hotspot"
   onclick="openBook()"
   aria-label="Examine The First Entry">
-
-  <span class="book-glow"></span>
-
 </button>
+
+<div class="book-sparkles" aria-hidden="true">
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+<div
+  id="portraitHer"
+  class="portrait-reveal portrait-her">
+  NADHIRA
+</div>
+
+<div
+  id="portraitHim"
+  class="portrait-reveal portrait-him">
+  FARIS
+</div>
 
   <div class="gallery1-shade"></div>
   <div class="gallery-hint">
@@ -642,7 +885,7 @@ button {
   </div>
 
 </section>
-
+  
 <!-- EXHIBIT 01 — THE FIRST ENTRY -->
 
 <section id="bookExhibit" class="scene">
@@ -651,6 +894,107 @@ button {
     class="book-exhibit-art"
     src="gallery-1-book.PNG"
     alt="The First Entry collection register">
+
+  <div class="book-writing">
+
+    <!-- FIRST REVEAL -->
+
+    <div
+      class="book-entry"
+      data-step="1"
+      style="left: 63%; top: 35%;">
+      4 May 2024
+    </div>
+
+    <div
+      class="book-entry"
+      data-step="1"
+      style="left: 63%; top: 39%;">
+      Muzz
+    </div>
+
+    <div
+      class="book-entry"
+      data-step="1"
+      style="left: 63%; top: 43%;">
+      Two strangers
+    </div>
+
+    <div
+      class="book-entry"
+      data-step="1"
+      style="left: 63%; top: 47%;">
+      An unexpected match
+    </div>
+
+    <!-- SECOND REVEAL -->
+
+    <div
+      class="book-entry"
+      data-step="2"
+      style="left: 63%; top: 51%;">
+      A memorable profile rant
+    </div>
+
+    <div
+      class="book-entry"
+      data-step="2"
+      style="left: 63%; top: 55%;">
+      She messaged first
+    </div>
+
+    <div
+      class="book-entry"
+      data-step="2"
+      style="left: 63%; top: 59%;">
+      His profile caught her attention
+    </div>
+
+    <div
+      class="book-entry"
+      data-step="2"
+      style="left: 63%; top: 63%;">
+      An opening worth remembering
+    </div>
+
+    <!-- THIRD REVEAL -->
+
+    <div
+      class="book-entry"
+      data-step="3"
+      style="left: 63%; top: 67%;">
+      The beginning of us
+    </div>
+
+    <!-- HANDWRITTEN NOTES -->
+
+    <div
+      class="handwritten-note note-one"
+      data-step="1">
+      lucky you were handsome…
+    </div>
+
+    <div
+      class="handwritten-note note-two"
+      data-step="2">
+      …and even luckier i decided
+      to message you first.
+    </div>
+
+    <div
+      class="handwritten-note note-three"
+      data-step="3">
+      good thing i'm nosy hehe.
+    </div>
+
+  </div>
+
+  <button
+    id="bookRevealButton"
+    class="book-reveal-button"
+    onclick="revealBook()">
+    REVEAL THE FIRST ENTRY →
+  </button>
 
   <button
     class="exhibit-back"
@@ -689,6 +1033,89 @@ function beginExploring() {
   }, 1000);
 }
 
+let bookRevealStep = 0;
+
+function revealBook() {
+
+  if (bookRevealStep >= 3) return;
+
+  bookRevealStep++;
+
+  const entries = document.querySelectorAll(
+    `.book-entry[data-step="${bookRevealStep}"]`
+  );
+
+  entries.forEach((entry, index) => {
+    setTimeout(() => {
+      entry.classList.add("revealed");
+    }, index * 350);
+  });
+
+  const note = document.querySelector(
+    `.handwritten-note[data-step="${bookRevealStep}"]`
+  );
+
+  if (note) {
+    setTimeout(() => {
+      note.classList.add("revealed");
+    }, 1100);
+  }
+
+  const button = document.getElementById(
+    "bookRevealButton"
+  );
+
+  if (bookRevealStep === 1) {
+    button.textContent = "CONTINUE READING →";
+  }
+
+  if (bookRevealStep === 2) {
+    button.textContent = "REVEAL THE OUTCOME →";
+  }
+
+  if (bookRevealStep === 3) {
+
+    button.textContent = "COLLECTION IDENTIFIED ✓";
+    button.disabled = true;
+
+    localStorage.setItem(
+      "museumFirstEntryComplete",
+      "true"
+    );
+
+    setTimeout(() => {
+      document
+        .getElementById("portraitHer")
+        .classList.add("revealed");
+
+      document
+        .getElementById("portraitHim")
+        .classList.add("revealed");
+    }, 1500);
+  }
+}
+
+if (
+  localStorage.getItem("museumFirstEntryComplete")
+  === "true"
+) {
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+      document
+        .getElementById("portraitHer")
+        .classList.add("revealed");
+
+      document
+        .getElementById("portraitHim")
+        .classList.add("revealed");
+
+    }
+  );
+}
+  
 function openBook() {
   const gallery = document.getElementById("gallery1");
   const book = document.getElementById("bookExhibit");
