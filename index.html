@@ -1479,122 +1479,276 @@ button {
 
 </section>
   
-<!-- EXHIBIT 01 — THE FIRST ENTRY -->
+<!-- ==========================================
+     EXHIBIT 01 — A CHANCE ENCOUNTER
+========================================== -->
 
 <section id="bookExhibit" class="scene">
 
-  <img
-    class="book-exhibit-art"
-    src="gallery-1-book.PNG"
-    alt="The First Entry collection register">
+  <div class="interactive-book">
 
-  <div class="book-writing">
+    <!-- SPREAD ONE: THE PROFILE -->
 
-    <!-- FIRST REVEAL -->
+    <div id="bookSpread1" class="book-spread active-spread">
 
-    <div
-      class="book-entry"
-      data-step="1"
-      style="left: 63%; top: 35%;">
-      4 May 2024
+      <img
+        class="book-page-art"
+        src="gallery-1-book-pages-3-4.PNG"
+        alt="An antique book opened to Faris's profile">
+
+      <!-- LEFT PAGE -->
+
+      <div class="book-page-content book-left">
+
+        <div class="book-small-heading">
+          EXHIBIT A
+        </div>
+
+        <h2>A Rather<br>Interesting Profile</h2>
+
+        <div class="book-divider">✦</div>
+
+        <p class="book-detail">
+          <strong>Subject:</strong> Faris
+        </p>
+
+        <p class="book-detail">
+          <strong>Platform:</strong> Muzmatch
+        </p>
+
+        <p class="book-detail">
+          <strong>Date:</strong> 3 May 2024
+        </p>
+
+        <div class="book-observations">
+
+          <div>☑ Handsome</div>
+          <div>☑ Singaporean</div>
+          <div>☑ Living in the UK</div>
+          <div>☑ Apparently had a few things to say</div>
+
+        </div>
+
+        <p class="book-handwriting">
+          Okay, I admit it.<br>
+          You were quite handsome.
+        </p>
+
+        <p class="book-tiny-note">
+          Don't let it get to your head.
+        </p>
+
+      </div>
+
+      <!-- RIGHT PAGE -->
+
+      <div class="book-page-content book-right">
+
+        <div class="book-small-heading">
+          EXHIBIT B
+        </div>
+
+        <h2>The Evidence</h2>
+
+        <p class="book-instruction">
+          Two rather specific complaints were
+          discovered in the subject's profile.
+        </p>
+
+        <!-- FOLDED NOTE ONE -->
+
+        <button
+          class="book-folded-note"
+          id="complaint1"
+          onclick="openComplaint(1)">
+
+          <span class="folded-label">
+            COMPLAINT NO. 01 ✉
+          </span>
+
+          <span class="folded-content">
+            Why did women keep asking whether
+            he wanted a British passport when
+            he already had a Singapore passport?
+          </span>
+
+        </button>
+
+        <!-- FOLDED NOTE TWO -->
+
+        <button
+          class="book-folded-note"
+          id="complaint2"
+          onclick="openComplaint(2)">
+
+          <span class="folded-label">
+            COMPLAINT NO. 02 ✉
+          </span>
+
+          <span class="folded-content">
+            Why did people assume he was using
+            Google Translate just because
+            his English was good?
+          </span>
+
+        </button>
+
+        <p
+          id="profileComment"
+          class="book-handwriting book-hidden-comment">
+
+          And somehow, I found this amusing.
+
+        </p>
+
+      </div>
+
     </div>
 
-    <div
-      class="book-entry"
-      data-step="1"
-      style="left: 63%; top: 39%;">
-      Muzz
-    </div>
 
-    <div
-      class="book-entry"
-      data-step="1"
-      style="left: 63%; top: 43%;">
-      Two strangers
-    </div>
+    <!-- SPREAD TWO: THE DECISION -->
 
-    <div
-      class="book-entry"
-      data-step="1"
-      style="left: 63%; top: 47%;">
-      An unexpected match
-    </div>
+    <div id="bookSpread2" class="book-spread">
 
-    <!-- SECOND REVEAL -->
+      <img
+        class="book-page-art"
+        src="gallery-1-book-pages-5-6.PNG"
+        alt="An antique book opened to the final findings">
 
-    <div
-      class="book-entry"
-      data-step="2"
-      style="left: 63%; top: 51%;">
-      A memorable profile rant
-    </div>
+      <!-- LEFT PAGE -->
 
-    <div
-      class="book-entry"
-      data-step="2"
-      style="left: 63%; top: 55%;">
-      She messaged first
-    </div>
+      <div class="book-page-content book-left">
 
-    <div
-      class="book-entry"
-      data-step="2"
-      style="left: 63%; top: 59%;">
-      His profile caught her attention
-    </div>
+        <div class="book-small-heading">
+          THE DECISION
+        </div>
 
-    <div
-      class="book-entry"
-      data-step="2"
-      style="left: 63%; top: 63%;">
-      An opening worth remembering
-    </div>
+        <h2>Who Made<br>the First Move?</h2>
 
-    <!-- THIRD REVEAL -->
+        <div class="book-divider">✦</div>
 
-    <div
-      class="book-entry"
-      data-step="3"
-      style="left: 63%; top: 67%;">
-      The beginning of us
-    </div>
+        <p class="book-instruction">
+          Select your answer.
+        </p>
 
-    <!-- HANDWRITTEN NOTES -->
+        <div class="book-guess-options">
 
-    <div
-      class="handwritten-note note-one"
-      data-step="1">
-      lucky you were handsome…
-    </div>
+          <button onclick="guessFirstMove('faris')">
+            ☐ Faris
+          </button>
 
-    <div
-      class="handwritten-note note-two"
-      data-step="2">
-      …and even luckier i decided
-      to message you first.
-    </div>
+          <button onclick="guessFirstMove('nadhira')">
+            ☐ Nadhira
+          </button>
 
-    <div
-      class="handwritten-note note-three"
-      data-step="3">
-      good thing i'm nosy hehe.
+        </div>
+
+        <p
+          id="bookGuessResponse"
+          class="book-handwriting book-guess-response">
+        </p>
+
+        <div
+          id="bookReasons"
+          class="book-reasons">
+
+          <div>☑ Found him handsome</div>
+          <div>☑ Found his profile amusing</div>
+          <div>☑ Decided to take a chance</div>
+
+        </div>
+
+      </div>
+
+      <!-- RIGHT PAGE -->
+
+      <div class="book-page-content book-right">
+
+        <div class="book-small-heading">
+          FINAL FINDINGS
+        </div>
+
+        <h2>The Confession</h2>
+
+        <div class="book-divider">✦</div>
+
+        <p class="book-detail">
+          <strong>Date:</strong> 3 May 2024
+        </p>
+
+        <p class="book-detail">
+          <strong>First move:</strong> Nadhira
+        </p>
+
+        <p class="book-detail">
+          <strong>Outcome:</strong> One message
+          that started everything.
+        </p>
+
+        <div
+          id="bookFinalNote"
+          class="book-final-note">
+
+          <p>
+            Imagine if I never<br>
+            messaged you first.
+          </p>
+
+          <p>
+            You're welcome, bb.
+          </p>
+
+        </div>
+
+      </div>
+
     </div>
 
   </div>
 
-  <button
-    id="bookRevealButton"
-    class="book-reveal-button"
-    onclick="revealBook()">
-    REVEAL THE FIRST ENTRY →
-  </button>
 
-  <button class="exhibit-back" onclick="closeBook()">
-    <span class="back-arrow">←</span> GALLERY I
+  <!-- BOOK NAVIGATION -->
+
+  <div class="book-navigation">
+
+    <button
+      id="bookPrevious"
+      onclick="changeBookSpread(-1)"
+      disabled>
+
+      ← PREVIOUS
+
+    </button>
+
+    <span id="bookPageIndicator">
+      01 — 02
+    </span>
+
+    <button
+      id="bookNext"
+      onclick="changeBookSpread(1)"
+      disabled>
+
+      TURN PAGE →
+
+    </button>
+
+  </div>
+
+
+  <!-- BACK TO GALLERY -->
+
+  <button
+    class="exhibit-back"
+    onclick="closeBook()">
+
+    <span class="back-arrow">←</span>
+    GALLERY I
+
   </button>
 
 </section>
-
+  
 <!-- ==========================================
      EXHIBIT 02 — THE FIRST DATE
 ========================================== -->
