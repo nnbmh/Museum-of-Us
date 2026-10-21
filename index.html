@@ -2806,34 +2806,21 @@ function guessFirstMove(person) {
    RESTORE COMPLETED EXHIBIT
 ========================================== */
 
-if (
-  localStorage.getItem("museumFirstEntryComplete")
-  === "true"
-) {
+try {
+  if (localStorage.getItem("museumFirstEntryComplete") === "true") {
+    const portraitHer = document.getElementById("portraitHer");
+    const portraitHim = document.getElementById("portraitHim");
 
-  document.addEventListener(
-    "DOMContentLoaded",
-    () => {
-
-      const portraitHer = document.getElementById(
-        "portraitHer"
-      );
-
-      const portraitHim = document.getElementById(
-        "portraitHim"
-      );
-
-      if (portraitHer) {
-        portraitHer.classList.add("revealed");
-      }
-
-      if (portraitHim) {
-        portraitHim.classList.add("revealed");
-      }
-
+    if (portraitHer) {
+      portraitHer.classList.add("revealed");
     }
-  );
 
+    if (portraitHim) {
+      portraitHim.classList.add("revealed");
+    }
+  }
+} catch (error) {
+  console.warn("Could not restore book progress:", error);
 }
   
 /* ==========================================
