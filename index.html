@@ -938,14 +938,9 @@ button {
 
   opacity: 0;
   pointer-events: none;
+  z-index: 5;
 
-  /* Reveal the OKC watch screen */
-  clip-path: inset(
-    41% 49% 48% 42%
-    round 8px
-  );
-
-  transition: opacity .2s ease;
+  transition: opacity 0.25s ease;
 }
   
 .watch-notification.visible {
@@ -1616,11 +1611,11 @@ button {
   <!-- OKC notification -->
 
   <img
-    id="watchNotification"
-    class="watch-notification"
-    src="gallery-1-watch-okc.PNG"
-    alt=""
-    aria-hidden="true">
+  id="watchNotification"
+  class="watch-notification"
+  src="watch-okc-logo-overlay.png"
+  alt=""
+  aria-hidden="true">
 
   <!-- Tap watch -->
 
