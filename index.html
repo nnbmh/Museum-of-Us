@@ -962,6 +962,341 @@ button {
     animation: none;
   }
 }
+
+/* ==========================================
+   EXHIBIT 03 — CONVERSATION CONSTELLATION
+========================================== */
+
+.conversation-stars {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  pointer-events: none;
+}
+
+/* Individual interactive stars */
+
+.conversation-star {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+
+  transform: translate(-50%, -50%);
+
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+
+  cursor: pointer;
+  pointer-events: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+#conversationExhibit.active .conversation-star {
+  opacity: 1;
+}
+
+/* Glowing star centre */
+
+.conversation-star::before {
+  content: "✦";
+
+  font-size: 20px;
+  color: #f9dfaa;
+
+  text-shadow:
+    0 0 5px rgba(255, 230, 170, .95),
+    0 0 12px rgba(255, 205, 110, .85),
+    0 0 24px rgba(255, 190, 95, .45);
+
+  animation: conversationTwinkle 3s ease-in-out infinite;
+}
+
+/* Different twinkle timings */
+
+.conversation-star:nth-child(2)::before {
+  animation-delay: .5s;
+}
+
+.conversation-star:nth-child(3)::before {
+  animation-delay: 1s;
+}
+
+.conversation-star:nth-child(4)::before {
+  animation-delay: 1.5s;
+}
+
+.conversation-star:nth-child(5)::before {
+  animation-delay: 2s;
+}
+
+@keyframes conversationTwinkle {
+  0%, 100% {
+    opacity: .55;
+    transform: scale(.85);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+/* Discovered stars */
+
+.conversation-star.discovered::before {
+  color: #fff0c8;
+
+  text-shadow:
+    0 0 8px rgba(255, 235, 180, 1),
+    0 0 20px rgba(255, 205, 120, .95),
+    0 0 35px rgba(255, 190, 90, .7);
+
+  animation: none;
+}
+
+/* Initial hint */
+
+.conversation-hint {
+  position: absolute;
+  bottom: 7%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 8;
+
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(15px, 1.6vw, 20px);
+  font-style: italic;
+  letter-spacing: .04em;
+
+  color: #f8e6c9;
+  text-shadow: 0 2px 12px rgba(0,0,0,.9);
+
+  pointer-events: none;
+  transition: opacity .8s ease;
+}
+
+.conversation-hint.hidden {
+  opacity: 0;
+}
+
+/* ==========================================
+   ARCHIVAL CARD
+========================================== */
+
+.conversation-card-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  background: rgba(12, 8, 6, .35);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity .45s ease,
+    visibility .45s ease;
+}
+
+.conversation-card-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Antique document */
+
+.conversation-card {
+  position: relative;
+
+  width: min(440px, 90vw);
+  max-height: 78vh;
+  overflow-y: auto;
+
+  padding: 38px 35px 34px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f3e5cc,
+      #e9d5b4 55%,
+      #dfc59e
+    );
+
+  border: 1px solid #b99a6b;
+
+  box-shadow:
+    0 15px 50px rgba(0,0,0,.5),
+    inset 0 0 35px rgba(125, 82, 35, .12);
+
+  color: #4b3527;
+
+  text-align: center;
+
+  transform: translateY(18px) scale(.96);
+
+  transition: transform .5s
+    cubic-bezier(.22, 1, .36, 1);
+}
+
+.conversation-card-overlay.visible .conversation-card {
+  transform: translateY(0) scale(1);
+}
+
+/* Card number */
+
+.conversation-card-number {
+  font-family: "DM Sans", sans-serif;
+  font-size: 10px;
+  letter-spacing: .3em;
+  color: #896d4c;
+}
+
+/* Card heading */
+
+.conversation-card h3 {
+  margin: 18px 0 20px;
+
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(27px, 3vw, 36px);
+  font-weight: 500;
+
+  color: #553a2b;
+}
+
+/* Placeholder conversation */
+
+.conversation-card-text {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(18px, 2vw, 23px);
+  line-height: 1.5;
+  font-style: italic;
+
+  color: #654936;
+}
+
+/* Decorative divider */
+
+.conversation-card-divider {
+  width: 55px;
+  height: 1px;
+
+  margin: 24px auto;
+
+  background: #ad8c60;
+}
+
+/* Close card */
+
+.conversation-card-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+
+  border: none;
+  background: transparent;
+
+  font-family: "Cormorant Garamond", serif;
+  font-size: 27px;
+
+  color: #74573e;
+  cursor: pointer;
+}
+
+.conversation-card-close:hover {
+  color: #3e281d;
+}
+
+/* ==========================================
+   FINAL CONSTELLATION MESSAGE
+========================================== */
+
+.conversation-final {
+  position: absolute;
+  left: 50%;
+  bottom: 12%;
+
+  transform: translateX(-50%) translateY(10px);
+
+  z-index: 9;
+  width: min(650px, 85%);
+
+  padding: 22px 30px;
+
+  text-align: center;
+
+  background: radial-gradient(
+    ellipse at center,
+    rgba(20, 12, 8, .85),
+    rgba(20, 12, 8, .5) 60%,
+    transparent
+  );
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity 1.5s ease,
+    transform 1.5s ease,
+    visibility 1.5s ease;
+}
+
+.conversation-final.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.conversation-final p {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(17px, 2vw, 24px);
+  font-style: italic;
+
+  color: #f5dfbc;
+  line-height: 1.4;
+}
+
+.conversation-final span {
+  display: block;
+  margin-top: 16px;
+
+  font-family: "DM Sans", sans-serif;
+  font-size: 10px;
+  letter-spacing: .22em;
+
+  color: #f1d09c;
+}
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .conversation-star::before {
+    animation: none;
+  }
+
+  .conversation-card,
+  .conversation-card-overlay,
+  .conversation-final {
+    transition: none;
+  }
+}
   
 </style>
 </head>
@@ -1251,12 +1586,135 @@ button {
 
 <section id="conversationExhibit" class="scene">
 
+  <!-- Original approved exhibit image -->
+
   <img
     class="conversation-exhibit-art"
     src="gallery-1-conversation.PNG"
     alt="Fragments of conversations displayed as a constellation">
 
-  <button class="exhibit-back" onclick="closeConversation()">
+
+  <!-- FIVE INTERACTIVE STARS -->
+
+  <div class="conversation-stars">
+
+    <button
+      class="conversation-star"
+      style="left: 32%; top: 38%;"
+      onclick="openConversationCard(0)"
+      aria-label="Explore conversation fragment one">
+    </button>
+
+    <button
+      class="conversation-star"
+      style="left: 47%; top: 30%;"
+      onclick="openConversationCard(1)"
+      aria-label="Explore conversation fragment two">
+    </button>
+
+    <button
+      class="conversation-star"
+      style="left: 63%; top: 40%;"
+      onclick="openConversationCard(2)"
+      aria-label="Explore conversation fragment three">
+    </button>
+
+    <button
+      class="conversation-star"
+      style="left: 39%; top: 61%;"
+      onclick="openConversationCard(3)"
+      aria-label="Explore conversation fragment four">
+    </button>
+
+    <button
+      class="conversation-star"
+      style="left: 59%; top: 64%;"
+      onclick="openConversationCard(4)"
+      aria-label="Explore conversation fragment five">
+    </button>
+
+  </div>
+
+
+  <!-- EXPLORATION HINT -->
+
+  <div
+    id="conversationHint"
+    class="conversation-hint">
+    Some conversations are worth revisiting.
+  </div>
+
+
+  <!-- FINAL MESSAGE -->
+
+  <div
+    id="conversationFinal"
+    class="conversation-final">
+
+    <p>
+      i don't think there was one particular
+      conversation that changed everything.
+      it was just all the little ones in between.
+    </p>
+
+    <span>
+      SOMEWHERE ALONG THE WAY, IT BECAME US.
+    </span>
+
+  </div>
+
+
+  <!-- ARCHIVAL CARD -->
+
+  <div
+    id="conversationCardOverlay"
+    class="conversation-card-overlay"
+    onclick="closeConversationCard(event)">
+
+    <div
+      class="conversation-card"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="conversationCardTitle"
+      onclick="event.stopPropagation()">
+
+      <button
+        class="conversation-card-close"
+        onclick="closeConversationCard()"
+        aria-label="Close conversation card">
+        ×
+      </button>
+
+      <div
+        id="conversationCardNumber"
+        class="conversation-card-number">
+        ARCHIVE FRAGMENT 01
+      </div>
+
+      <h3 id="conversationCardTitle">
+        The Random Things
+      </h3>
+
+      <div class="conversation-card-divider"></div>
+
+      <div
+        id="conversationCardText"
+        class="conversation-card-text">
+        Conversation coming soon.
+      </div>
+
+      <div class="conversation-card-divider"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- RETURN NAVIGATION -->
+
+  <button
+    class="exhibit-back"
+    onclick="closeConversation()">
     <span class="back-arrow">←</span> GALLERY I
   </button>
 
@@ -1481,8 +1939,54 @@ function closeWatch() {
    EXHIBIT 03 — CONVERSATION
 ========================================== */
 
+
+/* Temporary conversation content
+
+   Later, we only need to replace these
+   placeholders with actual Telegram messages.
+*/
+
+const conversationFragments = [
+
+  {
+    title: "The Random Things",
+    text: "A collection of the unexpected, completely random things we somehow ended up talking about."
+  },
+
+  {
+    title: "The Teasing",
+    text: "The little jokes, playful arguments, and moments when we couldn't resist annoying each other."
+  },
+
+  {
+    title: "The Questions",
+    text: "The conversations where we gradually learned more about the person on the other side of the screen."
+  },
+
+  {
+    title: "The Familiarity",
+    text: "The ordinary conversations that slowly started feeling familiar."
+  },
+
+  {
+    title: "The Little Moments",
+    text: "The small exchanges that might not have seemed important at the time."
+  }
+
+];
+
+
+/* Track discovered fragments */
+
+const discoveredConversations = new Set();
+
+
+/* Enter exhibit */
+
 function openConversation() {
+
   const gallery = document.getElementById("gallery1");
+
   const conversation = document.getElementById(
     "conversationExhibit"
   );
@@ -1492,20 +1996,118 @@ function openConversation() {
   setTimeout(() => {
     gallery.classList.remove("active");
   }, 1000);
+
 }
 
 
+/* Open archival card */
+
+function openConversationCard(index) {
+
+  const fragment = conversationFragments[index];
+
+  if (!fragment) return;
+
+  const overlay = document.getElementById(
+    "conversationCardOverlay"
+  );
+
+  const number = document.getElementById(
+    "conversationCardNumber"
+  );
+
+  const title = document.getElementById(
+    "conversationCardTitle"
+  );
+
+  const text = document.getElementById(
+    "conversationCardText"
+  );
+
+  number.textContent =
+    `ARCHIVE FRAGMENT ${String(index + 1).padStart(2, "0")}`;
+
+  title.textContent = fragment.title;
+
+  text.textContent = fragment.text;
+
+  overlay.classList.add("visible");
+
+  /* Mark star as discovered */
+
+  discoveredConversations.add(index);
+
+  const stars = document.querySelectorAll(
+    ".conversation-star"
+  );
+
+  stars[index].classList.add("discovered");
+
+  /* Hide initial hint */
+
+  document.getElementById(
+    "conversationHint"
+  ).classList.add("hidden");
+
+}
+
+
+/* Close archival card */
+
+function closeConversationCard(event) {
+
+  if (
+    event &&
+    event.target !== document.getElementById(
+      "conversationCardOverlay"
+    )
+  ) {
+    return;
+  }
+
+  document.getElementById(
+    "conversationCardOverlay"
+  ).classList.remove("visible");
+
+  /* Check if all five fragments were discovered */
+
+  if (discoveredConversations.size === 5) {
+
+    setTimeout(() => {
+
+      document.getElementById(
+        "conversationFinal"
+      ).classList.add("visible");
+
+    }, 700);
+
+  }
+
+}
+
+
+/* Return to Gallery I */
+
 function closeConversation() {
+
   const gallery = document.getElementById("gallery1");
+
   const conversation = document.getElementById(
     "conversationExhibit"
   );
+
+  /* Close any open archival card */
+
+  document.getElementById(
+    "conversationCardOverlay"
+  ).classList.remove("visible");
 
   gallery.classList.add("active");
 
   setTimeout(() => {
     conversation.classList.remove("active");
   }, 1000);
+
 }
 </script>
 
