@@ -42,12 +42,16 @@ button {
   overflow: hidden;
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
+  z-index: 0;
   transition: opacity 1s ease, visibility 1s;
 }
 
 .scene.active {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
+  z-index: 10;
 }
 
 /* MUSEUM ENTRANCE */
