@@ -214,68 +214,52 @@ button {
 }
 
 /* ==========================================
-   LOBBY → GALLERY I WALKTHROUGH
+   LOBBY → GALLERY I
+   MATCHING MUSEUM ENTRANCE
 ========================================== */
 
-/* Gentle forward camera movement */
+/* Same camera movement as museum entrance */
 
-#lobby.walkthrough .lobby-art {
-  animation: lobbyWalkForward 2.8s
-    cubic-bezier(.45, 0, .25, 1) forwards;
+#lobby.entering-gallery .lobby-art {
+  animation: enterGalleryCamera 2.5s ease-in forwards;
 }
 
-@keyframes lobbyWalkForward {
-  0% {
-    transform: scale(1);
-    filter: brightness(1);
-  }
-
-  100% {
-    transform: scale(1.07);
-    filter: brightness(.78);
-  }
-}
-
-/* Fade welcome text and button */
-
-#lobby.walkthrough .lobby-caption,
-#lobby.walkthrough .explore-container {
-  animation: walkthroughTextFade .65s ease forwards;
-}
-
-@keyframes walkthroughTextFade {
+@keyframes enterGalleryCamera {
   from {
-    opacity: 1;
+    transform: scale(1);
   }
 
   to {
-    opacity: 0;
+    transform: scale(1.7);
   }
 }
 
-/* Soft edge darkening */
+/* Fade lobby welcome content */
 
-#lobby::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 10;
-
-  pointer-events: none;
-
-  background: radial-gradient(
-    ellipse at center,
-    transparent 35%,
-    rgba(15, 9, 6, .12) 65%,
-    rgba(15, 9, 6, .55) 100%
-  );
-
+#lobby.entering-gallery .lobby-caption,
+#lobby.entering-gallery .explore-container {
   opacity: 0;
-  transition: opacity 1.8s ease;
+  transition: opacity .6s ease;
 }
 
-#lobby.walkthrough::after {
+/* Dark overlay matching museum entrance */
+
+.lobby-camera-overlay {
+  position: absolute;
+  inset: 0;
+
+  background: #090807;
+
+  opacity: 0;
+  pointer-events: none;
+  z-index: 8;
+
+  transition: opacity 1.3s ease;
+}
+
+#lobby.entering-gallery .lobby-camera-overlay {
   opacity: 1;
+  transition-delay: 1.5s;
 }
 
 .lobby-shade {
@@ -385,7 +369,7 @@ button {
 }
 
 /* ==========================================
-   GALLERY I — CINEMATIC ARRIVAL
+   GALLERY I — ARRIVAL
 ========================================== */
 
 .gallery1-art {
@@ -396,24 +380,16 @@ button {
   object-fit: cover;
   object-position: center;
 
-  transform: scale(1);
-  filter: brightness(1);
+  animation: galleryReveal 3s ease-out both;
 }
 
-/* Gentle movement as Gallery I appears */
-
-#gallery1.walkthrough-arrival .gallery1-art {
-  animation: galleryWalkArrival 2.3s
-    cubic-bezier(.22, 1, .36, 1) forwards;
-}
-
-@keyframes galleryWalkArrival {
-  0% {
-    transform: scale(1.045);
-    filter: brightness(.72);
+@keyframes galleryReveal {
+  from {
+    transform: scale(1.08);
+    filter: brightness(.45);
   }
 
-  100% {
+  to {
     transform: scale(1);
     filter: brightness(1);
   }
@@ -1418,6 +1394,10 @@ button {
     alt="Grand museum lobby with an admission ticket on the reception desk">
 
   <div class="lobby-shade"></div>
+  <div
+  class="lobby-camera-overlay"
+  aria-hidden="true">
+</div>
 
   <div class="lobby-caption">
     <div class="eyebrow">Welcome, Faris</div>
@@ -1819,7 +1799,7 @@ function enterMuseum() {
 
 /* ==========================================
    LOBBY → GALLERY I
-   SEAMLESS WALKTHROUGH
+   MATCHING MUSEUM ENTRANCE
 ========================================== */
 
 function beginExploring() {
@@ -1827,41 +1807,27 @@ function beginExploring() {
   const lobby = document.getElementById("lobby");
   const gallery = document.getElementById("gallery1");
 
-  /* Prevent multiple clicks */
+  const button = lobby.querySelector(".explore-button");
 
-  if (lobby.classList.contains("walkthrough")) {
+  if (lobby.classList.contains("entering-gallery")) {
     return;
   }
 
-  /* STEP 1 — Begin gentle forward movement */
+  button.disabled = true;
 
-  lobby.classList.add("walkthrough");
+  /* Same animation as entering the museum */
 
-  /* STEP 2 — Begin revealing Gallery I
-     while the lobby is still moving */
+  lobby.classList.add("entering-gallery");
+
+  /* Reveal Gallery I after camera movement */
 
   setTimeout(() => {
 
-    gallery.classList.add("walkthrough-arrival");
     gallery.classList.add("active");
-
-  }, 750);
-
-  /* STEP 3 — Finish the transition */
-
-  setTimeout(() => {
 
     lobby.classList.remove("active");
 
-  }, 1750);
-
-  /* STEP 4 — Complete the camera movement */
-
-  setTimeout(() => {
-
-    gallery.classList.remove("walkthrough-arrival");
-
-  }, 3100);
+  }, 2700);
 
 }
   
