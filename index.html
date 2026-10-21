@@ -206,6 +206,67 @@ button {
   }
 }
 
+/* Camera moves forward when entering Gallery I */
+
+#lobby.walkthrough .lobby-art {
+  animation: lobbyWalkForward 2.7s
+    cubic-bezier(.45, 0, .25, 1) forwards;
+}
+
+@keyframes lobbyWalkForward {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+
+  65% {
+    transform: scale(1.12);
+    filter: brightness(.85);
+  }
+
+  100% {
+    transform: scale(1.2);
+    filter: brightness(.35);
+  }
+}
+
+/* Fade the welcome text and button */
+
+#lobby.walkthrough .lobby-caption,
+#lobby.walkthrough .explore-container {
+  animation: walkthroughTextFade .5s ease forwards;
+}
+
+@keyframes walkthroughTextFade {
+  to {
+    opacity: 0;
+  }
+}
+
+/* Darkened edges during the walkthrough */
+
+#lobby::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+
+  background: radial-gradient(
+    ellipse at center,
+    transparent 20%,
+    rgba(10, 6, 4, .25) 55%,
+    rgba(10, 6, 4, .85) 100%
+  );
+
+  opacity: 0;
+  transition: opacity 2s ease;
+}
+
+#lobby.walkthrough::after {
+  opacity: 1;
+}
+
 .lobby-shade {
   position: absolute;
   inset: 0;
@@ -322,22 +383,52 @@ button {
   transform: scale(1);
 }
 
-#gallery1.active .gallery1-art {
-  animation: gallery1Arrival 3.5s ease-out both;
+/* Forward camera movement into Gallery I */
+
+#gallery1.walkthrough-arrival .gallery1-art {
+  animation: galleryWalkArrival 2.5s
+    cubic-bezier(.22, 1, .36, 1) forwards;
 }
 
-@keyframes gallery1Arrival {
-  from {
-    transform: scale(1.08);
-    filter: brightness(.35);
+@keyframes galleryWalkArrival {
+  0% {
+    transform: scale(1.14);
+    filter: brightness(.3);
   }
 
-  to {
+  35% {
+    filter: brightness(.65);
+  }
+
+  100% {
     transform: scale(1);
     filter: brightness(1);
   }
 }
 
+/* Soft darkness between the lobby and Gallery I */
+
+.museum-transition-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+
+  background: #100c09;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity .8s ease,
+    visibility .8s ease;
+}
+
+.museum-transition-veil.visible {
+  opacity: 1;
+  visibility: visible;
+}
+  
 .gallery1-shade {
   position: absolute;
   inset: 0;
@@ -1356,6 +1447,14 @@ button {
 
 </section>
 
+<!-- CINEMATIC MUSEUM TRANSITION -->
+
+<div
+  id="museumTransitionVeil"
+  class="museum-transition-veil"
+  aria-hidden="true">
+</div>
+  
 <!-- GALLERY I — THE BEGINNING -->
 
 <section id="gallery1" class="scene">
@@ -1737,18 +1836,56 @@ function enterMuseum() {
 }
 
 function beginExploring() {
+
   const lobby = document.getElementById("lobby");
   const gallery = document.getElementById("gallery1");
 
-  if (gallery.classList.contains("active")) return;
+  const veil = document.getElementById(
+    "museumTransitionVeil"
+  );
 
-  gallery.classList.add("active");
+  if (lobby.classList.contains("walkthrough")) return;
+
+  /* STEP 1 — Begin walking through the lobby */
+
+  lobby.classList.add("walkthrough");
+
+  /* STEP 2 — Approach the entrance */
 
   setTimeout(() => {
-    lobby.classList.remove("active");
-  }, 1000);
-}
 
+    veil.classList.add("visible");
+
+  }, 1700);
+
+  /* STEP 3 — Enter Gallery I */
+
+  setTimeout(() => {
+
+    gallery.classList.add("active");
+    gallery.classList.add("walkthrough-arrival");
+
+    lobby.classList.remove("active");
+
+  }, 2500);
+
+  /* STEP 4 — Reveal the gallery */
+
+  setTimeout(() => {
+
+    veil.classList.remove("visible");
+
+  }, 2750);
+
+  /* STEP 5 — Finish the arrival */
+
+  setTimeout(() => {
+
+    gallery.classList.remove("walkthrough-arrival");
+
+  }, 5300);
+
+}
 let bookRevealStep = 0;
 
 function revealBook() {
