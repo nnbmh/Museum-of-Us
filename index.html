@@ -84,6 +84,12 @@ button {
   );
 }
 
+.entrance-art,
+.entrance-shade,
+.camera-overlay {
+  pointer-events: none;
+}
+  
 .entrance-content {
   position: absolute;
   bottom: clamp(30px, 6vh, 65px);
@@ -96,22 +102,12 @@ button {
 }
 
 #enterButton {
-  position: fixed !important;
-  bottom: 35px !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-
-  z-index: 99999 !important;
-  pointer-events: auto !important;
-
-  background: #6b2635 !important;
-  color: white !important;
-
-  padding: 18px 28px !important;
-  border: 2px solid gold !important;
-
-  cursor: pointer !important;
+  position: relative;
+  z-index: 21;
+  pointer-events: auto;
+  cursor: pointer;
 }
+  
 .subtitle {
   font-family: "Cormorant Garamond", serif;
   font-size: clamp(17px, 2vw, 23px);
@@ -1896,14 +1892,6 @@ button {
 <!-- ENTRANCE -->
 
 <section id="entrance" class="scene active">
-  
-  <style>
-  #entrance .entrance-art,
-  #entrance .entrance-shade,
-  #entrance .camera-overlay {
-    pointer-events: none !important;
-  }
-</style>
 
   <div class="entrance-art"></div>
   <div class="entrance-shade"></div>
@@ -1917,9 +1905,10 @@ button {
   class="enter-button"
   id="enterButton"
   type="button"
-  onclick="alert('BUTTON WORKS'); enterMuseum();">
+  onclick="enterMuseum();">
   ENTER THE MUSEUM →
 </button>
+    
   </div>
 
   <div class="camera-overlay"></div>
