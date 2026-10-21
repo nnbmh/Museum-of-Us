@@ -852,6 +852,514 @@ button {
 }
 
 /* ==========================================
+   EXHIBIT 01 — INTERACTIVE ANTIQUE BOOK
+========================================== */
+
+#bookExhibit {
+  background: #100b08;
+}
+
+/* BOOK CONTAINER */
+
+.interactive-book {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* BOOK SPREADS */
+
+.book-spread {
+  position: absolute;
+  inset: 0;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition:
+    opacity .65s ease,
+    visibility .65s ease;
+}
+
+.book-spread.active-spread {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* BOOK BACKGROUND ARTWORK */
+
+.book-page-art {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+}
+
+/* PAGE WRITING AREAS */
+
+.book-page-content {
+  position: absolute;
+
+  top: 25%;
+  width: 26%;
+  height: 52%;
+
+  z-index: 5;
+
+  color: #593a28;
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  text-align: center;
+}
+
+.book-left {
+  left: 22%;
+}
+
+.book-right {
+  right: 22%;
+}
+
+/* SMALL HEADINGS */
+
+.book-small-heading {
+  font-size: clamp(8px, .85vw, 13px);
+  letter-spacing: .2em;
+  font-weight: 500;
+
+  margin-bottom: 10px;
+
+  color: #8b603b;
+}
+
+/* MAIN HEADINGS */
+
+.book-page-content h2 {
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size: clamp(17px, 2.1vw, 32px);
+  font-weight: 500;
+
+  line-height: 1;
+
+  margin: 0 0 12px;
+}
+
+/* DECORATIVE DIVIDER */
+
+.book-divider {
+  color: #9b724a;
+
+  margin: 8px 0 14px;
+
+  font-size: 14px;
+}
+
+/* BODY TEXT */
+
+.book-detail {
+  font-size: clamp(10px, 1.15vw, 17px);
+
+  line-height: 1.3;
+
+  margin: 7px 0;
+}
+
+.book-instruction {
+  font-size: clamp(10px, 1.1vw, 16px);
+
+  font-style: italic;
+  line-height: 1.3;
+
+  margin: 12px 0;
+}
+
+/* PROFILE OBSERVATIONS */
+
+.book-observations {
+  margin-top: 15px;
+
+  text-align: left;
+
+  padding-left: 10%;
+}
+
+.book-observations div {
+  font-size: clamp(10px, 1.1vw, 16px);
+
+  margin-bottom: 5px;
+}
+
+/* HANDWRITTEN ANNOTATIONS */
+
+.book-handwriting {
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-style: italic;
+
+  font-size: clamp(13px, 1.6vw, 23px);
+
+  color: #915b39;
+
+  line-height: 1.1;
+
+  margin-top: 18px;
+
+  transform: rotate(-3deg);
+}
+
+.book-tiny-note {
+  font-style: italic;
+
+  font-size: clamp(10px, 1vw, 15px);
+
+  color: #9a6a49;
+
+  transform: rotate(2deg);
+}
+
+
+/* ==========================================
+   FOLDED COMPLAINT NOTES
+========================================== */
+
+.book-folded-note {
+  display: block;
+
+  width: 92%;
+
+  margin: 12px auto;
+
+  padding: 12px 10px;
+
+  border: 1px solid #b49a72;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f2dfb6,
+      #ddc396
+    );
+
+  color: #62432b;
+
+  box-shadow:
+    2px 3px 7px rgba(65, 38, 15, .2);
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  cursor: pointer;
+
+  transition:
+    transform .35s ease,
+    padding .35s ease,
+    box-shadow .35s ease;
+}
+
+.book-folded-note:first-of-type {
+  transform: rotate(-2deg);
+}
+
+.book-folded-note:nth-of-type(2) {
+  transform: rotate(2deg);
+}
+
+/* OPENED NOTE */
+
+.book-folded-note.opened {
+  transform: rotate(0deg);
+
+  padding: 16px 10px;
+
+  box-shadow:
+    3px 5px 10px rgba(65, 38, 15, .25);
+}
+
+/* NOTE LABEL */
+
+.folded-label {
+  display: block;
+
+  font-size: clamp(9px, 1vw, 14px);
+
+  letter-spacing: .08em;
+}
+
+/* HIDDEN NOTE CONTENT */
+
+.folded-content {
+  display: block;
+
+  max-height: 0;
+
+  opacity: 0;
+
+  overflow: hidden;
+
+  font-size: clamp(10px, 1.05vw, 16px);
+
+  line-height: 1.2;
+
+  transition:
+    max-height .5s ease,
+    opacity .4s ease,
+    margin .4s ease;
+}
+
+/* UNFOLD CONTENT */
+
+.book-folded-note.opened .folded-content {
+  max-height: 160px;
+
+  opacity: 1;
+
+  margin-top: 10px;
+}
+
+/* PROFILE COMMENT */
+
+.book-hidden-comment {
+  opacity: 0;
+
+  transition: opacity .8s ease;
+}
+
+.book-hidden-comment.visible {
+  opacity: 1;
+}
+
+
+/* ==========================================
+   WHO MADE THE FIRST MOVE?
+========================================== */
+
+.book-guess-options {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+  margin: 20px auto;
+
+  width: 75%;
+}
+
+/* ANSWER BUTTONS */
+
+.book-guess-options button {
+  padding: 10px;
+
+  background: rgba(240, 220, 185, .45);
+
+  border: 1px solid #ad8b63;
+
+  color: #65452d;
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size: clamp(12px, 1.4vw, 20px);
+
+  transition:
+    background .3s ease,
+    transform .3s ease;
+}
+
+.book-guess-options button:hover {
+  background: rgba(240, 220, 185, .8);
+
+  transform: scale(1.03);
+}
+
+/* GUESS RESPONSE */
+
+.book-guess-response {
+  min-height: 35px;
+
+  margin-top: 12px;
+}
+
+/* REASONS FOR MESSAGING */
+
+.book-reasons {
+  opacity: 0;
+
+  transition: opacity .8s ease;
+
+  text-align: left;
+
+  margin: 15px auto;
+
+  width: 85%;
+}
+
+.book-reasons.visible {
+  opacity: 1;
+}
+
+.book-reasons div {
+  font-size: clamp(10px, 1.1vw, 16px);
+
+  margin-bottom: 6px;
+}
+
+
+/* ==========================================
+   FINAL CONFESSION
+========================================== */
+
+.book-final-note {
+  opacity: 0;
+
+  transform: translateY(8px);
+
+  transition:
+    opacity 1.2s ease,
+    transform 1.2s ease;
+
+  margin-top: 28px;
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-style: italic;
+
+  font-size: clamp(16px, 1.8vw, 27px);
+
+  line-height: 1.1;
+
+  color: #915b39;
+}
+
+/* REVEALED CONFESSION */
+
+.book-final-note.visible {
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+.book-final-note p:last-child {
+  margin-top: 18px;
+
+  transform: rotate(-4deg);
+}
+
+
+/* ==========================================
+   BOOK NAVIGATION
+========================================== */
+
+.book-navigation {
+  position: absolute;
+
+  bottom: 5%;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 48%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  z-index: 12;
+
+  color: #f5e4c7;
+}
+
+/* NAVIGATION BUTTONS */
+
+.book-navigation button {
+  background: rgba(27, 17, 11, .85);
+
+  border: 1px solid rgba(225, 192, 146, .55);
+
+  color: #f6ead8;
+
+  padding: 10px 15px;
+
+  font-size: clamp(8px, .9vw, 12px);
+
+  letter-spacing: .12em;
+}
+
+.book-navigation button:disabled {
+  opacity: .35;
+
+  cursor: default;
+}
+
+/* PAGE NUMBER */
+
+#bookPageIndicator {
+  font-family:
+    "Cormorant Garamond",
+    serif;
+
+  font-size: clamp(13px, 1.3vw, 19px);
+
+  letter-spacing: .15em;
+}
+
+
+/* ==========================================
+   SMALL-SCREEN ADJUSTMENTS
+========================================== */
+
+@media (max-width: 700px) {
+
+  .book-page-content {
+    top: 24%;
+    height: 55%;
+  }
+
+  .book-navigation {
+    width: 65%;
+  }
+
+  .book-folded-note {
+    margin: 7px auto;
+    padding: 7px;
+  }
+
+  .book-guess-options {
+    gap: 5px;
+    margin: 10px auto;
+  }
+
+  .book-guess-options button {
+    padding: 6px;
+  }
+
+}
+  
+/* ==========================================
    GALLERY I — WATCH & CONVERSATION EXHIBITS
 ========================================== */
 
@@ -1980,67 +2488,284 @@ function beginExploring() {
 
 }
   
-let bookRevealStep = 0;
+/* ==========================================
+   EXHIBIT 01 — INTERACTIVE BOOK
+========================================== */
 
-function revealBook() {
 
-  if (bookRevealStep >= 3) return;
+/* CURRENT BOOK STATE */
 
-  bookRevealStep++;
+let currentBookSpread = 1;
 
-  const entries = document.querySelectorAll(
-    `.book-entry[data-step="${bookRevealStep}"]`
+let openedComplaints = new Set();
+
+let firstMoveCorrect = false;
+
+
+/* ==========================================
+   OPEN BOOK
+========================================== */
+
+function openBook() {
+
+  const gallery = document.getElementById(
+    "gallery1"
   );
 
-  entries.forEach((entry, index) => {
+  const book = document.getElementById(
+    "bookExhibit"
+  );
+
+  book.classList.add("active");
+
+  setTimeout(() => {
+
+    gallery.classList.remove("active");
+
+  }, 1000);
+
+}
+
+
+/* ==========================================
+   CLOSE BOOK
+========================================== */
+
+function closeBook() {
+
+  const gallery = document.getElementById(
+    "gallery1"
+  );
+
+  const book = document.getElementById(
+    "bookExhibit"
+  );
+
+  gallery.classList.add("active");
+
+  setTimeout(() => {
+
+    book.classList.remove("active");
+
+  }, 1000);
+
+}
+
+
+/* ==========================================
+   TURN BOOK PAGES
+========================================== */
+
+function changeBookSpread(direction) {
+
+  const nextSpread = currentBookSpread + direction;
+
+  if (nextSpread < 1 || nextSpread > 2) {
+    return;
+  }
+
+  const current = document.getElementById(
+    "bookSpread" + currentBookSpread
+  );
+
+  current.classList.remove("active-spread");
+
+  currentBookSpread = nextSpread;
+
+  const next = document.getElementById(
+    "bookSpread" + currentBookSpread
+  );
+
+  next.classList.add("active-spread");
+
+  updateBookNavigation();
+
+}
+
+
+/* ==========================================
+   UPDATE BOOK NAVIGATION
+========================================== */
+
+function updateBookNavigation() {
+
+  const previous = document.getElementById(
+    "bookPrevious"
+  );
+
+  const next = document.getElementById(
+    "bookNext"
+  );
+
+  const indicator = document.getElementById(
+    "bookPageIndicator"
+  );
+
+  previous.disabled = currentBookSpread === 1;
+
+  if (currentBookSpread === 1) {
+
+    indicator.textContent = "01 — 02";
+
+    next.textContent = "TURN PAGE →";
+
+    next.disabled = openedComplaints.size < 2;
+
+  } else {
+
+    indicator.textContent = "03 — 04";
+
+    if (firstMoveCorrect) {
+
+      next.textContent = "THE END ✓";
+
+    } else {
+
+      next.textContent = "MAKE YOUR GUESS";
+
+    }
+
+    next.disabled = true;
+
+  }
+
+}
+
+
+/* ==========================================
+   OPEN FOLDED COMPLAINT NOTES
+========================================== */
+
+function openComplaint(number) {
+
+  const note = document.getElementById(
+    "complaint" + number
+  );
+
+  if (!note) {
+    return;
+  }
+
+  if (openedComplaints.has(number)) {
+    return;
+  }
+
+  openedComplaints.add(number);
+
+  note.classList.add("opened");
+
+  /* BOTH NOTES HAVE BEEN OPENED */
+
+  if (openedComplaints.size === 2) {
+
     setTimeout(() => {
-      entry.classList.add("revealed");
-    }, index * 350);
-  });
 
-  const note = document.querySelector(
-    `.handwritten-note[data-step="${bookRevealStep}"]`
+      const comment = document.getElementById(
+        "profileComment"
+      );
+
+      comment.classList.add("visible");
+
+      updateBookNavigation();
+
+    }, 600);
+
+  }
+
+}
+
+
+/* ==========================================
+   GUESS WHO MESSAGED FIRST
+========================================== */
+
+function guessFirstMove(person) {
+
+  const response = document.getElementById(
+    "bookGuessResponse"
   );
 
-  if (note) {
-    setTimeout(() => {
-      note.classList.add("revealed");
-    }, 1100);
+  /* WRONG ANSWER */
+
+  if (person === "faris") {
+
+    response.textContent =
+      "HAHAHAHA nice try, bb.";
+
+    return;
+
   }
 
-  const button = document.getElementById(
-    "bookRevealButton"
+  /* CORRECT ANSWER */
+
+  firstMoveCorrect = true;
+
+  response.textContent =
+    "Correct. Someone had to do it.";
+
+  /* REVEAL REASONS */
+
+  const reasons = document.getElementById(
+    "bookReasons"
   );
 
-  if (bookRevealStep === 1) {
-    button.textContent = "CONTINUE READING →";
-  }
+  reasons.classList.add("visible");
 
-  if (bookRevealStep === 2) {
-    button.textContent = "REVEAL THE OUTCOME →";
-  }
+  /* REVEAL FINAL CONFESSION */
 
-  if (bookRevealStep === 3) {
+  setTimeout(() => {
 
-    button.textContent = "COLLECTION IDENTIFIED ✓";
-    button.disabled = true;
-
-    localStorage.setItem(
-      "museumFirstEntryComplete",
-      "true"
+    const finalNote = document.getElementById(
+      "bookFinalNote"
     );
 
-    setTimeout(() => {
-      document
-        .getElementById("portraitHer")
-        .classList.add("revealed");
+    finalNote.classList.add("visible");
 
-      document
-        .getElementById("portraitHim")
-        .classList.add("revealed");
-    }, 1500);
-  }
+  }, 900);
+
+
+  /* ==========================================
+     SAVE EXHIBIT COMPLETION
+  ========================================== */
+
+  localStorage.setItem(
+    "museumFirstEntryComplete",
+    "true"
+  );
+
+
+  /* ==========================================
+     REVEAL GALLERY PORTRAIT NAMES
+  ========================================== */
+
+  setTimeout(() => {
+
+    const portraitHer = document.getElementById(
+      "portraitHer"
+    );
+
+    const portraitHim = document.getElementById(
+      "portraitHim"
+    );
+
+    if (portraitHer) {
+      portraitHer.classList.add("revealed");
+    }
+
+    if (portraitHim) {
+      portraitHim.classList.add("revealed");
+    }
+
+  }, 1800);
+
+  updateBookNavigation();
+
 }
+
+
+/* ==========================================
+   RESTORE COMPLETED EXHIBIT
+========================================== */
 
 if (
   localStorage.getItem("museumFirstEntryComplete")
@@ -2051,40 +2776,27 @@ if (
     "DOMContentLoaded",
     () => {
 
-      document
-        .getElementById("portraitHer")
-        .classList.add("revealed");
+      const portraitHer = document.getElementById(
+        "portraitHer"
+      );
 
-      document
-        .getElementById("portraitHim")
-        .classList.add("revealed");
+      const portraitHim = document.getElementById(
+        "portraitHim"
+      );
+
+      if (portraitHer) {
+        portraitHer.classList.add("revealed");
+      }
+
+      if (portraitHim) {
+        portraitHim.classList.add("revealed");
+      }
 
     }
   );
+
 }
   
-function openBook() {
-  const gallery = document.getElementById("gallery1");
-  const book = document.getElementById("bookExhibit");
-
-  book.classList.add("active");
-
-  setTimeout(() => {
-    gallery.classList.remove("active");
-  }, 1000);
-}
-
-function closeBook() {
-  const gallery = document.getElementById("gallery1");
-  const book = document.getElementById("bookExhibit");
-
-  gallery.classList.add("active");
-
-  setTimeout(() => {
-    book.classList.remove("active");
-  }, 1000);
-}
-
 /* ==========================================
    EXHIBIT 02 — WATCH
 ========================================== */
