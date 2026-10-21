@@ -92,12 +92,22 @@ button {
 }
 
 #enterButton {
-  position: relative;
-  z-index: 21;
-  pointer-events: auto;
-  cursor: pointer;
-}
+  position: fixed !important;
+  bottom: 35px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
 
+  z-index: 99999 !important;
+  pointer-events: auto !important;
+
+  background: #6b2635 !important;
+  color: white !important;
+
+  padding: 18px 28px !important;
+  border: 2px solid gold !important;
+
+  cursor: pointer !important;
+}
 .subtitle {
   font-family: "Cormorant Garamond", serif;
   font-size: clamp(17px, 2vw, 23px);
