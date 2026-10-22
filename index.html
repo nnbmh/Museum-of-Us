@@ -1717,6 +1717,141 @@ button {
 
   letter-spacing: 0.12em;
 }
+
+/* ==========================================
+   EXHIBIT 01 — FOLDED PAGE CORNERS
+========================================== */
+
+/* Navigation spans the book's paper area */
+
+#bookExhibit .book-navigation {
+  position: absolute;
+
+  left: 50%;
+  bottom: 23%;
+
+  transform: translateX(-50%);
+
+  width: 69%;
+  height: 5%;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  z-index: 20;
+
+  pointer-events: none;
+}
+
+/* Clickable corner areas */
+
+#bookExhibit .book-navigation .book-page-corner {
+  position: relative;
+
+  width: clamp(35px, 5vw, 75px);
+  height: clamp(35px, 5vw, 75px);
+
+  padding: 0;
+
+  border: none;
+  border-radius: 0;
+
+  background: transparent;
+
+  box-shadow: none;
+
+  cursor: pointer;
+
+  pointer-events: auto;
+
+  transition: transform 0.3s ease;
+}
+
+/* Folded parchment triangle */
+
+#bookExhibit .corner-fold {
+  position: absolute;
+
+  inset: 0;
+
+  display: block;
+
+  background: linear-gradient(
+    135deg,
+    #f6e4c2 0%,
+    #e7c899 55%,
+    #bd9262 100%
+  );
+
+  box-shadow:
+    2px -2px 7px rgba(75, 42, 18, 0.25);
+
+  transition:
+    filter 0.35s ease,
+    transform 0.35s ease;
+}
+
+/* LEFT FOLD */
+
+#bookExhibit .corner-left .corner-fold {
+  clip-path: polygon(
+    0 0,
+    100% 100%,
+    0 100%
+  );
+
+  transform-origin: bottom left;
+}
+
+/* RIGHT FOLD */
+
+#bookExhibit .corner-right .corner-fold {
+  clip-path: polygon(
+    100% 0,
+    100% 100%,
+    0 100%
+  );
+
+  transform-origin: bottom right;
+}
+
+/* Hover and touch feedback */
+
+#bookExhibit .book-page-corner:not(:disabled):hover .corner-fold,
+#bookExhibit .book-page-corner:not(:disabled):active .corner-fold {
+  filter: brightness(1.15);
+
+  transform: scale(1.08);
+}
+
+/* Disabled corners */
+
+#bookExhibit .book-page-corner:disabled {
+  opacity: 0.2;
+  cursor: default;
+}
+
+/* Page numbers */
+
+#bookExhibit #bookPageIndicator {
+  position: absolute;
+
+  left: 50%;
+  bottom: 0;
+
+  transform: translateX(-50%);
+
+  font-family: "Cormorant Garamond", Georgia, serif;
+
+  font-size: clamp(10px, 1vw, 15px);
+
+  letter-spacing: 0.15em;
+
+  color: #80583a;
+
+  pointer-events: none;
+}
   
 /* ==========================================
    GALLERY I — WATCH & CONVERSATION EXHIBITS
@@ -2575,35 +2710,35 @@ button {
 
   </div>
 
+<!-- BOOK NAVIGATION — FOLDED PAGE CORNERS -->
 
-  <!-- BOOK NAVIGATION -->
+<div class="book-navigation">
 
-  <div class="book-navigation">
+  <button
+    id="bookPrevious"
+    class="book-page-corner corner-left"
+    type="button"
+    onclick="changeBookSpread(-1)"
+    aria-label="Turn to previous pages"
+    disabled>
+    <span class="corner-fold"></span>
+  </button>
 
-    <button
-      id="bookPrevious"
-      onclick="changeBookSpread(-1)"
-      disabled>
+  <span id="bookPageIndicator">
+    01 — 02
+  </span>
 
-      ← PREVIOUS
+  <button
+    id="bookNext"
+    class="book-page-corner corner-right"
+    type="button"
+    onclick="changeBookSpread(1)"
+    aria-label="Turn to next pages"
+    disabled>
+    <span class="corner-fold"></span>
+  </button>
 
-    </button>
-
-    <span id="bookPageIndicator">
-      01 — 02
-    </span>
-
-    <button
-      id="bookNext"
-      onclick="changeBookSpread(1)"
-      disabled>
-
-      TURN PAGE →
-
-    </button>
-
-  </div>
-
+</div>
 
   <!-- BACK TO GALLERY -->
 
@@ -2950,17 +3085,11 @@ function changeBookSpread(direction) {
 
 function updateBookNavigation() {
 
-  const previous = document.getElementById(
-    "bookPrevious"
-  );
+  const previous = document.getElementById("bookPrevious");
+  const next = document.getElementById("bookNext");
+  const indicator = document.getElementById("bookPageIndicator");
 
-  const next = document.getElementById(
-    "bookNext"
-  );
-
-  const indicator = document.getElementById(
-    "bookPageIndicator"
-  );
+  // Previous page is unavailable on the first spread.
 
   previous.disabled = currentBookSpread === 1;
 
@@ -2968,7 +3097,7 @@ function updateBookNavigation() {
 
     indicator.textContent = "01 — 02";
 
-    next.textContent = "TURN PAGE →";
+    // Both complaint notes must be opened first.
 
     next.disabled = openedComplaints.size < 2;
 
@@ -2976,22 +3105,13 @@ function updateBookNavigation() {
 
     indicator.textContent = "03 — 04";
 
-    if (firstMoveCorrect) {
-
-      next.textContent = "THE END ✓";
-
-    } else {
-
-      next.textContent = "MAKE YOUR GUESS";
-
-    }
+    // The second spread is the final spread.
 
     next.disabled = true;
 
   }
 
 }
-
 
 /* ==========================================
    OPEN FOLDED COMPLAINT NOTES
