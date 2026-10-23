@@ -2773,6 +2773,157 @@ button {
     font-size: 20px;
   }
 }
+
+/* ==========================================
+   GALLERY II — EXHIBIT 02
+   ANYTHING YOU WANT US TO BE
+========================================== */
+
+#gallery2Exhibit2 {
+  background: #100c0b;
+  color: #f6ead8;
+  overflow: hidden;
+}
+
+.g2-car-background {
+  position: absolute;
+  inset: 0;
+
+  background-image: url("gallery-2-scene-6-car-ride.PNG");
+  background-size: cover;
+  background-position: center;
+
+  filter: brightness(.7) saturate(.85);
+}
+
+.g2-car-overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(15, 8, 10, .88),
+      rgba(25, 12, 14, .58) 55%,
+      rgba(15, 8, 10, .35)
+    );
+}
+
+.g2-car-content {
+  position: absolute;
+  z-index: 5;
+
+  top: 50%;
+  left: 8%;
+  transform: translateY(-50%);
+
+  width: min(510px, 84%);
+
+  padding: 35px;
+
+  background: rgba(24, 13, 16, .83);
+  border: 1px solid rgba(225, 192, 146, .45);
+
+  box-shadow:
+    0 15px 55px rgba(0, 0, 0, .45);
+
+  text-align: center;
+
+  transition:
+    opacity .4s ease,
+    transform .4s ease;
+}
+
+.g2-car-content.g2-car-hidden {
+  opacity: 0;
+  transform: translateY(-46%);
+  pointer-events: none;
+}
+
+.g2-car-label {
+  font-size: 10px;
+  letter-spacing: .25em;
+  color: #e1c092;
+  margin-bottom: 15px;
+}
+
+#g2CarTitle {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(32px, 5vw, 49px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: #f6ead8;
+  margin: 0 0 20px;
+}
+
+#g2CarText {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 21px;
+  line-height: 1.5;
+  color: #e9d9c7;
+  margin-bottom: 25px;
+}
+
+.g2-car-button {
+  padding: 13px 22px;
+  margin: 6px;
+
+  border: 1px solid #e1c092;
+  background: rgba(38, 21, 23, .95);
+
+  color: #f6ead8;
+  font-size: 10px;
+  letter-spacing: .14em;
+
+  cursor: pointer;
+  transition: background .25s ease;
+}
+
+.g2-car-button:hover {
+  background: #67413d;
+}
+
+.g2-car-stamp {
+  display: inline-block;
+
+  padding: 15px 22px;
+  margin: 15px 0;
+
+  border: 2px solid #e1c092;
+  color: #e1c092;
+
+  font-size: 14px;
+  letter-spacing: .15em;
+
+  transform: rotate(-4deg);
+}
+
+.g2-car-freeze {
+  animation: g2CarFreeze .35s ease;
+}
+
+@keyframes g2CarFreeze {
+  0% { filter: brightness(1.5); }
+  100% { filter: brightness(1); }
+}
+
+@media (max-width: 600px) {
+  .g2-car-content {
+    left: 50%;
+    top: 52%;
+    transform: translate(-50%, -50%);
+    width: 88%;
+    padding: 24px 18px;
+  }
+
+  .g2-car-content.g2-car-hidden {
+    transform: translate(-50%, -46%);
+  }
+
+  #g2CarText {
+    font-size: 19px;
+  }
+}
   
 </style>
 </head>
@@ -3403,6 +3554,38 @@ button {
     <p id="g2Text"></p>
 
     <div id="g2Interaction"></div>
+
+  </div>
+
+</section>
+
+<!-- ==========================================
+     GALLERY II — EXHIBIT 02
+     ANYTHING YOU WANT US TO BE
+========================================== -->
+
+<section id="gallery2Exhibit2" class="scene">
+
+  <div class="g2-car-background"></div>
+  <div class="g2-car-overlay"></div>
+
+  <button class="g2-back" onclick="closeGallery2Exhibit2()">
+    ← EXHIBIT 01
+  </button>
+
+  <div class="g2-progress">
+    GALLERY II · EXHIBIT 02
+  </div>
+
+  <div class="g2-car-content" id="g2CarContent">
+
+    <div class="g2-car-label" id="g2CarLabel"></div>
+
+    <h1 id="g2CarTitle"></h1>
+
+    <p id="g2CarText"></p>
+
+    <div id="g2CarInteraction"></div>
 
   </div>
 
@@ -4329,6 +4512,186 @@ function g2RevealVerdict() {
       .style.display = "inline-block";
 
   }, 5200));
+}
+
+/* ==========================================
+   GALLERY II — EXHIBIT 02
+   ANYTHING YOU WANT US TO BE
+========================================== */
+
+let g2CarScene = 0;
+let g2CarTimer = null;
+
+function openGallery2Exhibit2() {
+
+  clearTimeout(g2CarTimer);
+
+  document.getElementById("gallery2Exhibit1")
+    .classList.remove("active");
+
+  document.getElementById("gallery2Exhibit2")
+    .classList.add("active");
+
+  g2CarRender(0, true);
+}
+
+function closeGallery2Exhibit2() {
+
+  clearTimeout(g2CarTimer);
+
+  document.getElementById("gallery2Exhibit2")
+    .classList.remove("active");
+
+  document.getElementById("gallery2Exhibit1")
+    .classList.add("active");
+
+  g2RenderScene(5, true);
+}
+
+function g2CarRender(scene, immediate = false) {
+
+  clearTimeout(g2CarTimer);
+
+  g2CarScene = scene;
+
+  const content = document.getElementById("g2CarContent");
+  const label = document.getElementById("g2CarLabel");
+  const title = document.getElementById("g2CarTitle");
+  const text = document.getElementById("g2CarText");
+  const interaction = document.getElementById("g2CarInteraction");
+
+  if (!immediate) {
+    content.classList.add("g2-car-hidden");
+  }
+
+  g2CarTimer = setTimeout(() => {
+
+    content.classList.remove("g2-car-freeze");
+
+    if (scene === 0) {
+
+      label.textContent = "AN AFTERNOON DRIVE";
+      title.textContent = "Ten Minutes From Home";
+
+      text.textContent =
+        "After their first staycation together, he was driving her home. They made small talk along the way. But there was something she'd been trying to find the courage to ask.";
+
+      interaction.innerHTML = `
+        <button class="g2-car-button" onclick="g2CarRender(1)">
+          ASK THE QUESTION →
+        </button>
+      `;
+    }
+
+    else if (scene === 1) {
+
+      label.textContent = "THE QUESTION";
+      title.textContent = "What are we?";
+
+      text.textContent =
+        "She finally asked.";
+
+      interaction.innerHTML = `
+        <button class="g2-car-button" onclick="g2CarRender(2)">
+          HIS RESPONSE →
+        </button>
+      `;
+    }
+
+    else if (scene === 2) {
+
+      label.textContent = "HIS RESPONSE";
+      title.textContent = "Anything You Want Us to Be";
+
+      text.textContent =
+        "We can be anything you want us to be.";
+
+      interaction.innerHTML = `
+        <button class="g2-car-button" onclick="g2CarRender(3)">
+          ...
+        </button>
+      `;
+    }
+
+    else if (scene === 3) {
+
+      content.classList.add("g2-car-freeze");
+
+      label.textContent = "AN UNEXPECTED RESPONSE";
+      title.textContent = "EXCUSE ME?";
+
+      text.textContent =
+        "She would like to know what she was supposed to do with that answer.";
+
+      interaction.innerHTML = `
+        <button class="g2-car-button" onclick="g2CarRender(4)">
+          WHAT HAPPENED NEXT? →
+        </button>
+      `;
+    }
+
+    else if (scene === 4) {
+
+      label.textContent = "THE ARCHIVE NEEDS YOUR HELP";
+      title.textContent = "What Happened Next?";
+
+      text.textContent =
+        "The museum has three possible explanations. Which one sounds right?";
+
+      interaction.innerHTML = `
+        <button class="g2-car-button" onclick="g2CarRender(5)">
+          SHE ASKED HIM TO EXPLAIN
+        </button>
+
+        <button class="g2-car-button" onclick="g2CarRender(5)">
+          HE FINALLY GAVE A STRAIGHT ANSWER
+        </button>
+
+        <button class="g2-car-button" onclick="g2CarRender(5)">
+          THEY SOMEHOW FIGURED IT OUT
+        </button>
+      `;
+    }
+
+    else if (scene === 5) {
+
+      label.textContent = "ARCHIVAL NOTICE";
+      title.textContent = "RECORDS INCOMPLETE.";
+
+      text.textContent =
+        "The exact conversation that followed has unfortunately been lost to history.";
+
+      interaction.innerHTML = `
+        <button class="g2-car-button" onclick="g2CarRender(6)">
+          VIEW CONFIRMED OUTCOME →
+        </button>
+      `;
+    }
+
+    else if (scene === 6) {
+
+      label.textContent = "THE MOMENT WE BECAME US";
+      title.textContent = "And Just Like That...";
+
+      text.textContent =
+        "Whatever happened in those last ten minutes, they arrived at an answer.";
+
+      interaction.innerHTML = `
+        <div class="g2-car-stamp">
+          RELATIONSHIP STATUS: OFFICIAL
+        </div>
+
+        <br>
+
+        <button class="g2-car-button" onclick="closeGallery2Exhibit2()">
+          RETURN TO EXHIBIT 01
+        </button>
+      `;
+    }
+
+    content.classList.remove("g2-car-hidden");
+
+  }, immediate ? 0 : 350);
 }
   
 </script>
