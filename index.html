@@ -2924,6 +2924,283 @@ button {
     font-size: 19px;
   }
 }
+
+/* ==========================================
+   GALLERY II — MUSEUM ROOM
+========================================== */
+
+#gallery2Room {
+  background: #170d10;
+  overflow: hidden;
+}
+
+.g2-room-art {
+  position: absolute;
+  inset: 0;
+
+  background-image: url("gallery-2-room.PNG");
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.g2-room-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,.08),
+    transparent 30%,
+    rgba(0,0,0,.12)
+  );
+}
+
+/* TAPPABLE GLASS DISPLAYS */
+
+.g2-display {
+  position: absolute;
+  z-index: 10;
+
+  top: 35%;
+  height: 45%;
+  width: 25%;
+
+  border: 1px solid transparent;
+  border-radius: 6px;
+
+  background: transparent;
+  cursor: pointer;
+
+  transition:
+    background .35s ease,
+    box-shadow .35s ease,
+    border-color .35s ease;
+}
+
+.g2-display-one {
+  left: 9%;
+}
+
+.g2-display-two {
+  right: 9%;
+}
+
+.g2-display:hover,
+.g2-display:focus-visible {
+  background: rgba(255,215,150,.06);
+
+  border-color: rgba(235,198,132,.45);
+
+  box-shadow:
+    inset 0 0 35px rgba(255,215,150,.15),
+    0 0 35px rgba(255,215,150,.18);
+}
+
+.g2-display:active {
+  background: rgba(255,215,150,.13);
+}
+
+/* ROOM INSTRUCTION */
+
+.g2-room-hint {
+  position: absolute;
+  bottom: 3%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  z-index: 8;
+
+  color: #f2dcb5;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 14px;
+  letter-spacing: .16em;
+
+  text-align: center;
+  white-space: nowrap;
+
+  text-shadow: 0 2px 8px #000;
+}
+
+/* RETURN TO GALLERY I */
+
+.g2-room-back {
+  position: absolute;
+  top: 4%;
+  left: 4%;
+
+  z-index: 20;
+
+  background: transparent;
+  border: none;
+
+  font-family: "Cormorant Garamond", serif;
+  font-size: 19px;
+  letter-spacing: .08em;
+
+  color: #f6ead8;
+  text-shadow: 0 2px 10px #000;
+
+  cursor: pointer;
+}
+
+/* TRANSITION */
+
+.g2-room-transition {
+  position: absolute;
+  inset: 0;
+
+  z-index: 30;
+
+  background: #160d10;
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity .55s ease;
+}
+
+.g2-room-transition.visible {
+  opacity: 1;
+}
+
+/* ==========================================
+   GALLERY II — TYPOGRAPHY REFINEMENT
+========================================== */
+
+/* Elegant museum titles */
+
+#g2Title,
+#g2CarTitle {
+  font-family: "Cormorant Garamond", Georgia, serif;
+
+  font-size: clamp(30px, 4vw, 46px);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: .015em;
+
+  color: #f6ead8;
+}
+
+/* Romantic descriptions */
+
+#g2Text,
+#g2CarText {
+  font-family: "Cormorant Garamond", Georgia, serif;
+
+  font-size: clamp(18px, 2vw, 23px);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: .01em;
+
+  color: #edddc9;
+}
+
+/* Museum labels */
+
+.g2-eyebrow,
+.g2-progress,
+.g2-car-label {
+  font-family: "Cormorant Garamond", Georgia, serif;
+
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .18em;
+
+  color: #e1c092;
+}
+
+/* ==========================================
+   DISCREET SCENE NAVIGATION
+========================================== */
+
+.g2-button,
+.g2-car-button {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+
+  padding: 8px 4px;
+  margin: 8px;
+
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: .07em;
+
+  color: #e1c092;
+
+  cursor: pointer;
+
+  transition:
+    color .25s ease,
+    opacity .25s ease;
+}
+
+.g2-button:hover,
+.g2-car-button:hover {
+  background: transparent;
+  color: #fff0da;
+  transform: none;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+/* Slightly more breathing room */
+
+.g2-content {
+  width: min(90%, 700px);
+  padding: 25px 35px;
+}
+
+/* Verdict */
+
+.g2-verdict {
+  font-size: clamp(25px, 3vw, 37px);
+  line-height: 1.15;
+}
+
+/* ==========================================
+   SMALLER SCREENS
+========================================== */
+
+@media (max-width: 600px) {
+
+  .g2-display {
+    top: 35%;
+    height: 44%;
+    width: 29%;
+  }
+
+  .g2-display-one {
+    left: 5%;
+  }
+
+  .g2-display-two {
+    right: 5%;
+  }
+
+  .g2-room-hint {
+    bottom: 4%;
+    font-size: 11px;
+    letter-spacing: .08em;
+  }
+
+  #g2Title,
+  #g2CarTitle {
+    font-size: 32px;
+  }
+
+  #g2Text,
+  #g2CarText {
+    font-size: 19px;
+  }
+
+  .g2-content {
+    width: 94%;
+    padding: 18px 14px;
+  }
+}
   
 </style>
 </head>
@@ -3058,8 +3335,8 @@ button {
 
 <button
   class="gallery-next-plaque"
-  onclick="openGallery2Exhibit()">
-
+  onclick="openGallery2Room()">
+  
   <span class="gallery-next-number">
     GALLERY II
   </span>
@@ -3528,6 +3805,42 @@ button {
 </section>
 
 <!-- ==========================================
+     GALLERY II — THE MUSEUM ROOM
+========================================== -->
+
+<section id="gallery2Room" class="scene">
+
+  <div class="g2-room-art"></div>
+
+  <div class="g2-room-shade"></div>
+
+  <!-- EXHIBIT 01 GLASS DISPLAY -->
+  <button
+    class="g2-display g2-display-one"
+    onclick="enterGallery2Display(1)"
+    aria-label="Explore Exhibit 01: The Kiss He Was So Confident About">
+  </button>
+
+  <!-- EXHIBIT 02 GLASS DISPLAY -->
+  <button
+    class="g2-display g2-display-two"
+    onclick="enterGallery2Display(2)"
+    aria-label="Explore Exhibit 02: Anything You Want Us to Be">
+  </button>
+
+  <div class="g2-room-hint">
+    ✧ SELECT A DISPLAY TO REVISIT ITS MEMORY ✧
+  </div>
+
+  <button class="g2-room-back" onclick="leaveGallery2Room()">
+    ← GALLERY I
+  </button>
+
+  <div class="g2-room-transition" id="g2RoomTransition"></div>
+
+</section>
+  
+<!-- ==========================================
      GALLERY II — EXHIBIT 01
      THE KISS HE WAS SO CONFIDENT ABOUT
 ========================================== -->
@@ -3537,9 +3850,9 @@ button {
   <div class="g2-background" id="g2Background"></div>
   <div class="g2-shade"></div>
 
-  <button class="g2-back" onclick="closeGallery2Exhibit()">
-    ← GALLERY I
-  </button>
+  <button class="g2-back" onclick="returnToGallery2Room()">
+  ← GALLERY II
+</button>
 
   <div class="g2-progress" id="g2Progress">
     GALLERY II · EXHIBIT 01
@@ -4210,6 +4523,9 @@ function openGallery2Exhibit() {
   document.getElementById("gallery1")
     .classList.remove("active");
 
+  document.getElementById("gallery2Room")
+  .classList.remove("active");
+
   document.getElementById("gallery2Exhibit1")
     .classList.add("active");
 
@@ -4263,9 +4579,9 @@ function g2RenderScene(scene, immediate = false) {
       background.style.filter = "brightness(.78)";
 
       g2SetContent(
-        "SCENE 01 · THE DINNER",
-        "A Little Extra Crispy",
-        "At Yakiniku Shokudo, he noticed how she liked her beef slightly burnt. So he cooked some for her, using his own portion.",
+    "SCENE 01 · THE DINNER",
+    "The Little Things You Noticed",
+    "I don't know if you realised how much that little gesture meant to me. You noticed how I liked my beef slightly burnt, and without me having to ask, you took some from your own portion and cooked it just the way I liked it. It was such a simple thing, but I remember feeling really cared for in that moment.",
         `<button class="g2-button" onclick="g2RenderScene(2)">
           CONTINUE THE EVENING →
         </button>`
@@ -4280,9 +4596,9 @@ function g2RenderScene(scene, immediate = false) {
       background.style.filter = "brightness(.75)";
 
       g2SetContent(
-        "SCENE 02 · THE WALK",
-        "East Coast Park",
-        "After dinner, they walked along the cycling path, talking as the evening went on.",
+    "SCENE 02 · THE WALK",
+    "East Coast Park",
+    "I don't remember everything we talked about that night, but I remember how much I enjoyed being there with you. Just walking beside you, talking about whatever came to mind. There wasn't anything particularly extraordinary about what we were doing, but somehow, being there with you made it feel special.",
         `<button class="g2-button" onclick="g2RenderScene(3)">
           KEEP WALKING →
         </button>`
@@ -4376,14 +4692,6 @@ function g2RenderScene(scene, immediate = false) {
             Please refrain from bringing up this result
             at every available opportunity.
           </div>
-
-        <button
-          class="g2-button"
-          id="g2FinishButton"
-          style="display:none"
-          onclick="openGallery2Exhibit2()">
-          CONTINUE TO EXHIBIT 02 →
-        </button>
 
         </div>
 
@@ -4506,12 +4814,6 @@ function g2RevealVerdict() {
 
   }, 4300));
 
-  g2RevealTimers.push(setTimeout(() => {
-
-    document.getElementById("g2FinishButton")
-      .style.display = "inline-block";
-
-  }, 5200));
 }
 
 /* ==========================================
@@ -4693,7 +4995,86 @@ function g2CarRender(scene, immediate = false) {
 
   }, immediate ? 0 : 350);
 }
-  
+
+/* ==========================================
+   GALLERY II — ROOM NAVIGATION
+========================================== */
+
+let g2RoomTimer = null;
+
+function openGallery2Room() {
+
+  clearTimeout(g2RoomTimer);
+
+  document.getElementById("gallery1")
+    .classList.remove("active");
+
+  document.getElementById("gallery2Exhibit1")
+    .classList.remove("active");
+
+  document.getElementById("gallery2Exhibit2")
+    .classList.remove("active");
+
+  document.getElementById("g2RoomTransition")
+    .classList.remove("visible");
+
+  document.getElementById("gallery2Room")
+    .classList.add("active");
+}
+
+function leaveGallery2Room() {
+
+  document.getElementById("gallery2Room")
+    .classList.remove("active");
+
+  document.getElementById("gallery1")
+    .classList.add("active");
+}
+
+function enterGallery2Display(number) {
+
+  const transition =
+    document.getElementById("g2RoomTransition");
+
+  transition.classList.add("visible");
+
+  clearTimeout(g2RoomTimer);
+
+  g2RoomTimer = setTimeout(() => {
+
+    document.getElementById("gallery2Room")
+      .classList.remove("active");
+
+    if (number === 1) {
+
+      openGallery2Exhibit();
+
+    } else {
+
+      openGallery2Exhibit2();
+
+    }
+
+    transition.classList.remove("visible");
+
+  }, 550);
+}
+
+function returnToGallery2Room() {
+
+  g2ClearTimers();
+  clearTimeout(g2CarTimer);
+
+  document.getElementById("gallery2Exhibit1")
+    .classList.remove("active");
+
+  document.getElementById("gallery2Exhibit2")
+    .classList.remove("active");
+
+  document.getElementById("gallery2Room")
+    .classList.add("active");
+}
+
 </script>
 
 </body>
