@@ -2351,6 +2351,338 @@ button {
     transition: none;
   }
 }
+
+/* ==========================================
+   GALLERY II — EXHIBIT 01
+========================================== */
+
+#gallery2Exhibit1 {
+  background: #090807;
+  color: #f6ead8;
+}
+
+/* BACKGROUND */
+
+.g2-background {
+  position: absolute;
+  inset: 0;
+
+  background-size: cover;
+  background-position: center;
+
+  transition:
+    opacity 1s ease,
+    filter 1.5s ease;
+
+  filter: brightness(.78);
+}
+
+/* ATMOSPHERIC OVERLAY */
+
+.g2-shade {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,.25),
+    rgba(0,0,0,.08) 35%,
+    rgba(0,0,0,.72)
+  );
+
+  pointer-events: none;
+}
+
+/* BACK BUTTON */
+
+.g2-back {
+  position: absolute;
+  top: 4%;
+  left: 4%;
+
+  z-index: 20;
+
+  background: none;
+  border: none;
+
+  color: #f6ead8;
+
+  font-family: "Cormorant Garamond", serif;
+  font-size: 19px;
+  letter-spacing: .08em;
+
+  text-shadow: 0 2px 10px #000;
+}
+
+/* PROGRESS LABEL */
+
+.g2-progress {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  z-index: 10;
+
+  font-size: 10px;
+  letter-spacing: .25em;
+
+  color: #e1c092;
+
+  text-align: center;
+  white-space: nowrap;
+
+  text-shadow: 0 2px 10px #000;
+}
+
+/* MAIN CONTENT */
+
+.g2-content {
+  position: absolute;
+
+  bottom: 7%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: min(88%, 650px);
+
+  z-index: 10;
+
+  text-align: center;
+
+  padding: 30px 35px;
+
+  background: radial-gradient(
+    ellipse at center,
+    rgba(15,9,8,.88),
+    rgba(15,9,8,.65) 65%,
+    rgba(15,9,8,0)
+  );
+
+  transition:
+    opacity .45s ease,
+    transform .45s ease;
+}
+
+.g2-content.g2-hidden {
+  opacity: 0;
+  transform: translate(-50%, 15px);
+}
+
+/* EYEBROW */
+
+.g2-eyebrow {
+  font-size: 10px;
+  letter-spacing: .3em;
+
+  color: #e1c092;
+
+  margin-bottom: 12px;
+}
+
+/* HEADING */
+
+#g2Title {
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: clamp(30px, 5vw, 54px);
+  font-weight: 500;
+
+  line-height: 1;
+
+  margin: 0 0 18px;
+
+  color: #fff0da;
+}
+
+/* DESCRIPTION */
+
+#g2Text {
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: clamp(18px, 2.2vw, 25px);
+
+  line-height: 1.35;
+
+  margin: 0 0 22px;
+
+  color: #f0dcc1;
+}
+
+/* BUTTONS */
+
+.g2-button {
+  padding: 12px 22px;
+
+  margin: 8px;
+
+  border: 1px solid rgba(225,192,146,.65);
+
+  background: rgba(35,20,16,.85);
+
+  color: #f6ead8;
+
+  font-size: 10px;
+  letter-spacing: .18em;
+
+  transition:
+    background .3s ease,
+    transform .3s ease;
+}
+
+.g2-button:hover {
+  background: rgba(95,53,42,.9);
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   MOVING HEART INTERACTION
+========================================== */
+
+.g2-heart-area {
+  position: relative;
+
+  width: min(100%, 420px);
+  height: 150px;
+
+  margin: 10px auto;
+
+  border: 1px solid rgba(225,192,146,.18);
+
+  background: rgba(0,0,0,.18);
+
+  border-radius: 10px;
+}
+
+.g2-heart {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: 65px;
+  height: 65px;
+
+  border: none;
+  background: transparent;
+
+  font-size: 43px;
+
+  color: #ef9aa6;
+
+  filter: drop-shadow(0 0 12px rgba(255,130,150,.6));
+
+  transition:
+    left .3s ease,
+    top .3s ease,
+    transform .3s ease;
+}
+
+.g2-heart:active {
+  transform: translate(-50%, -50%) scale(.85);
+}
+
+.g2-attempt-text {
+  min-height: 25px;
+
+  font-family: "Cormorant Garamond", serif;
+  font-size: 20px;
+  font-style: italic;
+
+  color: #e1c092;
+}
+
+/* ==========================================
+   VERDICT
+========================================== */
+
+.g2-finding {
+  margin: 10px 0;
+
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(18px, 2vw, 24px);
+
+  opacity: 0;
+  transform: translateY(8px);
+
+  transition:
+    opacity .6s ease,
+    transform .6s ease;
+}
+
+.g2-finding.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.g2-verdict {
+  margin: 22px 0 10px;
+
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(28px, 4vw, 46px);
+
+  font-weight: 600;
+  letter-spacing: .04em;
+
+  color: #e1c092;
+
+  opacity: 0;
+  transform: scale(.85) rotate(-4deg);
+
+  transition:
+    opacity .6s ease,
+    transform .6s ease;
+}
+
+.g2-verdict.visible {
+  opacity: 1;
+  transform: scale(1) rotate(-4deg);
+}
+
+.g2-warning {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 18px;
+  font-style: italic;
+
+  color: #d9bca0;
+
+  opacity: 0;
+
+  transition: opacity .8s ease;
+}
+
+.g2-warning.visible {
+  opacity: 1;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+  .g2-content {
+    bottom: 5%;
+    width: 94%;
+    padding: 22px 15px;
+  }
+
+  .g2-heart-area {
+    height: 135px;
+  }
+
+  .g2-back {
+    top: 3%;
+    left: 3%;
+    font-size: 16px;
+  }
+
+  .g2-progress {
+    top: 9%;
+    font-size: 9px;
+  }
+
+}
   
 </style>
 </head>
@@ -2481,6 +2813,25 @@ button {
     <h2>The Beginning</h2>
   </div>
 
+<!-- TEMPORARY GALLERY II TEST BUTTON -->
+
+<button
+  onclick="openGallery2Exhibit()"
+  style="
+    position:absolute;
+    right:4%;
+    bottom:5%;
+    z-index:30;
+    padding:12px 18px;
+    border:1px solid #e1c092;
+    background:rgba(20,12,10,.9);
+    color:#f6ead8;
+    font-size:11px;
+    letter-spacing:.12em;
+  ">
+  TEST GALLERY II →
+</button>
+  
 </section>
   
 <!-- ==========================================
@@ -2931,6 +3282,38 @@ button {
     onclick="closeConversation()">
     <span class="back-arrow">←</span> GALLERY I
   </button>
+
+</section>
+
+<!-- ==========================================
+     GALLERY II — EXHIBIT 01
+     THE KISS HE WAS SO CONFIDENT ABOUT
+========================================== -->
+
+<section id="gallery2Exhibit1" class="scene">
+
+  <div class="g2-background" id="g2Background"></div>
+  <div class="g2-shade"></div>
+
+  <button class="g2-back" onclick="closeGallery2Exhibit()">
+    ← GALLERY I
+  </button>
+
+  <div class="g2-progress" id="g2Progress">
+    GALLERY II · EXHIBIT 01
+  </div>
+
+  <div class="g2-content" id="g2Content">
+
+    <div class="g2-eyebrow" id="g2Eyebrow"></div>
+
+    <h1 id="g2Title"></h1>
+
+    <p id="g2Text"></p>
+
+    <div id="g2Interaction"></div>
+
+  </div>
 
 </section>
   
@@ -3520,6 +3903,343 @@ function closeConversation() {
   }, 1000);
 
 }
+
+/* ==========================================
+   GALLERY II — EXHIBIT 01
+========================================== */
+
+let g2Scene = 1;
+let g2HeartAttempts = 0;
+let g2TransitionTimer = null;
+let g2RevealTimers = [];
+
+const g2Images = {
+  restaurant: "gallery-2-scene-1-restaurant.PNG",
+  park: "gallery-2-scene-2-east-coast.PNG",
+  kiss: "gallery-2-scene-4-first-kiss.PNG"
+};
+
+function g2ClearTimers() {
+  clearTimeout(g2TransitionTimer);
+
+  g2RevealTimers.forEach(timer => clearTimeout(timer));
+  g2RevealTimers = [];
+}
+
+function openGallery2Exhibit() {
+
+  g2Scene = 1;
+  g2HeartAttempts = 0;
+
+  g2ClearTimers();
+
+  document.getElementById("gallery1")
+    .classList.remove("active");
+
+  document.getElementById("gallery2Exhibit1")
+    .classList.add("active");
+
+  g2RenderScene(1, true);
+}
+
+function closeGallery2Exhibit() {
+
+  g2ClearTimers();
+
+  document.getElementById("gallery2Exhibit1")
+    .classList.remove("active");
+
+  document.getElementById("gallery1")
+    .classList.add("active");
+}
+
+function g2SetContent(eyebrow, title, text, interaction) {
+
+  document.getElementById("g2Eyebrow").textContent = eyebrow;
+
+  document.getElementById("g2Title").textContent = title;
+
+  document.getElementById("g2Text").textContent = text;
+
+  document.getElementById("g2Interaction").innerHTML = interaction;
+}
+
+function g2RenderScene(scene, immediate = false) {
+
+  g2ClearTimers();
+
+  const content = document.getElementById("g2Content");
+  const background = document.getElementById("g2Background");
+
+  g2Scene = scene;
+
+  if (!immediate) {
+    content.classList.add("g2-hidden");
+  }
+
+  const delay = immediate ? 0 : 450;
+
+  g2TransitionTimer = setTimeout(() => {
+
+    if (scene === 1) {
+
+      background.style.backgroundImage =
+        `url("${g2Images.restaurant}")`;
+
+      background.style.filter = "brightness(.78)";
+
+      g2SetContent(
+        "SCENE 01 · THE DINNER",
+        "A Little Extra Crispy",
+        "At Yakiniku Shokudo, he noticed how she liked her beef slightly burnt. So he cooked some for her, using his own portion.",
+        `<button class="g2-button" onclick="g2RenderScene(2)">
+          CONTINUE THE EVENING →
+        </button>`
+      );
+    }
+
+    else if (scene === 2) {
+
+      background.style.backgroundImage =
+        `url("${g2Images.park}")`;
+
+      background.style.filter = "brightness(.75)";
+
+      g2SetContent(
+        "SCENE 02 · THE WALK",
+        "East Coast Park",
+        "After dinner, they walked along the cycling path, talking as the evening went on.",
+        `<button class="g2-button" onclick="g2RenderScene(3)">
+          KEEP WALKING →
+        </button>`
+      );
+    }
+
+    else if (scene === 3) {
+
+      background.style.backgroundImage =
+        `url("${g2Images.park}")`;
+
+      background.style.filter = "brightness(.58)";
+
+      g2HeartAttempts = 0;
+
+      g2SetContent(
+        "SCENE 03 · THE ALMOST-KISS",
+        "Try Your Luck",
+        "He tried to get her to face him. Unfortunately, she was getting a little too flustered to cooperate.",
+        `
+        <div class="g2-heart-area" id="g2HeartArea">
+
+          <button
+            class="g2-heart"
+            id="g2Heart"
+            onclick="g2CatchHeart()"
+            aria-label="Try to catch the heart">
+            ♥
+          </button>
+
+        </div>
+
+        <div class="g2-attempt-text" id="g2AttemptText">
+          Go on. Try.
+        </div>
+        `
+      );
+    }
+
+    else if (scene === 4) {
+
+      background.style.backgroundImage =
+        `url("${g2Images.kiss}")`;
+
+      background.style.filter = "brightness(.8)";
+
+      g2SetContent(
+        "SCENE 04 · THE FIRST KISS",
+        "This Time, For Real",
+        "They found somewhere a little quieter. And despite all the nerves, this time, the kiss finally happened.",
+        `<button class="g2-button" onclick="g2RenderScene(5)">
+          EXAMINE THE EVIDENCE →
+        </button>`
+      );
+    }
+
+    else if (scene === 5) {
+
+      background.style.backgroundImage =
+        `url("${g2Images.kiss}")`;
+
+      background.style.filter = "brightness(.3) blur(3px)";
+
+      g2SetContent(
+        "SCENE 05 · THE OFFICIAL VERDICT",
+        "A Historical Misjudgement",
+        "Before the incident, she was convinced he was all talk.",
+        `
+        <div id="g2Findings" style="display:none">
+
+          <div class="g2-finding">
+            01 — Confidence: Excessive.
+          </div>
+
+          <div class="g2-finding">
+            02 — Nervousness: Conveniently undisclosed.
+          </div>
+
+          <div class="g2-finding">
+            03 — Actual performance: ...Unfortunately impressive.
+          </div>
+
+          <div class="g2-verdict" id="g2Verdict">
+            HIS EGO DID NOT NEED THIS.
+          </div>
+
+          <div class="g2-warning" id="g2Warning">
+            And yet, against her better judgement,
+            she had to admit he was right.
+            <br><br>
+            Please refrain from bringing up this result
+            at every available opportunity.
+          </div>
+
+          <button
+            class="g2-button"
+            id="g2FinishButton"
+            style="display:none"
+            onclick="closeGallery2Exhibit()">
+            RETURN TO GALLERY I
+          </button>
+
+        </div>
+
+        <button
+          class="g2-button"
+          id="g2RevealButton"
+          onclick="g2RevealVerdict()">
+          EXAMINE THE RESULTS
+        </button>
+        `
+      );
+    }
+
+    content.classList.remove("g2-hidden");
+
+  }, delay);
+}
+
+/* ==========================================
+   MOVING HEART
+========================================== */
+
+function g2CatchHeart() {
+
+  const heart = document.getElementById("g2Heart");
+  const message = document.getElementById("g2AttemptText");
+
+  if (!heart || !message) return;
+
+  g2HeartAttempts++;
+
+  if (g2HeartAttempts === 1) {
+
+    heart.style.left = "25%";
+    heart.style.top = "35%";
+
+    message.textContent = "Nope.";
+
+  }
+
+  else if (g2HeartAttempts === 2) {
+
+    heart.style.left = "75%";
+    heart.style.top = "65%";
+
+    message.textContent = "Still nope.";
+
+  }
+
+  else {
+
+    heart.disabled = true;
+    heart.style.left = "50%";
+    heart.style.top = "50%";
+
+    message.textContent = "Nice try.";
+
+    g2RevealTimers.push(setTimeout(() => {
+
+      document.getElementById("g2Interaction").innerHTML = `
+        <p class="g2-attempt-text">
+          Unfortunately, she was too busy panicking to cooperate.
+        </p>
+
+        <h2 style="
+          font-family: 'Cormorant Garamond', serif;
+          color: #e1c092;
+          font-size: 29px;
+          margin: 18px 0;
+        ">
+          FIRST KISS ATTEMPT: UNSUCCESSFUL
+        </h2>
+
+        <button
+          class="g2-button"
+          onclick="g2RenderScene(4)">
+          PERHAPS SOMEWHERE QUIETER? →
+        </button>
+      `;
+
+    }, 650));
+  }
+}
+
+/* ==========================================
+   VERDICT REVEAL
+========================================== */
+
+function g2RevealVerdict() {
+
+  document.getElementById("g2RevealButton")
+    .style.display = "none";
+
+  document.getElementById("g2Findings")
+    .style.display = "block";
+
+  const findings = document.querySelectorAll(
+    "#g2Findings .g2-finding"
+  );
+
+  findings.forEach((finding, index) => {
+
+    g2RevealTimers.push(setTimeout(() => {
+      finding.classList.add("visible");
+    }, 500 + index * 900));
+
+  });
+
+  g2RevealTimers.push(setTimeout(() => {
+
+    document.getElementById("g2Verdict")
+      .classList.add("visible");
+
+  }, 3400));
+
+  g2RevealTimers.push(setTimeout(() => {
+
+    document.getElementById("g2Warning")
+      .classList.add("visible");
+
+  }, 4300));
+
+  g2RevealTimers.push(setTimeout(() => {
+
+    document.getElementById("g2FinishButton")
+      .style.display = "inline-block";
+
+  }, 5200));
+}
+  
 </script>
 
 </body>
