@@ -3477,6 +3477,117 @@ button {
     transform: translate(-50%, calc(-50% + 12px));
   }
 }
+
+/* ==========================================
+   GALLERY II — CONVERSATION EXPERIENCE
+========================================== */
+
+/* Prevent sticky hover underlines */
+
+.g2-button:hover,
+.g2-car-button:hover,
+#gallery2Exhibit2 .g2-car-button:hover {
+  text-decoration: none !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .g2-button:hover,
+  .g2-car-button:hover {
+    color: #fff0da;
+  }
+}
+
+/* Keyboard navigation remains visible */
+
+.g2-button:focus-visible,
+.g2-car-button:focus-visible {
+  outline: 1px solid #e1c092;
+  outline-offset: 5px;
+}
+
+/* Question and answer share one composition */
+
+#gallery2Exhibit2.g2-car-dialogue .g2-car-content {
+  left: 50%;
+  top: 50%;
+  width: min(720px, 86%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+#gallery2Exhibit2 .g2-dialogue-question {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(31px, 4.5vw, 54px);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.15;
+  color: #f6ead8;
+  margin: 0 0 24px;
+  transition:
+    opacity .5s ease,
+    transform .5s ease,
+    font-size .5s ease;
+}
+
+#gallery2Exhibit2 .g2-dialogue-question.g2-question-soft {
+  font-size: clamp(24px, 3vw, 36px);
+  opacity: .72;
+  transform: translateY(-6px);
+}
+
+#gallery2Exhibit2 .g2-dialogue-answer {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(27px, 4vw, 48px);
+  font-style: italic;
+  line-height: 1.2;
+  color: #f4dfbf;
+  margin: 0 0 28px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity .7s ease,
+    transform .7s ease;
+}
+
+#gallery2Exhibit2 .g2-dialogue-answer.g2-answer-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#gallery2Exhibit2.g2-car-dialogue .g2-car-overlay {
+  background: rgba(12, 8, 10, .64);
+}
+
+/* Avoid changing alignment while text is visible */
+
+#gallery2Exhibit2.g2-car-dialogue .g2-car-content.g2-car-hidden {
+  transform: translate(-50%, calc(-50% + 12px));
+}
+
+/* Small screens */
+
+@media (max-width: 600px) {
+  #gallery2Exhibit2.g2-car-dialogue .g2-car-content {
+    width: 90%;
+    max-height: 70dvh;
+    padding: 12px;
+  }
+
+  #gallery2Exhibit2 .g2-dialogue-question {
+    font-size: clamp(29px, 8vw, 42px);
+  }
+
+  #gallery2Exhibit2 .g2-dialogue-answer {
+    font-size: clamp(26px, 7vw, 38px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #gallery2Exhibit2 .g2-dialogue-question,
+  #gallery2Exhibit2 .g2-dialogue-answer {
+    transition-duration: .01ms;
+  }
+}
   
 </style>
 </head>
@@ -5126,20 +5237,26 @@ function closeGallery2Exhibit2() {
   g2RenderScene(5, true);
 }
 
-  function g2CarRender(scene, immediate = false) {
+function g2CarRender(scene, immediate = false) {
 
   clearTimeout(g2CarTimer);
 
   g2CarScene = scene;
 
-  const carExhibit = document.getElementById("gallery2Exhibit2");
+  const exhibit = document.getElementById("gallery2Exhibit2");
   const content = document.getElementById("g2CarContent");
   const label = document.getElementById("g2CarLabel");
   const title = document.getElementById("g2CarTitle");
   const text = document.getElementById("g2CarText");
   const interaction = document.getElementById("g2CarInteraction");
 
-  /* First, fade out the current scene */
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  const fadeDelay = immediate || reducedMotion ? 0 : 650;
+
+  /* Fade out before changing to a different composition */
 
   if (!immediate) {
     content.classList.add("g2-car-hidden");
@@ -5147,25 +5264,12 @@ function closeGallery2Exhibit2() {
 
   g2CarTimer = setTimeout(() => {
 
-    /* Change the layout only after the old text fades */
-
-    carExhibit.classList.remove(
+    exhibit.classList.remove(
       "g2-car-question",
       "g2-car-answer",
-      "g2-car-excuse"
+      "g2-car-excuse",
+      "g2-car-dialogue"
     );
-
-    if (scene === 1) {
-      carExhibit.classList.add("g2-car-question");
-    }
-
-    if (scene === 2) {
-      carExhibit.classList.add("g2-car-answer");
-    }
-
-    if (scene === 3) {
-      carExhibit.classList.add("g2-car-excuse");
-    }
 
     content.classList.remove("g2-car-freeze");
 
@@ -5186,13 +5290,17 @@ function closeGallery2Exhibit2() {
 
     else if (scene === 1) {
 
-      label.textContent = "THE QUESTION";
-      title.textContent = "What are we?";
+      exhibit.classList.add("g2-car-dialogue");
 
-      text.textContent =
-        "She finally asked.";
+      label.textContent = "THE QUESTION";
+      title.textContent = "";
+      text.textContent = "";
 
       interaction.innerHTML = `
+        <div class="g2-dialogue-question" id="g2DialogueQuestion">
+          “What are we?”
+        </div>
+
         <button class="g2-car-button" onclick="g2CarRender(2)">
           HIS RESPONSE →
         </button>
@@ -5201,20 +5309,37 @@ function closeGallery2Exhibit2() {
 
     else if (scene === 2) {
 
-      label.textContent = "HIS RESPONSE";
-      title.textContent = "Anything You Want Us to Be";
+      exhibit.classList.add("g2-car-dialogue");
 
-      text.textContent =
-        "We can be anything you want us to be.";
+      label.textContent = "THE CONVERSATION";
+      title.textContent = "";
+      text.textContent = "";
 
       interaction.innerHTML = `
+        <div class="g2-dialogue-question g2-question-soft">
+          “What are we?”
+        </div>
+
+        <div class="g2-dialogue-answer" id="g2DialogueAnswer">
+          “We can be anything you want us to be.”
+        </div>
+
         <button class="g2-car-button" onclick="g2CarRender(3)">
           HER REACTION →
         </button>
       `;
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          document.getElementById("g2DialogueAnswer")
+            ?.classList.add("g2-answer-visible");
+        });
+      });
     }
 
     else if (scene === 3) {
+
+      exhibit.classList.add("g2-car-excuse");
 
       content.classList.add("g2-car-freeze");
 
@@ -5281,12 +5406,12 @@ function closeGallery2Exhibit2() {
         <div class="g2-car-stamp">
           RELATIONSHIP STATUS: OFFICIAL
         </div>
-  `;
-}
+      `;
+    }
 
     content.classList.remove("g2-car-hidden");
 
-  }, immediate ? 0 : 700);
+  }, fadeDelay);
 }
 
 /* ==========================================
