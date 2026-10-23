@@ -3554,16 +3554,149 @@ button {
   transform: translateY(0);
 }
 
-#gallery2Exhibit2.g2-car-dialogue .g2-car-overlay {
-  background: rgba(12, 8, 10, .64);
+/* ==========================================
+   EXHIBIT 02 — STATIONARY CINEMATIC LIGHTING
+========================================== */
+
+/* One fixed lighting treatment for every scene */
+
+#gallery2Exhibit2 .g2-car-overlay,
+#gallery2Exhibit2.g2-car-dialogue .g2-car-overlay,
+#gallery2Exhibit2.g2-car-excuse .g2-car-overlay {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(12, 8, 10, .78) 0%,
+      rgba(12, 8, 10, .65) 40%,
+      rgba(12, 8, 10, .48) 100%
+    ) !important;
+
+  transition: none !important;
+  animation: none !important;
 }
 
-/* Avoid changing alignment while text is visible */
+/* The text container never travels across the screen */
 
-#gallery2Exhibit2.g2-car-dialogue .g2-car-content.g2-car-hidden {
-  transform: translate(-50%, calc(-50% + 12px));
+#gallery2Exhibit2 .g2-car-content,
+#gallery2Exhibit2.g2-car-dialogue .g2-car-content,
+#gallery2Exhibit2.g2-car-excuse .g2-car-content {
+  left: 50%;
+  top: 50%;
+  width: min(720px, 88%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+
+  transition: opacity .45s ease !important;
 }
 
+/* Fade text without shifting its position */
+
+#gallery2Exhibit2 .g2-car-content.g2-car-hidden,
+#gallery2Exhibit2.g2-car-dialogue .g2-car-content.g2-car-hidden,
+#gallery2Exhibit2.g2-car-excuse .g2-car-content.g2-car-hidden {
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* Gentle question reveal */
+
+#gallery2Exhibit2 .g2-dialogue-question {
+  animation: g2QuestionEnter .7s ease both;
+}
+
+@keyframes g2QuestionEnter {
+  from {
+    opacity: 0;
+    transform: translateY(9px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sudden reaction */
+
+#gallery2Exhibit2.g2-car-excuse #g2CarTitle {
+  animation: g2ExcuseReveal .28s cubic-bezier(.2,.8,.3,1) both;
+}
+
+@keyframes g2ExcuseReveal {
+  from {
+    opacity: 0;
+    transform: scale(.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* The reaction explanation follows slightly later */
+
+#gallery2Exhibit2.g2-car-excuse #g2CarText {
+  animation: g2ReactionCaption .5s ease .4s both;
+}
+
+@keyframes g2ReactionCaption {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Official relationship stamp */
+
+#gallery2Exhibit2 .g2-car-stamp {
+  animation: g2OfficialReveal .65s ease both;
+}
+
+@keyframes g2OfficialReveal {
+  from {
+    opacity: 0;
+    transform: rotate(-4deg) scale(.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: rotate(-4deg) scale(1);
+  }
+}
+
+/* Responsive layout */
+
+@media (max-width: 600px) {
+  #gallery2Exhibit2 .g2-car-content,
+  #gallery2Exhibit2.g2-car-dialogue .g2-car-content,
+  #gallery2Exhibit2.g2-car-excuse .g2-car-content {
+    left: 50%;
+    top: 50%;
+    width: 90%;
+    max-height: 72dvh;
+    transform: translate(-50%, -50%);
+    padding: 12px;
+  }
+
+  #gallery2Exhibit2 .g2-car-content.g2-car-hidden {
+    transform: translate(-50%, -50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #gallery2Exhibit2 .g2-dialogue-question,
+  #gallery2Exhibit2.g2-car-excuse #g2CarTitle,
+  #gallery2Exhibit2.g2-car-excuse #g2CarText,
+  #gallery2Exhibit2 .g2-car-stamp {
+    animation: none !important;
+  }
+}
+  
 /* Small screens */
 
 @media (max-width: 600px) {
@@ -5254,13 +5387,17 @@ function g2CarRender(scene, immediate = false) {
     "(prefers-reduced-motion: reduce)"
   ).matches;
 
-  const fadeDelay = immediate || reducedMotion ? 0 : 650;
+  const fadeDelay = immediate || reducedMotion
+  ? 0
+  : scene === 3
+    ? 380
+    : 450;
 
   /* Fade out before changing to a different composition */
 
   if (!immediate) {
-    content.classList.add("g2-car-hidden");
-  }
+  content.classList.add("g2-car-hidden");
+}
 
   g2CarTimer = setTimeout(() => {
 
