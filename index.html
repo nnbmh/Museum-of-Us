@@ -2683,6 +2683,96 @@ button {
   }
 
 }
+
+/* ==========================================
+   GALLERY NAVIGATION PLAQUE
+========================================== */
+
+.gallery-next-plaque {
+  position: absolute;
+  bottom: 4%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+
+  min-width: 245px;
+  padding: 14px 28px;
+
+  border: 1px solid rgba(225,192,146,.65);
+  border-radius: 2px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(45,27,22,.95),
+    rgba(20,12,10,.97)
+  );
+
+  box-shadow:
+    0 0 0 3px rgba(18,10,8,.8),
+    0 0 0 4px rgba(225,192,146,.25),
+    0 8px 25px rgba(0,0,0,.5);
+
+  color: #f6ead8;
+  text-align: center;
+
+  transition:
+    border-color .3s ease,
+    box-shadow .3s ease,
+    background .3s ease;
+}
+
+.gallery-next-plaque:hover {
+  border-color: #e1c092;
+
+  background: linear-gradient(
+    145deg,
+    rgba(70,40,32,.98),
+    rgba(30,16,13,.98)
+  );
+
+  box-shadow:
+    0 0 0 3px rgba(18,10,8,.8),
+    0 0 0 4px rgba(225,192,146,.4),
+    0 8px 30px rgba(0,0,0,.6);
+}
+
+.gallery-next-number {
+  font-size: 9px;
+  letter-spacing: .3em;
+  color: #e1c092;
+}
+
+.gallery-next-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 23px;
+  font-style: italic;
+  line-height: 1.1;
+  color: #f6ead8;
+}
+
+.gallery-next-action {
+  margin-top: 6px;
+  font-size: 9px;
+  letter-spacing: .18em;
+  color: #d9bca0;
+}
+
+@media (max-width: 600px) {
+  .gallery-next-plaque {
+    bottom: 3%;
+    min-width: 220px;
+    padding: 12px 20px;
+  }
+
+  .gallery-next-title {
+    font-size: 20px;
+  }
+}
   
 </style>
 </head>
@@ -2813,23 +2903,24 @@ button {
     <h2>The Beginning</h2>
   </div>
 
-<!-- TEMPORARY GALLERY II TEST BUTTON -->
+<!-- GALLERY II NAVIGATION -->
 
 <button
-  onclick="openGallery2Exhibit()"
-  style="
-    position:absolute;
-    right:4%;
-    bottom:5%;
-    z-index:30;
-    padding:12px 18px;
-    border:1px solid #e1c092;
-    background:rgba(20,12,10,.9);
-    color:#f6ead8;
-    font-size:11px;
-    letter-spacing:.12em;
-  ">
-  TEST GALLERY II →
+  class="gallery-next-plaque"
+  onclick="openGallery2Exhibit()">
+
+  <span class="gallery-next-number">
+    GALLERY II
+  </span>
+
+  <span class="gallery-next-title">
+    The Moments That Made Us
+  </span>
+
+  <span class="gallery-next-action">
+    CONTINUE YOUR VISIT →
+  </span>
+
 </button>
   
 </section>
