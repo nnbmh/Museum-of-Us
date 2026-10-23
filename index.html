@@ -3882,10 +3882,10 @@ button {
   <div class="g2-car-background"></div>
   <div class="g2-car-overlay"></div>
 
-  <button class="g2-back" onclick="closeGallery2Exhibit2()">
-    ← EXHIBIT 01
-  </button>
-
+<button class="g2-back" onclick="returnToGallery2Room()">
+  ← GALLERY II
+</button>
+  
   <div class="g2-progress">
     GALLERY II · EXHIBIT 02
   </div>
@@ -4983,13 +4983,20 @@ function g2CarRender(scene, immediate = false) {
           RELATIONSHIP STATUS: OFFICIAL
         </div>
 
-        <br>
+        else if (scene === 6) {
 
-        <button class="g2-car-button" onclick="closeGallery2Exhibit2()">
-          RETURN TO EXHIBIT 01
-        </button>
-      `;
-    }
+  label.textContent = "THE MOMENT WE BECAME US";
+  title.textContent = "And Just Like That...";
+
+  text.textContent =
+    "Whatever happened in those last ten minutes, they arrived at an answer.";
+
+  interaction.innerHTML = `
+    <div class="g2-car-stamp">
+      RELATIONSHIP STATUS: OFFICIAL
+    </div>
+  `;
+}
 
     content.classList.remove("g2-car-hidden");
 
