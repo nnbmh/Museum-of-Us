@@ -5126,45 +5126,46 @@ function closeGallery2Exhibit2() {
   g2RenderScene(5, true);
 }
 
-function g2CarRender(scene, immediate = false) {
+  function g2CarRender(scene, immediate = false) {
 
   clearTimeout(g2CarTimer);
 
   g2CarScene = scene;
 
-  /* Scene-specific cinematic typography */
-
-const carExhibit = document.getElementById("gallery2Exhibit2");
-
-carExhibit.classList.remove(
-  "g2-car-question",
-  "g2-car-answer",
-  "g2-car-excuse"
-);
-
-if (scene === 1) {
-  carExhibit.classList.add("g2-car-question");
-}
-
-if (scene === 2) {
-  carExhibit.classList.add("g2-car-answer");
-}
-
-if (scene === 3) {
-  carExhibit.classList.add("g2-car-excuse");
-}
-
+  const carExhibit = document.getElementById("gallery2Exhibit2");
   const content = document.getElementById("g2CarContent");
   const label = document.getElementById("g2CarLabel");
   const title = document.getElementById("g2CarTitle");
   const text = document.getElementById("g2CarText");
   const interaction = document.getElementById("g2CarInteraction");
 
+  /* First, fade out the current scene */
+
   if (!immediate) {
     content.classList.add("g2-car-hidden");
   }
 
   g2CarTimer = setTimeout(() => {
+
+    /* Change the layout only after the old text fades */
+
+    carExhibit.classList.remove(
+      "g2-car-question",
+      "g2-car-answer",
+      "g2-car-excuse"
+    );
+
+    if (scene === 1) {
+      carExhibit.classList.add("g2-car-question");
+    }
+
+    if (scene === 2) {
+      carExhibit.classList.add("g2-car-answer");
+    }
+
+    if (scene === 3) {
+      carExhibit.classList.add("g2-car-excuse");
+    }
 
     content.classList.remove("g2-car-freeze");
 
@@ -5208,7 +5209,7 @@ if (scene === 3) {
 
       interaction.innerHTML = `
         <button class="g2-car-button" onclick="g2CarRender(3)">
-          ...
+          HER REACTION →
         </button>
       `;
     }
@@ -5285,7 +5286,7 @@ if (scene === 3) {
 
     content.classList.remove("g2-car-hidden");
 
-  }, immediate ? 0 : 350);
+  }, immediate ? 0 : 700);
 }
 
 /* ==========================================
