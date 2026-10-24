@@ -4205,6 +4205,71 @@ button {
 
   cursor: pointer;
 } 
+
+/* ==========================================
+   GALLERY I — REMOVE SIGNAGE GLOW
+========================================== */
+
+#gallery1 .gallery-next-plaque::before,
+#gallery1 .gallery-next-plaque::after,
+#gallery1 .gallery-next-plaque:hover::after,
+#gallery1 .gallery-next-plaque:active::after,
+#gallery1 .gallery-next-plaque:focus::after,
+#gallery1 .gallery-next-plaque:focus-visible::after {
+  content: none !important;
+  display: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+#gallery1 button.gallery-next-plaque {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ==========================================
+   GALLERY I — BOOK HOTSPOT CORRECTION
+========================================== */
+
+#gallery1 .book-hotspot {
+  position: absolute !important;
+
+  left: 38% !important;
+  top: 35% !important;
+
+  width: 24% !important;
+  height: 13% !important;
+
+  z-index: 30 !important;
+
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+
+  clip-path: polygon(
+    0% 30%,
+    45% 0%,
+    50% 8%,
+    55% 0%,
+    100% 30%,
+    95% 90%,
+    50% 100%,
+    5% 90%
+  );
+
+  cursor: pointer;
+} 
+
+/* ==========================================
+   WATCH EXHIBIT — OKC LOGO ALIGNMENT
+========================================== */
+
+#watchExhibit .watch-notification {
+  transform: translate(0.65%, 0.75%) !important;
+}
   
 </style>
 </head>
