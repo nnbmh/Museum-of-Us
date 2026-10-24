@@ -1932,17 +1932,14 @@ button {
 .watch-notification {
   position: absolute;
   inset: 0;
-
   width: 100%;
   height: 100%;
-
   object-fit: cover;
   object-position: center;
-
+  transform: translateX(-2%);
   opacity: 0;
   pointer-events: none;
   z-index: 5;
-
   transition: opacity 0.25s ease;
 }
   
@@ -1953,20 +1950,15 @@ button {
 
 .watch-screen-hotspot {
   position: absolute;
-
   left: 46.5%;
   top: 38%;
   width: 7%;
   height: 13%;
-
   z-index: 15;
-
   padding: 0;
   border: none;
   background: transparent;
-
   cursor: pointer;
-
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -1995,12 +1987,10 @@ button {
   left: 50%;
   transform: translateX(-50%);
   z-index: 8;
-
   font-size: 10px;
   letter-spacing: .2em;
   color: #f6ead8;
   text-shadow: 0 2px 12px #000;
-
   opacity: .85;
   pointer-events: none;
   transition: opacity .5s ease;
@@ -2029,36 +2019,21 @@ button {
   pointer-events: none;
 }
 
-.conversation-stars::after {
-  content: "";
-  position: absolute;
-  left: 30%;
-  right: 30%;
-  bottom: 16%;
-  height: 22%;
-  pointer-events: none;
-}
-
 /* Individual interactive stars */
 
 .conversation-star {
   position: absolute;
   width: 34px;
   height: 34px;
-
   transform: translate(-50%, -50%);
-
   border: none;
   border-radius: 50%;
   background: transparent;
-
   cursor: pointer;
   pointer-events: auto;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   opacity: 0;
   transition: opacity 1s ease;
 }
@@ -4276,14 +4251,14 @@ button {
 
     <button
       class="conversation-star"
-      style="left: 39%; top: 61%;"
+      style="left: 35%; top: 52%;"
       onclick="openConversationCard(3)"
       aria-label="Explore conversation fragment four">
     </button>
 
     <button
       class="conversation-star"
-      style="left: 59%; top: 64%;"
+      style="left: 65%; top: 52%;"
       onclick="openConversationCard(4)"
       aria-label="Explore conversation fragment five">
     </button>
