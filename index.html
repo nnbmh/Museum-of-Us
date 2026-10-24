@@ -3946,62 +3946,100 @@ button {
 }
 
 /* ==========================================
-   GALLERY I — GALLERY II DOORWAY HOTSPOT
+   GALLERY I — FINAL HOTSPOT CORRECTIONS
 ========================================== */
 
-/* Position the existing button over the sign */
+/* EXHIBIT 02 — THE FIRST DATE */
+/* Left glass display */
 
-#gallery1 button.gallery-next-plaque {
-  position: absolute !important;
+#gallery1 .watch-hotspot {
+  position: absolute;
+  left: 0%;
+  top: 37%;
+  width: 12%;
+  height: 25%;
 
-  left: 82.7% !important;
-  top: 40.5% !important;
+  z-index: 20;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
 
-  right: auto !important;
-  bottom: auto !important;
+/* EXHIBIT 03 — THE CONVERSATION */
+/* Right glass display */
 
-  transform: none !important;
+#gallery1 .conversation-hotspot {
+  position: absolute;
+  left: 66%;
+  top: 37%;
+  width: 15%;
+  height: 25%;
 
-  width: 7.5% !important;
-  height: 7% !important;
+  z-index: 20;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
 
-  min-width: 0 !important;
-  min-height: 0 !important;
+/* GALLERY II — SIGNAGE HOTSPOT */
 
-  padding: 0 !important;
-  margin: 0 !important;
+#gallery1 .gallery-next-plaque {
+  position: absolute;
 
-  display: block !important;
+  left: 82.7%;
+  top: 31%;
 
-  background: transparent !important;
-  border: none !important;
+  right: auto;
+  bottom: auto;
 
-  z-index: 50 !important;
+  transform: none;
+
+  width: 7%;
+  height: 6%;
+
+  min-width: 0;
+  min-height: 0;
+
+  padding: 0;
+  margin: 0;
+
+  display: block;
+
+  background: transparent;
+  border: none;
+
+  box-shadow: none;
+
+  z-index: 40;
 
   cursor: pointer;
 }
 
-/* Hide button text — the sign is in the image */
+/* Hide the old button contents */
 
 #gallery1 .gallery-next-plaque span {
-  display: none !important;
+  display: none;
 }
 
-/* Subtle gold glow around the existing sign */
+/* Soft champagne-gold glow */
 
 #gallery1 .gallery-next-plaque::after {
   content: "";
 
   position: absolute;
-  inset: -3px;
+  inset: -2px;
 
+  border: 1px solid rgba(225,192,146,.3);
   border-radius: 3px;
 
   box-shadow:
-    0 0 8px rgba(225,192,146,.3),
-    0 0 18px rgba(225,192,146,.15);
+    0 0 8px rgba(225,192,146,.2),
+    0 0 18px rgba(225,192,146,.1);
 
-  opacity: .5;
+  opacity: .35;
+  pointer-events: none;
 
   transition: opacity .3s ease;
 }
@@ -4011,8 +4049,38 @@ button {
   opacity: 1;
 
   box-shadow:
-    0 0 12px rgba(225,192,146,.7),
-    0 0 25px rgba(225,192,146,.35);
+    0 0 12px rgba(225,192,146,.65),
+    0 0 25px rgba(225,192,146,.3);
+}
+
+/* LOWER THE GALLERY HINT */
+
+#gallery1 .gallery-hint {
+  position: absolute;
+  top: auto;
+  bottom: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: max-content;
+  max-width: 95%;
+
+  text-align: center;
+  pointer-events: none;
+}
+
+/* REMOVE UNWANTED BUTTON OUTLINE */
+
+#gallery1 .gallery-next-plaque:focus,
+#gallery1 .gallery-next-plaque:active {
+  outline: none;
+}
+
+/* KEEP HOTSPOTS INVISIBLE */
+
+#gallery1 .watch-hotspot,
+#gallery1 .conversation-hotspot {
+  -webkit-tap-highlight-color: transparent;
 }
   
 </style>
