@@ -4344,6 +4344,67 @@ button {
   box-shadow: none !important;
   outline: none !important;
 }
+
+/* ==========================================
+   GALLERY II — CORRECT NAVIGATION HOTSPOTS
+========================================== */
+
+/* BOTH BRASS SIGNS */
+
+#gallery2Room .g2-nav-plaque {
+  position: absolute !important;
+
+  top: 15% !important;
+
+  width: 5.5% !important;
+  height: 7% !important;
+
+  z-index: 50 !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+
+  box-shadow: none !important;
+  outline: none !important;
+
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* GALLERY I — LEFT BRASS SIGN */
+
+#gallery2Room .g2-nav-left {
+  left: 12.5% !important;
+  right: auto !important;
+}
+
+/* GALLERY III — RIGHT BRASS SIGN */
+
+#gallery2Room .g2-nav-right {
+  right: 12.5% !important;
+  left: auto !important;
+}
+
+/* NO GLOW OR OUTLINE */
+
+#gallery2Room .g2-nav-plaque::before,
+#gallery2Room .g2-nav-plaque::after {
+  content: none !important;
+  display: none !important;
+}
+
+#gallery2Room .g2-nav-plaque:hover,
+#gallery2Room .g2-nav-plaque:active,
+#gallery2Room .g2-nav-plaque:focus {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
   
 </style>
 </head>
