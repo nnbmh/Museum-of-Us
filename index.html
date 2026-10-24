@@ -1879,13 +1879,20 @@ button {
   height: 31%;
 }
 
-/* Right display case */
+/* EXHIBIT 03 — CONVERSATION */
 
 .conversation-hotspot {
-  right: 3%;
-  top: 30%;
-  width: 14%;
-  height: 31%;
+  position: absolute;
+  right: 5%;
+  top: 36%;
+  width: 12%;
+  height: 23%;
+
+  z-index: 9;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 
 /* Exhibit scenes */
@@ -1931,16 +1938,23 @@ button {
 
 .watch-notification {
   position: absolute;
+
   inset: 0;
+
   width: 100%;
   height: 100%;
+
   object-fit: cover;
   object-position: center;
-  transform: translateX(-2%);
+
+  transform: none;
+
   opacity: 0;
   pointer-events: none;
+
   z-index: 5;
-  transition: opacity 0.25s ease;
+
+  transition: opacity .25s ease;
 }
   
 .watch-notification.visible {
@@ -3747,6 +3761,144 @@ button {
     border-color: #e1c092;
   }
 }  
+
+/* ==========================================
+   MUSEUM OF US — HOTSPOT ALIGNMENT UPDATE
+========================================== */
+
+/* GALLERY II — EXHIBIT 01 */
+
+#gallery2Room .g2-display-one {
+  position: absolute;
+
+  left: 12%;
+  top: 37%;
+
+  width: 22%;
+  height: 39%;
+
+  z-index: 10;
+}
+
+/* GALLERY II — EXHIBIT 02 */
+
+#gallery2Room .g2-display-two {
+  position: absolute;
+
+  right: 12%;
+  top: 37%;
+
+  width: 22%;
+  height: 39%;
+
+  z-index: 10;
+}
+
+/* INVISIBLE EXHIBIT HOTSPOTS */
+
+#gallery2Room .g2-display {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* GALLERY NAVIGATION PLAQUES */
+
+#gallery2Room .g2-nav-plaque {
+  position: absolute;
+
+  top: 43%;
+  width: 8%;
+  height: 12%;
+
+  z-index: 15;
+
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+
+  background: transparent;
+  cursor: pointer;
+
+  -webkit-tap-highlight-color: transparent;
+
+  transition:
+    box-shadow .4s ease,
+    background .4s ease;
+}
+
+/* GALLERY I — LEFT PLAQUE */
+
+#gallery2Room .g2-nav-left {
+  left: 2.5%;
+}
+
+/* GALLERY III — RIGHT PLAQUE */
+
+#gallery2Room .g2-nav-right {
+  right: 2.5%;
+}
+
+/* SOFT CHAMPAGNE-GOLD GLOW */
+
+#gallery2Room .g2-nav-plaque::after {
+  content: "";
+
+  position: absolute;
+  inset: -5px;
+
+  border-radius: 6px;
+
+  box-shadow:
+    0 0 10px rgba(212, 184, 137, .22),
+    0 0 22px rgba(212, 184, 137, .12);
+
+  opacity: .45;
+
+  pointer-events: none;
+
+  animation: museumPlaqueGlow 4s ease-in-out infinite;
+}
+
+/* HOVER AND TOUCH */
+
+#gallery2Room .g2-nav-plaque:hover::after,
+#gallery2Room .g2-nav-plaque:focus-visible::after,
+#gallery2Room .g2-nav-plaque:active::after {
+  opacity: 1;
+
+  box-shadow:
+    0 0 12px rgba(212, 184, 137, .65),
+    0 0 28px rgba(212, 184, 137, .35);
+}
+
+/* GENTLE AMBIENT PULSE */
+
+@keyframes museumPlaqueGlow {
+  0%, 100% {
+    opacity: .35;
+  }
+
+  50% {
+    opacity: .7;
+  }
+}
+
+/* PREVENT TAPS DURING TRANSITIONS */
+
+#gallery2Room.g2-transitioning .g2-nav-plaque {
+  pointer-events: none;
+}
+
+/* ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+  #gallery2Room .g2-nav-plaque::after {
+    animation: none;
+  }
+}
   
 </style>
 </head>
@@ -4359,6 +4511,23 @@ button {
   <div class="g2-room-art"></div>
 
   <div class="g2-room-shade"></div>
+
+  <!-- GALLERY I — LEFT NAVIGATION -->
+
+<button
+  class="g2-nav-plaque g2-nav-left"
+  onclick="leaveGallery2Room()"
+  aria-label="Return to Gallery I">
+</button>
+
+
+<!-- GALLERY III — RIGHT NAVIGATION -->
+
+<button
+  class="g2-nav-plaque g2-nav-right"
+  onclick="goToGallery3()"
+  aria-label="Enter Gallery III">
+</button>
 
   <!-- EXHIBIT 01 GLASS DISPLAY -->
   <button
@@ -5673,6 +5842,16 @@ function returnToGallery2Room() {
     .classList.add("active");
 }
 
+/* ==========================================
+   GALLERY III — NAVIGATION PLACEHOLDER
+========================================== */
+
+function goToGallery3() {
+  // Gallery III is not implemented yet.
+  // Navigation will be connected when its room is ready.
+  console.log("Gallery III is coming soon.");
+}
+  
 </script>
 
 </body>
