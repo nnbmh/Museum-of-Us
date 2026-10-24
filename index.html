@@ -1870,29 +1870,74 @@ button {
   cursor: pointer;
 }
 
-/* Left display case */
+/* ==========================================
+   GALLERY I — GALLERY II DOORWAY HOTSPOT
+========================================== */
 
-.watch-hotspot {
-  left: 3%;
-  top: 30%;
-  width: 14%;
-  height: 31%;
+/* Position the existing button over the sign */
+
+#gallery1 button.gallery-next-plaque {
+  position: absolute !important;
+
+  left: 82.7% !important;
+  top: 40.5% !important;
+
+  right: auto !important;
+  bottom: auto !important;
+
+  transform: none !important;
+
+  width: 7.5% !important;
+  height: 7% !important;
+
+  min-width: 0 !important;
+  min-height: 0 !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+
+  display: block !important;
+
+  background: transparent !important;
+  border: none !important;
+
+  z-index: 50 !important;
+
+  cursor: pointer;
 }
 
-/* EXHIBIT 03 — CONVERSATION */
+/* Hide button text — the sign is in the image */
 
-.conversation-hotspot {
+#gallery1 .gallery-next-plaque span {
+  display: none !important;
+}
+
+/* Subtle gold glow around the existing sign */
+
+#gallery1 .gallery-next-plaque::after {
+  content: "";
+
   position: absolute;
-  right: 5%;
-  top: 36%;
-  width: 12%;
-  height: 23%;
+  inset: -3px;
 
-  z-index: 9;
-  padding: 0;
-  border: none;
-  background: transparent;
-  cursor: pointer;
+  border-radius: 3px;
+
+  box-shadow:
+    0 0 8px rgba(225,192,146,.3),
+    0 0 18px rgba(225,192,146,.15);
+
+  opacity: .5;
+
+  transition: opacity .3s ease;
+}
+
+#gallery1 .gallery-next-plaque:hover::after,
+#gallery1 .gallery-next-plaque:active::after {
+  opacity: 1;
+
+  box-shadow:
+    0 0 12px rgba(225,192,146,.7),
+    0 0 25px rgba(225,192,146,.35);
 }
 
 /* Exhibit scenes */
@@ -3898,6 +3943,76 @@ button {
   #gallery2Room .g2-nav-plaque::after {
     animation: none;
   }
+}
+
+/* ==========================================
+   GALLERY I — GALLERY II DOORWAY HOTSPOT
+========================================== */
+
+/* Position the existing button over the sign */
+
+#gallery1 button.gallery-next-plaque {
+  position: absolute !important;
+
+  left: 82.7% !important;
+  top: 40.5% !important;
+
+  right: auto !important;
+  bottom: auto !important;
+
+  transform: none !important;
+
+  width: 7.5% !important;
+  height: 7% !important;
+
+  min-width: 0 !important;
+  min-height: 0 !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+
+  display: block !important;
+
+  background: transparent !important;
+  border: none !important;
+
+  z-index: 50 !important;
+
+  cursor: pointer;
+}
+
+/* Hide button text — the sign is in the image */
+
+#gallery1 .gallery-next-plaque span {
+  display: none !important;
+}
+
+/* Subtle gold glow around the existing sign */
+
+#gallery1 .gallery-next-plaque::after {
+  content: "";
+
+  position: absolute;
+  inset: -3px;
+
+  border-radius: 3px;
+
+  box-shadow:
+    0 0 8px rgba(225,192,146,.3),
+    0 0 18px rgba(225,192,146,.15);
+
+  opacity: .5;
+
+  transition: opacity .3s ease;
+}
+
+#gallery1 .gallery-next-plaque:hover::after,
+#gallery1 .gallery-next-plaque:active::after {
+  opacity: 1;
+
+  box-shadow:
+    0 0 12px rgba(225,192,146,.7),
+    0 0 25px rgba(225,192,146,.35);
 }
   
 </style>
