@@ -5295,25 +5295,12 @@ function openBook() {
 ========================================== */
 
 function closeBook() {
+  document.getElementById("bookExhibit")
+    .classList.remove("active");
 
-  const gallery = document.getElementById(
-    "gallery1"
-  );
-
-  const book = document.getElementById(
-    "bookExhibit"
-  );
-
-  gallery.classList.add("active");
-
-  setTimeout(() => {
-
-    book.classList.remove("active");
-
-  }, 1000);
-
+  document.getElementById("gallery1")
+    .classList.add("active");
 }
-
 
 /* ==========================================
    TURN BOOK PAGES
@@ -5602,16 +5589,12 @@ function triggerWatchNotification() {
 function closeWatch() {
   clearTimeout(watchTimer);
 
-  const gallery = document.getElementById("gallery1");
-  const watch = document.getElementById("watchExhibit");
+  document.getElementById("watchExhibit")
+    .classList.remove("active");
 
-  gallery.classList.add("active");
-
-  setTimeout(() => {
-    watch.classList.remove("active");
-  }, 1000);
+  document.getElementById("gallery1")
+    .classList.add("active");
 }
-
 
 /* ==========================================
    EXHIBIT 03 — CONVERSATION
@@ -5767,25 +5750,14 @@ function closeConversationCard(event) {
 /* Return to Gallery I */
 
 function closeConversation() {
+  document.getElementById("conversationCardOverlay")
+    .classList.remove("visible");
 
-  const gallery = document.getElementById("gallery1");
+  document.getElementById("conversationExhibit")
+    .classList.remove("active");
 
-  const conversation = document.getElementById(
-    "conversationExhibit"
-  );
-
-  /* Close any open archival card */
-
-  document.getElementById(
-    "conversationCardOverlay"
-  ).classList.remove("visible");
-
-  gallery.classList.add("active");
-
-  setTimeout(() => {
-    conversation.classList.remove("active");
-  }, 1000);
-
+  document.getElementById("gallery1")
+    .classList.add("active");
 }
 
 /* ==========================================
