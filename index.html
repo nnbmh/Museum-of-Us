@@ -581,7 +581,7 @@ button {
 
 .gallery-hint {
   position: absolute;
-  bottom: 6%;
+  bottom: 18%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 6;
@@ -840,6 +840,7 @@ button {
 /* PORTRAIT NAME REVEAL */
 
 .portrait-reveal {
+  display: none;
   position: absolute;
   z-index: 6;
   top: 48%;
@@ -2025,6 +2026,16 @@ button {
   position: absolute;
   inset: 0;
   z-index: 8;
+  pointer-events: none;
+}
+
+.conversation-stars::after {
+  content: "";
+  position: absolute;
+  left: 30%;
+  right: 30%;
+  bottom: 16%;
+  height: 22%;
   pointer-events: none;
 }
 
@@ -3721,6 +3732,46 @@ button {
     transition-duration: .01ms;
   }
 }
+
+/* EXHIBIT 02 — ARCHIVE ANSWER OPTIONS */
+
+#gallery2Exhibit2 #g2CarInteraction:has(
+  .g2-car-button:nth-child(3)
+) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+#gallery2Exhibit2 #g2CarInteraction:has(
+  .g2-car-button:nth-child(3)
+) .g2-car-button {
+  display: block;
+  width: min(100%, 440px);
+  margin: 0;
+  padding: 13px 18px;
+
+  border: 1px solid rgba(225, 192, 146, .55);
+  border-radius: 3px;
+  background: rgba(20, 12, 13, .55);
+
+  color: #f0dfc9;
+  font-size: clamp(14px, 1.5vw, 18px);
+  line-height: 1.3;
+  text-align: center;
+  cursor: pointer;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  #gallery2Exhibit2 #g2CarInteraction:has(
+    .g2-car-button:nth-child(3)
+  ) .g2-car-button:hover {
+    background: rgba(75, 47, 41, .75);
+    border-color: #e1c092;
+  }
+}  
   
 </style>
 </head>
