@@ -4270,6 +4270,80 @@ button {
 #watchExhibit .watch-notification {
   transform: translate(0.65%, 0.75%) !important;
 }
+
+/* ==========================================
+   GALLERY II — NAVIGATION SIGN HOTSPOTS
+   Invisible, no glow or outline
+========================================== */
+
+/* BOTH NAVIGATION SIGNS */
+
+#gallery2Room .g2-nav-plaque {
+  position: absolute !important;
+
+  top: 43% !important;
+
+  width: 8% !important;
+  height: 12% !important;
+
+  z-index: 30 !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+
+  box-shadow: none !important;
+  outline: none !important;
+
+  cursor: pointer;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* GALLERY I — LEFT SIGN */
+
+#gallery2Room .g2-nav-left {
+  left: 2.5% !important;
+  right: auto !important;
+}
+
+/* GALLERY III — RIGHT SIGN */
+
+#gallery2Room .g2-nav-right {
+  right: 2.5% !important;
+  left: auto !important;
+}
+
+/* REMOVE ALL SIGNAGE GLOW EFFECTS */
+
+#gallery2Room .g2-nav-plaque::before,
+#gallery2Room .g2-nav-plaque::after,
+#gallery2Room .g2-nav-plaque:hover::after,
+#gallery2Room .g2-nav-plaque:active::after,
+#gallery2Room .g2-nav-plaque:focus::after,
+#gallery2Room .g2-nav-plaque:focus-visible::after {
+  content: none !important;
+  display: none !important;
+
+  border: none !important;
+  box-shadow: none !important;
+
+  animation: none !important;
+}
+
+/* KEEP BUTTONS INVISIBLE WHEN TAPPED */
+
+#gallery2Room .g2-nav-plaque:hover,
+#gallery2Room .g2-nav-plaque:active,
+#gallery2Room .g2-nav-plaque:focus {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
   
 </style>
 </head>
