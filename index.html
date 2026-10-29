@@ -4475,6 +4475,155 @@ button {
   display: block !important;
   touch-action: manipulation;
 }
+
+/* ==========================================
+   GALLERY III — BETWEEN TWO WORLDS
+========================================== */
+
+#gallery3Room {
+  background: #080d1b;
+}
+
+.g3-room-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+}
+
+/* Invisible clickable areas */
+
+.g3-hotspot {
+  position: absolute;
+  z-index: 5;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.g3-hotspot:focus-visible {
+  outline: 2px solid #e1c092;
+}
+
+/* Four exhibits */
+
+.g3-exhibit-one {
+  left: 7%;
+  top: 43%;
+  width: 17%;
+  height: 30%;
+}
+
+.g3-exhibit-two {
+  left: 27%;
+  top: 45%;
+  width: 15%;
+  height: 27%;
+}
+
+.g3-exhibit-three {
+  left: 59%;
+  top: 44%;
+  width: 16%;
+  height: 29%;
+}
+
+.g3-exhibit-four {
+  left: 77%;
+  top: 42%;
+  width: 18%;
+  height: 32%;
+}
+
+/* Central installation */
+
+.g3-centre {
+  left: 43%;
+  top: 38%;
+  width: 16%;
+  height: 38%;
+}
+
+/* Doorways */
+
+.g3-door-left {
+  left: 0;
+  top: 35%;
+  width: 9%;
+  height: 39%;
+}
+
+.g3-door-right {
+  right: 0;
+  top: 35%;
+  width: 9%;
+  height: 39%;
+}
+
+/* Return button */
+
+.g3-back {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 20;
+
+  background: rgba(8, 13, 27, .48);
+  border: none;
+  padding: 10px 12px;
+
+  color: #f6ead8;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 19px;
+  letter-spacing: .08em;
+}
+
+/* Temporary exhibit previews */
+
+.g3-panel[hidden] {
+  display: none;
+}
+
+.g3-panel {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  width: min(88vw, 480px);
+  padding: 35px 28px;
+
+  background: rgba(9, 15, 30, .96);
+  border: 1px solid rgba(225, 192, 146, .6);
+  box-shadow: 0 15px 65px #000b;
+
+  text-align: center;
+  z-index: 30;
+}
+
+.g3-panel h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 34px;
+  font-weight: 500;
+  color: #e1c092;
+}
+
+.g3-panel p {
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.g3-panel button {
+  background: transparent;
+  border: none;
+  color: #e1c092;
+  padding: 12px;
+  letter-spacing: .13em;
+}
   
 </style>
 </head>
@@ -5190,6 +5339,100 @@ button {
     <p id="g2CarText"></p>
 
     <div id="g2CarInteraction"></div>
+
+  </div>
+
+</section>
+
+<!-- ==========================================
+     GALLERY III — BETWEEN TWO WORLDS
+========================================== -->
+
+<section id="gallery3Room" class="scene">
+
+  <img
+    class="g3-room-art"
+    src="gallery-3.PNG"
+    alt="Gallery III — Between Two Worlds">
+
+  <!-- GALLERY II DOORWAY -->
+
+  <button
+    class="g3-hotspot g3-door-left"
+    onclick="returnToGallery2From3()"
+    aria-label="Return to Gallery II">
+  </button>
+
+  <!-- GALLERY IV DOORWAY -->
+
+  <button
+    class="g3-hotspot g3-door-right"
+    onclick="g3Gallery4Pending()"
+    aria-label="Enter Gallery IV">
+  </button>
+
+  <!-- EXHIBIT 01 -->
+
+  <button
+    class="g3-hotspot g3-exhibit-one"
+    onclick="openG3Preview(1)"
+    aria-label="Whenever We Can">
+  </button>
+
+  <!-- EXHIBIT 02 -->
+
+  <button
+    class="g3-hotspot g3-exhibit-two"
+    onclick="openG3Preview(2)"
+    aria-label="The Little Decisions">
+  </button>
+
+  <!-- EXHIBIT 03 -->
+
+  <button
+    class="g3-hotspot g3-exhibit-three"
+    onclick="openG3Preview(3)"
+    aria-label="The Forgotten Photograph">
+  </button>
+
+  <!-- EXHIBIT 04 -->
+
+  <button
+    class="g3-hotspot g3-exhibit-four"
+    onclick="openG3Preview(4)"
+    aria-label="The Next Hello">
+  </button>
+
+  <!-- CENTRAL INSTALLATION -->
+
+  <button
+    class="g3-hotspot g3-centre"
+    onclick="openG3Preview(5)"
+    aria-label="Two Points, One Connection">
+  </button>
+
+  <!-- RETURN BUTTON -->
+
+  <button
+    class="g3-back"
+    onclick="returnToGallery2From3()">
+    ← GALLERY II
+  </button>
+
+  <!-- TEMPORARY EXHIBIT PREVIEW -->
+
+  <div
+    class="g3-panel"
+    id="g3Preview"
+    hidden>
+
+    <h2 id="g3PreviewTitle"></h2>
+
+    <p id="g3PreviewText"></p>
+
+    <button onclick="closeG3Preview()">
+      RETURN TO GALLERY III →
+    </button>
 
   </div>
 
@@ -6394,10 +6637,96 @@ function returnToGallery2Room() {
    GALLERY III — NAVIGATION PLACEHOLDER
 ========================================== */
 
+/* ==========================================
+   GALLERY III — ROOM NAVIGATION
+========================================== */
+
 function goToGallery3() {
-  // Gallery III is not implemented yet.
-  // Navigation will be connected when its room is ready.
-  console.log("Gallery III is coming soon.");
+
+  closeG3Preview();
+
+  document.getElementById("gallery2Room")
+    .classList.remove("active");
+
+  document.getElementById("gallery3Room")
+    .classList.add("active");
+}
+
+function returnToGallery2From3() {
+
+  closeG3Preview();
+
+  document.getElementById("gallery3Room")
+    .classList.remove("active");
+
+  openGallery2Room();
+}
+
+/* ==========================================
+   GALLERY III — EXHIBIT PREVIEWS
+========================================== */
+
+const g3Previews = [
+
+  {
+    title: "Whenever We Can",
+    text: "Our everyday calls, screen sharing, and time together."
+  },
+
+  {
+    title: "The Little Decisions",
+    text: "An alternative-history machine with a suspiciously biased curator."
+  },
+
+  {
+    title: "The Forgotten Photograph",
+    text: "A collection of photographs waiting to be developed."
+  },
+
+  {
+    title: "The Next Hello",
+    text: "A journey from Singapore to London, arriving in time for 2 December."
+  },
+
+  {
+    title: "Two Points, One Connection",
+    text: "Two distant points, waiting to be connected."
+  }
+
+];
+
+function openG3Preview(number) {
+
+  const exhibit = g3Previews[number - 1];
+
+  if (!exhibit) return;
+
+  document.getElementById("g3PreviewTitle")
+    .textContent = exhibit.title;
+
+  document.getElementById("g3PreviewText")
+    .textContent = exhibit.text;
+
+  document.getElementById("g3Preview")
+    .hidden = false;
+}
+
+function closeG3Preview() {
+
+  document.getElementById("g3Preview")
+    .hidden = true;
+}
+
+function g3Gallery4Pending() {
+
+  document.getElementById("g3PreviewTitle")
+    .textContent = "Gallery IV — Through My Eyes";
+
+  document.getElementById("g3PreviewText")
+    .textContent = "This gallery is still being prepared.";
+
+  document.getElementById("g3Preview")
+    .hidden = false;
 }
   
 </script>
