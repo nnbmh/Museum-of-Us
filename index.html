@@ -7152,6 +7152,150 @@ function g3Gallery4Pending() {
   document.getElementById("g3Preview")
     .hidden = false;
 }
+
+/* ==========================================
+   GALLERY III — TWO POINTS, ONE CONNECTION
+========================================== */
+
+let g3ConnectionTimers = [];
+
+/* CLEAR PREVIOUS ANIMATIONS */
+
+function g3ClearConnectionTimers() {
+
+  g3ConnectionTimers.forEach(timer => {
+    clearTimeout(timer);
+  });
+
+  g3ConnectionTimers = [];
+}
+
+/* OPEN CENTRAL INSTALLATION */
+
+function openG3Connection() {
+
+  g3ClearConnectionTimers();
+
+  const room = document.getElementById("gallery3Room");
+  const scene = document.getElementById("g3ConnectionScene");
+
+  const content = scene.querySelector(
+    ".g3-connection-content"
+  );
+
+  const paragraphs = scene.querySelectorAll(
+    ".g3-message-paragraph"
+  );
+
+  /* RESET EVERYTHING */
+
+  scene.classList.remove(
+    "g3-started",
+    "g3-connected",
+    "g3-finished"
+  );
+
+  document.getElementById("g3ConnectionMessage")
+    .classList.remove("g3-finale");
+
+  paragraphs.forEach(paragraph => {
+    paragraph.classList.remove("g3-visible");
+  });
+
+  content.scrollTop = 0;
+
+  /* ENTER THE INSTALLATION */
+
+  room.classList.remove("active");
+  scene.classList.add("active");
+
+  /* TWO POINTS BEGIN GLOWING */
+
+  g3ConnectionTimers.push(
+    setTimeout(() => {
+      scene.classList.add("g3-started");
+    }, 700)
+  );
+
+  /* GOLDEN LINE BEGINS CONNECTING */
+
+  g3ConnectionTimers.push(
+    setTimeout(() => {
+      scene.classList.add("g3-connected");
+    }, 2600)
+  );
+
+  /* REVEAL PERSONAL MESSAGE */
+
+  const firstParagraphDelay = 6200;
+  const paragraphInterval = 5500;
+
+  paragraphs.forEach((paragraph, index) => {
+
+    g3ConnectionTimers.push(
+      setTimeout(() => {
+
+        paragraph.classList.add("g3-visible");
+
+        /* KEEP THE NEW PARAGRAPH VISIBLE */
+
+        const targetPosition =
+          paragraph.offsetTop -
+          content.offsetTop -
+          content.clientHeight * 0.35;
+
+        content.scrollTo({
+          top: Math.max(0, targetPosition),
+          behavior: "smooth"
+        });
+
+      }, firstParagraphDelay + index * paragraphInterval)
+    );
+
+  });
+
+  /* EMPHASISE THE FINAL SENTENCE */
+
+  const finaleDelay =
+    firstParagraphDelay +
+    (paragraphs.length - 1) * paragraphInterval +
+    2000;
+
+  g3ConnectionTimers.push(
+    setTimeout(() => {
+
+      document.getElementById("g3ConnectionMessage")
+        .classList.add("g3-finale");
+
+    }, finaleDelay)
+  );
+
+  /* SHOW RETURN BUTTON */
+
+  g3ConnectionTimers.push(
+    setTimeout(() => {
+
+      scene.classList.add("g3-finished");
+
+    }, finaleDelay + 1500)
+  );
+
+}
+
+/* RETURN TO GALLERY III */
+
+function closeG3Connection() {
+
+  g3ClearConnectionTimers();
+
+  const scene = document.getElementById("g3ConnectionScene");
+  const room = document.getElementById("gallery3Room");
+
+  scene.classList.remove("active");
+
+  room.classList.add("active");
+
+}
   
 </script>
 
