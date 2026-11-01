@@ -4626,6 +4626,338 @@ button {
   padding: 12px;
   letter-spacing: .13em;
 }
+
+/* ==========================================
+   GALLERY III — TWO POINTS, ONE CONNECTION
+========================================== */
+
+/* MAIN SCENE */
+
+#g3ConnectionScene {
+  background: #080d1b;
+  overflow: hidden;
+  color: #f6ead8;
+}
+
+/* BACKGROUND */
+
+.g3-connection-background {
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 35%,
+      rgba(47, 60, 91, 0.38),
+      transparent 65%
+    ),
+    linear-gradient(
+      180deg,
+      #111b32 0%,
+      #080d1b 100%
+    );
+
+  pointer-events: none;
+}
+
+/* CONTENT CONTAINER */
+
+.g3-connection-content {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 5vh 7vw 4vh;
+
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* HEADING */
+
+.g3-connection-heading {
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.g3-connection-heading span {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  color: #c5a77b;
+}
+
+.g3-connection-heading h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(30px, 4vw, 48px);
+  font-weight: 400;
+
+  color: #e1c092;
+
+  margin: 12px 0 20px;
+}
+
+/* ==========================================
+   TWO DISTANT POINTS
+========================================== */
+
+.g3-connection-map {
+  position: relative;
+
+  width: min(70vw, 650px);
+  height: 125px;
+
+  margin: 10px auto 25px;
+
+  flex-shrink: 0;
+}
+
+/* INDIVIDUAL POINTS */
+
+.g3-connection-point {
+  position: absolute;
+  top: 35px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 20px;
+}
+
+/* SINGAPORE */
+
+.g3-point-sg {
+  left: 0;
+}
+
+/* LONDON */
+
+.g3-point-uk {
+  right: 0;
+}
+
+/* GLOWING LIGHT */
+
+.g3-point-light {
+  width: 13px;
+  height: 13px;
+
+  border-radius: 50%;
+
+  background: #f8dfa9;
+
+  box-shadow:
+    0 0 12px rgba(255, 218, 148, 0.9),
+    0 0 30px rgba(255, 218, 148, 0.5),
+    0 0 60px rgba(255, 218, 148, 0.2);
+
+  opacity: 0;
+
+  transform: scale(0.4);
+
+  transition:
+    opacity 1.5s ease,
+    transform 1.5s ease;
+}
+
+/* LIGHTS ACTIVATE */
+
+#g3ConnectionScene.g3-started .g3-point-light {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* LOCATION LABELS */
+
+.g3-connection-point span {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 15px;
+
+  letter-spacing: 0.18em;
+
+  color: #e1c092;
+
+  opacity: 0;
+
+  transition: opacity 1.5s ease;
+}
+
+/* LABELS APPEAR */
+
+#g3ConnectionScene.g3-connected
+.g3-connection-point span {
+  opacity: 1;
+}
+
+/* ==========================================
+   GOLDEN CONNECTION LINE
+========================================== */
+
+.g3-connection-line {
+  position: absolute;
+
+  top: 41px;
+  left: 7px;
+  right: 7px;
+
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    rgba(225, 192, 146, 0.5),
+    #f8dfa9,
+    rgba(225, 192, 146, 0.5)
+  );
+
+  box-shadow:
+    0 0 8px rgba(255, 218, 148, 0.6),
+    0 0 20px rgba(255, 218, 148, 0.25);
+
+  transform: scaleX(0);
+  transform-origin: left center;
+
+  transition: transform 3s ease-in-out;
+}
+
+/* LINE ANIMATES */
+
+#g3ConnectionScene.g3-connected
+.g3-connection-line {
+  transform: scaleX(1);
+}
+
+/* ==========================================
+   PERSONAL MESSAGE
+========================================== */
+
+.g3-connection-message {
+  width: min(85vw, 650px);
+
+  text-align: center;
+
+  margin: 0 auto;
+
+  flex-shrink: 0;
+}
+
+/* EACH PARAGRAPH */
+
+.g3-message-paragraph {
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: clamp(17px, 2vw, 21px);
+  line-height: 1.55;
+
+  color: #f6ead8;
+
+  margin-bottom: 22px;
+
+  opacity: 0;
+  transform: translateY(12px);
+
+  transition:
+    opacity 1.2s ease,
+    transform 1.2s ease;
+}
+
+/* PARAGRAPH REVEAL */
+
+.g3-message-paragraph.g3-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* FINAL SENTENCE */
+
+.g3-message-final {
+  color: #e1c092;
+
+  font-size: clamp(20px, 2.4vw, 25px);
+
+  margin-top: 30px;
+  margin-bottom: 35px;
+}
+
+/* FINAL SENTENCE EMPHASIS */
+
+.g3-connection-message.g3-finale
+.g3-message-paragraph:not(.g3-message-final) {
+  opacity: 0.3;
+}
+
+/* ==========================================
+   RETURN BUTTON
+========================================== */
+
+.g3-connection-return {
+  background: transparent;
+  border: none;
+
+  color: #e1c092;
+
+  font-family: "Cormorant Garamond", serif;
+  font-size: 17px;
+
+  letter-spacing: 0.12em;
+
+  padding: 15px 20px;
+
+  margin: 10px auto 30px;
+
+  cursor: pointer;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition: opacity 1s ease;
+}
+
+/* SHOW RETURN BUTTON */
+
+#g3ConnectionScene.g3-finished
+.g3-connection-return {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ==========================================
+   SMALLER SCREENS
+========================================== */
+
+@media (max-width: 600px) {
+
+  .g3-connection-content {
+    padding: 6vh 6vw 4vh;
+  }
+
+  .g3-connection-map {
+    width: 75vw;
+    height: 100px;
+  }
+
+  .g3-connection-heading h2 {
+    font-size: 30px;
+  }
+
+  .g3-message-paragraph {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  .g3-message-final {
+    font-size: 21px;
+  }
+
+}
   
 </style>
 </head>
@@ -5409,7 +5741,7 @@ button {
 
   <button
     class="g3-hotspot g3-centre"
-    onclick="openG3Preview(5)"
+    onclick="openG3Connection()"
     aria-label="Two Points, One Connection">
   </button>
 
@@ -5434,6 +5766,96 @@ button {
 
     <button onclick="closeG3Preview()">
       RETURN TO GALLERY III →
+    </button>
+
+  </div>
+
+</section>
+
+<!-- ==========================================
+     GALLERY III — TWO POINTS, ONE CONNECTION
+========================================== -->
+
+<section id="g3ConnectionScene" class="scene">
+
+  <div class="g3-connection-background"></div>
+
+  <div class="g3-connection-content">
+
+    <div class="g3-connection-heading">
+      <span>GALLERY III · CENTRAL INSTALLATION</span>
+      <h2>Two Points, One Connection</h2>
+    </div>
+
+    <!-- TWO DISTANT POINTS -->
+
+    <div class="g3-connection-map">
+
+      <div class="g3-connection-point g3-point-sg">
+        <div class="g3-point-light"></div>
+        <span>SINGAPORE</span>
+      </div>
+
+      <div class="g3-connection-line"></div>
+
+      <div class="g3-connection-point g3-point-uk">
+        <div class="g3-point-light"></div>
+        <span>LONDON</span>
+      </div>
+
+    </div>
+
+    <!-- PERSONAL MESSAGE -->
+
+    <div class="g3-connection-message" id="g3ConnectionMessage">
+
+      <div class="g3-message-paragraph">
+        yknow sayang, sometimes i think abt how weve spent most of our
+        relationship being so far away from each other.
+      </div>
+
+      <div class="g3-message-paragraph">
+        its funny cos even tho we could spend hours on call doing
+        absolutely nothing, there were still so many times i wished
+        you were actually here with me.
+      </div>
+
+      <div class="g3-message-paragraph">
+        sometimes i just wanted to see you uh.. not even to go anywhere
+        or do anything special. i just wanted to be able to spend time
+        with you without having to think abt when we'd get to see
+        each other again.
+      </div>
+
+      <div class="g3-message-paragraph">
+        and i know long distance wasnt always easy for us. we had our
+        fair share of arguments and there were times when things got
+        really frustrating.
+      </div>
+
+      <div class="g3-message-paragraph">
+        but despite all that, i dont regret any of it. well, maybe
+        some of the arguments HAHAHA.
+      </div>
+
+      <div class="g3-message-paragraph">
+        if i had to do it all over again, id probably still complain
+        abt how far away you were and how much i wished you were here.
+      </div>
+
+      <div class="g3-message-paragraph g3-message-final">
+        but even with all that, if i had to choose again,
+        id still want it to be you.
+      </div>
+
+    </div>
+
+    <!-- RETURN BUTTON -->
+
+    <button
+      class="g3-connection-return"
+      onclick="closeG3Connection()">
+      ← RETURN TO GALLERY III
     </button>
 
   </div>
