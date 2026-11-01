@@ -4628,335 +4628,299 @@ button {
 }
 
 /* ==========================================
-   GALLERY III — TWO POINTS, ONE CONNECTION
+   GALLERY III — CENTRAL INSTALLATION
 ========================================== */
 
-/* MAIN SCENE */
+/* DARKEN THE EXISTING ROOM */
 
-#g3ConnectionScene {
-  background: #080d1b;
-  overflow: hidden;
-  color: #f6ead8;
-}
-
-/* BACKGROUND */
-
-.g3-connection-background {
+.g3-connection-dim {
   position: absolute;
   inset: 0;
+  z-index: 21;
 
-  background:
-    radial-gradient(
-      ellipse at 50% 35%,
-      rgba(47, 60, 91, 0.38),
-      transparent 65%
-    ),
-    linear-gradient(
-      180deg,
-      #111b32 0%,
-      #080d1b 100%
-    );
+  background: rgba(3, 7, 18, 0.78);
 
+  opacity: 0;
   pointer-events: none;
+
+  transition: opacity 1.8s ease;
 }
 
-/* CONTENT CONTAINER */
-
-.g3-connection-content {
-  position: relative;
-  z-index: 2;
-
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  padding: 5vh 7vw 4vh;
-
-  box-sizing: border-box;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-/* HEADING */
-
-.g3-connection-heading {
-  text-align: center;
-  flex-shrink: 0;
-}
-
-.g3-connection-heading span {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 12px;
-  letter-spacing: 0.22em;
-  color: #c5a77b;
-}
-
-.g3-connection-heading h2 {
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(30px, 4vw, 48px);
-  font-weight: 400;
-
-  color: #e1c092;
-
-  margin: 12px 0 20px;
+#gallery3Room.g3-connecting .g3-connection-dim {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* ==========================================
-   TWO DISTANT POINTS
+   TWO GLOWING POINTS
 ========================================== */
 
-.g3-connection-map {
-  position: relative;
-
-  width: min(70vw, 650px);
-  height: 125px;
-
-  margin: 10px auto 25px;
-
-  flex-shrink: 0;
-}
-
-/* INDIVIDUAL POINTS */
-
-.g3-connection-point {
+.g3-sphere-animation {
   position: absolute;
-  top: 35px;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  /* POSITION OVER THE EXISTING SPHERE */
 
-  gap: 20px;
+  left: 43%;
+  top: 38%;
+  width: 16%;
+  height: 38%;
+
+  z-index: 22;
+
+  pointer-events: none;
+  opacity: 0;
+
+  transition: opacity 1s ease;
 }
 
-/* SINGAPORE */
-
-.g3-point-sg {
-  left: 0;
+#gallery3Room.g3-connecting .g3-sphere-animation {
+  opacity: 1;
 }
 
-/* LONDON */
+/* POINTS */
 
-.g3-point-uk {
-  right: 0;
-}
+.g3-sphere-point {
+  position: absolute;
 
-/* GLOWING LIGHT */
-
-.g3-point-light {
-  width: 13px;
-  height: 13px;
+  width: 10px;
+  height: 10px;
 
   border-radius: 50%;
 
-  background: #f8dfa9;
+  background: #ffe3ad;
 
   box-shadow:
-    0 0 12px rgba(255, 218, 148, 0.9),
-    0 0 30px rgba(255, 218, 148, 0.5),
-    0 0 60px rgba(255, 218, 148, 0.2);
+    0 0 12px #ffe3ad,
+    0 0 25px rgba(255, 220, 150, 0.8),
+    0 0 45px rgba(255, 220, 150, 0.4);
 
   opacity: 0;
-
-  transform: scale(0.4);
+  transform: translate(-50%, -50%) scale(0.3);
 
   transition:
     opacity 1.5s ease,
     transform 1.5s ease;
 }
 
-/* LIGHTS ACTIVATE */
+/* APPROXIMATE POINT POSITIONS */
 
-#g3ConnectionScene.g3-started .g3-point-light {
-  opacity: 1;
-  transform: scale(1);
+.g3-sphere-sg {
+  left: 27%;
+  top: 42%;
 }
 
-/* LOCATION LABELS */
-
-.g3-connection-point span {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 15px;
-
-  letter-spacing: 0.18em;
-
-  color: #e1c092;
-
-  opacity: 0;
-
-  transition: opacity 1.5s ease;
+.g3-sphere-uk {
+  left: 73%;
+  top: 58%;
 }
 
-/* LABELS APPEAR */
+/* ACTIVATE LIGHTS */
 
-#g3ConnectionScene.g3-connected
-.g3-connection-point span {
+#gallery3Room.g3-points-visible .g3-sphere-point {
   opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
 }
 
 /* ==========================================
-   GOLDEN CONNECTION LINE
+   GOLDEN CONNECTION
 ========================================== */
 
-.g3-connection-line {
+.g3-sphere-line {
   position: absolute;
 
-  top: 41px;
-  left: 7px;
-  right: 7px;
+  left: 27%;
+  top: 42%;
 
-  height: 1px;
+  width: 48.8%;
+  height: 2px;
 
   background: linear-gradient(
     90deg,
-    rgba(225, 192, 146, 0.5),
-    #f8dfa9,
-    rgba(225, 192, 146, 0.5)
+    #ffe3ad,
+    #e1c092
   );
 
   box-shadow:
-    0 0 8px rgba(255, 218, 148, 0.6),
-    0 0 20px rgba(255, 218, 148, 0.25);
+    0 0 10px rgba(255, 220, 150, 0.8),
+    0 0 22px rgba(255, 220, 150, 0.4);
 
-  transform: scaleX(0);
+  transform:
+    rotate(19.2deg)
+    scaleX(0);
+
   transform-origin: left center;
 
-  transition: transform 3s ease-in-out;
+  opacity: 0;
+
+  transition:
+    transform 2.5s ease,
+    opacity 0.5s ease;
 }
 
-/* LINE ANIMATES */
+#gallery3Room.g3-line-visible .g3-sphere-line {
+  transform:
+    rotate(19.2deg)
+    scaleX(1);
 
-#g3ConnectionScene.g3-connected
-.g3-connection-line {
-  transform: scaleX(1);
+  opacity: 1;
 }
 
 /* ==========================================
-   PERSONAL MESSAGE
+   LOCATION LABELS
 ========================================== */
 
-.g3-connection-message {
-  width: min(85vw, 650px);
-
-  text-align: center;
-
-  margin: 0 auto;
-
-  flex-shrink: 0;
-}
-
-/* EACH PARAGRAPH */
-
-.g3-message-paragraph {
-  font-family: "Cormorant Garamond", serif;
-
-  font-size: clamp(17px, 2vw, 21px);
-  line-height: 1.55;
+.g3-sphere-label {
+  position: absolute;
 
   color: #f6ead8;
 
-  margin-bottom: 22px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(11px, 1.3vw, 17px);
+
+  letter-spacing: 0.12em;
+
+  text-shadow: 0 0 12px #000;
 
   opacity: 0;
-  transform: translateY(12px);
 
-  transition:
-    opacity 1.2s ease,
-    transform 1.2s ease;
+  transition: opacity 1.2s ease;
 }
 
-/* PARAGRAPH REVEAL */
+.g3-label-sg {
+  left: 27%;
+  top: 42%;
+  transform: translate(-105%, -150%);
+}
 
-.g3-message-paragraph.g3-visible {
+.g3-label-uk {
+  left: 73%;
+  top: 58%;
+  transform: translate(12%, 25%);
+}
+
+#gallery3Room.g3-labels-visible .g3-sphere-label {
   opacity: 1;
+}
+
+/* ==========================================
+   MESSAGE OVERLAY
+========================================== */
+
+.g3-letter-overlay {
+  position: absolute;
+  inset: 0;
+
+  z-index: 30;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 24px;
+
+  background: rgba(3, 7, 18, 0.45);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity 1.5s ease,
+    visibility 1.5s;
+}
+
+#gallery3Room.g3-letter-visible .g3-letter-overlay {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* LETTER PANEL */
+
+.g3-letter {
+  position: relative;
+
+  width: min(90vw, 620px);
+  max-height: 85dvh;
+
+  overflow-y: auto;
+
+  padding: clamp(25px, 4vw, 45px);
+
+  background: rgba(11, 19, 37, 0.94);
+
+  border: 1px solid rgba(225, 192, 146, 0.55);
+
+  box-shadow:
+    0 20px 70px rgba(0, 0, 0, 0.6),
+    0 0 40px rgba(225, 192, 146, 0.08);
+
+  text-align: center;
+
+  transform: translateY(20px);
+
+  transition: transform 1.5s ease;
+}
+
+#gallery3Room.g3-letter-visible .g3-letter {
   transform: translateY(0);
+}
+
+/* LETTER HEADING */
+
+.g3-letter-heading {
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: clamp(25px, 3vw, 36px);
+  font-weight: 400;
+
+  color: #e1c092;
+
+  margin: 0 0 28px;
+}
+
+/* LETTER TEXT */
+
+.g3-letter p {
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: clamp(17px, 2vw, 20px);
+  line-height: 1.6;
+
+  color: #f6ead8;
+
+  margin: 0 0 20px;
 }
 
 /* FINAL SENTENCE */
 
-.g3-message-final {
+.g3-letter p.g3-letter-final {
   color: #e1c092;
 
-  font-size: clamp(20px, 2.4vw, 25px);
+  font-size: clamp(19px, 2.2vw, 23px);
 
   margin-top: 30px;
-  margin-bottom: 35px;
 }
 
-/* FINAL SENTENCE EMPHASIS */
+/* RETURN BUTTON */
 
-.g3-connection-message.g3-finale
-.g3-message-paragraph:not(.g3-message-final) {
-  opacity: 0.3;
-}
+.g3-letter-close {
+  display: block;
 
-/* ==========================================
-   RETURN BUTTON
-========================================== */
+  margin: 30px auto 0;
+  padding: 12px;
 
-.g3-connection-return {
   background: transparent;
   border: none;
 
   color: #e1c092;
 
   font-family: "Cormorant Garamond", serif;
-  font-size: 17px;
+  font-size: 16px;
 
   letter-spacing: 0.12em;
 
-  padding: 15px 20px;
-
-  margin: 10px auto 30px;
-
   cursor: pointer;
-
-  opacity: 0;
-
-  pointer-events: none;
-
-  transition: opacity 1s ease;
-}
-
-/* SHOW RETURN BUTTON */
-
-#g3ConnectionScene.g3-finished
-.g3-connection-return {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* ==========================================
-   SMALLER SCREENS
-========================================== */
-
-@media (max-width: 600px) {
-
-  .g3-connection-content {
-    padding: 6vh 6vw 4vh;
-  }
-
-  .g3-connection-map {
-    width: 75vw;
-    height: 100px;
-  }
-
-  .g3-connection-heading h2 {
-    font-size: 30px;
-  }
-
-  .g3-message-paragraph {
-    font-size: 18px;
-    line-height: 1.5;
-  }
-
-  .g3-message-final {
-    font-size: 21px;
-  }
-
 }
   
 </style>
@@ -5745,6 +5709,86 @@ button {
     aria-label="Two Points, One Connection">
   </button>
 
+  <!-- ==========================================
+     CENTRAL INSTALLATION ANIMATION
+========================================== -->
+
+<div class="g3-connection-dim"></div>
+
+<div class="g3-sphere-animation">
+
+  <!-- GOLDEN CONNECTION -->
+
+  <div class="g3-sphere-line"></div>
+
+  <!-- SINGAPORE -->
+
+  <div class="g3-sphere-point g3-sphere-sg"></div>
+
+  <span class="g3-sphere-label g3-label-sg">
+    SINGAPORE
+  </span>
+
+  <!-- LONDON -->
+
+  <div class="g3-sphere-point g3-sphere-uk"></div>
+
+  <span class="g3-sphere-label g3-label-uk">
+    LONDON
+  </span>
+
+</div>
+
+<!-- ==========================================
+     PERSONAL MESSAGE POP-UP
+========================================== -->
+
+<div class="g3-letter-overlay">
+
+  <div class="g3-letter">
+
+    <h2 class="g3-letter-heading">
+      Two Points, One Connection
+    </h2>
+
+    <p>
+      yknow sayang, sometimes i think abt how weve spent most of our relationship being so far away from each other.
+    </p>
+
+    <p>
+      its funny cos even tho we could spend hours on call doing absolutely nothing, there were still so many times i wished you were actually here with me.
+    </p>
+
+    <p>
+      sometimes i just wanted to see you uh.. not even to go anywhere or do anything special. i just wanted to be able to spend time with you without having to think abt when we'd get to see each other again.
+    </p>
+
+    <p>
+      and i know long distance wasnt always easy for us. we had our fair share of arguments and there were times when things got really frustrating.
+    </p>
+
+    <p>
+      but despite all that, i dont regret any of it. well, maybe some of the arguments HAHAHA.
+    </p>
+
+    <p>
+      if i had to do it all over again, id probably still complain abt how far away you were and how much i wished you were here.
+    </p>
+
+    <p class="g3-letter-final">
+      but even with all that, if i had to choose again, id still want it to be you.
+    </p>
+
+    <button
+      class="g3-letter-close"
+      onclick="closeG3Connection()">
+      RETURN TO GALLERY III →
+    </button>
+
+  </div>
+
+</div>
+
   <!-- RETURN BUTTON -->
 
   <button
@@ -5772,95 +5816,6 @@ button {
 
 </section>
 
-<!-- ==========================================
-     GALLERY III — TWO POINTS, ONE CONNECTION
-========================================== -->
-
-<section id="g3ConnectionScene" class="scene">
-
-  <div class="g3-connection-background"></div>
-
-  <div class="g3-connection-content">
-
-    <div class="g3-connection-heading">
-      <span>GALLERY III · CENTRAL INSTALLATION</span>
-      <h2>Two Points, One Connection</h2>
-    </div>
-
-    <!-- TWO DISTANT POINTS -->
-
-    <div class="g3-connection-map">
-
-      <div class="g3-connection-point g3-point-sg">
-        <div class="g3-point-light"></div>
-        <span>SINGAPORE</span>
-      </div>
-
-      <div class="g3-connection-line"></div>
-
-      <div class="g3-connection-point g3-point-uk">
-        <div class="g3-point-light"></div>
-        <span>LONDON</span>
-      </div>
-
-    </div>
-
-    <!-- PERSONAL MESSAGE -->
-
-    <div class="g3-connection-message" id="g3ConnectionMessage">
-
-      <div class="g3-message-paragraph">
-        yknow sayang, sometimes i think abt how weve spent most of our
-        relationship being so far away from each other.
-      </div>
-
-      <div class="g3-message-paragraph">
-        its funny cos even tho we could spend hours on call doing
-        absolutely nothing, there were still so many times i wished
-        you were actually here with me.
-      </div>
-
-      <div class="g3-message-paragraph">
-        sometimes i just wanted to see you uh.. not even to go anywhere
-        or do anything special. i just wanted to be able to spend time
-        with you without having to think abt when we'd get to see
-        each other again.
-      </div>
-
-      <div class="g3-message-paragraph">
-        and i know long distance wasnt always easy for us. we had our
-        fair share of arguments and there were times when things got
-        really frustrating.
-      </div>
-
-      <div class="g3-message-paragraph">
-        but despite all that, i dont regret any of it. well, maybe
-        some of the arguments HAHAHA.
-      </div>
-
-      <div class="g3-message-paragraph">
-        if i had to do it all over again, id probably still complain
-        abt how far away you were and how much i wished you were here.
-      </div>
-
-      <div class="g3-message-paragraph g3-message-final">
-        but even with all that, if i had to choose again,
-        id still want it to be you.
-      </div>
-
-    </div>
-
-    <!-- RETURN BUTTON -->
-
-    <button
-      class="g3-connection-return"
-      onclick="closeG3Connection()">
-      ← RETURN TO GALLERY III
-    </button>
-
-  </div>
-
-</section>
   
 <script>
 function enterMuseum() {
@@ -7154,12 +7109,12 @@ function g3Gallery4Pending() {
 }
 
 /* ==========================================
-   GALLERY III — TWO POINTS, ONE CONNECTION
+   GALLERY III — CENTRAL INSTALLATION
 ========================================== */
 
 let g3ConnectionTimers = [];
 
-/* CLEAR PREVIOUS ANIMATIONS */
+/* CLEAR TIMERS */
 
 function g3ClearConnectionTimers() {
 
@@ -7170,130 +7125,100 @@ function g3ClearConnectionTimers() {
   g3ConnectionTimers = [];
 }
 
-/* OPEN CENTRAL INSTALLATION */
+/* OPEN CONNECTION */
 
 function openG3Connection() {
 
   g3ClearConnectionTimers();
 
   const room = document.getElementById("gallery3Room");
-  const scene = document.getElementById("g3ConnectionScene");
 
-  const content = scene.querySelector(
-    ".g3-connection-content"
+  /* RESET ANIMATION */
+
+  room.classList.remove(
+    "g3-connecting",
+    "g3-points-visible",
+    "g3-line-visible",
+    "g3-labels-visible",
+    "g3-letter-visible"
   );
 
-  const paragraphs = scene.querySelectorAll(
-    ".g3-message-paragraph"
-  );
+  const letter = room.querySelector(".g3-letter");
 
-  /* RESET EVERYTHING */
+  letter.scrollTop = 0;
 
-  scene.classList.remove(
-    "g3-started",
-    "g3-connected",
-    "g3-finished"
-  );
+  /* DARKEN GALLERY */
 
-  document.getElementById("g3ConnectionMessage")
-    .classList.remove("g3-finale");
+  room.classList.add("g3-connecting");
 
-  paragraphs.forEach(paragraph => {
-    paragraph.classList.remove("g3-visible");
-  });
-
-  content.scrollTop = 0;
-
-  /* ENTER THE INSTALLATION */
-
-  room.classList.remove("active");
-  scene.classList.add("active");
-
-  /* TWO POINTS BEGIN GLOWING */
+  /* LIGHT UP THE TWO POINTS */
 
   g3ConnectionTimers.push(
     setTimeout(() => {
-      scene.classList.add("g3-started");
-    }, 700)
+
+      room.classList.add("g3-points-visible");
+
+    }, 1000)
   );
 
-  /* GOLDEN LINE BEGINS CONNECTING */
+  /* DRAW GOLDEN CONNECTION */
 
   g3ConnectionTimers.push(
     setTimeout(() => {
-      scene.classList.add("g3-connected");
-    }, 2600)
+
+      room.classList.add("g3-line-visible");
+
+    }, 2800)
+  );
+
+  /* REVEAL LOCATION LABELS */
+
+  g3ConnectionTimers.push(
+    setTimeout(() => {
+
+      room.classList.add("g3-labels-visible");
+
+    }, 5600)
   );
 
   /* REVEAL PERSONAL MESSAGE */
 
-  const firstParagraphDelay = 6200;
-  const paragraphInterval = 5500;
-
-  paragraphs.forEach((paragraph, index) => {
-
-    g3ConnectionTimers.push(
-      setTimeout(() => {
-
-        paragraph.classList.add("g3-visible");
-
-        /* KEEP THE NEW PARAGRAPH VISIBLE */
-
-        const targetPosition =
-          paragraph.offsetTop -
-          content.offsetTop -
-          content.clientHeight * 0.35;
-
-        content.scrollTo({
-          top: Math.max(0, targetPosition),
-          behavior: "smooth"
-        });
-
-      }, firstParagraphDelay + index * paragraphInterval)
-    );
-
-  });
-
-  /* EMPHASISE THE FINAL SENTENCE */
-
-  const finaleDelay =
-    firstParagraphDelay +
-    (paragraphs.length - 1) * paragraphInterval +
-    2000;
-
   g3ConnectionTimers.push(
     setTimeout(() => {
 
-      document.getElementById("g3ConnectionMessage")
-        .classList.add("g3-finale");
+      room.classList.add("g3-letter-visible");
 
-    }, finaleDelay)
-  );
-
-  /* SHOW RETURN BUTTON */
-
-  g3ConnectionTimers.push(
-    setTimeout(() => {
-
-      scene.classList.add("g3-finished");
-
-    }, finaleDelay + 1500)
+    }, 8500)
   );
 
 }
 
-/* RETURN TO GALLERY III */
+/* CLOSE CONNECTION */
 
 function closeG3Connection() {
 
   g3ClearConnectionTimers();
 
-  const scene = document.getElementById("g3ConnectionScene");
   const room = document.getElementById("gallery3Room");
 
-  scene.classList.remove("active");
+  /* HIDE LETTER FIRST */
 
-  room.classList.add("active");
+  room.classList.remove("g3-letter-visible");
+
+  /* RESTORE THE GALLERY */
+
+  g3ConnectionTimers.push(
+    setTimeout(() => {
+
+      room.classList.remove(
+        "g3-connecting",
+        "g3-points-visible",
+        "g3-line-visible",
+        "g3-labels-visible"
+      );
+
+    }, 700)
+  );
 
 }
   
