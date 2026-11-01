@@ -5627,35 +5627,11 @@ button {
     aria-label="Two Points, One Connection">
   </button>
 
-  <!-- ==========================================
+<!-- ==========================================
      CENTRAL INSTALLATION ANIMATION
 ========================================== -->
 
 <div class="g3-connection-dim"></div>
-
-<div class="g3-sphere-animation">
-
-  <!-- GOLDEN CONNECTION -->
-
-  <div class="g3-sphere-line"></div>
-
-  <!-- SINGAPORE -->
-
-  <div class="g3-sphere-point g3-sphere-sg"></div>
-
-  <span class="g3-sphere-label g3-label-sg">
-    SINGAPORE
-  </span>
-
-  <!-- LONDON -->
-
-  <div class="g3-sphere-point g3-sphere-uk"></div>
-
-  <span class="g3-sphere-label g3-label-uk">
-    LONDON
-  </span>
-
-</div>
 
 <!-- ==========================================
      PERSONAL MESSAGE POP-UP
@@ -7032,10 +7008,7 @@ function g3Gallery4Pending() {
 
 let g3ConnectionTimers = [];
 
-/* CLEAR TIMERS */
-
 function g3ClearConnectionTimers() {
-
   g3ConnectionTimers.forEach(timer => {
     clearTimeout(timer);
   });
@@ -7043,75 +7016,60 @@ function g3ClearConnectionTimers() {
   g3ConnectionTimers = [];
 }
 
-/* OPEN CONNECTION */
+/* OPEN CENTRAL INSTALLATION */
 
 function openG3Connection() {
 
   g3ClearConnectionTimers();
 
   const room = document.getElementById("gallery3Room");
+  const letter = room.querySelector(".g3-letter");
 
   /* RESET ANIMATION */
 
   room.classList.remove(
     "g3-connecting",
-    "g3-points-visible",
-    "g3-line-visible",
-    "g3-labels-visible",
+    "g3-image-connected",
     "g3-letter-visible"
   );
 
-  const letter = room.querySelector(".g3-letter");
-
   letter.scrollTop = 0;
 
-  /* DARKEN GALLERY */
+  /* ZOOM TOWARDS SPHERE */
 
-  room.classList.add("g3-connecting");
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      room.classList.add("g3-connecting");
+    });
+  });
 
-  /* LIGHT UP THE TWO POINTS */
+  /* TRANSITION TO CONNECTED IMAGE */
 
   g3ConnectionTimers.push(
     setTimeout(() => {
-
-      room.classList.add("g3-points-visible");
-
-    }, 1000)
+      room.classList.add("g3-image-connected");
+    }, 1800)
   );
 
-  /* DRAW GOLDEN CONNECTION */
+  /* SHOW PERSONAL MESSAGE */
 
   g3ConnectionTimers.push(
     setTimeout(() => {
 
-      room.classList.add("g3-line-visible");
-
-    }, 2800)
-  );
-
-  /* REVEAL LOCATION LABELS */
-
-  g3ConnectionTimers.push(
-    setTimeout(() => {
-
-      room.classList.add("g3-labels-visible");
-
-    }, 5600)
-  );
-
-  /* REVEAL PERSONAL MESSAGE */
-
-  g3ConnectionTimers.push(
-    setTimeout(() => {
+      letter.scrollTop = 0;
 
       room.classList.add("g3-letter-visible");
 
-    }, 8500)
+      requestAnimationFrame(() => {
+        letter.scrollTop = 0;
+      });
+
+    }, 6500)
   );
 
 }
 
-/* CLOSE CONNECTION */
+/* RETURN TO ORIGINAL GALLERY */
 
 function closeG3Connection() {
 
@@ -7119,23 +7077,24 @@ function closeG3Connection() {
 
   const room = document.getElementById("gallery3Room");
 
-  /* HIDE LETTER FIRST */
+  /* HIDE MESSAGE */
 
   room.classList.remove("g3-letter-visible");
 
-  /* RESTORE THE GALLERY */
+  /* RETURN TO ORIGINAL IMAGE */
 
   g3ConnectionTimers.push(
     setTimeout(() => {
+      room.classList.remove("g3-image-connected");
+    }, 500)
+  );
 
-      room.classList.remove(
-        "g3-connecting",
-        "g3-points-visible",
-        "g3-line-visible",
-        "g3-labels-visible"
-      );
+  /* ZOOM BACK OUT */
 
-    }, 700)
+  g3ConnectionTimers.push(
+    setTimeout(() => {
+      room.classList.remove("g3-connecting");
+    }, 1500)
   );
 
 }
