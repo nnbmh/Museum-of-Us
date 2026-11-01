@@ -4631,175 +4631,79 @@ button {
    GALLERY III — CENTRAL INSTALLATION
 ========================================== */
 
-/* DARKEN THE EXISTING ROOM */
+/* ORIGINAL AND CONNECTED IMAGES */
+
+#gallery3Room .g3-room-art,
+#gallery3Room .g3-connected-art {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: fill;
+
+  pointer-events: none;
+
+  transform: scale(1);
+  transform-origin: 50% 52%;
+
+  transition: transform 3s ease-in-out;
+}
+
+/* ORIGINAL IMAGE */
+
+#gallery3Room .g3-room-art {
+  z-index: 0;
+}
+
+/* CONNECTED IMAGE */
+
+#gallery3Room .g3-connected-art {
+  z-index: 1;
+
+  opacity: 0;
+
+  transition:
+    opacity 2.5s ease-in-out,
+    transform 3s ease-in-out;
+}
+
+/* CAMERA ZOOM */
+
+#gallery3Room.g3-connecting .g3-room-art,
+#gallery3Room.g3-connecting .g3-connected-art {
+  transform: scale(1.45);
+}
+
+/* REVEAL CONNECTED IMAGE */
+
+#gallery3Room.g3-image-connected .g3-connected-art {
+  opacity: 1;
+}
+
+/* ==========================================
+   DARKEN GALLERY
+========================================== */
 
 .g3-connection-dim {
   position: absolute;
   inset: 0;
+
   z-index: 21;
 
-  background: rgba(3, 7, 18, 0.78);
+  background: rgba(3, 7, 18, 0.35);
 
   opacity: 0;
+
   pointer-events: none;
 
-  transition: opacity 1.8s ease;
+  transition: opacity 2s ease;
 }
 
 #gallery3Room.g3-connecting .g3-connection-dim {
   opacity: 1;
   pointer-events: auto;
-}
-
-/* ==========================================
-   TWO GLOWING POINTS
-========================================== */
-
-.g3-sphere-animation {
-  position: absolute;
-
-  /* POSITION OVER THE EXISTING SPHERE */
-
-  left: 43%;
-  top: 38%;
-  width: 16%;
-  height: 38%;
-
-  z-index: 22;
-
-  pointer-events: none;
-  opacity: 0;
-
-  transition: opacity 1s ease;
-}
-
-#gallery3Room.g3-connecting .g3-sphere-animation {
-  opacity: 1;
-}
-
-/* POINTS */
-
-.g3-sphere-point {
-  position: absolute;
-
-  width: 10px;
-  height: 10px;
-
-  border-radius: 50%;
-
-  background: #ffe3ad;
-
-  box-shadow:
-    0 0 12px #ffe3ad,
-    0 0 25px rgba(255, 220, 150, 0.8),
-    0 0 45px rgba(255, 220, 150, 0.4);
-
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(0.3);
-
-  transition:
-    opacity 1.5s ease,
-    transform 1.5s ease;
-}
-
-/* APPROXIMATE POINT POSITIONS */
-
-.g3-sphere-sg {
-  left: 27%;
-  top: 42%;
-}
-
-.g3-sphere-uk {
-  left: 73%;
-  top: 58%;
-}
-
-/* ACTIVATE LIGHTS */
-
-#gallery3Room.g3-points-visible .g3-sphere-point {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
-
-/* ==========================================
-   GOLDEN CONNECTION
-========================================== */
-
-.g3-sphere-line {
-  position: absolute;
-
-  left: 27%;
-  top: 42%;
-
-  width: 48.8%;
-  height: 2px;
-
-  background: linear-gradient(
-    90deg,
-    #ffe3ad,
-    #e1c092
-  );
-
-  box-shadow:
-    0 0 10px rgba(255, 220, 150, 0.8),
-    0 0 22px rgba(255, 220, 150, 0.4);
-
-  transform:
-    rotate(19.2deg)
-    scaleX(0);
-
-  transform-origin: left center;
-
-  opacity: 0;
-
-  transition:
-    transform 2.5s ease,
-    opacity 0.5s ease;
-}
-
-#gallery3Room.g3-line-visible .g3-sphere-line {
-  transform:
-    rotate(19.2deg)
-    scaleX(1);
-
-  opacity: 1;
-}
-
-/* ==========================================
-   LOCATION LABELS
-========================================== */
-
-.g3-sphere-label {
-  position: absolute;
-
-  color: #f6ead8;
-
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(11px, 1.3vw, 17px);
-
-  letter-spacing: 0.12em;
-
-  text-shadow: 0 0 12px #000;
-
-  opacity: 0;
-
-  transition: opacity 1.2s ease;
-}
-
-.g3-label-sg {
-  left: 27%;
-  top: 42%;
-  transform: translate(-105%, -150%);
-}
-
-.g3-label-uk {
-  left: 73%;
-  top: 58%;
-  transform: translate(12%, 25%);
-}
-
-#gallery3Room.g3-labels-visible .g3-sphere-label {
-  opacity: 1;
 }
 
 /* ==========================================
@@ -4813,10 +4717,11 @@ button {
   z-index: 30;
 
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 
   padding: 24px;
+  box-sizing: border-box;
 
   background: rgba(3, 7, 18, 0.45);
 
@@ -4826,7 +4731,7 @@ button {
 
   transition:
     opacity 1.5s ease,
-    visibility 1.5s;
+    visibility 1.5s ease;
 }
 
 #gallery3Room.g3-letter-visible .g3-letter-overlay {
@@ -4835,19 +4740,24 @@ button {
   pointer-events: auto;
 }
 
-/* LETTER PANEL */
+/* ==========================================
+   MESSAGE PANEL
+========================================== */
 
 .g3-letter {
   position: relative;
 
   width: min(90vw, 620px);
-  max-height: 85dvh;
+  max-height: min(78dvh, 760px);
 
   overflow-y: auto;
+  overscroll-behavior: contain;
+
+  box-sizing: border-box;
 
   padding: clamp(25px, 4vw, 45px);
 
-  background: rgba(11, 19, 37, 0.94);
+  background: rgba(11, 19, 37, 0.96);
 
   border: 1px solid rgba(225, 192, 146, 0.55);
 
@@ -4866,7 +4776,7 @@ button {
   transform: translateY(0);
 }
 
-/* LETTER HEADING */
+/* MESSAGE HEADING */
 
 .g3-letter-heading {
   font-family: "Cormorant Garamond", serif;
@@ -4879,7 +4789,7 @@ button {
   margin: 0 0 28px;
 }
 
-/* LETTER TEXT */
+/* MESSAGE TEXT */
 
 .g3-letter p {
   font-family: "Cormorant Garamond", serif;
@@ -5648,11 +5558,19 @@ button {
 
 <section id="gallery3Room" class="scene">
 
-  <img
-    class="g3-room-art"
-    src="gallery-3.PNG"
-    alt="Gallery III — Between Two Worlds">
+  <!-- ORIGINAL GALLERY III -->
 
+<img
+  class="g3-room-art"
+  src="gallery-3.PNG"
+  alt="Gallery III — Between Two Worlds">
+
+<!-- CONNECTED GALLERY III -->
+
+<img
+  class="g3-connected-art"
+  src="gallery-3-connected-aligned.PNG"
+  alt="Singapore and London connected by a golden line">
   <!-- GALLERY II DOORWAY -->
 
   <button
