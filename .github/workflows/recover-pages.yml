@@ -1,4 +1,4 @@
-name: Recover stuck GitHub Pages deployment
+name: Recover GitHub Pages publishing
 on:
   push:
     paths:
@@ -11,18 +11,20 @@ jobs:
   recover:
     runs-on: ubuntu-latest
     steps:
-      - name: Cancel stale Pages deployment
+      - name: Switch Pages to branch publishing to bypass stuck workflow deployment
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
-          HTTP_CODE=$(curl -sS -o /tmp/pages-cancel-response.json -w "%{http_code}" \
-            -X POST \
+          HTTP_CODE=$(curl -sS -o /tmp/pages-response.json -w "%{http_code}" \
+            -X PUT \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer $GH_TOKEN" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            "https://api.github.com/repos/${{ github.repository }}/pages/deployments/caf957aa935166c083eaad33f6cb4987a56fe307/cancel")
-          echo "Cancel request HTTP status: $HTTP_CODE"
-          cat /tmp/pages-cancel-response.json
+            -H "Content-Type: application/json" \
+            -d '{"build_type":"legacy","source":{"branch":"main","path":"/"}}' \
+            "https://api.github.com/repos/${{ github.repository }}/pages")
+          echo "Pages settings HTTP status: $HTTP_CODE"
+          cat /tmp/pages-response.json
           echo
           if [ "$HTTP_CODE" -lt 200 ] || [ "$HTTP_CODE" -ge 300 ]; then exit 1; fi
