@@ -4,18 +4,14 @@
   <filter id="brightGlow" x="-80%" y="-100%" width="260%" height="300%"><feGaussianBlur stdDeviation="3.5"/></filter>
   <radialGradient id="light"><stop offset="0" stop-color="#fffef1"/><stop offset=".25" stop-color="#fff3b3"/><stop offset=".6" stop-color="#ffbd4b" stop-opacity=".7"/><stop offset="1" stop-color="#ffa832" stop-opacity="0"/></radialGradient>
 </defs>
-<!-- Only the connection is rendered: all architecture and globe rings come from gallery-3.PNG. -->
-<path d="M766 458 Q811 389 898 399" fill="none" stroke="#ffbb50" stroke-width="18" opacity=".48" filter="url(#softGlow)"/>
-<path d="M766 458 Q811 389 898 399" fill="none" stroke="#ffc35c" stroke-width="7" opacity=".85" filter="url(#brightGlow)"/>
-<path d="M766 458 Q811 389 898 399" fill="none" stroke="#ffe5a2" stroke-width="2.8" stroke-linecap="round"/>
-<circle cx="766" cy="458" r="32" fill="url(#light)" opacity=".75"/>
-<circle cx="898" cy="399" r="32" fill="url(#light)" opacity=".75"/>
-<circle cx="766" cy="458" r="7" fill="#fff9da"/>
-<circle cx="898" cy="399" r="7" fill="#fff9da"/>
+<!-- Keep the original globe and its two existing glowing points; only add the connection and labels. -->
+<path d="M746 481 Q816 405 916 410" fill="none" stroke="#ffbb50" stroke-width="18" opacity=".48" filter="url(#softGlow)"/>
+<path d="M746 481 Q816 405 916 410" fill="none" stroke="#ffc35c" stroke-width="7" opacity=".85" filter="url(#brightGlow)"/>
+<path d="M746 481 Q816 405 916 410" fill="none" stroke="#ffe5a2" stroke-width="2.8" stroke-linecap="round"/>
 <g font-family="Georgia, 'Times New Roman', serif" font-size="17" letter-spacing="1" fill="#f7d69a" text-anchor="middle">
- <rect x="689" y="479" width="153" height="32" rx="2" fill="#1d1420" stroke="#c59450" stroke-width="1.5"/>
- <text x="765.5" y="501">SINGAPORE</text>
- <rect x="905" y="418" width="115" height="32" rx="2" fill="#1d1420" stroke="#c59450" stroke-width="1.5"/>
- <text x="962.5" y="440">LONDON</text>
+ <rect x="669" y="504" width="153" height="32" rx="2" fill="#1d1420" stroke="#c59450" stroke-width="1.5"/>
+ <text x="745.5" y="526">SINGAPORE</text>
+ <rect x="923" y="430" width="115" height="32" rx="2" fill="#1d1420" stroke="#c59450" stroke-width="1.5"/>
+ <text x="980.5" y="452">LONDON</text>
 </g>
 </svg>
