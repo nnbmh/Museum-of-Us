@@ -7081,20 +7081,16 @@ function closeG3Connection() {
 
   room.classList.remove("g3-letter-visible");
 
-  /* RETURN TO ORIGINAL IMAGE */
+  /* Fade out the connection completely BEFORE zooming back.
+     Otherwise the SVG stays enlarged over the original globe during
+     the return animation and appears to miss both glowing points. */
+  room.classList.remove("g3-image-connected");
 
-  g3ConnectionTimers.push(
-    setTimeout(() => {
-      room.classList.remove("g3-image-connected");
-    }, 500)
-  );
-
-  /* ZOOM BACK OUT */
-
+  /* Only zoom out once the 2.5s overlay fade has completed. */
   g3ConnectionTimers.push(
     setTimeout(() => {
       room.classList.remove("g3-connecting");
-    }, 1500)
+    }, 2600)
   );
 
 }
