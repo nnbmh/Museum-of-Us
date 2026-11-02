@@ -4633,22 +4633,27 @@ button {
 
 /* ORIGINAL AND CONNECTED IMAGES */
 
+/* One shared canvas: the original art and connection MUST zoom together. */
+#gallery3Room .g3-art-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transform: scale(1);
+  transform-origin: 50% 52%;
+  transition: transform 3s ease-in-out;
+}
+
 #gallery3Room .g3-room-art,
 #gallery3Room .g3-connected-art {
   position: absolute;
   inset: 0;
-
   width: 100%;
   height: 100%;
-
   object-fit: fill;
-
   pointer-events: none;
-
-  transform: scale(1);
-  transform-origin: 50% 52%;
-
-  transition: transform 3s ease-in-out;
+  transform: none !important;
 }
 
 /* ORIGINAL IMAGE */
@@ -4665,14 +4670,12 @@ button {
   opacity: 0;
 
   transition:
-    opacity 2.5s ease-in-out,
-    transform 3s ease-in-out;
+    opacity 2.5s ease-in-out;
 }
 
 /* CAMERA ZOOM */
 
-#gallery3Room.g3-connecting .g3-room-art,
-#gallery3Room.g3-connecting .g3-connected-art {
+#gallery3Room.g3-connecting .g3-art-layer {
   transform: scale(1.45);
 }
 
@@ -5560,17 +5563,18 @@ button {
 
   <!-- ORIGINAL GALLERY III -->
 
+<div class="g3-art-layer">
 <img
   class="g3-room-art"
   src="gallery-3.PNG"
   alt="Gallery III — Between Two Worlds">
 
-<!-- TRANSPARENT SINGAPORE-LONDON CONNECTION ONLY (ORIGINAL ART STAYS FIXED) -->
-
+<!-- Transparent line and labels, sharing the EXACT same canvas and zoom as the original image. -->
 <img
   class="g3-connected-art"
-  src="g3-connection-overlay.svg?v=20261102c"
+  src="g3-connection-overlay.svg?v=20261102d"
   alt="Singapore and London connected by a golden line">
+</div>
   <!-- GALLERY II DOORWAY -->
 
   <button
