@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1669" height="942" viewBox="0 0 1669 942">
+<svg xmlns="http://www.w3.org/2000/svg" width="1669" height="942" viewBox="0 0 1669 942" preserveAspectRatio="none">
 <defs>
   <filter id="softGlow" x="-80%" y="-100%" width="260%" height="300%"><feGaussianBlur stdDeviation="10"/></filter>
   <filter id="brightGlow" x="-80%" y="-100%" width="260%" height="300%"><feGaussianBlur stdDeviation="3.5"/></filter>
