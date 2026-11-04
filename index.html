@@ -4749,11 +4749,11 @@ button {
 
 .g3-letter {
   position: relative;
-  width: min(95vw, 1040px);
-  max-height: calc(100dvh - 32px);
-  overflow: hidden;
+  width: min(96vw, 1040px);
+  max-height: calc(100dvh - 24px);
+  overflow: auto;
   box-sizing: border-box;
-  padding: clamp(16px, 2.4vw, 32px);
+  padding: clamp(12px, 2vw, 24px);
   background: rgba(11, 19, 37, 0.96);
   border: 1px solid rgba(225, 192, 146, 0.55);
   box-shadow:
@@ -4769,19 +4769,18 @@ button {
   font-size: clamp(23px, 2.5vw, 34px);
   font-weight: 400;
   color: #e1c092;
-  margin: 0 0 18px;
+  margin: 0 0 12px;
 }
 .g3-letter-body {
-  column-count: 2;
-  column-gap: clamp(20px, 3.2vw, 46px);
-  text-align: left;
+  column-count: 1;
+  text-align: center;
 }
 .g3-letter-body p {
   font-family: "Cormorant Garamond", serif;
   font-size: clamp(15px, 1.55vw, 19px);
-  line-height: 1.36;
+  line-height: 1.3;
   color: #f6ead8;
-  margin: 0 0 12px;
+  margin: 0 0 9px;
   break-inside: avoid;
 }
 .g3-letter-body p.g3-letter-final {
@@ -4791,7 +4790,7 @@ button {
 }
 .g3-letter-close {
   display: block;
-  margin: 18px auto 0;
+  margin: 12px auto 0;
   padding: 8px 12px;
   background: transparent;
   border: none;
@@ -4805,7 +4804,7 @@ button {
   .g3-letter-overlay { padding: 8px; }
   .g3-letter { width: 100%; max-height: calc(100dvh - 16px); padding: 12px; }
   .g3-letter-heading { font-size: 21px; margin-bottom: 10px; }
-  .g3-letter-body { column-gap: 12px; }
+  .g3-letter-body { column-count: 1; text-align: center; }
   .g3-letter-body p { font-size: 12px; line-height: 1.22; margin-bottom: 7px; }
   .g3-letter-body p.g3-letter-final { font-size: 13px; margin-top: 6px; }
   .g3-letter-close { font-size: 12px; margin-top: 10px; padding: 6px; }
