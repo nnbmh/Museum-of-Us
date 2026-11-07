@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Little Decisions — Word Concepts</title>
+<style>
+:root{font-family:Georgia,serif}*{box-sizing:border-box}body{margin:0;background:#15151b;color:#eee;font-family:system-ui,sans-serif}.top{max-width:980px;margin:30px auto 16px;padding:0 20px}.top h1{font:normal 30px Georgia;margin:0 0 8px}.top p{color:#bfc0c8;line-height:1.5}.switches{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}.switches button{background:#292a33;color:#eee;border:1px solid #51515c;border-radius:30px;padding:11px 15px;cursor:pointer}.switches button.active{background:#e7d4b0;color:#24202a;border-color:#e7d4b0}.label{font-size:12px;letter-spacing:2px;color:#a8a8b5;text-transform:uppercase;margin-top:20px}.stage{--bg:#121e34;--ink:#f3e9d8;--muted:#c6c0c0;--accent:#ead2a6;--panel:#1b2c45;--line:#6e6780;min-height:550px;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 55px #0007;padding:clamp(25px,6vw,65px);transition:background .25s,color .25s}.stage.ivory{--bg:#f4efe4;--ink:#41342f;--muted:#75675d;--accent:#9d644d;--panel:#eae0d0;--line:#d4c2a7}.stage.burgundy{--bg:#351e2b;--ink:#f5e6d9;--muted:#ddc3c6;--accent:#e3bd8e;--panel:#4b2b3a;--line:#8a6270}.eyebrow{text-align:center;letter-spacing:3px;font:11px system-ui,sans-serif;color:var(--accent)}.stage h2{text-align:center;font:normal clamp(25px,4vw,36px) Georgia;margin:18px 0 8px}.date{text-align:center;font:12px system-ui,sans-serif;letter-spacing:2px;color:var(--muted);margin-bottom:35px}.rule{height:1px;background:var(--line);opacity:.6;margin:28px auto;max-width:540px}.story{max-width:570px;margin:auto;font:clamp(18px,2.5vw,22px)/1.85 Georgia}.story p{margin:0 0 15px}.edit{font:inherit;color:var(--accent);background:none;border:0;border-bottom:1px dashed var(--accent);padding:0 2px;cursor:pointer}.edit:hover{background:var(--panel)}.note{font:12px/1.7 system-ui,sans-serif;letter-spacing:1px;color:var(--muted);margin-top:30px;text-align:center}.choices{display:grid;gap:9px;margin-top:25px}.choice{background:var(--panel);color:var(--ink);border:1px solid var(--line);padding:15px 17px;text-align:left;border-radius:4px;cursor:pointer;font:16px Georgia}.choice:hover{border-color:var(--accent)}.outcome{background:var(--panel);border-left:2px solid var(--accent);padding:15px 18px;margin-top:20px;font:17px/1.7 Georgia}.small{font:12px system-ui,sans-serif;color:var(--muted);margin-top:20px}.reset{color:var(--accent);background:none;border:0;text-decoration:underline;cursor:pointer;margin-top:15px}.foot{max-width:980px;margin:14px auto 40px;padding:0 20px;color:#c1c1cb;font-size:13px;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="top">
+<h1>The Little Decisions — two ways to tell it</h1>
+<p>Try both interaction styles, then switch the colour palette. This is a small working concept, not the final story or puzzle.</p>
+<div class="label">Interaction</div>
+<div class="switches" id="modes"><button type="button" data-mode="inline" class="active">A · Rewrite words in the story</button><button type="button" data-mode="choices">B · Choose what happens next</button></div>
+<div class="label">Colour palette</div>
+<div class="switches" id="themes"><button type="button" data-theme="midnight" class="active">Midnight blue + champagne</button><button type="button" data-theme="ivory">Warm ivory + ink</button><button type="button" data-theme="burgundy">Burgundy + antique gold</button></div>
+</div>
+<main class="stage" id="stage">
+<div class="eyebrow">DEPARTMENT OF ALTERNATIVE HISTORIES</div>
+<h2>One Hour Too Late</h2>
+<div class="date">08 MAY 2024 · BISHAN</div>
+<div class="rule"></div>
+<section class="story" id="story"></section>
+</main>
+<div class="foot">In version A, tap the underlined phrase to rewrite the event. In version B, read the scene and choose from the options underneath. The colour buttons work with either version.</div>
+<script>
+let mode='inline',theme='midnight',selection=null;
+const story=document.getElementById('story'),stage=document.getElementById('stage');
+const variants=[
+{label:'arrived five minutes earlier',text:'Faris arrives five minutes earlier. He parks before she reaches the car park entrance. The machine detects a possible encounter.',note:'TIMELINE ALTERED · ENCOUNTER POSSIBLE'},
+{label:'sent his message before entering',text:'Her phone lights up: “I’ve reached.” She pauses, but keeps walking. An arrival message is not a time machine.',note:'TIMELINE ALTERED · ENCOUNTER STILL UNCERTAIN'},
+{label:'parked near the jogging path',text:'He parks near the jogging path and steps out just as she walks past. For the first time, their paths might actually cross.',note:'TIMELINE ALTERED · ENCOUNTER POSSIBLE'}
+];
+function render(){
+ stage.className='stage '+(theme==='midnight'?'':theme);
+ let intro='<p>She waited on the bench across the car park.</p><p>One hour passed.</p><p>She stood up and started walking away.</p>';
+ if(mode==='inline'){
+  story.innerHTML=intro+'<p>Meanwhile, Faris <button class="edit" id="edit">arrived just as she was leaving</button>.</p><p>His car passed her on the way into the car park.</p><p>Neither of them noticed.</p><div class="note">ENCOUNTER MISSED · SELECT THE UNDERLINED EVENT TO INTERFERE</div>'+(selection===null?'':'<div class="outcome">'+variants[selection].text+'<div class="small">'+variants[selection].note+'</div></div>')+'<div id="picker"></div>'+(selection===null?'':'<button class="reset" id="reset">Restore original timeline</button>');
+  document.getElementById('edit').onclick=()=>{
+   document.getElementById('picker').innerHTML='<div class="choices">'+variants.map((v,i)=>'<button class="choice" data-pick="'+i+'">'+v.label+'</button>').join('')+'</div>';
+   document.querySelectorAll('[data-pick]').forEach(b=>b.onclick=()=>{selection=Number(b.dataset.pick);render()});
+  };
+ }else{
+  story.innerHTML=intro+'<p>His car passed her on the way into the car park.</p><p>Neither of them noticed.</p><div class="note">ENCOUNTER MISSED · CHOOSE ONE INTERVENTION</div><div class="choices">'+variants.map((v,i)=>'<button class="choice" data-pick="'+i+'">'+String.fromCharCode(65+i)+'. '+v.label.charAt(0).toUpperCase()+v.label.slice(1)+'</button>').join('')+'</div>'+(selection===null?'':'<div class="outcome">'+variants[selection].text+'<div class="small">'+variants[selection].note+'</div></div><button class="reset" id="reset">Try another intervention</button>');
+  document.querySelectorAll('[data-pick]').forEach(b=>b.onclick=()=>{selection=Number(b.dataset.pick);render()});
+ }
+ const reset=document.getElementById('reset');
+ if(reset)reset.onclick=()=>{selection=null;render()};
+}
+document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{mode=b.dataset.mode;selection=null;document.querySelectorAll('[data-mode]').forEach(x=>x.classList.toggle('active',x===b));render()});
+document.querySelectorAll('[data-theme]').forEach(b=>b.onclick=()=>{theme=b.dataset.theme;document.querySelectorAll('[data-theme]').forEach(x=>x.classList.toggle('active',x===b));render()});
+render();
+</script>
+</body>
+</html>
