@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Little Decisions — Word Concepts</title>
+<style>
+:root{font-family:Georgia,serif}*{box-sizing:border-box}body{margin:0;background:#15151b;color:#eee;font-family:system-ui,sans-serif}.top{max-width:980px;margin:30px auto 16px;padding:0 20px}.top h1{font:normal 30px Georgia;margin:0 0 8px}.top p{color:#bfc0c8;line-height:1.5}.switches{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}.switches button{background:#292a33;color:#eee;border:1px solid #51515c;border-radius:30px;padding:11px 15px;cursor:pointer}.switches button.active{background:#e7d4b0;color:#24202a;border-color:#e7d4b0}.label{font-size:12px;letter-spacing:2px;color:#a8a8b5;text-transform:uppercase;margin-top:20px}.stage{--bg:#121e34;--ink:#f3e9d8;--muted:#c6c0c0;--accent:#ead2a6;--panel:#1b2c45;--line:#6e6780;min-height:550px;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 55px #0007;padding:clamp(25px,6vw,65px);transition:background .25s,color .25s}.stage.ivory{--bg:#f4efe4;--ink:#41342f;--muted:#75675d;--accent:#9d644d;--panel:#eae0d0;--line:#d4c2a7}.stage.burgundy{--bg:#351e2b;--ink:#f5e6d9;--muted:#ddc3c6;--accent:#e3bd8e;--panel:#4b2b3a;--line:#8a6270}.eyebrow{text-align:center;letter-spacing:3px;font:11px system-ui,sans-serif;color:var(--accent)}.stage h2{text-align:center;font:normal clamp(25px,4vw,36px) Georgia;margin:18px 0 8px}.date{text-align:center;font:12px system-ui,sans-serif;letter-spacing:2px;color:var(--muted);margin-bottom:35px}.rule{height:1px;background:var(--line);opacity:.6;margin:28px auto;max-width:540px}.story{max-width:570px;margin:auto;font:clamp(18px,2.5vw,22px)/1.85 Georgia}.story p{margin:0 0 15px}.edit{font:inherit;color:var(--accent);background:none;border:0;border-bottom:1px dashed var(--accent);padding:0 2px;cursor:pointer}.edit:hover{background:var(--panel)}.note{font:12px/1.7 system-ui,sans-serif;letter-spacing:1px;color:var(--muted);margin-top:30px;text-align:center}.choices{display:grid;gap:9px;margin-top:25px}.choice{background:var(--panel);color:var(--ink);border:1px solid var(--line);padding:15px 17px;text-align:left;border-radius:4px;cursor:pointer;font:16px Georgia}.choice:hover{border-color:var(--accent)}.outcome{background:var(--panel);border-left:2px solid var(--accent);padding:15px 18px;margin-top:20px;font:17px/1.7 Georgia}.small{font:12px system-ui,sans-serif;color:var(--muted);margin-top:20px}.reset{color:var(--accent);background:none;border:0;text-decoration:underline;cursor:pointer;margin-top:15px}.foot{max-width:980px;margin:14px auto 40px;padding:0 20px;color:#c1c1cb;font-size:13px;line-height:1.6}
+
+.stage{max-width:900px;margin:auto}.top{text-align:center}.story{max-width:590px}.hint{font:13px/1.6 system-ui,sans-serif;color:var(--muted);text-align:center;margin:15px auto 30px}.edit:focus-visible,.choice:focus-visible{outline:2px solid var(--accent)}.edit.chosen{border-bottom-style:solid}.result{margin-top:25px;padding:20px;background:var(--panel);border:1px solid var(--line);font:17px/1.7 Georgia}.result strong{display:block;font:11px system-ui,sans-serif;letter-spacing:2px;color:var(--accent);margin-bottom:8px}.toolbar{text-align:center;margin-top:22px}.toolbar button{color:var(--accent);background:transparent;border:1px solid var(--line);padding:10px 16px;cursor:pointer;border-radius:5px}.foot{text-align:center}
+</style></head><body>
+<div class="top"><h1>The Little Decisions</h1><p>A tiny alternate-history puzzle. Change two highlighted phrases to make sure you meet.</p></div>
+<main class="stage ivory" id="stage">
+<div class="eyebrow">DEPARTMENT OF ALTERNATIVE HISTORIES</div>
+<h2>One Hour Too Late</h2><div class="date">08 MAY 2024 · BISHAN</div><div class="rule"></div>
+<div class="hint">Tap the underlined words. Try different combinations. There are no timers or penalties.</div>
+<section class="story" id="story"></section>
+</main>
+<div class="foot">Prototype only · Warm ivory + clickable words · Your museum galleries have not been changed.</div>
+<script>
+const story=document.getElementById('story');
+let her=0,him=0,editing=null;
+const hers=['decided to leave','waited five more minutes','walked towards the staircase'];
+const his=['drove straight into the car park','parked and rushed upstairs','parked and looked towards the jogging path'];
+function outcome(){
+ if(her===1&&him===2)return ['ENCOUNTER FOUND','She waited a little longer. He parked, looked towards the jogging path, and spotted her on the bench. This time, they saw each other.','Machine note: Astonishing. Looking around has proved useful.'];
+ if(her===2&&him===2)return ['ENCOUNTER FOUND','She walked towards the staircase. He parked and looked around before heading upstairs. They noticed each other near the car park.','Machine note: A small detour. A rather significant result.'];
+ if(her===0&&him===2)return ['ENCOUNTER MISSED','He looked towards the jogging path, but the bench was already empty. She had started walking away.','Machine note: Excellent observation. Slightly late.'];
+ if(her===1&&him===1)return ['ENCOUNTER MISSED','She stayed on the bench for five more minutes. He hurried upstairs without looking across the car park.','Machine note: Being in the same place is not quite the same as meeting.'];
+ if(her===2&&him===1)return ['ENCOUNTER MISSED','She headed for the staircase, but he had already rushed upstairs by the time she got there.','Machine note: Two excellent attempts at walking. Poor coordination.'];
+ if(her===0&&him===1)return ['ENCOUNTER MISSED','She left the bench. He parked and rushed upstairs. Their paths never crossed.','Machine note: An impressively efficient missed connection.'];
+ if(her===1&&him===0)return ['ENCOUNTER MISSED','She stayed five more minutes, but he drove into the car park and headed straight for the stairs. She never saw him.','Machine note: Five minutes can change a lot. Not everything.'];
+ if(her===2&&him===0)return ['ENCOUNTER MISSED','She walked towards the staircase as he drove into the car park. They passed without recognising each other.','Machine note: Very close. Not close enough.'];
+ return ['ENCOUNTER MISSED','She walked away from the bench just as his car entered the car park. Neither of them noticed the other.','Machine note: This timeline appears to require a little help.'];
+}
+function render(){
+ const [status,desc,note]=outcome();
+ story.innerHTML='<p>She waited on the bench along the jogging path, across from the car park.</p><p>Over an hour passed.</p><p>She <button class="edit '+(her?'chosen':'')+'" data-edit="her">'+hers[her]+'</button>.</p><p>Meanwhile, he <button class="edit '+(him?'chosen':'')+'" data-edit="him">'+his[him]+'</button>.</p><div id="choices"></div><div class="result"><strong>'+status+'</strong>'+desc+'<div class="small">'+note+'</div></div><div class="toolbar"><button id="reset">Reset timeline</button></div>';
+ document.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>{editing=b.dataset.edit;showChoices()});
+ document.getElementById('reset').onclick=()=>{her=0;him=0;editing=null;render()};
+}
+function showChoices(){
+ const opts=editing==='her'?hers:his;
+ document.getElementById('choices').innerHTML='<div class="note">REWRITE THIS MOMENT</div><div class="choices">'+opts.map((t,i)=>'<button class="choice" data-index="'+i+'">'+t.charAt(0).toUpperCase()+t.slice(1)+'</button>').join('')+'</div>';
+ document.querySelectorAll('[data-index]').forEach(b=>b.onclick=()=>{if(editing==='her')her=Number(b.dataset.index);else him=Number(b.dataset.index);editing=null;render()});
+}
+render();
+</script></body></html>
