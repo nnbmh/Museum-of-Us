@@ -4811,25 +4811,32 @@ button {
 }
 
 
-/* GALLERY IV — Through My Eyes: deliberately compact final gallery */
-#gallery4Room{background:radial-gradient(ellipse at 50% 38%,#aebdca 0%,#8da4b7 55%,#627e95 100%);color:#fff7e9;overflow-y:auto}
-.g4-room{min-height:100%;padding:74px 22px 65px;display:flex;flex-direction:column;align-items:center;text-align:center;background:repeating-linear-gradient(90deg,transparent 0 18%,#ffffff09 18.1% 18.3%,transparent 18.4% 36%)}
-.g4-back{position:fixed;top:19px;left:20px;z-index:3;background:none;border:0;color:#fff9ef;font:16px Georgia,serif;cursor:pointer}
-.g4-eyebrow{font:11px system-ui,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#f8e9d2}
-.g4-room h2{font:normal clamp(39px,6vw,69px) Georgia,serif;margin:13px 0 6px;text-shadow:0 2px 14px #2d4b6070}
-.g4-subtitle{font:italic 19px Georgia,serif;margin:0 0 27px;color:#f8e8d3}
-.g4-frame{width:min(360px,80vw);height:min(420px,91vw);border:13px ridge #c5a77c;outline:1px solid #f5e5c8;box-shadow:0 18px 45px #30495d99,inset 0 0 25px #0003;background:linear-gradient(150deg,#b6c4cc,#718b9f);display:grid;place-items:center;position:relative;overflow:hidden}
-.g4-portrait{position:absolute;inset:0;display:grid;place-items:center;filter:blur(4px);opacity:.25;transition:filter 1.1s,opacity 1.1s}
-.g4-portrait:before{content:'';width:110px;height:120px;background:#344e61;border-radius:50% 50% 46% 46%;position:absolute;top:20%}
-.g4-portrait:after{content:'';width:230px;height:230px;background:#344e61;border-radius:48% 48% 10% 10%;position:absolute;top:52%}
-.g4-portrait[data-progress="2"]{opacity:.42;filter:blur(3px)}.g4-portrait[data-progress="3"]{opacity:.58;filter:blur(2px)}.g4-portrait[data-progress="4"]{opacity:.76;filter:blur(1px)}.g4-portrait[data-progress="5"]{opacity:.9;filter:none}
-.g4-frame-caption{position:absolute;bottom:17px;left:0;right:0;font:italic 15px Georgia;color:#fff4df;text-shadow:0 2px 5px #142a3d}
-.g4-plaque{margin:14px 0 16px;background:#d8c19a;color:#374757;padding:9px 25px;font:12px Georgia;letter-spacing:.1em}
-.g4-note{max-width:540px;min-height:115px;padding:18px 10px 10px;font:clamp(18px,3vw,24px)/1.5 Georgia,serif;color:#fff9f0}
-.g4-note small{display:block;font:11px system-ui;letter-spacing:.16em;margin-bottom:12px;color:#f5ddbf}
-.g4-action{border:1px solid #f4e4c9;background:#f5e6d4;color:#42586b;padding:12px 25px;font:17px Georgia;cursor:pointer}
-.g4-counter{font:11px system-ui;letter-spacing:.15em;margin:14px;color:#f6e7d1}
-@media(max-width:480px){.g4-room{padding-top:80px}.g4-frame{height:320px;width:260px}.g4-room h2{font-size:39px}.g4-note{min-height:145px}}
+/* GALLERY IV — full architectural gallery, with a single floor installation */
+#gallery4Room{background:#8197a9;color:#fff6e9;overflow:hidden}
+.g4-back{position:absolute;z-index:15;top:18px;left:18px;background:#1b3044a6;border:1px solid #d6c3a46b;padding:11px 15px;color:#fff4df;font:15px Georgia;cursor:pointer}
+.g4-hall{position:absolute;inset:0;overflow:hidden;background:radial-gradient(ellipse at 50% 28%,#e1e3df 0%,#b6c6cf 43%,#738da4 100%)}
+.g4-ceiling{position:absolute;left:8%;right:8%;top:0;height:23%;background:linear-gradient(#d6dde0,#a5b7c2);clip-path:polygon(0 0,100% 0,79% 100%,21% 100%);border-bottom:3px solid #c4a77c}
+.g4-leftwall,.g4-rightwall{position:absolute;top:0;bottom:21%;width:31%;background:repeating-linear-gradient(90deg,#8ca4b8 0 24%,#a8bbca 24.5% 27%,#819bae 27.5% 50%);box-shadow:inset 0 0 65px #344d6370}
+.g4-leftwall{left:0;clip-path:polygon(0 0,100% 22%,100% 100%,0 100%)}
+.g4-rightwall{right:0;clip-path:polygon(0 22%,100% 0,100% 100%,0 100%)}
+.g4-backwall{position:absolute;top:13%;left:24%;width:52%;height:61%;background:linear-gradient(100deg,#9eb2c1,#d0d5d5 49%,#a2b6c4);border:12px ridge #d2c3ad;box-shadow:inset 0 0 65px #47637c55}
+.g4-floor{position:absolute;bottom:-12%;left:-25%;width:150%;height:47%;background:repeating-linear-gradient(90deg,transparent 0 12%,#61798b55 12.1% 12.3%,transparent 12.4% 24%),repeating-linear-gradient(0deg,#9dabb6 0 23%,#d4d8d8 23.5% 24%,#b7c1c8 24.5% 48%);clip-path:polygon(30% 0,70% 0,100% 100%,0 100%);box-shadow:inset 0 20px 40px #3c536a50}
+.g4-arch{position:absolute;top:12%;left:29%;width:42%;height:60%;border:8px solid #cbb894;border-radius:46% 46% 0 0 / 21% 21% 0 0;box-shadow:0 0 0 10px #8fa8ba,0 0 0 13px #d8c7a9}
+.g4-heading{position:absolute;top:17%;left:50%;transform:translateX(-50%);width:60%;text-align:center;color:#415469;text-shadow:0 1px #f8ebd7}
+.g4-heading small{font:10px system-ui;letter-spacing:.24em}.g4-heading h2{font:normal clamp(24px,3.5vw,46px) Georgia;margin:7px 0}
+.g4-frame{position:absolute;top:34%;left:50%;transform:translateX(-50%);width:clamp(135px,19vw,245px);height:clamp(170px,27vw,315px);border:11px ridge #bc9868;background:linear-gradient(135deg,#b2bfca,#6d879b);box-shadow:0 12px 27px #2a405c88,inset 0 0 20px #293d5070;overflow:hidden}
+.g4-portrait{position:absolute;inset:0;opacity:.18;filter:blur(6px);transition:opacity 1s,filter 1s}
+.g4-portrait:before{content:'';position:absolute;width:38%;height:31%;left:31%;top:18%;border-radius:48%;background:#334c61}
+.g4-portrait:after{content:'';position:absolute;width:80%;height:57%;left:10%;top:52%;border-radius:48% 48% 0 0;background:#334c61}
+.g4-portrait[data-progress="2"]{opacity:.4;filter:blur(4px)}.g4-portrait[data-progress="3"]{opacity:.55;filter:blur(3px)}.g4-portrait[data-progress="4"]{opacity:.72;filter:blur(2px)}.g4-portrait[data-progress="5"]{opacity:.85;filter:none}
+.g4-plaque{position:absolute;top:calc(34% + clamp(170px,27vw,315px) + 10px);left:50%;transform:translateX(-50%);background:#d7bf96;color:#4d5360;padding:7px 13px;white-space:nowrap;font:clamp(9px,1vw,12px) Georgia;letter-spacing:.09em}
+.g4-floor-markers{position:absolute;left:50%;bottom:8%;transform:translateX(-50%);width:min(540px,84%);display:flex;justify-content:space-between;align-items:flex-end;gap:7px}
+.g4-marker{width:clamp(44px,9vw,77px);height:clamp(44px,9vw,77px);border:2px solid #d9c098;border-radius:50%;background:radial-gradient(#d4b98865,#3c586c9e);box-shadow:0 0 12px #e5c99c66,inset 0 0 0 5px #d8c49a35;color:#f7e8ce;font:clamp(14px,2vw,22px) Georgia;cursor:pointer;transition:transform .2s,background .3s}
+.g4-marker:hover,.g4-marker:focus-visible{transform:translateY(-5px);background:#9d8055}.g4-marker.seen{background:#b69b6c;color:#223a4c}
+.g4-instruction{position:absolute;bottom:2%;width:100%;text-align:center;color:#fff4e4;text-shadow:0 2px 7px #183449;font:13px Georgia}
+.g4-panel{position:absolute;z-index:10;left:50%;top:50%;transform:translate(-50%,-50%);width:min(520px,90vw);max-height:78dvh;overflow:auto;background:#f3eadc;color:#463b32;border:10px ridge #c7a77b;padding:clamp(24px,4vw,40px);text-align:center;box-shadow:0 0 0 100vmax #0a1c2ca6,0 15px 65px #0007}
+.g4-panel[hidden]{display:none}.g4-panel small{font:11px system-ui;letter-spacing:.2em;color:#9c7751}.g4-panel h3{font:normal 30px Georgia;margin:16px 0}.g4-panel p{font:clamp(19px,3vw,24px)/1.55 Georgia;margin:20px 0 28px}.g4-panel button{border:0;border-bottom:1px solid #9a7754;background:none;color:#7b593d;padding:8px;font:17px Georgia;cursor:pointer}
+@media(max-width:600px){.g4-heading{top:21%;width:90%}.g4-backwall{left:15%;width:70%}.g4-arch{left:20%;width:60%}.g4-frame{top:36%;width:170px;height:220px}.g4-plaque{top:calc(36% + 230px)}.g4-floor-markers{bottom:11%}.g4-instruction{bottom:4%;font-size:12px}}
 </style>
 </head>
 
@@ -5714,20 +5721,24 @@ button {
 
 <!-- GALLERY IV — THROUGH MY EYES -->
 <section id="gallery4Room" class="scene" aria-label="Gallery IV — Through My Eyes">
-  <button class="g4-back" onclick="returnToGallery3From4()">← Return to Gallery III</button>
-  <div class="g4-room">
-    <div class="g4-eyebrow">Gallery IV · The Faris I Know</div>
-    <h2>Through My Eyes</h2>
-    <p class="g4-subtitle">A portrait, in little pieces.</p>
-    <div class="g4-frame" aria-label="An unfinished portrait gradually revealed">
-      <div class="g4-portrait" id="g4Portrait" data-progress="0"></div>
-      <div class="g4-frame-caption" id="g4FrameCaption">An unfinished study</div>
-    </div>
-    <div class="g4-plaque">PORTRAIT OF FARIS · AS I SEE HIM</div>
-    <div class="g4-note" aria-live="polite" id="g4Note"><small>CURATOR'S NOTE · 00 / 05</small>Not everything worth seeing is obvious at first glance.</div>
-    <button class="g4-action" id="g4Next" onclick="advanceGallery4()">Look a little closer →</button>
-    <div class="g4-counter" id="g4Counter">00 / 05</div>
-  </div>
+<button class="g4-back" onclick="returnToGallery3From4()">← Return to Gallery III</button>
+<div class="g4-hall">
+<div class="g4-ceiling"></div><div class="g4-leftwall"></div><div class="g4-rightwall"></div><div class="g4-backwall"></div><div class="g4-arch"></div><div class="g4-floor"></div>
+<div class="g4-heading"><small>GALLERY IV · THE FARIS I KNOW</small><h2>Through My Eyes</h2></div>
+<div class="g4-frame" aria-label="An unfinished portrait"><div class="g4-portrait" id="g4Portrait" data-progress="0"></div></div>
+<div class="g4-plaque">THE FARIS I KNOW · AN UNFINISHED STUDY</div>
+<div class="g4-floor-markers" aria-label="Five reflections">
+<button class="g4-marker" onclick="revealGallery4(0)" aria-label="Reveal reflection one">I</button>
+<button class="g4-marker" onclick="revealGallery4(1)" aria-label="Reveal reflection two">II</button>
+<button class="g4-marker" onclick="revealGallery4(2)" aria-label="Reveal reflection three">III</button>
+<button class="g4-marker" onclick="revealGallery4(3)" aria-label="Reveal reflection four">IV</button>
+<button class="g4-marker" onclick="revealGallery4(4)" aria-label="Reveal reflection five">V</button>
+</div>
+<div class="g4-instruction">Five little perspectives. Tap a floor medallion to discover one.</div>
+</div>
+<div id="g4Panel" class="g4-panel" hidden role="dialog" aria-modal="true" aria-labelledby="g4PanelTitle">
+<small id="g4PanelLabel">CURATOR'S NOTE</small><h3 id="g4PanelTitle">Through My Eyes</h3><p id="g4PanelText"></p><button onclick="closeGallery4Panel()">Return to the gallery →</button>
+</div>
 </section>
 
 <script>
@@ -7115,39 +7126,38 @@ function closeG3Connection() {
 }
   
 
-/* GALLERY IV — one gentle, self-contained interaction */
+/* GALLERY IV — architectural room and five independent floor medallions */
 const g4Notes=[
-  "There's the side of you that makes me laugh, sometimes without even trying.",
-  "There's the way you think things through, and how much you care about getting them right.",
-  "There's the version of you that keeps trying, even on days when you can't see much to be proud of.",
-  "There's the person I get to be silly with, quiet with, and completely myself around.",
-  "And there's you. Not a finished masterpiece. Not someone who has to have everything figured out. Just the person I love."
+"There's the side of you that makes me laugh, sometimes without even trying.",
+"There's the way you think things through, and how much you care about getting them right.",
+"There's the version of you that keeps trying, even on days when you can't see much to be proud of.",
+"There's the person I get to be silly with, quiet with, and completely myself around.",
+"And there's you. Not a finished masterpiece. Not someone who has to have everything figured out. Just the person I love."
 ];
-let g4Step=0;
+const g4Seen=new Set();
 function openGallery4Room(){
-  closeG3Preview();
-  document.getElementById("gallery3Room").classList.remove("active");
-  document.getElementById("gallery4Room").classList.add("active");
-  g4Step=0;renderGallery4();
+closeG3Preview();
+document.getElementById("gallery3Room").classList.remove("active");
+document.getElementById("gallery4Room").classList.add("active");
+g4Seen.clear();document.querySelectorAll(".g4-marker").forEach(x=>x.classList.remove("seen"));
+document.getElementById("g4Portrait").dataset.progress="0";
+closeGallery4Panel();
 }
 function returnToGallery3From4(){
-  document.getElementById("gallery4Room").classList.remove("active");
-  document.getElementById("gallery3Room").classList.add("active");
+closeGallery4Panel();
+document.getElementById("gallery4Room").classList.remove("active");
+document.getElementById("gallery3Room").classList.add("active");
 }
-function advanceGallery4(){
-  if(g4Step<g4Notes.length)g4Step++;
-  else g4Step=0;
-  renderGallery4();
+function revealGallery4(i){
+g4Seen.add(i);
+document.querySelectorAll(".g4-marker")[i].classList.add("seen");
+document.getElementById("g4Portrait").dataset.progress=String(g4Seen.size);
+document.getElementById("g4PanelLabel").textContent="CURATOR'S NOTE · "+String(i+1).padStart(2,"0")+" / 05";
+document.getElementById("g4PanelTitle").textContent=g4Seen.size===5?"The Faris I Know":"Through My Eyes";
+document.getElementById("g4PanelText").textContent=g4Notes[i]+(g4Seen.size===5?" Every little piece belongs to the same person.":"");
+document.getElementById("g4Panel").hidden=false;
 }
-function renderGallery4(){
-  const count=String(g4Step).padStart(2,"0")+" / 05";
-  document.getElementById("g4Portrait").dataset.progress=String(g4Step);
-  document.getElementById("g4Counter").textContent=count;
-  document.getElementById("g4FrameCaption").textContent=g4Step===5?"The Faris I know":"An unfinished study";
-  document.getElementById("g4Note").innerHTML="<small>CURATOR'S NOTE · "+count+"</small>"+(g4Step?g4Notes[g4Step-1]:"Not everything worth seeing is obvious at first glance.");
-  document.getElementById("g4Next").textContent=g4Step===5?"See it again ↺":"Look a little closer →";
-}
-
+function closeGallery4Panel(){document.getElementById("g4Panel").hidden=true}
 </script>
 
 </body>
