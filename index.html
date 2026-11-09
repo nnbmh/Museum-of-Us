@@ -4551,20 +4551,29 @@ button {
 /* Doorways */
 
 .g3-door-left {
-  left: 2%;
-  top: 38%;
-  width: 9%;
-  height: 17%;
+  left: 0;
+  top: 23%;
+  width: 11%;
+  height: 56%;
   z-index: 15;
 }
 
 .g3-door-right {
-  right: 2%;
-  top: 38%;
-  width: 9%;
-  height: 17%;
+  right: 0;
+  top: 23%;
+  width: 11%;
+  height: 56%;
   z-index: 15;
 }
+/* The brass doorway signs are tappable too, not just the narrow arch opening. */
+.g3-sign-left,.g3-sign-right {
+  top: 31%;
+  width: 12%;
+  height: 22%;
+  z-index: 16;
+}
+.g3-sign-left { left: 0; }
+.g3-sign-right { right: 0; }
 
 /* Return button */
 
@@ -4814,11 +4823,12 @@ button {
 /* GALLERY IV — approved artwork, aligned to the other museum galleries */
 #gallery4Room{background:#a7b4c3;color:#fff7e8;overflow:hidden}
 .g4-room-art{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none}
-.g4-back{position:absolute;z-index:20;top:18px;left:18px;background:#22374a91;border:1px solid #e2d2b67a;padding:10px 14px;color:#fff8eb;font:17px "Cormorant Garamond",Georgia,serif;cursor:pointer}
 .g4-hotspot{position:absolute;z-index:7;background:transparent;border:0;padding:0;cursor:pointer;touch-action:manipulation}
 .g4-hotspot:focus-visible{outline:2px solid #f7dfb3;outline-offset:2px}
-.g4-door-left{left:8%;top:21%;width:13%;height:58%}
-.g4-door-right{right:8%;top:21%;width:13%;height:58%}
+.g4-door-left{left:9%;top:18%;width:13%;height:62%}
+.g4-door-right{right:9%;top:18%;width:13%;height:62%}
+.g4-sign-left{left:1%;top:32%;width:11%;height:20%;z-index:16}
+.g4-sign-right{right:1%;top:32%;width:11%;height:20%;z-index:16}
 .g4-portrait-tap{left:37%;top:24%;width:26%;height:42%;z-index:8}
 .g4-portrait-veil{position:absolute;left:40%;top:30%;width:20%;height:31%;z-index:4;pointer-events:none;backdrop-filter:blur(13px);-webkit-backdrop-filter:blur(13px);background:#d5d6d019;transition:opacity .9s ease,backdrop-filter .9s ease;opacity:.9}
 .g4-portrait-veil[data-progress="1"]{opacity:.78;backdrop-filter:blur(11px);-webkit-backdrop-filter:blur(11px)}
@@ -4833,11 +4843,11 @@ button {
 .g4-hint{position:absolute;z-index:9;bottom:3%;width:100%;text-align:center;font:14px Georgia;color:#fff9f1;text-shadow:0 2px 7px #263a52}
 .g4-panel[hidden]{display:none}
 .g4-panel{position:absolute;z-index:25;left:50%;top:50%;transform:translate(-50%,-50%);width:min(520px,90vw);max-height:82dvh;overflow:auto;background:#f3eadc;color:#463b32;border:9px ridge #c7a77b;padding:clamp(24px,4vw,40px);text-align:center;box-shadow:0 0 0 100vmax #0a1c2ca6,0 15px 65px #0007}
-.g4-panel small{font:11px system-ui;letter-spacing:.2em;color:#9c7751}
-.g4-panel h3{font:normal 30px Georgia;margin:16px 0}
-.g4-panel p{font:clamp(19px,3vw,24px)/1.55 Georgia;margin:20px 0 28px}
-.g4-panel button{border:0;border-bottom:1px solid #9a7754;background:none;color:#7b593d;padding:8px;font:17px Georgia;cursor:pointer}
-@media(max-width:600px){.g4-floor-markers{width:60vw;bottom:10%}.g4-marker{width:32px;height:32px}.g4-hint{bottom:4%;font-size:11px}.g4-back{font-size:14px;padding:8px}.g4-door-left{left:6%;width:17%}.g4-door-right{right:6%;width:17%}}
+.g4-panel small{font:500 11px "DM Sans",sans-serif;letter-spacing:.24em;color:#9c7751}
+.g4-panel h3{font:500 clamp(34px,5vw,46px)/1.12 "Cormorant Garamond",serif;margin:18px 0;color:#5c493c}
+.g4-panel p{font:400 clamp(15px,2vw,18px)/1.85 "DM Sans",sans-serif;letter-spacing:.015em;margin:22px 0 30px;color:#514a46}
+.g4-panel button{border:0;border-bottom:1px solid #9a7754;background:none;color:#7b593d;padding:8px;font:500 12px "DM Sans",sans-serif;letter-spacing:.1em;cursor:pointer}
+@media(max-width:600px){.g4-floor-markers{width:60vw;bottom:10%}.g4-marker{width:32px;height:32px}.g4-hint{bottom:4%;font-size:11px}.g4-door-left{left:9%;width:13%}.g4-door-right{right:9%;width:13%}.g4-sign-left,.g4-sign-right{width:12%}}
 </style>
 </head>
 
@@ -5590,7 +5600,17 @@ button {
   <button
     class="g3-hotspot g3-door-right"
     onclick="openGallery4Room()"
-    aria-label="Enter Gallery IV">
+    aria-label="Enter Gallery IV through the doorway">
+  </button>
+  <button
+    class="g3-hotspot g3-sign-right"
+    onclick="openGallery4Room()"
+    aria-label="Tap Gallery IV sign to enter">
+  </button>
+  <button
+    class="g3-hotspot g3-sign-left"
+    onclick="returnToGallery2From3()"
+    aria-label="Tap Gallery II sign to return">
   </button>
 
   <!-- EXHIBIT 01 -->
@@ -5723,9 +5743,10 @@ button {
 <!-- GALLERY IV — THROUGH MY EYES -->
 <section id="gallery4Room" class="scene" aria-label="Gallery IV — Through My Eyes">
 <img class="g4-room-art" src="gallery-4.PNG" alt="Dusty-blue Gallery IV, with the unfinished portrait of Faris, a midnight-blue Gallery III doorway to the left, and a warm ivory Main Lobby doorway to the right">
-<button class="g4-back" onclick="returnToGallery3From4()">← Return to Gallery III</button>
-<button class="g4-hotspot g4-door-left" onclick="returnToGallery3From4()" aria-label="Enter Gallery III"></button>
-<button class="g4-hotspot g4-door-right" onclick="returnToLobbyFrom4()" aria-label="Return to Main Lobby"></button>
+<button class="g4-hotspot g4-door-left" onclick="returnToGallery3From4()" aria-label="Return to Gallery III through doorway"></button>
+<button class="g4-hotspot g4-sign-left" onclick="returnToGallery3From4()" aria-label="Tap Gallery III sign to return"></button>
+<button class="g4-hotspot g4-door-right" onclick="returnToLobbyFrom4()" aria-label="Return to Main Lobby through doorway"></button>
+<button class="g4-hotspot g4-sign-right" onclick="returnToLobbyFrom4()" aria-label="Tap Main Lobby sign to return"></button>
 <div class="g4-portrait-veil" id="g4Portrait" data-progress="0" aria-hidden="true"></div>
 <button class="g4-hotspot g4-portrait-tap" onclick="revealGallery4Portrait()" aria-label="Examine the unfinished portrait"></button>
 <div class="g4-floor-markers" aria-label="Five reflections about Faris">
@@ -7151,8 +7172,13 @@ document.getElementById("gallery3Room").classList.add("active");
 }
 function returnToLobbyFrom4(){
 closeGallery4Panel();
+const lobby=document.getElementById("lobby");
+// The lobby's entrance animation is one-shot; reset it when revisiting from Gallery IV.
+lobby.classList.remove("entering-gallery");
+const exploreButton=lobby.querySelector(".explore-button");
+if(exploreButton)exploreButton.disabled=false;
 document.getElementById("gallery4Room").classList.remove("active");
-document.getElementById("lobby").classList.add("active");
+lobby.classList.add("active");
 }
 function revealGallery4Portrait(){
 document.getElementById("g4PanelLabel").textContent="AN UNFINISHED STUDY";
