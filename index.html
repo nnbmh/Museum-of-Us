@@ -4561,19 +4561,25 @@ button {
 .g3-door-right {
   right: 0;
   top: 23%;
-  width: 11%;
+  width: 8.5%;
   height: 56%;
   z-index: 15;
 }
-/* The brass doorway signs are tappable too, not just the narrow arch opening. */
-.g3-sign-left,.g3-sign-right {
+/* Keep doorway plaques clickable without covering the nearby exhibits. */
+.g3-sign-left {
+  left: 0;
   top: 31%;
-  width: 12%;
-  height: 22%;
+  width: 10%;
+  height: 20%;
   z-index: 16;
 }
-.g3-sign-left { left: 0; }
-.g3-sign-right { right: 0; }
+.g3-sign-right {
+  right: 0;
+  top: 30%;
+  width: 8.5%;
+  height: 17%;
+  z-index: 16;
+}
 
 /* Return button */
 
@@ -5495,10 +5501,6 @@ button {
     ✧ SELECT A DISPLAY TO REVISIT ITS MEMORY ✧
   </div>
 
-  <button class="g2-room-back" onclick="leaveGallery2Room()">
-    ← GALLERY I
-  </button>
-
   <div class="g2-room-transition" id="g2RoomTransition"></div>
 
 </section>
@@ -5710,14 +5712,6 @@ button {
   </div>
 
 </div>
-
-  <!-- RETURN BUTTON -->
-
-  <button
-    class="g3-back"
-    onclick="returnToGallery2From3()">
-    ← GALLERY II
-  </button>
 
   <!-- TEMPORARY EXHIBIT PREVIEW -->
 
