@@ -4854,6 +4854,161 @@ button {
 .g4-panel p{font:400 clamp(15px,2vw,18px)/1.85 "DM Sans",sans-serif;letter-spacing:.015em;margin:22px 0 30px;color:#514a46}
 .g4-panel button{border:0;border-bottom:1px solid #9a7754;background:none;color:#7b593d;padding:8px;font:500 12px "DM Sans",sans-serif;letter-spacing:.1em;cursor:pointer}
 @media(max-width:600px){.g4-floor-markers{width:60vw;bottom:10%}.g4-marker{width:32px;height:32px}.g4-hint{bottom:4%;font-size:11px}.g4-door-left{left:9%;width:13%}.g4-door-right{right:9%;width:13%}.g4-sign-left,.g4-sign-right{width:12%}}
+
+/* ==========================================
+   GALLERY I — EXHIBIT 2: OUR FIRST DATE
+   Tap watch → date → OKC notification → memory
+========================================== */
+
+/* The watch is inside the LEFT display case, not the left doorway. */
+#gallery1 .watch-hotspot {
+  left: 29.1% !important;
+  top: 46% !important;
+  width: 5.8% !important;
+  height: 14.5% !important;
+}
+
+/* The date sits directly inside the face of the existing watch artwork. */
+#watchExhibit .watch-date-screen {
+  position: absolute;
+  left: 42.2%;
+  top: 33.5%;
+  width: 6.55%;
+  height: 9.3%;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  border-radius: 19%;
+  background: linear-gradient(155deg, #171b20, #050607 85%);
+  box-shadow: inset 0 0 10px rgba(255,255,255,.05), 0 0 12px rgba(232,194,139,.2);
+  color: #f6ead8;
+  font-family: "DM Sans", sans-serif;
+  font-size: clamp(7px, .78vw, 13px);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: .015em;
+  text-align: center;
+  opacity: 0;
+  transform: scale(.95);
+  transition: opacity .55s ease, transform .55s ease;
+  pointer-events: none;
+}
+#watchExhibit .watch-date-screen.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+#watchExhibit .watch-notification { z-index: 6; }
+
+/* The notification is the ONLY tap target once it appears. */
+#watchExhibit .watch-screen-hotspot {
+  left: 42% !important;
+  top: 32% !important;
+  width: 7.1% !important;
+  height: 12.8% !important;
+  z-index: 30 !important;
+}
+#watchExhibit .watch-screen-hotspot:disabled {
+  cursor: default;
+}
+#watchExhibit .watch-hint {
+  bottom: 5.5%;
+  width: max-content;
+  max-width: 90%;
+  text-align: center;
+  font-size: clamp(10px, 1vw, 13px);
+}
+
+/* A readable, real-text curator's note — not text baked into an image. */
+#watchExhibit .watch-memory-panel {
+  position: absolute;
+  inset: 0;
+  z-index: 100000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: max(24px, env(safe-area-inset-top)) 18px max(24px, env(safe-area-inset-bottom));
+  background: rgba(11,8,9,.83);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+}
+#watchExhibit .watch-memory-panel.visible {
+  display: flex;
+  animation: watchMemoryAppear .45s ease both;
+}
+#watchExhibit .watch-memory-card {
+  width: min(90vw, 660px);
+  max-height: 88dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: clamp(25px, 4vw, 46px);
+  border: 1px solid rgba(225,192,146,.48);
+  border-radius: 8px;
+  background: linear-gradient(160deg, #29201e, #151114);
+  box-shadow: 0 18px 65px rgba(0,0,0,.6);
+  text-align: left;
+}
+#watchExhibit .watch-memory-kicker {
+  margin: 0 0 10px;
+  color: #e1c092;
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+#watchExhibit .watch-memory-card h2 {
+  margin: 0 0 4px;
+  color: #f6ead8;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(31px, 4vw, 43px);
+  font-weight: 500;
+}
+#watchExhibit .watch-memory-date {
+  margin: 0 0 22px;
+  color: #d9c0a1;
+  font-size: 12px;
+  letter-spacing: .06em;
+}
+#watchExhibit .watch-memory-copy p {
+  margin: 0 0 16px;
+  color: #f4e9df;
+  font-size: clamp(14px, 1.4vw, 16px);
+  line-height: 1.7;
+}
+#watchExhibit .watch-memory-return {
+  display: block;
+  margin: 22px auto 0;
+  padding: 11px 0;
+  color: #e1c092;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(225,192,146,.6);
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-align: center;
+}
+#watchExhibit.story-open .exhibit-back {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+@keyframes watchMemoryAppear {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@media (max-width: 600px) {
+  #watchExhibit .watch-memory-card {
+    width: 100%;
+    max-height: 86dvh;
+    padding: 24px 22px;
+  }
+  #watchExhibit .watch-memory-copy p { font-size: 14px; line-height: 1.58; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #watchExhibit .watch-memory-panel.visible { animation: none; }
+  #watchExhibit .watch-date-screen { transition: none; }
+}
+
 </style>
 </head>
 
@@ -5281,32 +5436,59 @@ button {
 
 <section id="watchExhibit" class="scene">
 
-  <!-- Sleeping watch -->
-
+  <!-- Original close-up artwork: no image assets changed. -->
   <img
     class="watch-exhibit-art"
     src="gallery-1-watch-asleep.PNG"
-    alt="A sleeping Apple Watch inside a museum display case">
+    alt="An Apple Watch inside a museum display case">
 
-  <!-- OKC notification -->
+  <!-- Watch face wakes up with the date of our first date. -->
+  <div id="watchDateScreen" class="watch-date-screen" aria-label="8 May 2024">
+    <span>8 MAY</span><span>2024</span>
+  </div>
 
+  <!-- Existing, precisely aligned OKC logo overlay. -->
   <img
-  id="watchNotification"
-  class="watch-notification"
-  src="watch-okc-logo-overlay.png?v=2"
-  alt=""
-  aria-hidden="true">
+    id="watchNotification"
+    class="watch-notification"
+    src="watch-okc-logo-overlay.png?v=2"
+    alt=""
+    aria-hidden="true">
 
-  <!-- Tap watch -->
-
+  <!-- Enabled only when the OKC notification arrives. -->
   <button
+    id="watchNotificationTap"
     class="watch-screen-hotspot"
-    onclick="triggerWatchNotification()"
-    aria-label="Tap the watch">
+    onclick="openWatchMemory()"
+    aria-label="Read the memory behind the OKC notification"
+    disabled>
   </button>
 
-  <div id="watchHint" class="watch-hint">
-    ✧ TAP THE WATCH ✧
+  <div id="watchHint" class="watch-hint" aria-live="polite"></div>
+
+  <div
+    id="watchMemoryPanel"
+    class="watch-memory-panel"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="watchMemoryTitle"
+    aria-hidden="true">
+    <div class="watch-memory-card">
+      <p class="watch-memory-kicker">EXHIBIT 2 · OUR FIRST DATE</p>
+      <h2 id="watchMemoryTitle">The Things I Remember</h2>
+      <p class="watch-memory-date">8 May 2024 · Good Bites</p>
+
+      <div class="watch-memory-copy">
+        <p>HAHAHA I still can’t believe I actually did that fat gesture when I first saw you 😭 You literally told me you’d gained weight and somehow my brain thought it was a good idea to demonstrate it HAHAHA.</p>
+        <p>And as if that wasn’t embarrassing enough, that OKC notification had to pop up while we were talking 😭</p>
+        <p>But you know what I liked? You just laughed everything off. You never made me feel stupid or uncomfortable about any of it. And even though you said you’d be awkward too, you ended up being the one trying to make me feel less shy.</p>
+        <p>I think that’s what I liked about you that day.. how you made it easier for me to be myself around you. Plus your smile was a bonus too.</p>
+      </div>
+
+      <button class="watch-memory-return" onclick="closeWatch()">
+        RETURN TO GALLERY I →
+      </button>
+    </div>
   </div>
 
   <button class="exhibit-back" onclick="closeWatch()">
@@ -6078,77 +6260,80 @@ try {
    EXHIBIT 02 — WATCH
 ========================================== */
 
-let watchBusy = false;
-let watchTimer = null;
+/* ==========================================
+   EXHIBIT 02 — WATCH / FIRST DATE MEMORY
+========================================== */
+
+let watchDateTimer = null;
+let watchNotificationTimer = null;
+let watchEntranceTimer = null;
+
+function resetWatchSequence() {
+  clearTimeout(watchDateTimer);
+  clearTimeout(watchNotificationTimer);
+  clearTimeout(watchEntranceTimer);
+
+  const watch = document.getElementById("watchExhibit");
+  const notification = document.getElementById("watchNotification");
+  const date = document.getElementById("watchDateScreen");
+  const panel = document.getElementById("watchMemoryPanel");
+  const tap = document.getElementById("watchNotificationTap");
+  const hint = document.getElementById("watchHint");
+
+  watch.classList.remove("story-open");
+  date.classList.remove("visible");
+  notification.classList.remove("visible", "vibrating");
+  panel.classList.remove("visible");
+  panel.setAttribute("aria-hidden", "true");
+  tap.disabled = true;
+  hint.textContent = "";
+  hint.classList.add("hidden");
+}
 
 function openWatch() {
   const gallery = document.getElementById("gallery1");
   const watch = document.getElementById("watchExhibit");
-  const notification = document.getElementById("watchNotification");
-  const hint = document.getElementById("watchHint");
-
-  clearTimeout(watchTimer);
-
-  watchBusy = false;
-
-  notification.classList.remove(
-    "visible",
-    "vibrating"
-  );
-
-  hint.classList.remove("hidden");
+  resetWatchSequence();
 
   watch.classList.add("active");
-
-  setTimeout(() => {
+  watchEntranceTimer = setTimeout(() => {
     gallery.classList.remove("active");
   }, 1000);
+
+  // The watch wakes, then the unexpected OKC notification arrives.
+  watchDateTimer = setTimeout(() => {
+    document.getElementById("watchDateScreen").classList.add("visible");
+  }, 900);
+
+  watchNotificationTimer = setTimeout(() => {
+    const notification = document.getElementById("watchNotification");
+    notification.classList.add("visible", "vibrating");
+    document.getElementById("watchNotificationTap").disabled = false;
+    const hint = document.getElementById("watchHint");
+    hint.textContent = "✧ TAP THE OKC NOTIFICATION ✧";
+    hint.classList.remove("hidden");
+    setTimeout(() => notification.classList.remove("vibrating"), 400);
+  }, 2800);
 }
 
+function openWatchMemory() {
+  const tap = document.getElementById("watchNotificationTap");
+  if (tap.disabled) return;
+  tap.disabled = true;
 
-function triggerWatchNotification() {
-  if (watchBusy) return;
-
-  watchBusy = true;
-
-  const notification = document.getElementById(
-    "watchNotification"
-  );
-
-  const hint = document.getElementById("watchHint");
-
-  hint.classList.add("hidden");
-
-  // Small pause before the unexpected notification
-
-  watchTimer = setTimeout(() => {
-
-    notification.classList.add("visible");
-
-    // Notification disappears after 3 seconds
-
-    watchTimer = setTimeout(() => {
-
-      notification.classList.remove("visible");
-
-      watchBusy = false;
-
-      hint.classList.remove("hidden");
-
-    }, 3000);
-
-  }, 250);
+  const watch = document.getElementById("watchExhibit");
+  const panel = document.getElementById("watchMemoryPanel");
+  document.getElementById("watchHint").classList.add("hidden");
+  watch.classList.add("story-open");
+  panel.classList.add("visible");
+  panel.setAttribute("aria-hidden", "false");
+  panel.querySelector(".watch-memory-return").focus({preventScroll: true});
 }
-
 
 function closeWatch() {
-  clearTimeout(watchTimer);
-
-  document.getElementById("watchExhibit")
-    .classList.remove("active");
-
-  document.getElementById("gallery1")
-    .classList.add("active");
+  resetWatchSequence();
+  document.getElementById("watchExhibit").classList.remove("active");
+  document.getElementById("gallery1").classList.add("active");
 }
 
 /* ==========================================
