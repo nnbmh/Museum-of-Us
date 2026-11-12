@@ -5009,6 +5009,114 @@ button {
   #watchExhibit .watch-date-screen { transition: none; }
 }
 
+
+/* ==========================================
+   GALLERY I — FINAL CLICK/TAP ALIGNMENT
+   Based on the current 1536 × 864 Gallery I artwork.
+   All percentages track the stretched gallery background.
+========================================== */
+
+/* Exhibit 2: the LEFT watch and its glass case. */
+#gallery1 .watch-hotspot {
+  left: 25.1% !important;
+  top: 39.3% !important;
+  width: 13.2% !important;
+  height: 24.4% !important;
+  z-index: 40 !important;
+}
+
+/* Exhibit 1: the open book, not the blank space above it. */
+#gallery1 .book-hotspot {
+  left: 40.6% !important;
+  top: 44.8% !important;
+  width: 17.5% !important;
+  height: 19.0% !important;
+  z-index: 40 !important;
+  clip-path: polygon(0 12%, 50% 0, 100% 12%, 100% 95%, 50% 100%, 0 95%) !important;
+}
+
+/* Exhibit 3: silhouettes and their three speech bubbles. */
+#gallery1 .conversation-hotspot {
+  left: 60.5% !important;
+  top: 42.0% !important;
+  width: 15.5% !important;
+  height: 22.0% !important;
+  z-index: 40 !important;
+}
+
+/* The signs are painted into the image, so the buttons stay invisible. */
+#gallery1 .gallery-next-plaque,
+#gallery1 .g1-lobby-sign,
+#gallery1 .g1-doorway {
+  position: absolute !important;
+  display: block !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* RIGHT plaque: Gallery II, next to the burgundy archway. */
+#gallery1 button.gallery-next-plaque {
+  left: 91.8% !important;
+  top: 32.7% !important;
+  width: 7.1% !important;
+  height: 13.2% !important;
+  right: auto !important;
+  bottom: auto !important;
+  z-index: 65 !important;
+}
+
+/* LEFT plaque: Main Lobby, next to the ivory archway. */
+#gallery1 .g1-lobby-sign {
+  left: 1.8% !important;
+  top: 32.7% !important;
+  width: 7.2% !important;
+  height: 13.2% !important;
+  z-index: 65 !important;
+}
+
+/* Doorways are also tappable; neither overlaps an exhibit. */
+#gallery1 .g1-doorway {
+  top: 20.5% !important;
+  height: 49.5% !important;
+  z-index: 32 !important;
+}
+#gallery1 .g1-doorway-left {
+  left: 8.4% !important;
+  width: 10.1% !important;
+}
+#gallery1 .g1-doorway-right {
+  left: 81.6% !important;
+  width: 10.1% !important;
+}
+
+/* No phantom glow/rectangle on the signage. */
+#gallery1 .g1-lobby-sign::before,
+#gallery1 .g1-lobby-sign::after,
+#gallery1 .g1-doorway::before,
+#gallery1 .g1-doorway::after {
+  content: none !important;
+  display: none !important;
+}
+#gallery1 .gallery-next-plaque:focus-visible,
+#gallery1 .g1-lobby-sign:focus-visible,
+#gallery1 .g1-doorway:focus-visible,
+#gallery1 .watch-hotspot:focus-visible,
+#gallery1 .book-hotspot:focus-visible,
+#gallery1 .conversation-hotspot:focus-visible {
+  outline: 2px solid #f6ead8 !important;
+  outline-offset: 2px;
+}
+
 </style>
 </head>
 
@@ -5137,6 +5245,25 @@ button {
     <span>GALLERY I</span>
     <h2>The Beginning</h2>
   </div>
+
+<!-- MAIN LOBBY — LEFT DOORWAY AND SIGN -->
+<button
+  class="g1-lobby-sign"
+  onclick="returnToLobbyFrom1()"
+  aria-label="Return to the Main Lobby using its sign">
+</button>
+<button
+  class="g1-doorway g1-doorway-left"
+  onclick="returnToLobbyFrom1()"
+  aria-label="Return to the Main Lobby through the left doorway">
+</button>
+
+<!-- GALLERY II — RIGHT DOORWAY -->
+<button
+  class="g1-doorway g1-doorway-right"
+  onclick="openGallery2Room()"
+  aria-label="Enter Gallery II through the right doorway">
+</button>
 
 <!-- GALLERY II NAVIGATION -->
 
@@ -5988,6 +6115,17 @@ function beginExploring() {
 
 }
   
+/* Gallery I → Main Lobby. Restore Explore for repeat visits. */
+function returnToLobbyFrom1() {
+  const gallery = document.getElementById("gallery1");
+  const lobby = document.getElementById("lobby");
+  lobby.classList.remove("entering-gallery");
+  const explore = lobby.querySelector(".explore-button");
+  if (explore) explore.disabled = false;
+  gallery.classList.remove("active");
+  lobby.classList.add("active");
+}
+
 /* ==========================================
    EXHIBIT 01 — INTERACTIVE BOOK
 ========================================== */
