@@ -5118,6 +5118,151 @@ button {
 }
 
 
+/* ==========================================
+   EXHIBIT 01 — FINAL ARCHIVE DESIGN
+   Overrides the retired page-flipping layout.
+========================================== */
+#bookExhibit { background: #110b08; }
+#bookExhibit .book-closeup-art {
+  display: block; position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover; object-position: center;
+}
+#bookExhibit .book-archive-hotspot {
+  position: absolute; z-index: 12; border: 1px solid transparent;
+  background: transparent; padding: 0; border-radius: 4px;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+#bookExhibit .book-archive-hotspot:hover,
+#bookExhibit .book-archive-hotspot:focus-visible {
+  outline: 1px solid rgba(225,192,146,.8);
+  background: rgba(225,192,146,.08);
+}
+#bookExhibit .book-muzz-hotspot { left: 32%; top: 34%; width: 17%; height: 27%; }
+#bookExhibit .book-checklist-hotspot { left: 52%; top: 34%; width: 17%; height: 27%; }
+#bookExhibit .book-archive-hint {
+  position: absolute; z-index: 12; bottom: 6%; left: 50%;
+  transform: translateX(-50%); max-width: 92vw; white-space: nowrap;
+  color: #f9e7cd; font-size: clamp(9px,1vw,12px); letter-spacing: .17em;
+  text-shadow: 0 2px 10px #130804,0 1px 4px #130804;
+  pointer-events: none;
+}
+#bookExhibit .exhibit-back { color: #f8e4c4; text-shadow: 0 2px 8px #1b0c08; }
+#bookArchive { background: #230e14; color: #3e2422; }
+#bookArchive [hidden] { display: none !important; }
+#bookArchive .archive-back {
+  position: fixed; z-index: 20; top: max(14px,env(safe-area-inset-top));
+  left: max(15px,env(safe-area-inset-left));
+  border: 1px solid #d6b88b; background: #f8eddb; color: #582a33;
+  font-family: "DM Sans",sans-serif; font-size: 11px; letter-spacing: .12em;
+  padding: 10px 14px; box-shadow: 0 3px 14px #210b1455;
+}
+#bookArchive .archive-scroll {
+  height: 100%; overflow-y: auto; overscroll-behavior: contain;
+  padding: 64px clamp(12px,3vw,32px) 28px;
+  -webkit-overflow-scrolling: touch;
+}
+#bookArchive .archive-paper {
+  position: relative; max-width: 1020px; margin: 0 auto;
+  padding: clamp(24px,4vw,56px);
+  background:
+    radial-gradient(circle at 16% 20%,#fff5e4 0%,transparent 46%),
+    repeating-linear-gradient(110deg,rgba(113,70,38,.018) 0px,rgba(113,70,38,.018) 1px,transparent 2px,transparent 6px),
+    #e8d4b3;
+  border: 7px solid #ead8ba;
+  outline: 1px solid #ad8058; outline-offset: -18px;
+  box-shadow: 0 15px 50px #0b030780, inset 0 0 48px #9c633329;
+}
+#bookArchive .archive-paper::before {
+  content: ""; position: absolute; inset: 14px; pointer-events: none;
+  border: 1px solid rgba(119,65,47,.35);
+}
+#bookArchive .archive-letterhead { position: relative; text-align: center; padding-bottom: 23px; border-bottom: 1px solid #b28c67; }
+#bookArchive .archive-brand {
+  color: #6e2c39; font-family: "Cormorant Garamond",serif;
+  font-size: clamp(23px,3.5vw,35px); letter-spacing: .18em;
+}
+#bookArchive .archive-exhibit-name {
+  font-family: "Cormorant Garamond",serif; font-size: clamp(14px,2vw,19px);
+  letter-spacing: .08em; margin-top: 4px;
+}
+#bookArchive .archive-file-number {
+  margin-top: 11px; color: #755b48; font-size: 10px; letter-spacing: .15em;
+}
+#bookArchive .archive-record { position: relative; padding: clamp(18px,3vw,35px) 0 10px; }
+#bookArchive .archive-kicker { font-size: 10px; color: #823f46; letter-spacing: .22em; font-weight: 500; }
+#bookArchive h2 {
+  font-family: "Cormorant Garamond",serif; font-weight: 600;
+  color: #572334; font-size: clamp(34px,5vw,58px); line-height: 1;
+  margin: 12px 0;
+}
+#bookArchive .archive-deck { font-family: "Cormorant Garamond",serif; font-size: clamp(18px,2.5vw,25px); margin: 12px 0 22px; }
+#bookArchive .archive-description { font-size: 13px; line-height: 1.7; max-width: 710px; margin-bottom: 24px; }
+#bookArchive .archive-evidence-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; }
+#bookArchive .archive-evidence {
+  min-height: 188px; display: flex; flex-direction: column; align-items: flex-start;
+  text-align: left; padding: 22px; background: #f4e6cd;
+  border: 1px solid #a87b57; color: #4b302a;
+  box-shadow: 3px 5px 0 #b99b7659;
+}
+#bookArchive .archive-evidence-label { display: flex; gap: 10px; flex-wrap: wrap; font-size: 10px; letter-spacing: .15em; color: #7c4c4b; }
+#bookArchive .archive-seal { color: #7e3a3d; border: 1px solid currentColor; padding: 1px 5px; transform: rotate(-4deg); }
+#bookArchive .archive-evidence-title { font-family: "Cormorant Garamond",serif; font-size: clamp(23px,2.7vw,31px); margin: 18px 0 7px; }
+#bookArchive .archive-evidence-detail { display: none; font-size: 13px; line-height: 1.6; }
+#bookArchive .archive-evidence.unsealed .archive-evidence-detail { display: block; }
+#bookArchive .archive-evidence-prompt { font-size: 10px; letter-spacing: .14em; color: #8c4e4a; margin-top: auto; padding-top: 15px; }
+#bookArchive .archive-evidence:hover { border-color: #642a3a; }
+#bookArchive .archive-handwritten {
+  background: #f4e4c9; border: 1px solid #d3b28d;
+  padding: clamp(19px,3vw,32px); box-shadow: 2px 5px 10px #5d3b2522;
+}
+#bookArchive .archive-profile-note { margin-top: 25px; transform: rotate(-.3deg); }
+#bookArchive .archive-note-label { font: 10px "DM Sans",sans-serif; letter-spacing: .19em; color: #793c46; }
+#bookArchive .archive-handwritten p {
+  font-family: "Caveat",cursive; font-size: clamp(23px,3vw,31px);
+  line-height: 1.18; margin: 14px 0; color: #4d302c;
+}
+#bookArchive .archive-decision-grid { display: grid; grid-template-columns: 1.25fr .85fr; gap: 24px; align-items: start; }
+#bookArchive .archive-assessment { border: 1px solid #9b6f50; padding: 0 20px 12px; background: #f0dfc3; }
+#bookArchive .archive-assessment h3 {
+  margin: -1px -21px 10px; background: #612639; color: #f3d8aa;
+  padding: 13px 18px; font: 500 13px "DM Sans",sans-serif; letter-spacing: .13em;
+}
+#bookArchive .archive-checkrow { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; border-bottom: 1px solid #b89b7c; padding: 11px 0; font-family: "Cormorant Garamond",serif; font-size: clamp(17px,2.4vw,23px); }
+#bookArchive .archive-checkrow:last-child { border: 0; }
+#bookArchive .archive-checkrow span:last-child { font-size: 27px; color: #783341; }
+#bookArchive .archive-checkrow em { font: 25px "Caveat",cursive; color: #8b3b3c; white-space: nowrap; }
+#bookArchive .archive-decision-note { transform: rotate(1deg); }
+#bookArchive .archive-reveal-area { text-align: center; margin: 32px 0 10px; }
+#bookArchive .archive-reveal-button {
+  background: #612639; color: #f7e5c7; border: 1px solid #c5a46d;
+  padding: 15px 22px; font-size: 12px; letter-spacing: .18em;
+}
+#bookArchive .archive-reveal-button:hover { background: #79394b; }
+#bookArchive .archive-first-move { border-top: 1px solid #ad7e57; padding-top: 25px; }
+#bookArchive .archive-first-title { display: inline-block; padding: 12px 24px; background: #612639; border: 1px solid #bd9b6a; color: #f5e0b6; font-family: "Cormorant Garamond",serif; font-size: clamp(22px,3vw,30px); letter-spacing: .1em; }
+#bookArchive .archive-first-move p { font-family: "Cormorant Garamond",serif; font-size: 27px; margin: 15px; }
+#bookArchive .archive-first-move strong { color: #7b3440; font-style: italic; }
+#bookArchive .archive-stamp { display: inline-block; border: 3px double #95494b; border-radius: 50%; padding: 17px 12px; color: #95494b; font-weight: 500; font-size: 13px; letter-spacing: .08em; transform: rotate(-10deg); margin-bottom: 18px; }
+#bookArchive .archive-risk-stamp { color: #95494b; border: 2px solid #95494b; display: inline-block; padding: 8px 17px; font-size: 11px; letter-spacing: .1em; transform: rotate(-3deg); margin: 0 auto 24px; }
+#bookArchive .archive-final-note { margin: 0 auto; max-width: 680px; background: #f2d7ca; padding: 20px; font: clamp(25px,3vw,34px)/1.3 "Caveat",cursive; }
+#bookArchive .archive-footer { text-align: center; border-top: 1px solid #b28c67; padding-top: 19px; margin-top: 28px; font-size: 10px; letter-spacing: .18em; color: #795b46; }
+@media(max-width:650px) {
+  #bookArchive .archive-scroll { padding-top: 62px; }
+  #bookArchive .archive-paper { padding: 25px 22px; border-width: 4px; outline-offset: -11px; }
+  #bookArchive .archive-paper::before { inset: 9px; }
+  #bookArchive .archive-evidence-grid,#bookArchive .archive-decision-grid { grid-template-columns: 1fr; gap: 14px; }
+  #bookArchive .archive-evidence { min-height: 145px; }
+  #bookArchive .archive-handwritten p { font-size: 25px; }
+  #bookArchive .archive-checkrow { font-size: 18px; }
+  #bookArchive .archive-checkrow em { font-size: 21px; }
+  #bookExhibit .book-muzz-hotspot { left: 27%; top: 37%; width: 23%; height: 23%; }
+  #bookExhibit .book-checklist-hotspot { left: 51%; top: 37%; width: 23%; height: 23%; }
+  #bookExhibit .book-archive-hint { font-size: 8px; letter-spacing: .07em; bottom: 8%; }
+}
+@media(prefers-reduced-motion:reduce) {
+  #bookArchive,#bookExhibit { transition: none; }
+}
+
 </style>
 </head>
 
@@ -5290,274 +5435,103 @@ button {
   
 <!-- ==========================================
      EXHIBIT 01 — A CHANCE ENCOUNTER
+     Two archive records; the book remains behind glass.
 ========================================== -->
 
-<section id="bookExhibit" class="scene">
-
-  <div class="interactive-book">
-
-    <!-- SPREAD ONE: THE PROFILE -->
-
-    <div id="bookSpread1" class="book-spread active-spread">
-
-      <img
-        class="book-page-art"
-        src="gallery-1-book-pages-3-4.PNG"
-        alt="An antique book opened to Faris's profile">
-
-      <!-- LEFT PAGE -->
-
-      <div class="book-page-content book-left">
-
-        <div class="book-small-heading">
-          EXHIBIT A
-        </div>
-
-        <h2>A Rather<br>Interesting Profile</h2>
-
-        <div class="book-divider">✦</div>
-
-        <p class="book-detail">
-          <strong>Subject:</strong> Faris
-        </p>
-
-        <p class="book-detail">
-          <strong>Platform:</strong> Muzmatch
-        </p>
-
-        <p class="book-detail">
-          <strong>Date:</strong> 3 May 2024
-        </p>
-
-        <div class="book-observations">
-
-          <div>☑ Handsome</div>
-          <div>☑ Singaporean</div>
-          <div>☑ Living in the UK</div>
-          <div>☑ Apparently had a few things to say</div>
-
-        </div>
-
-        <p class="book-handwriting">
-          Okay, I admit it.<br>
-          You were quite handsome.
-        </p>
-
-        <p class="book-tiny-note">
-          Don't let it get to your head.
-        </p>
-
-      </div>
-
-      <!-- RIGHT PAGE -->
-
-      <div class="book-page-content book-right">
-
-        <div class="book-small-heading">
-          EXHIBIT B
-        </div>
-
-        <h2>The Evidence</h2>
-
-        <p class="book-instruction">
-          Two rather specific complaints were
-          discovered in the subject's profile.
-        </p>
-
-        <!-- FOLDED NOTE ONE -->
-
-        <button
-          class="book-folded-note"
-          id="complaint1"
-          onclick="openComplaint(1)">
-
-          <span class="folded-label">
-            COMPLAINT NO. 01 ✉
-          </span>
-
-          <span class="folded-content">
-            Why did women keep asking whether
-            he wanted a British passport when
-            he already had a Singapore passport?
-          </span>
-
-        </button>
-
-        <!-- FOLDED NOTE TWO -->
-
-        <button
-          class="book-folded-note"
-          id="complaint2"
-          onclick="openComplaint(2)">
-
-          <span class="folded-label">
-            COMPLAINT NO. 02 ✉
-          </span>
-
-          <span class="folded-content">
-            Why did people assume he was using
-            Google Translate just because
-            his English was good?
-          </span>
-
-        </button>
-
-        <p
-          id="profileComment"
-          class="book-handwriting book-hidden-comment">
-
-          And somehow, I found this amusing.
-
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <!-- SPREAD TWO: THE DECISION -->
-
-    <div id="bookSpread2" class="book-spread">
-
-      <img
-        class="book-page-art"
-        src="gallery-1-book-pages-5-6.PNG"
-        alt="An antique book opened to the final findings">
-
-      <!-- LEFT PAGE -->
-
-      <div class="book-page-content book-left">
-
-        <div class="book-small-heading">
-          THE DECISION
-        </div>
-
-        <h2>Who Made<br>the First Move?</h2>
-
-        <div class="book-divider">✦</div>
-
-        <p class="book-instruction">
-          Select your answer.
-        </p>
-
-        <div class="book-guess-options">
-
-          <button onclick="guessFirstMove('faris')">
-            ☐ Faris
-          </button>
-
-          <button onclick="guessFirstMove('nadhira')">
-            ☐ Nadhira
-          </button>
-
-        </div>
-
-        <p
-          id="bookGuessResponse"
-          class="book-handwriting book-guess-response">
-        </p>
-
-        <div
-          id="bookReasons"
-          class="book-reasons">
-
-          <div>☑ Found him handsome</div>
-          <div>☑ Found his profile amusing</div>
-          <div>☑ Decided to take a chance</div>
-
-        </div>
-
-      </div>
-
-      <!-- RIGHT PAGE -->
-
-      <div class="book-page-content book-right">
-
-        <div class="book-small-heading">
-          FINAL FINDINGS
-        </div>
-
-        <h2>The Confession</h2>
-
-        <div class="book-divider">✦</div>
-
-        <p class="book-detail">
-          <strong>Date:</strong> 3 May 2024
-        </p>
-
-        <p class="book-detail">
-          <strong>First move:</strong> Nadhira
-        </p>
-
-        <p class="book-detail">
-          <strong>Outcome:</strong> One message
-          that started everything.
-        </p>
-
-        <div
-          id="bookFinalNote"
-          class="book-final-note">
-
-          <p>
-            Imagine if I never<br>
-            messaged you first.
-          </p>
-
-          <p>
-            You're welcome, bb.
-          </p>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-<!-- BOOK NAVIGATION — FOLDED PAGE CORNERS -->
-
-<div class="book-navigation">
-
-  <button
-    id="bookPrevious"
-    class="book-page-corner corner-left"
-    type="button"
-    onclick="changeBookSpread(-1)"
-    aria-label="Turn to previous pages"
-    disabled>
-    <span class="corner-fold"></span>
+<section id="bookExhibit" class="scene" aria-label="Exhibit 1 close-up">
+  <img class="book-closeup-art" src="gallery-1-book-closeup.PNG"
+       alt="The Muzz book displayed behind glass in Gallery I">
+  <button class="book-archive-hotspot book-muzz-hotspot" type="button"
+          onclick="openBookArchive('profile')"
+          aria-label="Open archive: A Rather Interesting Profile"></button>
+  <button class="book-archive-hotspot book-checklist-hotspot" type="button"
+          onclick="openBookArchive('decision')"
+          aria-label="Open archive: Worth a Try?"></button>
+  <div class="book-archive-hint">TAP THE MUZZ LOGO OR THE CHECKLIST TO EXPLORE</div>
+  <button class="exhibit-back" type="button" onclick="closeBook()">
+    <span class="back-arrow">←</span> GALLERY I
   </button>
-
-  <span id="bookPageIndicator">
-    01 — 02
-  </span>
-
-  <button
-    id="bookNext"
-    class="book-page-corner corner-right"
-    type="button"
-    onclick="changeBookSpread(1)"
-    aria-label="Turn to next pages"
-    disabled>
-    <span class="corner-fold"></span>
-  </button>
-
-</div>
-
-  <!-- BACK TO GALLERY -->
-
-  <button
-    class="exhibit-back"
-    onclick="closeBook()">
-
-    <span class="back-arrow">←</span>
-    GALLERY I
-
-  </button>
-
 </section>
-  
+
+<!-- ARCHIVAL VIEWING SCREEN — FULL PAGE, NOT AN OVERLAY ON THE BOOK -->
+<section id="bookArchive" class="scene" aria-label="The Us Archive">
+  <button class="archive-back" type="button" onclick="closeBookArchive()">
+    <span aria-hidden="true">←</span> RETURN TO EXHIBIT
+  </button>
+  <div class="archive-scroll" id="archiveScroll">
+    <article class="archive-paper">
+      <header class="archive-letterhead">
+        <div class="archive-brand">✦ &nbsp; THE US ARCHIVE &nbsp; ✦</div>
+        <div class="archive-exhibit-name">EXHIBIT 1 — A CHANCE ENCOUNTER</div>
+        <div class="archive-file-number" id="archiveFileNumber">ARCHIVE NO. 001-A</div>
+      </header>
+
+      <div id="archiveProfile" class="archive-record">
+        <div class="archive-kicker">ARCHIVE 01 / PROFILE OBSERVATIONS</div>
+        <h2>A Rather Interesting Profile</h2>
+        <p class="archive-deck">Subject: Faris &nbsp;·&nbsp; Platform: Muzz &nbsp;·&nbsp; 3 May 2024</p>
+        <p class="archive-description">Two rather specific complaints were discovered in the subject's About section. Open both evidence records to see what caught my attention.</p>
+        <div class="archive-evidence-grid">
+          <button type="button" class="archive-evidence" id="archiveComplaint1"
+                  onclick="revealArchiveComplaint(1)" aria-expanded="false">
+            <span class="archive-evidence-label">EVIDENCE 01 <span class="archive-seal">SEALED</span></span>
+            <span class="archive-evidence-title">The British Passport</span>
+            <span class="archive-evidence-detail">Why did women keep asking whether he wanted a British passport when he already had a Singaporean passport?</span>
+            <span class="archive-evidence-prompt">TAP TO UNSEAL ↗</span>
+          </button>
+          <button type="button" class="archive-evidence" id="archiveComplaint2"
+                  onclick="revealArchiveComplaint(2)" aria-expanded="false">
+            <span class="archive-evidence-label">EVIDENCE 02 <span class="archive-seal">SEALED</span></span>
+            <span class="archive-evidence-title">Google Translate</span>
+            <span class="archive-evidence-detail">Why did people assume he used Google Translate just because his English was good?</span>
+            <span class="archive-evidence-prompt">TAP TO UNSEAL ↗</span>
+          </button>
+        </div>
+        <div class="archive-handwritten archive-profile-note" id="archiveProfileNote" hidden>
+          <span class="archive-note-label">A NOTE FROM NADHIRA</span>
+          <p>Okay, I thought you were cute. Handsome, even. But then I read your About section and found myself wanting to know more about you.</p>
+          <p>I mean, who puts complaints about British passports and Google Translate on their dating profile?? HAHAHA.</p>
+          <p>Somehow, instead of putting me off, it just made me even more intrigued. ♡</p>
+        </div>
+      </div>
+
+      <div id="archiveDecision" class="archive-record" hidden>
+        <div class="archive-kicker">ARCHIVE 02 / THE DECISION</div>
+        <h2>Worth a Try?</h2>
+        <p class="archive-deck">A record of the (slightly spontaneous) thought process before the first move.</p>
+        <div class="archive-decision-grid">
+          <div class="archive-assessment">
+            <h3>INITIAL ASSESSMENT</h3>
+            <div class="archive-checkrow"><span>Cute?</span><span>✓</span></div>
+            <div class="archive-checkrow"><span>Handsome?</span><span>✓</span></div>
+            <div class="archive-checkrow"><span>Interesting profile?</span><span>✓</span></div>
+            <div class="archive-checkrow"><span>Curious enough to message?</span><span>✓</span></div>
+            <div class="archive-checkrow"><span>Any idea where this would lead?</span><em>Absolutely not.</em></div>
+          </div>
+          <div class="archive-handwritten archive-decision-note">
+            <span class="archive-note-label">PERSONAL NOTE</span>
+            <p>I wasn't expecting anything really.</p>
+            <p>You seemed interesting, so I thought… why not?</p>
+            <p>Let's just see where this goes. ♡</p>
+          </div>
+        </div>
+        <div class="archive-reveal-area">
+          <button id="archiveRevealButton" class="archive-reveal-button" type="button"
+                  onclick="revealArchiveFirstMove()">REVEAL THE FIRST MOVE →</button>
+          <div id="archiveFirstMove" class="archive-first-move" hidden>
+            <div class="archive-stamp">APPROVED</div>
+            <div class="archive-first-title">THE FIRST MOVE</div>
+            <p>Made by: <strong>Nadhira</strong></p>
+            <div class="archive-risk-stamp">★ WORTH THE RISK ★</div>
+            <div class="archive-final-note">Imagine if I never messaged you first.<br>You're welcome, sayang. ♡</div>
+          </div>
+        </div>
+      </div>
+      <footer class="archive-footer">THE MUSEUM OF US &nbsp;·&nbsp; EST. 2024</footer>
+    </article>
+  </div>
+</section>
+
 <!-- ==========================================
      EXHIBIT 02 — THE FIRST DATE
 ========================================== -->
@@ -6128,251 +6102,53 @@ function returnToLobbyFrom1() {
 }
 
 /* ==========================================
-   EXHIBIT 01 — INTERACTIVE BOOK
+   EXHIBIT 01 — BOOK CLOSE-UP & ARCHIVES
 ========================================== */
-
-
-/* CURRENT BOOK STATE */
-
-let currentBookSpread = 1;
-
-let openedComplaints = new Set();
-
-let firstMoveCorrect = false;
-
-
-/* ==========================================
-   OPEN BOOK
-========================================== */
-
+const openedArchiveComplaints = new Set();
 function openBook() {
-
-  const gallery = document.getElementById(
-    "gallery1"
-  );
-
-  const book = document.getElementById(
-    "bookExhibit"
-  );
-
-  book.classList.add("active");
-
-  setTimeout(() => {
-
-    gallery.classList.remove("active");
-
-  }, 1000);
-
+  document.getElementById("gallery1").classList.remove("active");
+  document.getElementById("bookExhibit").classList.add("active");
 }
-
-
-/* ==========================================
-   CLOSE BOOK
-========================================== */
-
 function closeBook() {
-  document.getElementById("bookExhibit")
-    .classList.remove("active");
-
-  document.getElementById("gallery1")
-    .classList.add("active");
+  document.getElementById("bookArchive").classList.remove("active");
+  document.getElementById("bookExhibit").classList.remove("active");
+  document.getElementById("gallery1").classList.add("active");
 }
-
-/* ==========================================
-   TURN BOOK PAGES
-========================================== */
-
-function changeBookSpread(direction) {
-
-  const nextSpread = currentBookSpread + direction;
-
-  if (nextSpread < 1 || nextSpread > 2) {
-    return;
-  }
-
-  const current = document.getElementById(
-    "bookSpread" + currentBookSpread
-  );
-
-  current.classList.remove("active-spread");
-
-  currentBookSpread = nextSpread;
-
-  const next = document.getElementById(
-    "bookSpread" + currentBookSpread
-  );
-
-  next.classList.add("active-spread");
-
-  updateBookNavigation();
-
+function openBookArchive(which) {
+  const profile = which === "profile";
+  document.getElementById("archiveProfile").hidden = !profile;
+  document.getElementById("archiveDecision").hidden = profile;
+  document.getElementById("archiveFileNumber").textContent = profile ? "ARCHIVE NO. 001-A" : "ARCHIVE NO. 001-B";
+  document.getElementById("archiveScroll").scrollTop = 0;
+  document.getElementById("bookExhibit").classList.remove("active");
+  document.getElementById("bookArchive").classList.add("active");
 }
-
-
-/* ==========================================
-   UPDATE BOOK NAVIGATION
-========================================== */
-
-function updateBookNavigation() {
-
-  const previous = document.getElementById("bookPrevious");
-  const next = document.getElementById("bookNext");
-  const indicator = document.getElementById("bookPageIndicator");
-
-  // Previous page is unavailable on the first spread.
-
-  previous.disabled = currentBookSpread === 1;
-
-  if (currentBookSpread === 1) {
-
-    indicator.textContent = "01 — 02";
-
-    // Both complaint notes must be opened first.
-
-    next.disabled = openedComplaints.size < 2;
-
-  } else {
-
-    indicator.textContent = "03 — 04";
-
-    // The second spread is the final spread.
-
-    next.disabled = true;
-
-  }
-
+function closeBookArchive() {
+  document.getElementById("bookArchive").classList.remove("active");
+  document.getElementById("bookExhibit").classList.add("active");
 }
-
-/* ==========================================
-   OPEN FOLDED COMPLAINT NOTES
-========================================== */
-
-function openComplaint(number) {
-
-  const note = document.getElementById(
-    "complaint" + number
-  );
-
-  if (!note) {
-    return;
+function revealArchiveComplaint(number) {
+  openedArchiveComplaints.add(number);
+  const evidence = document.getElementById("archiveComplaint" + number);
+  evidence.classList.add("unsealed");
+  evidence.setAttribute("aria-expanded", "true");
+  evidence.querySelector(".archive-seal").textContent = "UNSEALED";
+  evidence.querySelector(".archive-evidence-prompt").textContent = "EVIDENCE OPENED";
+  if (openedArchiveComplaints.size === 2) {
+    document.getElementById("archiveProfileNote").hidden = false;
   }
-
-  if (openedComplaints.has(number)) {
-    return;
-  }
-
-  openedComplaints.add(number);
-
-  note.classList.add("opened");
-
-  /* BOTH NOTES HAVE BEEN OPENED */
-
-  if (openedComplaints.size === 2) {
-
-    setTimeout(() => {
-
-      const comment = document.getElementById(
-        "profileComment"
-      );
-
-      comment.classList.add("visible");
-
-      updateBookNavigation();
-
-    }, 600);
-
-  }
-
 }
-
-
-/* ==========================================
-   GUESS WHO MESSAGED FIRST
-========================================== */
-
-function guessFirstMove(person) {
-
-  const response = document.getElementById(
-    "bookGuessResponse"
-  );
-
-  /* WRONG ANSWER */
-
-  if (person === "faris") {
-
-    response.textContent =
-      "HAHAHAHA nice try, bb.";
-
-    return;
-
-  }
-
-  /* CORRECT ANSWER */
-
-  firstMoveCorrect = true;
-
-  response.textContent =
-    "Correct. Someone had to do it.";
-
-  /* REVEAL REASONS */
-
-  const reasons = document.getElementById(
-    "bookReasons"
-  );
-
-  reasons.classList.add("visible");
-
-  /* REVEAL FINAL CONFESSION */
-
-  setTimeout(() => {
-
-    const finalNote = document.getElementById(
-      "bookFinalNote"
-    );
-
-    finalNote.classList.add("visible");
-
-  }, 900);
-
-
-  /* ==========================================
-     SAVE EXHIBIT COMPLETION
-  ========================================== */
-
-  localStorage.setItem(
-    "museumFirstEntryComplete",
-    "true"
-  );
-
-
-  /* ==========================================
-     REVEAL GALLERY PORTRAIT NAMES
-  ========================================== */
-
-  setTimeout(() => {
-
-    const portraitHer = document.getElementById(
-      "portraitHer"
-    );
-
-    const portraitHim = document.getElementById(
-      "portraitHim"
-    );
-
-    if (portraitHer) {
-      portraitHer.classList.add("revealed");
-    }
-
-    if (portraitHim) {
-      portraitHim.classList.add("revealed");
-    }
-
-  }, 1800);
-
-  updateBookNavigation();
-
+function revealArchiveFirstMove() {
+  document.getElementById("archiveRevealButton").hidden = true;
+  const reveal = document.getElementById("archiveFirstMove");
+  reveal.hidden = false;
+  reveal.scrollIntoView({behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "nearest"});
+  try { localStorage.setItem("museumFirstEntryComplete", "true"); } catch (e) {}
+  ["portraitHer", "portraitHim"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.add("revealed");
+  });
 }
-
 
 /* ==========================================
    RESTORE COMPLETED EXHIBIT
