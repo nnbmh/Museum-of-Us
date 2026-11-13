@@ -5117,6 +5117,49 @@ button {
   outline-offset: 2px;
 }
 
+
+/* Exhibit 2: align UI with the uploaded watch close-up.
+   All screen overlays are HTML, not changes to the artwork. */
+#watchExhibit .watch-exhibit-art { object-fit: fill; }
+#watchExhibit .watch-date-screen {
+  left: 46.35% !important; top: 28.25% !important;
+  width: 7.65% !important; height: 15.75% !important;
+  z-index: 5 !important; border-radius: 16% !important;
+  font-size: clamp(9px, 1.1vw, 17px) !important;
+}
+#watchExhibit .watch-notification {
+  inset: auto !important;
+  left: 46.45% !important; top: 30.15% !important;
+  width: 7.45% !important; height: 11.5% !important;
+  z-index: 8 !important;
+  display: flex !important; flex-direction: column;
+  align-items: center; justify-content: center; gap: 3px;
+  padding: 2px; box-sizing: border-box;
+  border: 1px solid rgba(246,234,216,.26);
+  border-radius: 13%;
+  background: linear-gradient(155deg, #30333a, #171a20);
+  color: #fff; text-align: center;
+  font-family: "DM Sans", sans-serif;
+  opacity: 0; pointer-events: none;
+  transition: opacity .3s ease;
+}
+#watchExhibit .watch-notification.visible { opacity: 1; }
+#watchExhibit .watch-okc-title {
+  display: block; font-size: clamp(10px, 1.12vw, 17px);
+  font-weight: 700; letter-spacing: .02em; line-height: 1.05;
+}
+#watchExhibit .watch-okc-subtitle {
+  display: block; font-size: clamp(6px, .68vw, 11px); line-height: 1.1;
+}
+#watchExhibit .watch-screen-hotspot {
+  left: 46.1% !important; top: 27.85% !important;
+  width: 8.2% !important; height: 16.6% !important;
+  border-radius: 12%; touch-action: manipulation;
+}
+@media (prefers-reduced-motion: reduce) {
+  #watchExhibit .watch-notification { transition: none; }
+}
+
 </style>
 </head>
 
@@ -5570,17 +5613,15 @@ button {
     alt="An Apple Watch inside a museum display case">
 
   <!-- Watch face wakes up with the date of our first date. -->
-  <div id="watchDateScreen" class="watch-date-screen" aria-label="8 May 2024">
-    <span>8 MAY</span><span>2024</span>
+  <div id="watchDateScreen" class="watch-date-screen" aria-label="6 May 2024">
+    <span>6 MAY</span><span>2024</span>
   </div>
 
-  <!-- Existing, precisely aligned OKC logo overlay. -->
-  <img
-    id="watchNotification"
-    class="watch-notification"
-    src="watch-okc-logo-overlay.png?v=2"
-    alt=""
-    aria-hidden="true">
+  <!-- A real HTML notification, aligned to the current watch face. -->
+  <div id="watchNotification" class="watch-notification" aria-hidden="true">
+    <span class="watch-okc-title">OKC</span>
+    <span class="watch-okc-subtitle">Notification</span>
+  </div>
 
   <!-- Enabled only when the OKC notification arrives. -->
   <button
@@ -5603,7 +5644,7 @@ button {
     <div class="watch-memory-card">
       <p class="watch-memory-kicker">EXHIBIT 2 · OUR FIRST DATE</p>
       <h2 id="watchMemoryTitle">The Things I Remember</h2>
-      <p class="watch-memory-date">8 May 2024 · Good Bites</p>
+      <p class="watch-memory-date">6 May 2024 · Good Bites</p>
 
       <div class="watch-memory-copy">
         <p>HAHAHA I still can’t believe I actually did that fat gesture when I first saw you 😭 You literally told me you’d gained weight and somehow my brain thought it was a good idea to demonstrate it HAHAHA.</p>
