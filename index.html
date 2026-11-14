@@ -5370,14 +5370,28 @@ button {
   50% { transform: translate(calc(-13% + 1px),14.8%); }
   75% { transform: translate(calc(-13% - 1px),14.8%); }
 }
-/* The original hint was ivory on a pale marble floor and nearly invisible. */
+/* Match the gallery's text-only prompts while staying legible on marble. */
 #watchExhibit .watch-hint {
-  bottom: 4.5%; z-index: 20; opacity: 1;
-  padding: 9px 16px;
-  color: #fff0d6; background: rgba(25,12,13,.83);
-  border: 1px solid rgba(225,192,146,.35);
-  text-shadow: none; font-size: clamp(11px,1.3vw,14px);
-  letter-spacing: .1em;
+  bottom: 4.5%;
+  z-index: 20;
+  width: max-content;
+  max-width: 90%;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #542a30;
+  font: 500 clamp(10px,1.2vw,13px) "DM Sans",sans-serif;
+  letter-spacing: .2em;
+  line-height: 1.4;
+  text-shadow: 0 1px 3px rgba(255,247,230,.95), 0 0 12px rgba(255,247,230,.9);
+  opacity: 1;
+}
+#watchExhibit .watch-hint.hidden,
+#watchExhibit .watch-hint:empty {
+  opacity: 0;
+  visibility: hidden;
 }
 #watchExhibit .exhibit-back {
   top: 3%; left: 3%; color: #fff0d6;
@@ -5465,8 +5479,8 @@ button {
   display:block;object-fit:fill;object-position:center;
   background:transparent;border:0;box-shadow:none;
   z-index:6;pointer-events:none;
-  /* Smaller logo, nudged left and down to sit within the watch screen. */
-  transform:translate(-14%,13.8%) scale(.86) !important;
+  /* Align the smaller logo with the watch face in the iPad framing. */
+  transform:translate(-14.2%,13.1%) scale(.86) !important;
   opacity:0;transition:opacity .35s ease;
 }
 #watchExhibit .watch-notification.watch-okc-original.visible { opacity:1; }
