@@ -5376,10 +5376,87 @@ button {
   #watchExhibit .watch-notification.vibrating { animation: none; }
 }
 
+/* Gallery I — unified camera transition and museum navigation */
+#museumSceneVeil {
+  position:fixed;inset:0;z-index:1000000;pointer-events:none;
+  background:#160d10;opacity:0;visibility:hidden;
+  transition:opacity .75s ease,visibility 0s linear .75s;
+}
+#museumSceneVeil.visible {
+  opacity:1;visibility:visible;
+  transition:opacity .75s ease,visibility 0s;
+}
+#gallery1,#bookArchive,#watchExhibit,#conversationExhibit {
+  transition:opacity .35s ease,visibility .35s;
+}
+#bookArchive .archive-back,
+#bookExhibit .exhibit-back,
+#watchExhibit .exhibit-back,
+#conversationExhibit .exhibit-back,
+#gallery2Exhibit1 .g2-back,
+#gallery2Exhibit2 .g2-back {
+  position:absolute !important;
+  top:max(16px,env(safe-area-inset-top)) !important;
+  left:max(18px,env(safe-area-inset-left)) !important;
+  z-index:99999 !important;display:block !important;
+  visibility:visible !important;opacity:1 !important;
+  pointer-events:auto !important;
+  padding:10px 12px !important;
+  background:rgba(25,12,17,.42) !important;
+  border:1px solid rgba(225,192,146,.22) !important;
+  border-radius:3px !important;box-shadow:none !important;
+  color:#fff0da !important;
+  font:500 clamp(14px,1.65vw,18px) "Cormorant Garamond",Georgia,serif !important;
+  letter-spacing:.08em !important;line-height:1.2 !important;
+  text-shadow:0 2px 9px #14080b !important;cursor:pointer;
+  transition:background .2s ease,color .2s ease !important;
+}
+#bookArchive .archive-back:hover,
+#bookExhibit .exhibit-back:hover,
+#watchExhibit .exhibit-back:hover,
+#conversationExhibit .exhibit-back:hover,
+#gallery2Exhibit1 .g2-back:hover,
+#gallery2Exhibit2 .g2-back:hover {background:rgba(48,22,31,.75) !important;color:#fff !important}
+#bookArchive .archive-back:focus-visible,
+#bookExhibit .exhibit-back:focus-visible,
+#watchExhibit .exhibit-back:focus-visible,
+#conversationExhibit .exhibit-back:focus-visible,
+#gallery2Exhibit1 .g2-back:focus-visible,
+#gallery2Exhibit2 .g2-back:focus-visible {outline:2px solid #f6d7a6;outline-offset:3px}
+/* The notification is a tiny face-anchored element, not a shifted full-screen image. */
+#watchExhibit .watch-notification.watch-okc-badge {
+  position:absolute;inset:auto;left:29.95%;top:48.75%;
+  width:4.1%;height:7.2%;z-index:6;
+  display:flex;align-items:center;justify-content:center;
+  transform:none !important;object-fit:initial;
+  background:#151419;border:1px solid #363238;border-radius:18%;
+  box-shadow:inset 0 0 6px #0008;
+  opacity:0;pointer-events:none;transition:opacity .35s ease;
+}
+#watchExhibit .watch-notification.watch-okc-badge.visible{opacity:1}
+#watchExhibit .watch-okc-badge span{
+  display:block;padding:1px 3px;border-radius:4px;
+  color:#fff;background:#bc3680;
+  font:700 clamp(7px,.9vw,12px)/1.15 "DM Sans",Arial,sans-serif;
+  letter-spacing:-.03em;text-shadow:none;
+}
+#watchExhibit .watch-notification.watch-okc-badge.vibrating{animation:watchBadgeBuzz .35s ease}
+@keyframes watchBadgeBuzz{
+  0%,100%{translate:0 0}25%{translate:-1px 0}50%{translate:1px 0}75%{translate:-1px 0}
+}
+#watchExhibit .watch-memory-return{
+  font:500 17px "Cormorant Garamond",Georgia,serif;letter-spacing:.08em
+}
+@media(prefers-reduced-motion:reduce){
+  #museumSceneVeil,#gallery1,#bookArchive,#watchExhibit,#conversationExhibit{transition:none !important}
+  #watchExhibit .watch-notification.watch-okc-badge.vibrating{animation:none !important}
+}
+
 </style>
 </head>
 
 <body>
+<div id="museumSceneVeil" aria-hidden="true"></div>
 
 <!-- ENTRANCE -->
 
@@ -5662,9 +5739,8 @@ button {
     <img class="watch-exhibit-art" src="gallery-1.PNG"
          alt="Gallery I's first-date display, with the entire glass case and pedestal visible">
 
-    <!-- The transparent OKC logo artwork is aligned to the watch face. -->
-    <img id="watchNotification" class="watch-notification"
-         src="watch-okc-logo-overlay.png?v=2" alt="" aria-hidden="true">
+    <!-- OKC badge is anchored directly to the watch face, not a full-screen PNG. -->
+    <div id="watchNotification" class="watch-notification watch-okc-badge" aria-hidden="true"><span>okc</span></div>
 
     <button id="watchNotificationTap" class="watch-screen-hotspot"
             onclick="openWatchMemory()"
@@ -5693,7 +5769,7 @@ button {
       </div>
 
       <button class="watch-memory-return" onclick="closeWatch()">
-        RETURN TO GALLERY I →
+        ← GALLERY I
       </button>
     </div>
   </div>
@@ -6168,7 +6244,7 @@ function returnToLobbyFrom1() {
 }
 
 /* GALLERY I — CINEMATIC ZOOM INTO THE EXISTING ROOM ARTWORK */
-let g1ZoomTimer = null, g1DissolveTimer = null, g1ZoomLocked = false;
+let g1ZoomTimer = null, g1DissolveTimer = null, g1RevealTimer = null, g1ZoomLocked = false;
 function resetGallery1Zoom() {
   clearTimeout(g1ZoomTimer);
   clearTimeout(g1DissolveTimer);
@@ -6177,19 +6253,27 @@ function resetGallery1Zoom() {
 }
 function startGallery1ExhibitZoom(exhibit) {
   const gallery = document.getElementById("gallery1");
+  const veil = document.getElementById("museumSceneVeil");
   if (!gallery.classList.contains("active") || g1ZoomLocked) return;
   if (!["book","watch","conversation"].includes(exhibit)) return;
   g1ZoomLocked = true;
+  clearTimeout(g1RevealTimer);
   gallery.classList.add("g1-zooming","g1-zoom-" + exhibit);
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  g1DissolveTimer = setTimeout(() => gallery.classList.add("g1-dissolving"), reduced ? 0 : 680);
+  // Zoom first, then fade the full viewport to dark.
+  g1DissolveTimer = setTimeout(() => {
+    gallery.classList.add("g1-dissolving");
+    veil.classList.add("visible");
+  }, reduced ? 0 : 670);
   g1ZoomTimer = setTimeout(() => {
+    // Swap while hidden: no translucent archive over the gallery image.
     gallery.classList.remove("active");
     if (exhibit === "book") openBookArchive("profile");
     if (exhibit === "watch") enterWatchExhibit();
     if (exhibit === "conversation") enterConversationExhibit();
     resetGallery1Zoom();
-  }, reduced ? 80 : 1550);
+    g1RevealTimer = setTimeout(() => veil.classList.remove("visible"), reduced ? 0 : 450);
+  }, reduced ? 60 : 1650);
 }
 
 /* ==========================================
