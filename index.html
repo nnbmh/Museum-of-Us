@@ -5662,10 +5662,6 @@ button {
     <img class="watch-exhibit-art" src="gallery-1.PNG"
          alt="Gallery I's first-date display, with the entire glass case and pedestal visible">
 
-    <div id="watchDateScreen" class="watch-date-screen" aria-label="8 May 2024">
-      <span>8 MAY</span><span>2024</span>
-    </div>
-
     <!-- The transparent OKC logo artwork is aligned to the watch face. -->
     <img id="watchNotification" class="watch-notification"
          src="watch-okc-logo-overlay.png?v=2" alt="" aria-hidden="true">
@@ -5687,7 +5683,7 @@ button {
     <div class="watch-memory-card">
       <p class="watch-memory-kicker">EXHIBIT 2 · OUR FIRST DATE</p>
       <h2 id="watchMemoryTitle">The Things I Remember</h2>
-      <p class="watch-memory-date">8 May 2024 · Good Bites</p>
+      <p class="watch-memory-date">6 May 2024 · Good Bites</p>
 
       <div class="watch-memory-copy">
         <p>HAHAHA I still can’t believe I actually did that fat gesture when I first saw you 😭 You literally told me you’d gained weight and somehow my brain thought it was a good idea to demonstrate it HAHAHA.</p>
@@ -6274,24 +6270,20 @@ try {
    EXHIBIT 02 — WATCH / FIRST DATE MEMORY
 ========================================== */
 
-let watchDateTimer = null;
 let watchNotificationTimer = null;
 let watchEntranceTimer = null;
 
 function resetWatchSequence() {
-  clearTimeout(watchDateTimer);
   clearTimeout(watchNotificationTimer);
   clearTimeout(watchEntranceTimer);
 
   const watch = document.getElementById("watchExhibit");
   const notification = document.getElementById("watchNotification");
-  const date = document.getElementById("watchDateScreen");
   const panel = document.getElementById("watchMemoryPanel");
   const tap = document.getElementById("watchNotificationTap");
   const hint = document.getElementById("watchHint");
 
   watch.classList.remove("story-open");
-  date.classList.remove("visible");
   notification.classList.remove("visible", "vibrating");
   panel.classList.remove("visible");
   panel.setAttribute("aria-hidden", "true");
@@ -6305,11 +6297,7 @@ function enterWatchExhibit() {
   const watch = document.getElementById("watchExhibit");
   resetWatchSequence();
   watch.classList.add("active");
-  // The watch wakes, then the unexpected OKC notification arrives.
-  watchDateTimer = setTimeout(() => {
-    document.getElementById("watchDateScreen").classList.add("visible");
-  }, 900);
-
+  // The OKC notification appears directly; no date overlay.
   watchNotificationTimer = setTimeout(() => {
     const notification = document.getElementById("watchNotification");
     notification.classList.add("visible", "vibrating");
@@ -6318,7 +6306,7 @@ function enterWatchExhibit() {
     hint.textContent = "✧ TAP THE OKC NOTIFICATION ✧";
     hint.classList.remove("hidden");
     setTimeout(() => notification.classList.remove("vibrating"), 400);
-  }, 2800);
+  }, 1400);
 }
 
 function openWatchMemory() {
