@@ -5271,7 +5271,7 @@ button {
 #gallery1.g1-zoom-conversation .gallery1-art{transform:scale(2.15) translate(-20%,2%)}
 #gallery1 .g1-zoom-dissolve{position:absolute;inset:0;z-index:85;pointer-events:none;opacity:0;background:radial-gradient(ellipse at center,#27130e24 0%,#190e11b5 65%,#0d0809fa 100%);transition:opacity .75s ease}
 #gallery1.g1-dissolving .g1-zoom-dissolve{opacity:1}
-#gallery1.g1-zooming button,#gallery1.g1-zooming .book-sparkles,#gallery1.g1-zooming .gallery-hint,#gallery1.g1-zooming .portrait-reveal,#gallery1.g1-zooming .gallery1-label{pointer-events:none!important;opacity:0!important}
+#gallery1.g1-zooming button{pointer-events:none!important}
 /* Exhibit 1: archive records immediately after zoom, with two tabs */
 #bookArchive .archive-tabs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
 #bookArchive .archive-tab{background:#f6e8d0;color:#63313a;border:1px solid #ad8058;padding:15px 10px;font:500 clamp(11px,1.3vw,14px) "DM Sans",sans-serif;text-align:center}
@@ -5376,18 +5376,39 @@ button {
   #watchExhibit .watch-notification.vibrating { animation: none; }
 }
 
-/* Gallery I — unified camera transition and museum navigation */
-#museumSceneVeil {
-  position:fixed;inset:0;z-index:1000000;pointer-events:none;
-  background:#160d10;opacity:0;visibility:hidden;
-  transition:opacity .75s ease,visibility 0s linear .75s;
+/* Gallery I uses the SAME camera movement and radial dissolve as Gallery II.
+   Do not shorten scene fades or cover the transition with an opaque veil. */
+#gallery1 .gallery1-art {
+  transition: transform 1.65s cubic-bezier(.2,.65,.2,1), filter 1.65s ease;
+  will-change: transform;
 }
-#museumSceneVeil.visible {
-  opacity:1;visibility:visible;
-  transition:opacity .75s ease,visibility 0s;
+#gallery1 .g1-zoom-dissolve {
+  z-index: 40;
+  background: radial-gradient(ellipse at center,
+    rgba(35,20,15,.12) 0%,
+    rgba(20,12,13,.65) 65%,
+    rgba(12,8,9,.95) 100%);
+  transition: opacity .85s ease;
 }
-#gallery1,#bookArchive,#watchExhibit,#conversationExhibit {
-  transition:opacity .35s ease,visibility .35s;
+#gallery1.g1-zooming .gallery1-art { filter:brightness(1.12); }
+#gallery1.g1-zoom-watch .gallery1-art { transform:scale(1.72) translate(18%,-10%); }
+#gallery1.g1-zoom-book .gallery1-art { transform:scale(1.72) translate(0%,-10%); }
+#gallery1.g1-zoom-conversation .gallery1-art { transform:scale(1.72) translate(-18%,-10%); }
+/* Let the controls ease away rather than abruptly disappearing on tap. */
+#gallery1 .gallery-hint,
+#gallery1 .gallery-next-plaque,
+#gallery1 .gallery1-label,
+#gallery1 .book-sparkles,
+#gallery1 .portrait-reveal {
+  transition: opacity .35s ease;
+}
+#gallery1.g1-zooming .gallery-hint,
+#gallery1.g1-zooming .gallery-next-plaque,
+#gallery1.g1-zooming .gallery1-label,
+#gallery1.g1-zooming .book-sparkles,
+#gallery1.g1-zooming .portrait-reveal {
+  opacity:0;
+  pointer-events:none;
 }
 #bookArchive .archive-back,
 #bookExhibit .exhibit-back,
@@ -5448,7 +5469,7 @@ button {
   font:500 17px "Cormorant Garamond",Georgia,serif;letter-spacing:.08em
 }
 @media(prefers-reduced-motion:reduce){
-  #museumSceneVeil,#gallery1,#bookArchive,#watchExhibit,#conversationExhibit{transition:none !important}
+  #gallery1 .gallery1-art,#gallery1 .g1-zoom-dissolve{transition:none !important}
   #watchExhibit .watch-notification.watch-okc-badge.vibrating{animation:none !important}
 }
 
@@ -5456,7 +5477,6 @@ button {
 </head>
 
 <body>
-<div id="museumSceneVeil" aria-hidden="true"></div>
 
 <!-- ENTRANCE -->
 
@@ -6244,35 +6264,37 @@ function returnToLobbyFrom1() {
 }
 
 /* GALLERY I — CINEMATIC ZOOM INTO THE EXISTING ROOM ARTWORK */
-let g1ZoomTimer = null, g1DissolveTimer = null, g1RevealTimer = null, g1ZoomLocked = false;
+let g1ZoomTimer = null, g1DissolveTimer = null, g1ZoomLocked = false;
 function resetGallery1Zoom() {
   clearTimeout(g1ZoomTimer);
   clearTimeout(g1DissolveTimer);
-  document.getElementById("gallery1").classList.remove("g1-zooming","g1-dissolving","g1-zoom-watch","g1-zoom-book","g1-zoom-conversation");
+  document.getElementById("gallery1").classList.remove(
+    "g1-zooming","g1-dissolving","g1-zoom-watch","g1-zoom-book","g1-zoom-conversation"
+  );
   g1ZoomLocked = false;
 }
 function startGallery1ExhibitZoom(exhibit) {
   const gallery = document.getElementById("gallery1");
-  const veil = document.getElementById("museumSceneVeil");
   if (!gallery.classList.contains("active") || g1ZoomLocked) return;
   if (!["book","watch","conversation"].includes(exhibit)) return;
   g1ZoomLocked = true;
-  clearTimeout(g1RevealTimer);
-  gallery.classList.add("g1-zooming","g1-zoom-" + exhibit);
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  // Zoom first, then fade the full viewport to dark.
+  // Same easing, dissolve delay and scene timing as enterGallery2Display().
+  gallery.classList.add("g1-zooming","g1-zoom-" + exhibit);
   g1DissolveTimer = setTimeout(() => {
-    gallery.classList.add("g1-dissolving");
-    veil.classList.add("visible");
-  }, reduced ? 0 : 670);
+    if (gallery.classList.contains("g1-zooming")) gallery.classList.add("g1-dissolving");
+  }, reduced ? 0 : 650);
   g1ZoomTimer = setTimeout(() => {
-    // Swap while hidden: no translucent archive over the gallery image.
+    if (exhibit === "book") {
+      // Land on the actual glass-case close-up, just as Gallery II lands on its exhibit.
+      document.getElementById("bookExhibit").classList.add("active");
+    } else if (exhibit === "watch") {
+      enterWatchExhibit();
+    } else {
+      enterConversationExhibit();
+    }
     gallery.classList.remove("active");
-    if (exhibit === "book") openBookArchive("profile");
-    if (exhibit === "watch") enterWatchExhibit();
-    if (exhibit === "conversation") enterConversationExhibit();
     resetGallery1Zoom();
-    g1RevealTimer = setTimeout(() => veil.classList.remove("visible"), reduced ? 0 : 450);
   }, reduced ? 60 : 1650);
 }
 
