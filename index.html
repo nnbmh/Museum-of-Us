@@ -5358,6 +5358,20 @@ button {
   50% { transform: translate(calc(-13% + 1px),14.8%); }
   75% { transform: translate(calc(-13% - 1px),14.8%); }
 }
+/* The original hint was ivory on a pale marble floor and nearly invisible. */
+#watchExhibit .watch-hint {
+  bottom: 4.5%; z-index: 20; opacity: 1;
+  padding: 9px 16px;
+  color: #fff0d6; background: rgba(25,12,13,.83);
+  border: 1px solid rgba(225,192,146,.35);
+  text-shadow: none; font-size: clamp(11px,1.3vw,14px);
+  letter-spacing: .1em;
+}
+#watchExhibit .exhibit-back {
+  top: 3%; left: 3%; color: #fff0d6;
+  text-shadow: 0 2px 8px #130708, 0 1px 3px #130708;
+}
+#watchExhibit .exhibit-back:hover { color: #f4d3a4; }
 @media (prefers-reduced-motion: reduce) {
   #watchExhibit .watch-notification.vibrating { animation: none; }
 }
