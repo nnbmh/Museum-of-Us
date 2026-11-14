@@ -5300,6 +5300,68 @@ button {
 @media(max-width:650px){#bookArchive .archive-tabs{grid-template-columns:1fr}#conversationExhibit .conversation-stars{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}#conversationExhibit .conversation-star{min-height:132px;padding:15px 8px}#conversationExhibit .conversation-archive-scroll{padding-top:70px}}
 @media(prefers-reduced-motion:reduce){#gallery1 .gallery1-art,#gallery1 .g1-zoom-dissolve{transition:none!important}}
 
+/* ==========================================
+   CAMERA FRAMING CORRECTIONS — 14 NOV 2026
+   Keep full glass displays AND pedestal plaques in frame.
+========================================== */
+#gallery1.g1-zoom-watch .gallery1-art {
+  transform: scale(1.72) translate(18%, -10%);
+}
+#gallery1.g1-zoom-book .gallery1-art {
+  transform: scale(1.72) translate(0%, -10%);
+}
+#gallery1.g1-zoom-conversation .gallery1-art {
+  transform: scale(1.72) translate(-18%, -10%);
+}
+#gallery2Room.g2-zoom-one .g2-room-art {
+  transform: scale(1.72) translate(17%, -10%);
+}
+#gallery2Room.g2-zoom-two .g2-room-art {
+  transform: scale(1.72) translate(-17%, -10%);
+}
+/* The watch scene uses the SAME gallery image, zoom and framing. */
+#watchExhibit { background: #160c0b; }
+#watchExhibit .g1-watch-camera {
+  position: absolute; inset: 0; overflow: visible;
+  transform-origin: center;
+  transform: scale(1.72) translate(18%, -10%);
+}
+#watchExhibit .watch-exhibit-art {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: fill; object-position: center;
+  animation: none !important;
+}
+/* Coordinates are relative to the unzoomed Gallery I artwork,
+   so the watch face and its overlays move together as one camera layer. */
+#watchExhibit .watch-date-screen {
+  left: 29.95%; top: 48.75%; width: 4.1%; height: 7.2%;
+  border-radius: 20%; gap: 1px;
+  font-size: clamp(6px,.9vw,10px);
+  box-shadow: inset 0 0 6px #0009;
+}
+#watchExhibit .watch-screen-hotspot {
+  left: 29.6% !important; top: 48.4% !important;
+  width: 4.8% !important; height: 8.0% !important;
+}
+/* Original transparent PNG places the logo at 45%,38%.
+   Move its centre to the actual watch face at 32%,53%. */
+#watchExhibit .watch-notification {
+  object-fit: fill; transform: translate(-13%, 14.8%);
+  transition: opacity .25s ease;
+}
+#watchExhibit .watch-notification.vibrating {
+  animation: g1AlignedWatchBuzz .35s ease;
+}
+@keyframes g1AlignedWatchBuzz {
+  0%,100% { transform: translate(-13%,14.8%); }
+  25% { transform: translate(calc(-13% - 1px),14.8%); }
+  50% { transform: translate(calc(-13% + 1px),14.8%); }
+  75% { transform: translate(calc(-13% - 1px),14.8%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #watchExhibit .watch-notification.vibrating { animation: none; }
+}
+
 </style>
 </head>
 
@@ -5580,33 +5642,24 @@ button {
 
 <section id="watchExhibit" class="scene">
 
-  <!-- Original close-up artwork: no image assets changed. -->
-  <img
-    class="watch-exhibit-art"
-    src="gallery-1-watch-asleep.PNG"
-    alt="An Apple Watch inside a museum display case">
+  <!-- Same Gallery I artwork and identical camera framing as the zoom.
+       This avoids the jump to a separately rendered exhibit close-up. -->
+  <div class="g1-watch-camera">
+    <img class="watch-exhibit-art" src="gallery-1.PNG"
+         alt="Gallery I's first-date display, with the entire glass case and pedestal visible">
 
-  <!-- Watch face wakes up with the date of our first date. -->
-  <div id="watchDateScreen" class="watch-date-screen" aria-label="8 May 2024">
-    <span>8 MAY</span><span>2024</span>
+    <div id="watchDateScreen" class="watch-date-screen" aria-label="8 May 2024">
+      <span>8 MAY</span><span>2024</span>
+    </div>
+
+    <!-- The transparent OKC logo artwork is aligned to the watch face. -->
+    <img id="watchNotification" class="watch-notification"
+         src="watch-okc-logo-overlay.png?v=2" alt="" aria-hidden="true">
+
+    <button id="watchNotificationTap" class="watch-screen-hotspot"
+            onclick="openWatchMemory()"
+            aria-label="Read the memory behind the OKC notification" disabled></button>
   </div>
-
-  <!-- Existing, precisely aligned OKC logo overlay. -->
-  <img
-    id="watchNotification"
-    class="watch-notification"
-    src="watch-okc-logo-overlay.png?v=2"
-    alt=""
-    aria-hidden="true">
-
-  <!-- Enabled only when the OKC notification arrives. -->
-  <button
-    id="watchNotificationTap"
-    class="watch-screen-hotspot"
-    onclick="openWatchMemory()"
-    aria-label="Read the memory behind the OKC notification"
-    disabled>
-  </button>
 
   <div id="watchHint" class="watch-hint" aria-live="polite"></div>
 
@@ -7018,9 +7071,9 @@ function enterGallery2Display(number) {
 
   /* Begin the soft dissolve after the camera moves */
 
-  g2RoomTimer = setTimeout(() => {
-    transition.classList.add("visible");
-  }, 850);
+  setTimeout(() => {
+    if (room.classList.contains("g2-transitioning")) transition.classList.add("visible");
+  }, 650);
 
   /* Open the selected exhibit */
 
