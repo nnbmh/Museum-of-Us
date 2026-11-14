@@ -5263,6 +5263,43 @@ button {
   #bookArchive,#bookExhibit { transition: none; }
 }
 
+/* GALLERY I — ZOOM TRANSITIONS (GALLERY II CAMERA STYLE) */
+#gallery1 .gallery1-art{transition:transform 1.55s cubic-bezier(.2,.65,.2,1),filter 1.55s ease;transform-origin:center}
+#gallery1.g1-zooming .gallery1-art{animation:none!important;filter:brightness(1.1)}
+#gallery1.g1-zoom-watch .gallery1-art{transform:scale(2.15) translate(20%,2%)}
+#gallery1.g1-zoom-book .gallery1-art{transform:scale(2.15) translate(0,2%)}
+#gallery1.g1-zoom-conversation .gallery1-art{transform:scale(2.15) translate(-20%,2%)}
+#gallery1 .g1-zoom-dissolve{position:absolute;inset:0;z-index:85;pointer-events:none;opacity:0;background:radial-gradient(ellipse at center,#27130e24 0%,#190e11b5 65%,#0d0809fa 100%);transition:opacity .75s ease}
+#gallery1.g1-dissolving .g1-zoom-dissolve{opacity:1}
+#gallery1.g1-zooming button,#gallery1.g1-zooming .book-sparkles,#gallery1.g1-zooming .gallery-hint,#gallery1.g1-zooming .portrait-reveal,#gallery1.g1-zooming .gallery1-label{pointer-events:none!important;opacity:0!important}
+/* Exhibit 1: archive records immediately after zoom, with two tabs */
+#bookArchive .archive-tabs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+#bookArchive .archive-tab{background:#f6e8d0;color:#63313a;border:1px solid #ad8058;padding:15px 10px;font:500 clamp(11px,1.3vw,14px) "DM Sans",sans-serif;text-align:center}
+#bookArchive .archive-tab.selected{background:#612639;color:#f7e5c7;border-color:#612639}
+#bookArchive .archive-tab:focus-visible{outline:2px solid #612639;outline-offset:2px}
+/* Exhibit 3: museum records replace the former standalone constellation image */
+#conversationExhibit{background:radial-gradient(ellipse at 50% 30%,#573323 0%,#301719 55%,#150d11 100%);color:#f4e4ce}
+#conversationExhibit .conversation-archive-scroll{position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:78px clamp(20px,5vw,65px) 45px;text-align:center}
+#conversationExhibit .conversation-archive-header{max-width:850px;margin:0 auto 26px}
+#conversationExhibit .conversation-archive-header span,#conversationExhibit .conversation-archive-subtitle{color:#d9b987;font:500 11px "DM Sans",sans-serif;letter-spacing:.19em}
+#conversationExhibit .conversation-archive-header h2{font:italic 500 clamp(45px,7vw,88px) "Cormorant Garamond",serif;margin:10px 0;color:#fff0d6}
+#conversationExhibit .conversation-archive-header p{font:clamp(20px,2.6vw,28px)/1.4 "Cormorant Garamond",serif;color:#e8d3b4;margin:8px auto}
+#conversationExhibit .conversation-archive-subtitle{margin:30px auto 16px}
+#conversationExhibit .conversation-stars{position:relative;inset:auto;z-index:8;max-width:950px;margin:0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;pointer-events:auto}
+#conversationExhibit .conversation-star{position:relative;left:auto;top:auto;width:100%;height:auto;min-height:154px;transform:none;opacity:1;border:1px solid #b48c60;border-radius:0;background:linear-gradient(155deg,#f8e7c8,#e7cfaa);color:#522e2b;padding:20px 12px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;box-shadow:0 5px 18px #09050866;text-align:center}
+#conversationExhibit .conversation-star::before,#conversationExhibit .conversation-star::after{content:none!important;display:none!important}
+#conversationExhibit .conversation-star:hover{background:#fff1d6}
+#conversationExhibit .conversation-star.discovered{border:2px solid #fff1d6;background:#f7e3c1}
+#conversationExhibit .conversation-index,#conversationExhibit .conversation-open{font:500 10px "DM Sans",sans-serif;letter-spacing:.16em;color:#9a634b}
+#conversationExhibit .conversation-name{font:500 clamp(23px,3vw,32px) "Cormorant Garamond",serif}
+#conversationExhibit .conversation-hint{position:relative;bottom:auto;left:auto;transform:none;margin:20px auto 10px;color:#e4c89d;font-size:19px}
+#conversationExhibit .conversation-final{position:relative;bottom:auto;left:auto;margin:22px auto 10px;transform:translateY(10px);max-width:680px}
+#conversationExhibit .conversation-final.visible{transform:translateY(0)}
+#conversationExhibit .exhibit-back{position:fixed;top:16px;left:20px;color:#f8e8d1;z-index:30}
+#conversationExhibit .conversation-card-overlay{position:fixed;z-index:35;background:#140b10b8}
+@media(max-width:650px){#bookArchive .archive-tabs{grid-template-columns:1fr}#conversationExhibit .conversation-stars{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}#conversationExhibit .conversation-star{min-height:132px;padding:15px 8px}#conversationExhibit .conversation-archive-scroll{padding-top:70px}}
+@media(prefers-reduced-motion:reduce){#gallery1 .gallery1-art,#gallery1 .g1-zoom-dissolve{transition:none!important}}
+
 </style>
 </head>
 
@@ -5335,6 +5372,7 @@ button {
     class="gallery1-art"
     src="gallery-1.PNG"
     alt="Gallery I — The Beginning">
+  <div class="g1-zoom-dissolve" aria-hidden="true"></div>
 
   <!-- EXHIBIT 02 — WATCH HOTSPOT -->
 
@@ -5350,13 +5388,13 @@ button {
 <button
   class="conversation-hotspot"
   onclick="openConversation()"
-  aria-label="Examine Somewhere Along the Conversation">
+  aria-label="Explore Becoming Us">
 </button>
 
  <button
   class="book-hotspot"
   onclick="openBook()"
-  aria-label="Examine The First Entry">
+  aria-label="Explore A Chance Encounter">
 </button>
 
 <div class="book-sparkles" aria-hidden="true">
@@ -5456,7 +5494,7 @@ button {
 <!-- ARCHIVAL VIEWING SCREEN — FULL PAGE, NOT AN OVERLAY ON THE BOOK -->
 <section id="bookArchive" class="scene" aria-label="The Us Archive">
   <button class="archive-back" type="button" onclick="closeBookArchive()">
-    <span aria-hidden="true">←</span> RETURN TO EXHIBIT
+    <span aria-hidden="true">←</span> GALLERY I
   </button>
   <div class="archive-scroll" id="archiveScroll">
     <article class="archive-paper">
@@ -5466,6 +5504,10 @@ button {
         <div class="archive-file-number" id="archiveFileNumber">ARCHIVE NO. 001-A</div>
       </header>
 
+      <nav class="archive-tabs" aria-label="Exhibit 1 archive records">
+        <button class="archive-tab selected" data-archive="profile" type="button" aria-pressed="true" onclick="openBookArchive('profile')">01 · A Rather Interesting Profile</button>
+        <button class="archive-tab" data-archive="decision" type="button" aria-pressed="false" onclick="openBookArchive('decision')">02 · Worth a Try?</button>
+      </nav>
       <div id="archiveProfile" class="archive-record">
         <div class="archive-kicker">ARCHIVE 01 / PROFILE OBSERVATIONS</div>
         <h2>A Rather Interesting Profile</h2>
@@ -5605,84 +5647,45 @@ button {
 ========================================== -->
 
 <section id="conversationExhibit" class="scene">
-
-  <!-- Original approved exhibit image -->
-
-  <img
-    class="conversation-exhibit-art"
-    src="gallery-1-conversation.PNG"
-    alt="Fragments of conversations displayed as a constellation">
-
-
-  <!-- FIVE INTERACTIVE STARS -->
-
-  <div class="conversation-stars">
-
-    <button
-      class="conversation-star"
-      style="left: 32%; top: 38%;"
-      onclick="openConversationCard(0)"
-      aria-label="Explore conversation fragment one">
-    </button>
-
-    <button
-      class="conversation-star"
-      style="left: 47%; top: 30%;"
-      onclick="openConversationCard(1)"
-      aria-label="Explore conversation fragment two">
-    </button>
-
-    <button
-      class="conversation-star"
-      style="left: 63%; top: 40%;"
-      onclick="openConversationCard(2)"
-      aria-label="Explore conversation fragment three">
-    </button>
-
-    <button
-      class="conversation-star"
-      style="left: 35%; top: 52%;"
-      onclick="openConversationCard(3)"
-      aria-label="Explore conversation fragment four">
-    </button>
-
-    <button
-      class="conversation-star"
-      style="left: 65%; top: 52%;"
-      onclick="openConversationCard(4)"
-      aria-label="Explore conversation fragment five">
-    </button>
-
+  <!-- No separate close-up image: Gallery I zooms into its existing display. -->
+  <div class="conversation-archive-scroll">
+    <div class="conversation-archive-header">
+      <span>GALLERY I / EXHIBIT 3 / 13 JULY 2024</span>
+      <h2>Becoming Us</h2>
+      <p>Somewhere along all those conversations, something started to feel different.</p>
+    </div>
+    <div class="conversation-archive-subtitle">THE CONVERSATION ARCHIVES · OPEN EACH RECORD</div>
+    <div class="conversation-stars"><button class="conversation-star" onclick="openConversationCard(0)" aria-label="Open The Random Things archive">
+  <span class="conversation-index">RECORD 01</span>
+  <span class="conversation-name">The Random Things</span>
+  <span class="conversation-open">OPEN RECORD ↗</span>
+</button>
+<button class="conversation-star" onclick="openConversationCard(1)" aria-label="Open The Teasing archive">
+  <span class="conversation-index">RECORD 02</span>
+  <span class="conversation-name">The Teasing</span>
+  <span class="conversation-open">OPEN RECORD ↗</span>
+</button>
+<button class="conversation-star" onclick="openConversationCard(2)" aria-label="Open The Questions archive">
+  <span class="conversation-index">RECORD 03</span>
+  <span class="conversation-name">The Questions</span>
+  <span class="conversation-open">OPEN RECORD ↗</span>
+</button>
+<button class="conversation-star" onclick="openConversationCard(3)" aria-label="Open The Familiarity archive">
+  <span class="conversation-index">RECORD 04</span>
+  <span class="conversation-name">The Familiarity</span>
+  <span class="conversation-open">OPEN RECORD ↗</span>
+</button>
+<button class="conversation-star" onclick="openConversationCard(4)" aria-label="Open The Little Moments archive">
+  <span class="conversation-index">RECORD 05</span>
+  <span class="conversation-name">The Little Moments</span>
+  <span class="conversation-open">OPEN RECORD ↗</span>
+</button></div>
+    <div id="conversationHint" class="conversation-hint">Open all five records to complete this exhibit.</div>
+    <div id="conversationFinal" class="conversation-final">
+      <p>i don't think there was one particular conversation that changed everything. it was just all the little ones in between.</p>
+      <span>SOMEWHERE ALONG THE WAY, IT BECAME US.</span>
+    </div>
   </div>
-
-
-  <!-- EXPLORATION HINT -->
-
-  <div
-    id="conversationHint"
-    class="conversation-hint">
-    Some conversations are worth revisiting.
-  </div>
-
-
-  <!-- FINAL MESSAGE -->
-
-  <div
-    id="conversationFinal"
-    class="conversation-final">
-
-    <p>
-      i don't think there was one particular
-      conversation that changed everything.
-      it was just all the little ones in between.
-    </p>
-
-    <span>
-      SOMEWHERE ALONG THE WAY, IT BECAME US.
-    </span>
-
-  </div>
-
 
   <!-- ARCHIVAL CARD -->
 
@@ -6101,31 +6104,56 @@ function returnToLobbyFrom1() {
   lobby.classList.add("active");
 }
 
+/* GALLERY I — CINEMATIC ZOOM INTO THE EXISTING ROOM ARTWORK */
+let g1ZoomTimer = null, g1DissolveTimer = null, g1ZoomLocked = false;
+function resetGallery1Zoom() {
+  clearTimeout(g1ZoomTimer);
+  clearTimeout(g1DissolveTimer);
+  document.getElementById("gallery1").classList.remove("g1-zooming","g1-dissolving","g1-zoom-watch","g1-zoom-book","g1-zoom-conversation");
+  g1ZoomLocked = false;
+}
+function startGallery1ExhibitZoom(exhibit) {
+  const gallery = document.getElementById("gallery1");
+  if (!gallery.classList.contains("active") || g1ZoomLocked) return;
+  if (!["book","watch","conversation"].includes(exhibit)) return;
+  g1ZoomLocked = true;
+  gallery.classList.add("g1-zooming","g1-zoom-" + exhibit);
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  g1DissolveTimer = setTimeout(() => gallery.classList.add("g1-dissolving"), reduced ? 0 : 680);
+  g1ZoomTimer = setTimeout(() => {
+    gallery.classList.remove("active");
+    if (exhibit === "book") openBookArchive("profile");
+    if (exhibit === "watch") enterWatchExhibit();
+    if (exhibit === "conversation") enterConversationExhibit();
+    resetGallery1Zoom();
+  }, reduced ? 80 : 1550);
+}
+
 /* ==========================================
    EXHIBIT 01 — BOOK CLOSE-UP & ARCHIVES
 ========================================== */
 const openedArchiveComplaints = new Set();
-function openBook() {
-  document.getElementById("gallery1").classList.remove("active");
-  document.getElementById("bookExhibit").classList.add("active");
-}
-function closeBook() {
-  document.getElementById("bookArchive").classList.remove("active");
-  document.getElementById("bookExhibit").classList.remove("active");
-  document.getElementById("gallery1").classList.add("active");
-}
+function openBook() { startGallery1ExhibitZoom("book"); }
+function closeBook() { closeBookArchive(); }
 function openBookArchive(which) {
   const profile = which === "profile";
   document.getElementById("archiveProfile").hidden = !profile;
   document.getElementById("archiveDecision").hidden = profile;
   document.getElementById("archiveFileNumber").textContent = profile ? "ARCHIVE NO. 001-A" : "ARCHIVE NO. 001-B";
+  document.querySelectorAll("#bookArchive .archive-tab").forEach(tab => {
+    const selected = tab.dataset.archive === which;
+    tab.classList.toggle("selected", selected);
+    tab.setAttribute("aria-pressed", String(selected));
+  });
   document.getElementById("archiveScroll").scrollTop = 0;
   document.getElementById("bookExhibit").classList.remove("active");
   document.getElementById("bookArchive").classList.add("active");
 }
 function closeBookArchive() {
   document.getElementById("bookArchive").classList.remove("active");
-  document.getElementById("bookExhibit").classList.add("active");
+  document.getElementById("bookExhibit").classList.remove("active");
+  document.getElementById("gallery1").classList.add("active");
+  resetGallery1Zoom();
 }
 function revealArchiveComplaint(number) {
   openedArchiveComplaints.add(number);
@@ -6205,16 +6233,11 @@ function resetWatchSequence() {
   hint.classList.add("hidden");
 }
 
-function openWatch() {
-  const gallery = document.getElementById("gallery1");
+function openWatch() { startGallery1ExhibitZoom("watch"); }
+function enterWatchExhibit() {
   const watch = document.getElementById("watchExhibit");
   resetWatchSequence();
-
   watch.classList.add("active");
-  watchEntranceTimer = setTimeout(() => {
-    gallery.classList.remove("active");
-  }, 1000);
-
   // The watch wakes, then the unexpected OKC notification arrives.
   watchDateTimer = setTimeout(() => {
     document.getElementById("watchDateScreen").classList.add("visible");
@@ -6299,22 +6322,10 @@ const discoveredConversations = new Set();
 
 /* Enter exhibit */
 
-function openConversation() {
-
-  const gallery = document.getElementById("gallery1");
-
-  const conversation = document.getElementById(
-    "conversationExhibit"
-  );
-
-  conversation.classList.add("active");
-
-  setTimeout(() => {
-    gallery.classList.remove("active");
-  }, 1000);
-
+function openConversation() { startGallery1ExhibitZoom("conversation"); }
+function enterConversationExhibit() {
+  document.getElementById("conversationExhibit").classList.add("active");
 }
-
 
 /* Open archival card */
 
