@@ -5478,6 +5478,30 @@ button {
   50%{translate:1px 0}
   75%{translate:-1px 0}
 }
+/* Dark text keeps the watch return link readable against the pale wall. */
+#watchExhibit .exhibit-back {
+  color: #46222b !important;
+  text-shadow: 0 1px 2px rgba(255,246,227,.95), 0 0 10px rgba(255,246,227,.85) !important;
+}
+#watchExhibit .exhibit-back:hover { color: #6c3544 !important; }
+
+/* The decoded watch frame is painted underneath the room during handoff. */
+#watchExhibit.g1-prepared {
+  visibility: visible;
+  opacity: 1;
+  z-index: 9;
+  pointer-events: none;
+}
+#gallery1.g1-handoff {
+  opacity: 0 !important;
+  z-index: 11 !important;
+  pointer-events: none !important;
+  transition: opacity .42s ease !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  #gallery1.g1-handoff { transition: none !important; }
+}
+
 /* All exhibit back links are text only, without boxes. */
 #bookArchive .archive-back,
 #bookExhibit .exhibit-back,
@@ -5687,27 +5711,8 @@ button {
   
 </section>
   
-<!-- ==========================================
-     EXHIBIT 01 — A CHANCE ENCOUNTER
-     Two archive records; the book remains behind glass.
-========================================== -->
-
-<section id="bookExhibit" class="scene" aria-label="Exhibit 1 close-up">
-  <img class="book-closeup-art" src="gallery-1-book-closeup.PNG"
-       alt="The Muzz book displayed behind glass in Gallery I">
-  <button class="book-archive-hotspot book-muzz-hotspot" type="button"
-          onclick="openBookArchive('profile')"
-          aria-label="Open archive: A Rather Interesting Profile"></button>
-  <button class="book-archive-hotspot book-checklist-hotspot" type="button"
-          onclick="openBookArchive('decision')"
-          aria-label="Open archive: Worth a Try?"></button>
-  <div class="book-archive-hint">TAP THE MUZZ LOGO OR THE CHECKLIST TO EXPLORE</div>
-  <button class="exhibit-back" type="button" onclick="closeBook()">
-    <span class="back-arrow">←</span> GALLERY I
-  </button>
-</section>
-
-<!-- ARCHIVAL VIEWING SCREEN — FULL PAGE, NOT AN OVERLAY ON THE BOOK -->
+<!-- EXHIBIT 01 — A CHANCE ENCOUNTER: THE ARCHIVE -->
+<!-- ARCHIVAL VIEWING SCREEN — FULL PAGE -->
 <section id="bookArchive" class="scene" aria-label="The Us Archive">
   <button class="archive-back" type="button" onclick="closeBookArchive()">
     <span aria-hidden="true">←</span> GALLERY I
@@ -6324,6 +6329,15 @@ function startGallery1ExhibitZoom(exhibit) {
   if (!gallery.classList.contains("active") || g1ZoomLocked) return;
   if (!["book","watch","conversation"].includes(exhibit)) return;
   g1ZoomLocked = true;
+  let watchImageReady = null;
+  let watch = null;
+  if (exhibit === "watch") {
+    watch = document.getElementById("watchExhibit");
+    const watchImage = watch.querySelector(".watch-exhibit-art");
+    watchImageReady = watchImage.decode ? watchImage.decode().catch(() => {}) : Promise.resolve();
+    // Paint the matching watch frame behind Gallery I before the zoom finishes.
+    watch.classList.add("g1-prepared");
+  }
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   // Same easing, dissolve delay and scene timing as enterGallery2Display().
   gallery.classList.add("g1-zooming","g1-zoom-" + exhibit);
@@ -6331,11 +6345,21 @@ function startGallery1ExhibitZoom(exhibit) {
     if (gallery.classList.contains("g1-zooming")) gallery.classList.add("g1-dissolving");
   }, reduced ? 0 : 650);
   g1ZoomTimer = setTimeout(() => {
+    if (exhibit === "watch") {
+      // Fade the room over the already decoded, matching watch frame.
+      Promise.resolve(watchImageReady).then(() => {
+        enterWatchExhibit();
+        gallery.classList.add("g1-handoff");
+        setTimeout(() => {
+          gallery.classList.remove("active", "g1-handoff");
+          watch.classList.remove("g1-prepared");
+          resetGallery1Zoom();
+        }, reduced ? 0 : 420);
+      });
+      return;
+    }
     if (exhibit === "book") {
-      // Land on the actual glass-case close-up, just as Gallery II lands on its exhibit.
-      document.getElementById("bookExhibit").classList.add("active");
-    } else if (exhibit === "watch") {
-      enterWatchExhibit();
+      openBookArchive("profile");
     } else {
       enterConversationExhibit();
     }
@@ -6349,7 +6373,6 @@ function startGallery1ExhibitZoom(exhibit) {
 ========================================== */
 const openedArchiveComplaints = new Set();
 function openBook() { startGallery1ExhibitZoom("book"); }
-function closeBook() { closeBookArchive(); }
 function openBookArchive(which) {
   const profile = which === "profile";
   document.getElementById("archiveProfile").hidden = !profile;
@@ -6361,12 +6384,10 @@ function openBookArchive(which) {
     tab.setAttribute("aria-pressed", String(selected));
   });
   document.getElementById("archiveScroll").scrollTop = 0;
-  document.getElementById("bookExhibit").classList.remove("active");
   document.getElementById("bookArchive").classList.add("active");
 }
 function closeBookArchive() {
   document.getElementById("bookArchive").classList.remove("active");
-  document.getElementById("bookExhibit").classList.remove("active");
   document.getElementById("gallery1").classList.add("active");
   resetGallery1Zoom();
 }
