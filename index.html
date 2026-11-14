@@ -5465,7 +5465,8 @@ button {
   display:block;object-fit:fill;object-position:center;
   background:transparent;border:0;box-shadow:none;
   z-index:6;pointer-events:none;
-  transform:translate(-13%,14.8%) !important;
+  /* Smaller logo, nudged left and down to sit within the watch screen. */
+  transform:translate(-14%,13.8%) scale(.86) !important;
   opacity:0;transition:opacity .35s ease;
 }
 #watchExhibit .watch-notification.watch-okc-original.visible { opacity:1; }
