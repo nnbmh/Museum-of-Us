@@ -5444,33 +5444,58 @@ button {
 #conversationExhibit .exhibit-back:focus-visible,
 #gallery2Exhibit1 .g2-back:focus-visible,
 #gallery2Exhibit2 .g2-back:focus-visible {outline:2px solid #f6d7a6;outline-offset:3px}
-/* The notification is a tiny face-anchored element, not a shifted full-screen image. */
-#watchExhibit .watch-notification.watch-okc-badge {
-  position:absolute;inset:auto;left:29.95%;top:48.75%;
-  width:4.1%;height:7.2%;z-index:6;
-  display:flex;align-items:center;justify-content:center;
-  transform:none !important;object-fit:initial;
-  background:#151419;border:1px solid #363238;border-radius:18%;
-  box-shadow:inset 0 0 6px #0008;
-  opacity:0;pointer-events:none;transition:opacity .35s ease;
+/* Original transparent OKC logo from the repository.
+   Original artwork's icon centre: ~45%,38%; watch face centre: ~32%,53%.
+   Both artwork and logo live in the same scaled Gallery I camera layer. */
+#watchExhibit .watch-notification.watch-okc-original {
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  display:block;object-fit:fill;object-position:center;
+  background:transparent;border:0;box-shadow:none;
+  z-index:6;pointer-events:none;
+  transform:translate(-13%,14.8%) !important;
+  opacity:0;transition:opacity .35s ease;
 }
-#watchExhibit .watch-notification.watch-okc-badge.visible{opacity:1}
-#watchExhibit .watch-okc-badge span{
-  display:block;padding:1px 3px;border-radius:4px;
-  color:#fff;background:#bc3680;
-  font:700 clamp(7px,.9vw,12px)/1.15 "DM Sans",Arial,sans-serif;
-  letter-spacing:-.03em;text-shadow:none;
+#watchExhibit .watch-notification.watch-okc-original.visible { opacity:1; }
+#watchExhibit .watch-notification.watch-okc-original.vibrating {
+  animation:watchOriginalLogoBuzz .35s ease;
 }
-#watchExhibit .watch-notification.watch-okc-badge.vibrating{animation:watchBadgeBuzz .35s ease}
-@keyframes watchBadgeBuzz{
-  0%,100%{translate:0 0}25%{translate:-1px 0}50%{translate:1px 0}75%{translate:-1px 0}
+@keyframes watchOriginalLogoBuzz {
+  0%,100%{translate:0 0}
+  25%{translate:-1px 0}
+  50%{translate:1px 0}
+  75%{translate:-1px 0}
+}
+/* All exhibit back links are text only, without boxes. */
+#bookArchive .archive-back,
+#bookExhibit .exhibit-back,
+#watchExhibit .exhibit-back,
+#conversationExhibit .exhibit-back,
+#gallery2Exhibit1 .g2-back,
+#gallery2Exhibit2 .g2-back {
+  padding:8px 0 !important;
+  background:transparent !important;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  text-shadow:0 2px 8px rgba(18,8,10,.85) !important;
+  transition:color .2s ease,opacity .2s ease !important;
+}
+#bookArchive .archive-back:hover,
+#bookExhibit .exhibit-back:hover,
+#watchExhibit .exhibit-back:hover,
+#conversationExhibit .exhibit-back:hover,
+#gallery2Exhibit1 .g2-back:hover,
+#gallery2Exhibit2 .g2-back:hover {
+  background:transparent !important;
+  color:#f4d3a4 !important;
 }
 #watchExhibit .watch-memory-return{
   font:500 17px "Cormorant Garamond",Georgia,serif;letter-spacing:.08em
 }
 @media(prefers-reduced-motion:reduce){
   #gallery1 .gallery1-art,#gallery1 .g1-zoom-dissolve{transition:none !important}
-  #watchExhibit .watch-notification.watch-okc-badge.vibrating{animation:none !important}
+  #watchExhibit .watch-notification.watch-okc-original.vibrating{animation:none !important}
 }
 
 </style>
@@ -5759,8 +5784,11 @@ button {
     <img class="watch-exhibit-art" src="gallery-1.PNG"
          alt="Gallery I's first-date display, with the entire glass case and pedestal visible">
 
-    <!-- OKC badge is anchored directly to the watch face, not a full-screen PNG. -->
-    <div id="watchNotification" class="watch-notification watch-okc-badge" aria-hidden="true"><span>okc</span></div>
+    <!-- Preserve the ORIGINAL cropped OKC artwork already in GitHub.
+         Its transparent full-frame canvas aligns with the original gallery image. -->
+    <img id="watchNotification" class="watch-notification watch-okc-original"
+         src="watch-okc-logo-overlay.png?v=3"
+         alt="" aria-hidden="true">
 
     <button id="watchNotificationTap" class="watch-screen-hotspot"
             onclick="openWatchMemory()"
