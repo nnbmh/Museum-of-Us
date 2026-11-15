@@ -5592,6 +5592,21 @@ button {
 #gallery4Room .g4-sign-left,#gallery4Room .g4-sign-right { display:none!important; }
 #gallery3Room .g3-retired { display:none!important; }
 #gallery3Room .g3-connected-art { display:none!important; }
+#gallery3Room .g3-photo-reveal {
+  position:absolute;
+  left:43.25%;top:42.55%;width:13.5%;height:21.3%;
+  overflow:hidden;z-index:2;pointer-events:none;
+  opacity:var(--g3-photo-opacity,0);
+  transition:opacity 900ms ease;
+  -webkit-mask-image:radial-gradient(ellipse at center,#000 78%,transparent 100%);
+  mask-image:radial-gradient(ellipse at center,#000 78%,transparent 100%);
+}
+#gallery3Room .g3-photo-reveal img {
+  width:100%;height:100%;object-fit:cover;object-position:55% 45%;
+  transform:scale(1.08);
+  filter:blur(var(--g3-photo-blur,22px)) sepia(.28) saturate(.8) contrast(.94);
+  transition:filter 1100ms ease;
+}
 #gallery3Room .g3-portrait-tap { left:40%!important;top:38%!important;width:20%!important;height:36%!important;z-index:9; }
 #gallery3Room .g3-floor-points { position:absolute;left:27%;width:46%;bottom:7%;display:flex;justify-content:space-between;align-items:flex-end;z-index:19;pointer-events:none; }
 #gallery3Room .g3-floor-point { position:relative;bottom:var(--rise);flex:none;width:clamp(42px,3.2vw,52px);height:clamp(42px,3.2vw,52px);border:1px solid #b9945e;border-radius:50%;background:radial-gradient(circle,#fff5dc 0%,#d9bb88 28%,#a57c49 68%,#6e523b 100%);box-shadow:0 2px 12px #3f291744,inset 0 0 0 3px #f7e8c899;color:#172238;font:600 15px Georgia,serif;cursor:pointer;pointer-events:auto;touch-action:manipulation; }
@@ -6154,6 +6169,9 @@ button {
   class="g3-room-art"
   src="gallery-3.PNG"
   alt="Gallery III — Through My Eyes">
+<div class="g3-photo-reveal" aria-hidden="true">
+  <img src="faris-gallery-iii.jpeg" alt="">
+</div>
 
 <!-- Transparent line and labels, sharing the EXACT same canvas and zoom as the original image. -->
 <img
@@ -7589,6 +7607,17 @@ function showG3PortraitHint(){
 function revealGallery3(i){
   if(i<0||i>=g3PortraitNotes.length)return;
   g3PortraitSeen.add(i);
+  const revealSteps=[
+    {opacity:.38,blur:"18px"},
+    {opacity:.58,blur:"13px"},
+    {opacity:.75,blur:"8px"},
+    {opacity:.9,blur:"4px"},
+    {opacity:1,blur:"0px"}
+  ];
+  const step=revealSteps[Math.min(g3PortraitSeen.size,5)-1];
+  const room=document.getElementById("gallery3Room");
+  room.style.setProperty("--g3-photo-opacity",step.opacity);
+  room.style.setProperty("--g3-photo-blur",step.blur);
   document.querySelectorAll(".g3-floor-point")[i].classList.add("seen");
   document.getElementById("g3PortraitLabel").textContent="CURATOR'S NOTE · "+String(i+1).padStart(2,"0")+" / 05";
   document.getElementById("g3PortraitTitle").textContent="The Faris I Know";
