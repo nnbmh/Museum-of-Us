@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Museum of Us</title>
+<link rel="preload" as="image" href="gallery-1.PNG">
+<link rel="preload" as="image" href="gallery-2-room.PNG">
+<link rel="preload" as="image" href="gallery-3.PNG">
+<link rel="preload" as="image" href="gallery-4.PNG">
+<link rel="preload" as="image" href="watch-okc-logo-overlay.png">
+<link rel="preload" as="image" href="gallery-2-scene-1-restaurant.PNG">
+<link rel="preload" as="image" href="gallery-2-scene-2-east-coast.PNG">
+<link rel="preload" as="image" href="gallery-2-scene-4-first-kiss.PNG">
+<link rel="preload" as="image" href="gallery-2-scene-6-car-ride.PNG">
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&family=Caveat:wght@400;500;600&display=swap" rel="stylesheet">
 
@@ -5560,6 +5569,52 @@ button {
   #watchExhibit .watch-notification.watch-okc-original.vibrating{animation:none !important}
 }
 
+/* The four uploaded rooms share a stretched, full-viewport image canvas.
+   Coordinates below follow the artwork, including the signs above the arches. */
+#gallery1 .watch-hotspot { left:20.2%!important;top:40%!important;width:15.4%!important;height:45%!important; }
+#gallery1 .book-hotspot { left:40.2%!important;top:38%!important;width:19.8%!important;height:49%!important;clip-path:none!important; }
+#gallery1 .conversation-hotspot { left:64.5%!important;top:40%!important;width:15.4%!important;height:45%!important; }
+#gallery1 .g1-doorway { top:23%!important;height:59%!important;z-index:45!important; }
+#gallery1 .g1-doorway-left { left:4.2%!important;width:14.7%!important; }
+#gallery1 .g1-doorway-right { left:81.1%!important;width:14.7%!important; }
+/* The doorway includes its sign; separate sign buttons cannot intercept it. */
+#gallery1 .g1-lobby-sign,#gallery1 .gallery-next-plaque { display:none!important; }
+
+#gallery2Room .g2-display-one { left:24%!important;top:39%!important;width:18.5%!important;height:44%!important;right:auto!important; }
+#gallery2Room .g2-display-two { left:57.5%!important;top:39%!important;width:18.5%!important;height:44%!important;right:auto!important; }
+#gallery2Room .g2-nav-plaque { top:23%!important;width:15%!important;height:57%!important;z-index:20!important; }
+#gallery2Room .g2-nav-left { left:4%!important;right:auto!important; }
+#gallery2Room .g2-nav-right { left:81%!important;right:auto!important; }
+
+#gallery3Room .g3-door-left,#gallery4Room .g4-door-left { left:5%!important;right:auto!important;top:24%!important;width:17%!important;height:55%!important;z-index:18!important; }
+#gallery3Room .g3-door-right,#gallery4Room .g4-door-right { left:78%!important;right:auto!important;top:24%!important;width:17%!important;height:55%!important;z-index:18!important; }
+#gallery3Room .g3-sign-left,#gallery3Room .g3-sign-right,
+#gallery4Room .g4-sign-left,#gallery4Room .g4-sign-right { display:none!important; }
+#gallery3Room .g3-retired { display:none!important; }
+#gallery3Room .g3-connected-art { display:none!important; }
+#gallery3Room .g3-portrait-tap { left:40%!important;top:38%!important;width:20%!important;height:36%!important;z-index:9; }
+#gallery3Room .g3-floor-points { position:absolute;left:24%;width:52%;bottom:7%;display:flex;justify-content:space-between;align-items:flex-end;z-index:19;pointer-events:none; }
+#gallery3Room .g3-floor-point { position:relative;bottom:var(--rise);flex:none;width:clamp(42px,3.2vw,52px);height:clamp(42px,3.2vw,52px);border:1px solid #b9945e;border-radius:50%;background:radial-gradient(circle,#fff5dc 0%,#d9bb88 28%,#a57c49 68%,#6e523b 100%);box-shadow:0 2px 12px #3f291744,inset 0 0 0 3px #f7e8c899;color:#172238;font:600 15px Georgia,serif;cursor:pointer;pointer-events:auto;touch-action:manipulation; }
+#gallery3Room .g3-floor-point.seen { background:radial-gradient(circle,#fffdfa,#f2d7a0 60%,#b88e55);box-shadow:0 0 16px #e9ca8a; }
+#gallery3Room .g3-floor-point:focus-visible { outline:2px solid #fff;outline-offset:3px; }
+#gallery3Room .g3-floor-hint { position:absolute;bottom:1.5%;left:0;width:100%;text-align:center;z-index:8;pointer-events:none;color:#273447;text-shadow:0 1px 5px #fff,0 0 10px #fff;font:500 clamp(10px,1vw,13px) "DM Sans",sans-serif;letter-spacing:.17em; }
+#gallery3Room .g3-portrait-panel[hidden] { display:none; }
+#gallery3Room .g3-portrait-panel { position:absolute;z-index:35;top:50%;left:50%;transform:translate(-50%,-50%);width:min(480px,90vw);max-height:85dvh;overflow:auto;padding:30px;background:#101b2eeF;border:1px solid #dbba81;box-shadow:0 0 0 100vmax #07101dbb,0 12px 50px #0008;text-align:center;color:#f8ebd8; }
+#gallery3Room .g3-portrait-panel small { letter-spacing:.2em;color:#dcbf8e; }
+#gallery3Room .g3-portrait-panel h2 { font:italic 32px "Cormorant Garamond",serif;color:#ecd4a2; }
+#gallery3Room .g3-portrait-panel p { line-height:1.65; }
+#gallery3Room .g3-portrait-panel button { border:0;background:transparent;color:#eed3a4;padding:12px;cursor:pointer; }
+@media(max-width:600px){#gallery3Room .g3-floor-points{left:13%;width:74%;bottom:8%}#gallery3Room .g3-floor-point{width:42px;height:42px;font-size:12px}#gallery3Room .g3-floor-hint{bottom:1%;font-size:9px}}
+
+#gallery4Room .g4-portrait-tap { left:37%!important;top:42%!important;width:26%!important;height:46%!important; }
+#watchExhibit .watch-screen-hotspot { left:25.5%!important;top:51.7%!important;width:4.7%!important;height:9.2%!important; }
+/* Original transparent PNG: opaque logo centre (45.1%,37.8%).
+   New watch face centre (27.8%,55.9%) on Gallery I's image canvas. */
+#watchExhibit .watch-notification.watch-okc-original { transform:translate(-17.3%,18.1%)!important; }
+#gallery1.g1-zoom-watch .gallery1-art,#watchExhibit .g1-watch-camera { transform:scale(1.72) translate(21.5%,-12.5%); }
+#gallery1.g1-zoom-book .gallery1-art { transform:scale(1.72) translate(0%,-12.5%); }
+#gallery1.g1-zoom-conversation .gallery1-art { transform:scale(1.72) translate(-21.5%,-12.5%); }
+
 </style>
 </head>
 
@@ -6132,6 +6187,8 @@ button {
     aria-label="Tap Gallery II sign to return">
   </button>
 
+  <!-- Retired Gallery III exhibits are kept out of the new portrait room. -->
+  <div class="g3-retired" hidden>
   <!-- EXHIBIT 01 -->
 
   <button
@@ -6171,6 +6228,24 @@ button {
     onclick="openG3Connection()"
     aria-label="Two Points, One Connection">
   </button>
+  </div>
+
+  <button class="g3-hotspot g3-portrait-tap" onclick="showG3PortraitHint()"
+    aria-label="Examine The Faris I Know portrait"></button>
+  <div class="g3-floor-points" aria-label="Five floor points for The Faris I Know">
+    <button class="g3-floor-point" style="--point:0;--rise:0px" onclick="revealGallery3(0)" aria-label="Reveal the first part of the portrait">I</button>
+    <button class="g3-floor-point" style="--point:1;--rise:18px" onclick="revealGallery3(1)" aria-label="Reveal the second part of the portrait">II</button>
+    <button class="g3-floor-point" style="--point:2;--rise:26px" onclick="revealGallery3(2)" aria-label="Reveal the third part of the portrait">III</button>
+    <button class="g3-floor-point" style="--point:3;--rise:18px" onclick="revealGallery3(3)" aria-label="Reveal the fourth part of the portrait">IV</button>
+    <button class="g3-floor-point" style="--point:4;--rise:0px" onclick="revealGallery3(4)" aria-label="Reveal the fifth part of the portrait">V</button>
+  </div>
+  <div class="g3-floor-hint">✧ TAP THE FIVE POINTS ON THE FLOOR ✧</div>
+  <div id="g3PortraitPanel" class="g3-portrait-panel" hidden role="dialog" aria-modal="true" aria-labelledby="g3PortraitTitle">
+    <small id="g3PortraitLabel">THE FARIS I KNOW</small>
+    <h2 id="g3PortraitTitle">Through My Eyes</h2>
+    <p id="g3PortraitText"></p>
+    <button onclick="closeG3PortraitPanel()">RETURN TO GALLERY III →</button>
+  </div>
 
 <!-- ==========================================
      CENTRAL INSTALLATION ANIMATION
@@ -6251,25 +6326,17 @@ button {
 
   
 
-<!-- GALLERY IV — THROUGH MY EYES -->
-<section id="gallery4Room" class="scene" aria-label="Gallery IV — Through My Eyes">
-<img class="g4-room-art" src="gallery-4.PNG" alt="Dusty-blue Gallery IV, with the unfinished portrait of Faris, a midnight-blue Gallery III doorway to the left, and a warm ivory Main Lobby doorway to the right">
+<!-- GALLERY IV — RIGHT HERE -->
+<section id="gallery4Room" class="scene" aria-label="Gallery IV — Right Here">
+<img class="g4-room-art" src="gallery-4.PNG" alt="Dusty-blue Gallery IV with The Final Exhibit, Gallery III on the left, and the Main Lobby on the right">
 <button class="g4-hotspot g4-door-left" onclick="returnToGallery3From4()" aria-label="Return to Gallery III through doorway"></button>
 <button class="g4-hotspot g4-sign-left" onclick="returnToGallery3From4()" aria-label="Tap Gallery III sign to return"></button>
 <button class="g4-hotspot g4-door-right" onclick="returnToLobbyFrom4()" aria-label="Return to Main Lobby through doorway"></button>
 <button class="g4-hotspot g4-sign-right" onclick="returnToLobbyFrom4()" aria-label="Tap Main Lobby sign to return"></button>
-<div class="g4-portrait-veil" id="g4Portrait" data-progress="0" aria-hidden="true"></div>
-<button class="g4-hotspot g4-portrait-tap" onclick="revealGallery4Portrait()" aria-label="Examine the unfinished portrait"></button>
-<div class="g4-floor-markers" aria-label="Five reflections about Faris">
-<button class="g4-marker" onclick="revealGallery4(0)" aria-label="Reveal reflection one">I</button>
-<button class="g4-marker" onclick="revealGallery4(1)" aria-label="Reveal reflection two">II</button>
-<button class="g4-marker" onclick="revealGallery4(2)" aria-label="Reveal reflection three">III</button>
-<button class="g4-marker" onclick="revealGallery4(3)" aria-label="Reveal reflection four">IV</button>
-<button class="g4-marker" onclick="revealGallery4(4)" aria-label="Reveal reflection five">V</button>
-</div>
-<div class="g4-hint">Tap the floor medallions to discover how I see you.</div>
+<button class="g4-hotspot g4-portrait-tap" onclick="revealGallery4Portrait()" aria-label="Examine The Final Exhibit"></button>
+<div class="g4-hint">✧ TAP THE FINAL EXHIBIT ✧</div>
 <div id="g4Panel" class="g4-panel" hidden role="dialog" aria-modal="true" aria-labelledby="g4PanelTitle">
-<small id="g4PanelLabel">CURATOR'S NOTE</small><h3 id="g4PanelTitle">Through My Eyes</h3><p id="g4PanelText"></p><button onclick="closeGallery4Panel()">Return to the gallery →</button>
+<small id="g4PanelLabel">GALLERY IV · RIGHT HERE</small><h3 id="g4PanelTitle">The Final Exhibit</h3><p id="g4PanelText"></p><button onclick="closeGallery4Panel()">Return to the gallery →</button>
 </div>
 </section>
 
@@ -7321,6 +7388,7 @@ function returnToGallery2Room() {
 function goToGallery3() {
 
   closeG3Preview();
+  closeG3PortraitPanel();
 
   document.getElementById("gallery2Room")
     .classList.remove("active");
@@ -7332,6 +7400,7 @@ function goToGallery3() {
 function returnToGallery2From3() {
 
   closeG3Preview();
+  closeG3PortraitPanel();
 
   document.getElementById("gallery3Room")
     .classList.remove("active");
@@ -7500,22 +7569,38 @@ function closeG3Connection() {
 }
   
 
-/* GALLERY IV — approved background and interactive portrait */
-const g4Notes=[
+/* Gallery III: five separate points reveal five parts of the portrait story. */
+const g3PortraitNotes=[
 "There's the side of you that makes me laugh, sometimes without even trying.",
 "There's the way you think things through, and how much you care about getting them right.",
 "There's the version of you that keeps trying, even on days when you can't see much to be proud of.",
 "There's the person I get to be silly with, quiet with, and completely myself around.",
 "And there's you. Not a finished masterpiece. Not someone who has to have everything figured out. Just the person I love."
 ];
-const g4Seen=new Set();
+const g3PortraitSeen=new Set();
+function showG3PortraitHint(){
+  document.getElementById("g3PortraitLabel").textContent="THE FARIS I KNOW";
+  document.getElementById("g3PortraitTitle").textContent="Through My Eyes";
+  document.getElementById("g3PortraitText").textContent="Tap the five points on the floor to discover the little pieces I see in you.";
+  document.getElementById("g3PortraitPanel").hidden=false;
+}
+function revealGallery3(i){
+  if(i<0||i>=g3PortraitNotes.length)return;
+  g3PortraitSeen.add(i);
+  document.querySelectorAll(".g3-floor-point")[i].classList.add("seen");
+  document.getElementById("g3PortraitLabel").textContent="CURATOR'S NOTE · "+String(i+1).padStart(2,"0")+" / 05";
+  document.getElementById("g3PortraitTitle").textContent="The Faris I Know";
+  document.getElementById("g3PortraitText").textContent=g3PortraitNotes[i]+(g3PortraitSeen.size===5?" Every little piece belongs to the same person.":"");
+  document.getElementById("g3PortraitPanel").hidden=false;
+}
+function closeG3PortraitPanel(){document.getElementById("g3PortraitPanel").hidden=true}
+
+/* Gallery IV is the empty final exhibit in the new artwork. */
 function openGallery4Room(){
 closeG3Preview();
+closeG3PortraitPanel();
 document.getElementById("gallery3Room").classList.remove("active");
 document.getElementById("gallery4Room").classList.add("active");
-g4Seen.clear();
-document.querySelectorAll(".g4-marker").forEach(x=>x.classList.remove("seen"));
-document.getElementById("g4Portrait").dataset.progress="0";
 closeGallery4Panel();
 }
 function returnToGallery3From4(){
@@ -7534,18 +7619,9 @@ document.getElementById("gallery4Room").classList.remove("active");
 lobby.classList.add("active");
 }
 function revealGallery4Portrait(){
-document.getElementById("g4PanelLabel").textContent="AN UNFINISHED STUDY";
-document.getElementById("g4PanelTitle").textContent="The Faris I Know";
-document.getElementById("g4PanelText").textContent="Some portraits take more than a glance to understand. Discover the five little pieces on the gallery floor.";
-document.getElementById("g4Panel").hidden=false;
-}
-function revealGallery4(i){
-g4Seen.add(i);
-document.querySelectorAll(".g4-marker")[i].classList.add("seen");
-document.getElementById("g4Portrait").dataset.progress=String(g4Seen.size);
-document.getElementById("g4PanelLabel").textContent="CURATOR'S NOTE · "+String(i+1).padStart(2,"0")+" / 05";
-document.getElementById("g4PanelTitle").textContent=g4Seen.size===5?"The Faris I Know":"Through My Eyes";
-document.getElementById("g4PanelText").textContent=g4Notes[i]+(g4Seen.size===5?" Every little piece belongs to the same person.":"");
+document.getElementById("g4PanelLabel").textContent="GALLERY IV · RIGHT HERE";
+document.getElementById("g4PanelTitle").textContent="The Final Exhibit";
+document.getElementById("g4PanelText").textContent="This one isn't a memory yet.";
 document.getElementById("g4Panel").hidden=false;
 }
 function closeGallery4Panel(){document.getElementById("g4Panel").hidden=true}
