@@ -5298,21 +5298,30 @@ button {
 #bookArchive .archive-tab{background:#f6e8d0;color:#63313a;border:1px solid #ad8058;padding:15px 10px;font:500 clamp(11px,1.3vw,14px) "DM Sans",sans-serif;text-align:center}
 #bookArchive .archive-tab.selected{background:#612639;color:#f7e5c7;border-color:#612639}
 #bookArchive .archive-tab:focus-visible{outline:2px solid #612639;outline-offset:2px}
-/* Exhibit 1's loose archival slips */
+/* Exhibit 1's magnifying glass archive */
 #bookArchive .archive-puzzle{margin:30px 0 4px;padding:22px clamp(16px,3vw,28px);border:1px solid #a47a58;background:#ead8b9;box-shadow:3px 5px 0 #b99b7659}
 #bookArchive .archive-puzzle h3{font:italic clamp(25px,3vw,34px) "Cormorant Garamond",serif;color:#61303a;margin:8px 0}
 #bookArchive .archive-puzzle-intro{font:13px/1.6 "DM Sans",sans-serif;margin:0 0 18px;max-width:680px}
-#bookArchive .archive-slips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-#bookArchive .archive-slip{min-height:76px;padding:12px 15px;background:#f8edda;border:1px solid #b58c64;color:#4b302a;text-align:left;font:italic clamp(18px,2.3vw,24px)/1.15 "Cormorant Garamond",serif;box-shadow:2px 3px 0 #b3906944;transition:transform .2s,border-color .2s,opacity .2s}
-#bookArchive .archive-slip:not(:disabled):hover{transform:translateY(-3px);border-color:#612639}
-#bookArchive .archive-slip:disabled{opacity:.5;cursor:default}
-#bookArchive .archive-slip:focus-visible{outline:2px solid #612639;outline-offset:2px}
-#bookArchive .archive-slip-order{display:block;font:500 10px "DM Sans",sans-serif;letter-spacing:.15em;color:#88444b;margin-bottom:6px}
+#bookArchive .archive-scan{position:relative;min-height:300px;overflow:hidden;border:1px solid #a87b57;background:repeating-linear-gradient(0deg,#efe1c5,#efe1c5 25px,#ebdabb 26px);touch-action:none;cursor:crosshair;user-select:none;--lens-x:50%;--lens-y:50%}
+#bookArchive .archive-scan::before{content:"MUZZ  /  PROFILE RECORD  /  FILED IN MAY 2024";position:absolute;left:6%;top:9%;font:500 clamp(10px,1.3vw,15px) "DM Sans",sans-serif;letter-spacing:.12em;color:#866a54}
+#bookArchive .archive-scan::after{content:"FADED CATALOGUE MARKS  ·  SCAN THE PAPER";position:absolute;right:6%;bottom:8%;font:9px "DM Sans",sans-serif;letter-spacing:.16em;color:#a78e70}
+#bookArchive .archive-scan-ink{position:absolute;inset:0;clip-path:circle(70px at var(--lens-x) var(--lens-y));pointer-events:none;background:#f9efda;box-shadow:inset 0 0 20px #7d503e44}
+#bookArchive .archive-scan-mark{position:absolute;width:27%;min-width:80px;text-align:center;font:500 12px/1.25 "DM Sans",sans-serif;letter-spacing:.09em;color:#703741}
+#bookArchive .archive-scan-mark strong{display:block;font:italic clamp(27px,3vw,37px) "Cormorant Garamond",serif;letter-spacing:0}
+#bookArchive .archive-scan-mark[data-mark="day"]{left:17%;top:34%}
+#bookArchive .archive-scan-mark[data-mark="month"]{left:60%;top:22%}
+#bookArchive .archive-scan-mark[data-mark="year"]{left:48%;top:67%}
+#bookArchive .archive-scan-mark[data-mark="chat"]{left:5%;top:72%;font-size:10px;color:#876b5d}
+#bookArchive .archive-lens{position:absolute;z-index:2;left:var(--lens-x);top:var(--lens-y);width:140px;height:140px;border:6px solid #ac8144;border-radius:50%;transform:translate(-50%,-50%);box-shadow:inset 0 0 0 2px #fff8e3aa,0 4px 12px #4b291e66;pointer-events:none}
+#bookArchive .archive-lens::after{content:"";position:absolute;width:65px;height:14px;right:-49px;bottom:-16px;transform:rotate(45deg);transform-origin:left center;border-radius:8px;background:linear-gradient(#d4b46d,#79552d,#d4b46d);box-shadow:0 2px 5px #4b291e66}
+#bookArchive .archive-found{display:flex;gap:9px;flex-wrap:wrap;margin:13px 0 0}
+#bookArchive .archive-found span{border:1px solid #b58c64;background:#f6e8cf;padding:7px 12px;font:11px "DM Sans",sans-serif;color:#674940}
+#bookArchive .archive-found span.found{background:#612639;color:#f9e9d0;border-color:#612639}
 #bookArchive .archive-puzzle-progress{min-height:26px;margin:16px 0 0;font:12px/1.5 "DM Sans",sans-serif;color:#713b43}
 #bookArchive .archive-puzzle-result{border-top:1px solid #b58c64;padding-top:18px;margin-top:10px;text-align:center}
 #bookArchive .archive-puzzle-date{font:clamp(30px,5vw,52px) "Cormorant Garamond",serif;color:#612639;margin:4px 0}
 #bookArchive .archive-puzzle-result p:last-child{font:13px/1.5 "DM Sans",sans-serif;margin:5px}
-@media(max-width:650px){#bookArchive .archive-slips{grid-template-columns:1fr}}
+@media(max-width:650px){#bookArchive .archive-scan{min-height:350px}#bookArchive .archive-lens{width:116px;height:116px}#bookArchive .archive-scan-ink{clip-path:circle(58px at var(--lens-x) var(--lens-y))}#bookArchive .archive-scan-mark{width:31%}#bookArchive .archive-scan-mark[data-mark="month"]{left:61%}#bookArchive .archive-scan-mark[data-mark="year"]{left:49%}}
 /* Exhibit 3: museum records replace the former standalone constellation image */
 #conversationExhibit{background:radial-gradient(ellipse at 50% 30%,#573323 0%,#301719 55%,#150d11 100%);color:#f4e4ce}
 #conversationExhibit .conversation-archive-scroll{position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:78px clamp(20px,5vw,65px) 45px;text-align:center}
@@ -5861,17 +5870,21 @@ button {
           <p>The British passport bit on your profile made me curious enough to message you. The Google Translate story? That only came out once we were chatting.</p>
           <p>Somehow, each new detail made me want to know more. ♡</p>
         </div>
-        <section class="archive-puzzle" aria-label="Restore the archive sequence">
-          <span class="archive-kicker">A MISFILED MARGINAL NOTE</span>
-          <h3>What happened first?</h3>
-          <p class="archive-puzzle-intro">Four loose slips fell out of this record. Tap them in the order things actually happened, from the profile to our chat. The date is on the other side of the completed note.</p>
-          <div class="archive-slips" id="archiveSlips">
-            <button class="archive-slip" type="button" data-order="2" onclick="chooseArchiveSlip(this)"><span class="archive-slip-order">LOOSE SLIP</span>“A British passport? He already had one.”</button>
-            <button class="archive-slip" type="button" data-order="1" onclick="chooseArchiveSlip(this)"><span class="archive-slip-order">LOOSE SLIP</span>“Okay… he’s cute.”</button>
-            <button class="archive-slip" type="button" data-order="4" onclick="chooseArchiveSlip(this)"><span class="archive-slip-order">LOOSE SLIP</span>“Wait, people thought he used Google Translate?”</button>
-            <button class="archive-slip" type="button" data-order="3" onclick="chooseArchiveSlip(this)"><span class="archive-slip-order">LOOSE SLIP</span>“I might as well message him first.”</button>
+        <section class="archive-puzzle" aria-label="Inspect the profile record with a magnifying glass">
+          <span class="archive-kicker">THE PROFILE RECORD / FADED INK</span>
+          <h3>Look a little closer</h3>
+          <p class="archive-puzzle-intro">Move the magnifying glass across the paper (drag it on a phone). Find the three faded marks filed with his profile. The chat addendum belongs to a later chapter.</p>
+          <div class="archive-scan" id="archiveScan" role="group" tabindex="0" aria-label="Drag or move the magnifying glass to find three hidden date marks. Arrow keys also move the lens." onpointerdown="scanArchive(event)" onpointermove="scanArchive(event)" onkeydown="moveArchiveLensWithKeys(event)">
+            <div class="archive-scan-ink" aria-hidden="true">
+              <span class="archive-scan-mark" data-mark="day">FILE DAY<strong>03</strong></span>
+              <span class="archive-scan-mark" data-mark="month">FILE MONTH<strong>MAY</strong></span>
+              <span class="archive-scan-mark" data-mark="year">FILE YEAR<strong>2024</strong></span>
+              <span class="archive-scan-mark" data-mark="chat">CHAT ADDENDUM<br>GOOGLE TRANSLATE<br>AFTER FIRST MESSAGE</span>
+            </div>
+            <span class="archive-lens" aria-hidden="true"></span>
           </div>
-          <p class="archive-puzzle-progress" id="archivePuzzleProgress" role="status" aria-live="polite">The note is waiting to be restored.</p>
+          <div class="archive-found" aria-label="Recovered profile marks"><span id="archiveFoundDay">DAY · ?</span><span id="archiveFoundMonth">MONTH · ?</span><span id="archiveFoundYear">YEAR · ?</span></div>
+          <p class="archive-puzzle-progress" id="archivePuzzleProgress" role="status" aria-live="polite">Three profile marks remain hidden.</p>
           <div class="archive-puzzle-result" id="archivePuzzleResult" hidden>
             <span class="archive-kicker">ARCHIVE DATE RECOVERED</span>
             <div class="archive-puzzle-date">3 May 2024</div>
@@ -6525,31 +6538,47 @@ function startGallery1ExhibitZoom(exhibit) {
    EXHIBIT 01 — BOOK CLOSE-UP & ARCHIVES
 ========================================== */
 const openedArchiveComplaints = new Set();
-let archiveSlipStep = 0;
-let archiveSlipResetTimer;
-function chooseArchiveSlip(slip) {
-  if (slip.disabled || archiveSlipResetTimer || document.getElementById("archivePuzzleResult").hidden === false) return;
-  const status = document.getElementById("archivePuzzleProgress");
-  if (Number(slip.dataset.order) !== archiveSlipStep + 1) {
-    status.textContent = "That slip belongs somewhere else. The note has fallen apart — try again.";
-    archiveSlipResetTimer = setTimeout(() => {
-      archiveSlipStep = 0;
-      document.querySelectorAll("#archiveSlips .archive-slip").forEach(item => { item.disabled = false; item.querySelector(".archive-slip-order").textContent = "LOOSE SLIP"; });
-      status.textContent = "The note is waiting to be restored.";
-      archiveSlipResetTimer = null;
-    }, 1100);
-    return;
+const archiveFoundMarks = new Set();
+function positionArchiveLens(x, y) {
+  const scan = document.getElementById("archiveScan");
+  const bounds = scan.getBoundingClientRect();
+  x = Math.max(0, Math.min(bounds.width, x));
+  y = Math.max(0, Math.min(bounds.height, y));
+  scan.style.setProperty("--lens-x", x + "px");
+  scan.style.setProperty("--lens-y", y + "px");
+  for (const mark of scan.querySelectorAll('.archive-scan-mark:not([data-mark="chat"])')) {
+    const rect = mark.getBoundingClientRect();
+    const dx = rect.left + rect.width / 2 - (bounds.left + x);
+    const dy = rect.top + rect.height / 2 - (bounds.top + y);
+    if (Math.hypot(dx, dy) > (bounds.width < 500 ? 61 : 74)) continue;
+    const key = mark.dataset.mark;
+    if (archiveFoundMarks.has(key)) continue;
+    archiveFoundMarks.add(key);
+    const found = document.getElementById("archiveFound" + key[0].toUpperCase() + key.slice(1));
+    found.textContent = key.toUpperCase() + " · " + mark.querySelector("strong").textContent;
+    found.classList.add("found");
   }
-  archiveSlipStep++;
-  slip.disabled = true;
-  slip.querySelector(".archive-slip-order").textContent = "PLACED · " + String(archiveSlipStep).padStart(2, "0");
-  if (archiveSlipStep === 4) {
-    status.textContent = "The note is complete. Turn it over…";
+  const left = 3 - archiveFoundMarks.size;
+  document.getElementById("archivePuzzleProgress").textContent = left ? left + " profile mark" + (left === 1 ? " remains" : "s remain") + " hidden." : "All three marks recovered from the profile record.";
+  if (!left) {
     document.getElementById("archivePuzzleResult").hidden = false;
     document.querySelector("#archiveProfile .archive-deck").innerHTML = "Subject: Faris &nbsp;·&nbsp; Platform: Muzz &nbsp;·&nbsp; 3 May 2024";
-  } else {
-    status.textContent = archiveSlipStep + " of 4 slips placed. What came next?";
   }
+}
+function scanArchive(event) {
+  if (event.type === "pointermove" && event.pointerType === "touch" && event.buttons === 0) return;
+  const bounds = event.currentTarget.getBoundingClientRect();
+  positionArchiveLens(event.clientX - bounds.left, event.clientY - bounds.top);
+}
+function moveArchiveLensWithKeys(event) {
+  const direction = {ArrowLeft:[-28,0],ArrowRight:[28,0],ArrowUp:[0,-28],ArrowDown:[0,28]}[event.key];
+  if (!direction) return;
+  event.preventDefault();
+  const scan = event.currentTarget;
+  const rect = scan.getBoundingClientRect();
+  const x = parseFloat(scan.style.getPropertyValue("--lens-x")) || rect.width / 2;
+  const y = parseFloat(scan.style.getPropertyValue("--lens-y")) || rect.height / 2;
+  positionArchiveLens(x + direction[0], y + direction[1]);
 }
 function openBook() { startGallery1ExhibitZoom("book"); }
 function openBookArchive(which) {
