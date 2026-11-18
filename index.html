@@ -5298,6 +5298,21 @@ button {
 #bookArchive .archive-tab{background:#f6e8d0;color:#63313a;border:1px solid #ad8058;padding:15px 10px;font:500 clamp(11px,1.3vw,14px) "DM Sans",sans-serif;text-align:center}
 #bookArchive .archive-tab.selected{background:#612639;color:#f7e5c7;border-color:#612639}
 #bookArchive .archive-tab:focus-visible{outline:2px solid #612639;outline-offset:2px}
+/* Exhibit 1's loose archival slips */
+#bookArchive .archive-puzzle{margin:30px 0 4px;padding:22px clamp(16px,3vw,28px);border:1px solid #a47a58;background:#ead8b9;box-shadow:3px 5px 0 #b99b7659}
+#bookArchive .archive-puzzle h3{font:italic clamp(25px,3vw,34px) "Cormorant Garamond",serif;color:#61303a;margin:8px 0}
+#bookArchive .archive-puzzle-intro{font:13px/1.6 "DM Sans",sans-serif;margin:0 0 18px;max-width:680px}
+#bookArchive .archive-slips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#bookArchive .archive-slip{min-height:76px;padding:12px 15px;background:#f8edda;border:1px solid #b58c64;color:#4b302a;text-align:left;font:italic clamp(18px,2.3vw,24px)/1.15 "Cormorant Garamond",serif;box-shadow:2px 3px 0 #b3906944;transition:transform .2s,border-color .2s,opacity .2s}
+#bookArchive .archive-slip:not(:disabled):hover{transform:translateY(-3px);border-color:#612639}
+#bookArchive .archive-slip:disabled{opacity:.5;cursor:default}
+#bookArchive .archive-slip:focus-visible{outline:2px solid #612639;outline-offset:2px}
+#bookArchive .archive-slip-order{display:block;font:500 10px "DM Sans",sans-serif;letter-spacing:.15em;color:#88444b;margin-bottom:6px}
+#bookArchive .archive-puzzle-progress{min-height:26px;margin:16px 0 0;font:12px/1.5 "DM Sans",sans-serif;color:#713b43}
+#bookArchive .archive-puzzle-result{border-top:1px solid #b58c64;padding-top:18px;margin-top:10px;text-align:center}
+#bookArchive .archive-puzzle-date{font:clamp(30px,5vw,52px) "Cormorant Garamond",serif;color:#612639;margin:4px 0}
+#bookArchive .archive-puzzle-result p:last-child{font:13px/1.5 "DM Sans",sans-serif;margin:5px}
+@media(max-width:650px){#bookArchive .archive-slips{grid-template-columns:1fr}}
 /* Exhibit 3: museum records replace the former standalone constellation image */
 #conversationExhibit{background:radial-gradient(ellipse at 50% 30%,#573323 0%,#301719 55%,#150d11 100%);color:#f4e4ce}
 #conversationExhibit .conversation-archive-scroll{position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:78px clamp(20px,5vw,65px) 45px;text-align:center}
@@ -5822,7 +5837,7 @@ button {
       <div id="archiveProfile" class="archive-record">
         <div class="archive-kicker">ARCHIVE 01 / PROFILE OBSERVATIONS</div>
         <h2>A Rather Interesting Profile</h2>
-        <p class="archive-deck">Subject: Faris &nbsp;·&nbsp; Platform: Muzz &nbsp;·&nbsp; 3 May 2024</p>
+        <p class="archive-deck">Subject: Faris &nbsp;·&nbsp; Platform: Muzz &nbsp;·&nbsp; Date sealed</p>
         <p class="archive-description">Two rather specific complaints were discovered in the subject's About section. Open both evidence records to see what caught my attention.</p>
         <div class="archive-evidence-grid">
           <button type="button" class="archive-evidence" id="archiveComplaint1"
@@ -5846,6 +5861,23 @@ button {
           <p>I mean, who puts complaints about British passports and Google Translate on their dating profile?? HAHAHA.</p>
           <p>Somehow, instead of putting me off, it just made me even more intrigued. ♡</p>
         </div>
+        <section class="archive-puzzle" aria-label="Restore the archive sequence">
+          <span class="archive-kicker">A MISFILED MARGINAL NOTE</span>
+          <h3>What happened first?</h3>
+          <p class="archive-puzzle-intro">Four loose slips fell out of this record. Tap them in the order I actually noticed things. The date is on the other side of the completed note.</p>
+          <div class="archive-slips" id="archiveSlips">
+            <button class="archive-slip" type="button" data-order="3" onclick="chooseArchiveSlip(this)"><span class="archive-slip-order">LOOSE SLIP</span>“A British passport? He already had one.”</button>
+            <button class="archive-slip" type="button" data-order="1" onclick="chooseArchiveSlip(this)"><span class="archive-slip-order">LOOSE SLIP</span>“Okay… he’s cute.”</button>
+            <button class="archive-slip" type="button" data-order="4" onclick="chooseArchiveSlip(this)"><span class="archive-slip-order">LOOSE SLIP</span>“I might as well message him first.”</button>
+            <button class="archive-slip" type="button" data-order="2" onclick="chooseArchiveSlip(this)"><span class="archive-slip-order">LOOSE SLIP</span>“Let me read his About section.”</button>
+          </div>
+          <p class="archive-puzzle-progress" id="archivePuzzleProgress" role="status" aria-live="polite">The note is waiting to be restored.</p>
+          <div class="archive-puzzle-result" id="archivePuzzleResult" hidden>
+            <span class="archive-kicker">ARCHIVE DATE RECOVERED</span>
+            <div class="archive-puzzle-date">3 May 2024</div>
+            <p>The day a rather interesting profile became our first chapter. ♡</p>
+          </div>
+        </section>
       </div>
 
       <div id="archiveDecision" class="archive-record" hidden>
@@ -6493,6 +6525,32 @@ function startGallery1ExhibitZoom(exhibit) {
    EXHIBIT 01 — BOOK CLOSE-UP & ARCHIVES
 ========================================== */
 const openedArchiveComplaints = new Set();
+let archiveSlipStep = 0;
+let archiveSlipResetTimer;
+function chooseArchiveSlip(slip) {
+  if (slip.disabled || archiveSlipResetTimer || document.getElementById("archivePuzzleResult").hidden === false) return;
+  const status = document.getElementById("archivePuzzleProgress");
+  if (Number(slip.dataset.order) !== archiveSlipStep + 1) {
+    status.textContent = "That slip belongs somewhere else. The note has fallen apart — try again.";
+    archiveSlipResetTimer = setTimeout(() => {
+      archiveSlipStep = 0;
+      document.querySelectorAll("#archiveSlips .archive-slip").forEach(item => { item.disabled = false; item.querySelector(".archive-slip-order").textContent = "LOOSE SLIP"; });
+      status.textContent = "The note is waiting to be restored.";
+      archiveSlipResetTimer = null;
+    }, 1100);
+    return;
+  }
+  archiveSlipStep++;
+  slip.disabled = true;
+  slip.querySelector(".archive-slip-order").textContent = "PLACED · " + String(archiveSlipStep).padStart(2, "0");
+  if (archiveSlipStep === 4) {
+    status.textContent = "The note is complete. Turn it over…";
+    document.getElementById("archivePuzzleResult").hidden = false;
+    document.querySelector("#archiveProfile .archive-deck").innerHTML = "Subject: Faris &nbsp;·&nbsp; Platform: Muzz &nbsp;·&nbsp; 3 May 2024";
+  } else {
+    status.textContent = archiveSlipStep + " of 4 slips placed. What came next?";
+  }
+}
 function openBook() { startGallery1ExhibitZoom("book"); }
 function openBookArchive(which) {
   const profile = which === "profile";
