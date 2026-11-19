@@ -5345,6 +5345,12 @@ button {
 #bookArchive .archive-datecase{background:#f1e5d1;border:1px solid #bd9e6d;color:#4b3329;box-shadow:0 12px 34px #0b06064d}
 #bookArchive .archive-datecase-seal{border-color:#967247;outline-color:#967247;color:#715536;transform:rotate(-5deg)}
 #bookArchive .archive-datecase .archive-puzzle-progress{color:#785846}
+#bookArchive .archive-hint-area{margin-top:14px}
+#bookArchive .archive-hint-button{padding:8px 0;border:0;border-bottom:1px solid #9d7a4e;background:transparent;color:#62432f;font:600 10px "DM Sans",sans-serif;letter-spacing:.12em;cursor:pointer;text-align:left}
+#bookArchive .archive-hint-button:hover,#bookArchive .archive-hint-button:focus-visible{color:#9b6e3e;outline-offset:3px}
+#bookArchive .archive-hint-button:disabled{opacity:.6;cursor:default}
+#bookArchive .archive-hint-list{display:grid;gap:8px;margin-top:11px}
+#bookArchive .archive-datecase .archive-hint-list p{max-width:520px;margin:0;padding:8px 12px;border-left:2px solid #b6915c;background:#e7d8bd88;color:#5b4031;font:12px/1.5 "DM Sans",sans-serif}
 #bookArchive .archive-guess input{color:#3f2a23;border-bottom-color:#9d7a4e}
 #bookArchive .archive-guess button{color:#5d3b2d;border-bottom-color:#9d7a4e}
 #bookArchive .archive-puzzle-result{border-top-color:#ae9169}
@@ -5919,6 +5925,10 @@ button {
                 <button type="submit">FILE YOUR GUESS →</button>
               </form>
               <p class="archive-puzzle-progress" id="archivePuzzleProgress" role="status" aria-live="polite">Enter the full date to open this archive entry.</p>
+              <div class="archive-hint-area" id="archiveHintArea">
+                <button class="archive-hint-button" id="archiveHintButton" type="button" onclick="showArchiveHint()">ASK THE MUSEUM FOR A HINT ✧</button>
+                <div class="archive-hint-list" id="archiveHintList" aria-live="polite"></div>
+              </div>
             </div>
             <div class="archive-datecase-seal"><span>ARCHIVE 001-A</span><b>DATE<br>SEALED</b><span>AWAITING YOUR<br>GUESS</span></div>
           </div>
@@ -6575,6 +6585,22 @@ function startGallery1ExhibitZoom(exhibit) {
    EXHIBIT 01 — BOOK CLOSE-UP & ARCHIVES
 ========================================== */
 const openedArchiveComplaints = new Set();
+let archiveHintIndex = 0;
+const archiveHints = [
+  "Official museum advice: stare at the display case until it feels guilty. No? Fine, ask again.",
+  "The watch in Exhibit 2 is a witness. It knows when we first went out. Interrogate it politely.",
+  "This profile caught my eye only a few days before that first date. I refuse to do the counting for you."
+];
+function showArchiveHint() {
+  if (archiveHintIndex >= archiveHints.length) return;
+  const hint = document.createElement("p");
+  hint.textContent = "HINT " + (archiveHintIndex + 1) + " · " + archiveHints[archiveHintIndex];
+  document.getElementById("archiveHintList").appendChild(hint);
+  archiveHintIndex++;
+  const button = document.getElementById("archiveHintButton");
+  button.textContent = archiveHintIndex === archiveHints.length ? "THE MUSEUM IS OUT OF IDEAS" : "ASK FOR ANOTHER HINT →";
+  button.disabled = archiveHintIndex === archiveHints.length;
+}
 function guessArchiveDate(event) {
   event.preventDefault();
   const guess = document.getElementById("archiveDateGuess").value.trim().replace(/[,]+/g, "").replace(/\s+/g, " ");
@@ -6589,7 +6615,7 @@ function guessArchiveDate(event) {
     const year = iso ? Number(iso[1]) : parts ? Number(parts[3]) : NaN;
     const entered = Date.UTC(year, month - 1, day);
     if (!Number.isFinite(entered) || new Date(entered).getUTCDate() !== day || new Date(entered).getUTCMonth() !== month - 1) {
-      status.textContent = "Enter a full date, like 3 May 2024.";
+      status.textContent = "Enter a full date in day, month, year order.";
     } else {
       status.textContent = entered > Date.UTC(2024, 4, 3) ? "Earlier than that. Try another date." : "Later than that. Try another date.";
     }
@@ -6599,6 +6625,7 @@ function guessArchiveDate(event) {
   document.getElementById("archivePuzzleResult").hidden = false;
   document.querySelector("#archiveProfile .archive-deck").innerHTML = "Subject: Faris &nbsp;·&nbsp; Platform: Muzz &nbsp;·&nbsp; 3 May 2024";
   document.querySelector("#bookArchive .archive-guess").hidden = true;
+  document.getElementById("archiveHintArea").hidden = true;
 }
 function openBook() { startGallery1ExhibitZoom("book"); }
 function openBookArchive(which) {
