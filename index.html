@@ -5322,6 +5322,41 @@ button {
 #bookArchive .archive-puzzle-date{font:clamp(30px,5vw,52px) "Cormorant Garamond",serif;color:#612639;margin:4px 0}
 #bookArchive .archive-puzzle-result p:last-child{font:13px/1.5 "DM Sans",sans-serif;margin:5px}
 @media(max-width:650px){#bookArchive .archive-datecase{grid-template-columns:1fr;gap:18px}#bookArchive .archive-datecase-seal{width:125px;height:125px;margin:auto}#bookArchive .archive-datecase strong{font-size:32px}}
+/* Exhibit 1 follows Gallery I's walnut, ivory and champagne palette. */
+#bookArchive{background:radial-gradient(ellipse at 50% 28%,#4b2d1e 0%,#291911 57%,#140e0b 100%);color:#f3e9d8}
+#bookArchive .archive-back{border:0;background:transparent;color:#f5e5cc;box-shadow:none;padding:10px 5px;text-shadow:0 2px 8px #140b08}
+#bookArchive .archive-paper{max-width:1060px;background:transparent;border:0;outline:0;box-shadow:none;padding:clamp(24px,4vw,54px)}
+#bookArchive .archive-paper::before{display:none}
+#bookArchive .archive-letterhead{border-bottom-color:#ae9169}
+#bookArchive .archive-brand,#bookArchive h2{color:#f6e8c9}
+#bookArchive .archive-exhibit-name,#bookArchive .archive-file-number,#bookArchive .archive-kicker{color:#d6b989}
+#bookArchive .archive-description,#bookArchive .archive-deck{color:#eadbc5}
+#bookArchive .archive-tabs{border-bottom-color:#9f8057}
+#bookArchive .archive-tab{color:#cbb597}
+#bookArchive .archive-tab.selected{color:#fff0d1;border-bottom-color:#d4b47c}
+#bookArchive .archive-evidence{background:#f9e9ca0c;border:1px solid #ae8a5a;color:#f5e5c9;box-shadow:none;transition:background .2s,border-color .2s}
+#bookArchive .archive-evidence:hover,#bookArchive .archive-evidence:focus-visible{background:#f9e9ca18;border-color:#e1bd86}
+#bookArchive .archive-evidence-label,#bookArchive .archive-evidence-prompt,#bookArchive .archive-seal{color:#d6b989}
+#bookArchive .archive-handwritten{background:#f3e7d4;color:#4d302c;border:1px solid #cbae82;box-shadow:0 9px 25px #1009074d}
+#bookArchive .archive-profile-note,#bookArchive .archive-decision-note{transform:none}
+#bookArchive .archive-puzzle{border-top-color:#ae9169}
+#bookArchive .archive-puzzle h3{color:#f6e8c9}
+#bookArchive .archive-puzzle-intro{color:#e5d6bd}
+#bookArchive .archive-datecase{background:#f1e5d1;border:1px solid #bd9e6d;color:#4b3329;box-shadow:0 12px 34px #0b06064d}
+#bookArchive .archive-datecase-seal{border-color:#967247;outline-color:#967247;color:#715536;transform:rotate(-5deg)}
+#bookArchive .archive-datecase .archive-puzzle-progress{color:#785846}
+#bookArchive .archive-guess input{color:#3f2a23;border-bottom-color:#9d7a4e}
+#bookArchive .archive-guess button{color:#5d3b2d;border-bottom-color:#9d7a4e}
+#bookArchive .archive-puzzle-result{border-top-color:#ae9169}
+#bookArchive .archive-puzzle-date{color:#f5dfb6}
+#bookArchive .archive-assessment{background:#f9e9ca0c;border-color:#ae8a5a}
+#bookArchive .archive-assessment h3{background:transparent;color:#e4c99d;border-bottom:1px solid #9f8057}
+#bookArchive .archive-checkrow{border-bottom-color:#9f8057}
+#bookArchive .archive-checkrow span:last-child,#bookArchive .archive-checkrow em,#bookArchive .archive-first-move strong{color:#e0bb82}
+#bookArchive .archive-first-move{border-top-color:#ae9169}
+#bookArchive .archive-first-title,#bookArchive .archive-reveal-button{background:#4b3022;color:#f6e5c5;border-color:#c5a46d}
+#bookArchive .archive-footer{border-top-color:#ae9169;color:#c0a984}
+@media(max-width:650px){#bookArchive .archive-paper{padding:22px 12px}#bookArchive .archive-evidence-grid{gap:12px}#bookArchive .archive-datecase{padding:22px 18px}}
 /* Exhibit 3: museum records replace the former standalone constellation image */
 #conversationExhibit{background:radial-gradient(ellipse at 50% 30%,#573323 0%,#301719 55%,#150d11 100%);color:#f4e4ce}
 #conversationExhibit .conversation-archive-scroll{position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:78px clamp(20px,5vw,65px) 45px;text-align:center}
@@ -5873,7 +5908,7 @@ button {
         <section class="archive-puzzle" aria-label="The sealed date in the archive">
           <span class="archive-kicker">ARCHIVE DATE / SEALED</span>
           <h3>When did this begin?</h3>
-          <p class="archive-puzzle-intro">Find our first date in Exhibit 2. This entry was recorded the Friday before it.</p>
+          <p class="archive-puzzle-intro">The date is missing from this record. When do you think I first noticed your profile?</p>
           <div class="archive-datecase" aria-label="Archive record with a sealed date">
             <div class="archive-datecase-body">
               <small>MUZZ / PROFILE OBSERVATION</small><strong>Faris</strong>
@@ -5885,7 +5920,7 @@ button {
               </form>
               <p class="archive-puzzle-progress" id="archivePuzzleProgress" role="status" aria-live="polite">Enter the full date to open this archive entry.</p>
             </div>
-            <div class="archive-datecase-seal"><span>RECORDED</span><b>DATE<br>SEALED</b><span>FRIDAY BEFORE<br>OUR FIRST DATE</span></div>
+            <div class="archive-datecase-seal"><span>ARCHIVE 001-A</span><b>DATE<br>SEALED</b><span>AWAITING YOUR<br>GUESS</span></div>
           </div>
           <div class="archive-puzzle-result" id="archivePuzzleResult" hidden>
             <span class="archive-kicker">ARCHIVE DATE RECOVERED</span>
@@ -6545,7 +6580,21 @@ function guessArchiveDate(event) {
   const guess = document.getElementById("archiveDateGuess").value.trim().replace(/[,]+/g, "").replace(/\s+/g, " ");
   const correct = /^(0?3)[\s/.-]+(may|0?5)[\s/.-]+2024$/i.test(guess) || /^2024[/-]0?5[/-]0?3$/.test(guess);
   const status = document.getElementById("archivePuzzleProgress");
-  if (!correct) { status.textContent = "That date doesn't fit the archive. Check the first-date watch, then find the Friday before that week."; return; }
+  if (!correct) {
+    const parts = /^(\d{1,2})[\s/.-]+([a-z]+|\d{1,2})[\s/.-]+(\d{4})$/i.exec(guess);
+    const iso = /^(\d{4})[/-](\d{1,2})[/-](\d{1,2})$/.exec(guess);
+    const months = {jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12};
+    const day = iso ? Number(iso[3]) : parts ? Number(parts[1]) : NaN;
+    const month = iso ? Number(iso[2]) : parts ? (months[parts[2].slice(0,3).toLowerCase()] || Number(parts[2])) : NaN;
+    const year = iso ? Number(iso[1]) : parts ? Number(parts[3]) : NaN;
+    const entered = Date.UTC(year, month - 1, day);
+    if (!Number.isFinite(entered) || new Date(entered).getUTCDate() !== day || new Date(entered).getUTCMonth() !== month - 1) {
+      status.textContent = "Enter a full date, like 3 May 2024.";
+    } else {
+      status.textContent = entered > Date.UTC(2024, 4, 3) ? "Earlier than that. Try another date." : "Later than that. Try another date.";
+    }
+    return;
+  }
   status.textContent = "You found the beginning.";
   document.getElementById("archivePuzzleResult").hidden = false;
   document.querySelector("#archiveProfile .archive-deck").innerHTML = "Subject: Faris &nbsp;·&nbsp; Platform: Muzz &nbsp;·&nbsp; 3 May 2024";
