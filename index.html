@@ -5302,7 +5302,7 @@ button {
 #bookArchive .archive-puzzle{margin:30px 0 4px;padding:22px clamp(16px,3vw,28px);border:1px solid #a47a58;background:#ead8b9;box-shadow:3px 5px 0 #b99b7659}
 #bookArchive .archive-puzzle h3{font:italic clamp(25px,3vw,34px) "Cormorant Garamond",serif;color:#61303a;margin:8px 0}
 #bookArchive .archive-puzzle-intro{font:13px/1.6 "DM Sans",sans-serif;margin:0 0 18px;max-width:680px}
-#bookArchive .archive-scan{position:relative;min-height:300px;overflow:hidden;border:1px solid #a87b57;background:radial-gradient(ellipse at 52% 38%,#f8efd9,#dfc9a6);touch-action:none;cursor:crosshair;user-select:none;--lens-x:50%;--lens-y:50%}
+#bookArchive .archive-scan{position:relative;min-height:300px;overflow:hidden;border:1px solid #a87b57;background:radial-gradient(ellipse at 52% 38%,#f8efd9,#dfc9a6);user-select:none;--lens-x:50%;--lens-y:50%}
 #bookArchive .archive-scan-page{position:absolute;inset:16px 22px;border:1px solid #9c7b5a88;padding:19px 24px;color:#71594b;background:linear-gradient(90deg,transparent 49.8%,#ac886340 50%,transparent 50.2%)}
 #bookArchive .archive-scan-page small{font:10px "DM Sans",sans-serif;letter-spacing:.17em}
 #bookArchive .archive-scan-page strong{display:block;margin:9px 0 4px;font:italic 38px "Cormorant Garamond",serif;color:#68483e}
@@ -5317,7 +5317,11 @@ button {
 #bookArchive .archive-scan-mark[data-mark="year"]{left:48%;top:67%}
 #bookArchive .archive-scan-mark[data-mark="chat"]{left:5%;top:72%;font-size:10px;color:#876b5d}
 #bookArchive .archive-lens{position:absolute;z-index:2;left:var(--lens-x);top:var(--lens-y);width:140px;height:140px;border:6px solid #ac8144;border-radius:50%;transform:translate(-50%,-50%);box-shadow:inset 0 0 0 2px #fff8e3aa,0 4px 12px #4b291e66;pointer-events:none}
-#bookArchive .archive-lens::after{content:"";position:absolute;width:65px;height:14px;right:-49px;bottom:-16px;transform:rotate(45deg);transform-origin:left center;border-radius:8px;background:linear-gradient(#d4b46d,#79552d,#d4b46d);box-shadow:0 2px 5px #4b291e66}
+#bookArchive .archive-handle{position:absolute;z-index:3;left:calc(var(--lens-x) + 47px);top:calc(var(--lens-y) + 46px);width:98px;height:30px;transform:rotate(45deg);transform-origin:left center;border:2px solid #78502e;border-radius:8px;background:linear-gradient(#d4b46d,#79552d,#d4b46d);box-shadow:0 2px 5px #4b291e66;color:#fff6df;font:700 10px "DM Sans",sans-serif;letter-spacing:.1em;cursor:grab;touch-action:none}
+#bookArchive .archive-handle:active{cursor:grabbing}
+#bookArchive .archive-handle:focus-visible{outline:3px solid #612639;outline-offset:4px}
+#bookArchive .archive-clues{display:grid;gap:7px;margin-top:14px}
+#bookArchive .archive-clues p{margin:0;padding:10px 13px;border-left:3px solid #ae8457;background:#f7e9d0;color:#593b36;font:14px/1.45 "DM Sans",sans-serif}
 #bookArchive .archive-guess{display:flex;gap:10px;flex-wrap:wrap;align-items:stretch;margin-top:15px}
 #bookArchive .archive-guess input{flex:1 1 210px;min-width:0;padding:13px 15px;border:1px solid #a87b57;background:#fff5e3;color:#4b302a;font:20px "Cormorant Garamond",serif}
 #bookArchive .archive-guess button{padding:11px 24px;border:1px solid #612639;background:#612639;color:#f7e5c7;font:500 11px "DM Sans",sans-serif;letter-spacing:.14em}
@@ -5878,17 +5882,19 @@ button {
         <section class="archive-puzzle" aria-label="Inspect the profile record with a magnifying glass">
           <span class="archive-kicker">THE PROFILE RECORD / FADED INK</span>
           <h3>Look a little closer</h3>
-          <p class="archive-puzzle-intro">The date isn't written here. Move the glass across the faded record (drag on a phone), follow the clues, then tell me when this story began. You may need to look at the watch exhibit too.</p>
-          <div class="archive-scan" id="archiveScan" role="group" tabindex="0" aria-label="Drag or move the magnifying glass to find three hidden clues. Arrow keys also move the lens." onpointerdown="scanArchive(event)" onpointermove="scanArchive(event)" onkeydown="moveArchiveLensWithKeys(event)">
+          <p class="archive-puzzle-intro">Drag the gold handle to inspect the faded record. Each clue you find stays below so you can read it. Use the watch exhibit's date to work out when this story began.</p>
+          <div class="archive-scan" id="archiveScan" role="group" aria-label="Profile record with a draggable magnifying glass">
             <div class="archive-scan-page" aria-hidden="true"><small>MUZZ / PROFILE RECORD</small><strong>Faris</strong><p>A rather interesting About section. A British passport mentioned, though he already had a Singaporean one.</p><em>DATE ERASED</em></div>
             <div class="archive-scan-ink" aria-hidden="true">
-              <span class="archive-scan-mark" data-mark="day">BEFORE THE WATCH<strong>Three days</strong></span>
-              <span class="archive-scan-mark" data-mark="month">CHECK EXHIBIT 2<strong>First date</strong></span>
-              <span class="archive-scan-mark" data-mark="year">SAME AS THAT DATE<strong>Month &amp; year</strong></span>
+              <span class="archive-scan-mark" data-mark="day">TIME BETWEEN<strong>Three days</strong></span>
+              <span class="archive-scan-mark" data-mark="month">LOOK AT THE WATCH<strong>First date</strong></span>
+              <span class="archive-scan-mark" data-mark="year">KEEP FROM THAT DATE<strong>Month &amp; year</strong></span>
               <span class="archive-scan-mark" data-mark="chat">CHAT ADDENDUM<br>GOOGLE TRANSLATE<br>AFTER FIRST MESSAGE</span>
             </div>
             <span class="archive-lens" aria-hidden="true"></span>
+            <button class="archive-handle" type="button" aria-label="Drag the magnifying glass handle; arrow keys also move it" onpointerdown="startArchiveHandle(event)" onpointermove="moveArchiveHandle(event)" onpointerup="stopArchiveHandle(event)" onpointercancel="stopArchiveHandle(event)" onkeydown="moveArchiveLensWithKeys(event)">DRAG</button>
           </div>
+          <div class="archive-clues" id="archiveClues" aria-live="polite"></div>
           <p class="archive-puzzle-progress" id="archivePuzzleProgress" role="status" aria-live="polite">Three clues are hidden in the paper.</p>
           <form class="archive-guess" onsubmit="guessArchiveDate(event)">
             <input id="archiveDateGuess" type="text" autocomplete="off" inputmode="text" aria-label="Guess the date when the story began" placeholder="Day Month Year" required>
@@ -6548,11 +6554,17 @@ function startGallery1ExhibitZoom(exhibit) {
 ========================================== */
 const openedArchiveComplaints = new Set();
 const archiveFoundMarks = new Set();
+let archiveHandleDrag = null;
+const archiveClueText = {
+  day: "This profile caught my eye three days before our first date.",
+  month: "The watch in Exhibit 2 holds the date of our first date.",
+  year: "Use the same month and year as that first date. Count back three days for this one."
+};
 function positionArchiveLens(x, y) {
   const scan = document.getElementById("archiveScan");
   const bounds = scan.getBoundingClientRect();
-  x = Math.max(0, Math.min(bounds.width, x));
-  y = Math.max(0, Math.min(bounds.height, y));
+  x = Math.max(85, Math.min(bounds.width - 115, x));
+  y = Math.max(80, Math.min(bounds.height - 95, y));
   scan.style.setProperty("--lens-x", x + "px");
   scan.style.setProperty("--lens-y", y + "px");
   for (const mark of scan.querySelectorAll('.archive-scan-mark:not([data-mark="chat"])')) {
@@ -6563,6 +6575,9 @@ function positionArchiveLens(x, y) {
     const key = mark.dataset.mark;
     if (archiveFoundMarks.has(key)) continue;
     archiveFoundMarks.add(key);
+    const clue = document.createElement("p");
+    clue.textContent = archiveClueText[key];
+    document.getElementById("archiveClues").appendChild(clue);
   }
   const left = 3 - archiveFoundMarks.size;
   document.getElementById("archivePuzzleProgress").textContent = left ? (3-left) + " of 3 clues found. Keep looking, or make your guess." : "All clues found. What date do they point to?";
@@ -6578,16 +6593,25 @@ function guessArchiveDate(event) {
   document.querySelector("#archiveProfile .archive-deck").innerHTML = "Subject: Faris &nbsp;·&nbsp; Platform: Muzz &nbsp;·&nbsp; 3 May 2024";
   document.querySelector("#bookArchive .archive-guess").hidden = true;
 }
-function scanArchive(event) {
-  if (event.type === "pointermove" && event.pointerType === "touch" && event.buttons === 0) return;
-  const bounds = event.currentTarget.getBoundingClientRect();
-  positionArchiveLens(event.clientX - bounds.left, event.clientY - bounds.top);
+function startArchiveHandle(event) {
+  event.preventDefault();
+  const scan = document.getElementById("archiveScan");
+  const bounds = scan.getBoundingClientRect();
+  archiveHandleDrag = {id:event.pointerId, startX:event.clientX, startY:event.clientY, x:parseFloat(scan.style.getPropertyValue("--lens-x")) || bounds.width/2, y:parseFloat(scan.style.getPropertyValue("--lens-y")) || bounds.height/2};
+  event.currentTarget.setPointerCapture(event.pointerId);
+}
+function moveArchiveHandle(event) {
+  if (!archiveHandleDrag || archiveHandleDrag.id !== event.pointerId) return;
+  positionArchiveLens(archiveHandleDrag.x + event.clientX - archiveHandleDrag.startX, archiveHandleDrag.y + event.clientY - archiveHandleDrag.startY);
+}
+function stopArchiveHandle(event) {
+  if (archiveHandleDrag?.id === event.pointerId) archiveHandleDrag = null;
 }
 function moveArchiveLensWithKeys(event) {
   const direction = {ArrowLeft:[-28,0],ArrowRight:[28,0],ArrowUp:[0,-28],ArrowDown:[0,28]}[event.key];
   if (!direction) return;
   event.preventDefault();
-  const scan = event.currentTarget;
+  const scan = document.getElementById("archiveScan");
   const rect = scan.getBoundingClientRect();
   const x = parseFloat(scan.style.getPropertyValue("--lens-x")) || rect.width / 2;
   const y = parseFloat(scan.style.getPropertyValue("--lens-y")) || rect.height / 2;
