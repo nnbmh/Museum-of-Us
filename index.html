@@ -5294,30 +5294,33 @@ button {
 #gallery1.g1-dissolving .g1-zoom-dissolve{opacity:1}
 #gallery1.g1-zooming button{pointer-events:none!important}
 /* Exhibit 1: archive records immediately after zoom, with two tabs */
-#bookArchive .archive-tabs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
-#bookArchive .archive-tab{background:#f6e8d0;color:#63313a;border:1px solid #ad8058;padding:15px 10px;font:500 clamp(11px,1.3vw,14px) "DM Sans",sans-serif;text-align:center}
-#bookArchive .archive-tab.selected{background:#612639;color:#f7e5c7;border-color:#612639}
+#bookArchive .archive-tabs{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:24px;border-bottom:1px solid #b69a73}
+#bookArchive .archive-tab{background:transparent;color:#725242;border:0;border-bottom:3px solid transparent;padding:15px 10px;font:500 clamp(11px,1.3vw,14px) "DM Sans",sans-serif;text-align:center}
+#bookArchive .archive-tab.selected{background:transparent;color:#542e26;border-bottom-color:#aa8150}
 #bookArchive .archive-tab:focus-visible{outline:2px solid #612639;outline-offset:2px}
 /* Exhibit 1's sealed archive date */
-#bookArchive .archive-puzzle{margin:30px 0 4px;padding:22px clamp(16px,3vw,28px);border:1px solid #a47a58;background:#ead8b9;box-shadow:3px 5px 0 #b99b7659}
-#bookArchive .archive-puzzle h3{font:italic clamp(25px,3vw,34px) "Cormorant Garamond",serif;color:#61303a;margin:8px 0}
-#bookArchive .archive-puzzle-intro{font:13px/1.6 "DM Sans",sans-serif;margin:0 0 18px;max-width:680px}
-#bookArchive .archive-datecase{display:grid;grid-template-columns:minmax(0,1fr) minmax(150px,28%);gap:24px;align-items:center;min-height:210px;padding:26px clamp(18px,3vw,32px);border:1px solid #a87b57;background:linear-gradient(90deg,#f7ebd4,#ecdbba);color:#68483e;box-shadow:inset 0 0 0 8px #f7ebd477}
+#bookArchive .archive-puzzle{margin:42px 0 4px;padding:33px clamp(8px,2vw,24px) 12px;border:0;border-top:3px double #b6986f;background:transparent;box-shadow:none}
+#bookArchive .archive-puzzle h3{font:italic clamp(31px,4vw,46px) "Cormorant Garamond",serif;color:#512d28;margin:8px 0 4px}
+#bookArchive .archive-puzzle-intro{font:14px/1.65 "DM Sans",sans-serif;margin:0 0 24px;max-width:700px;color:#62463b}
+#bookArchive .archive-datecase{display:grid;grid-template-columns:minmax(0,1fr) 170px;gap:24px;align-items:center;min-height:195px;padding:25px clamp(20px,3vw,34px);border:1px solid #c1a47c;background:linear-gradient(120deg,#fff6e5,#f4e5c9);color:#68483e;box-shadow:0 8px 20px #4b28151e,inset 0 0 0 5px #fff9ec}
 #bookArchive .archive-datecase small{font:10px "DM Sans",sans-serif;letter-spacing:.16em}
 #bookArchive .archive-datecase strong{display:block;margin:10px 0;font:italic 38px "Cormorant Garamond",serif}
 #bookArchive .archive-datecase p{max-width:480px;margin:0;font:italic 21px/1.3 "Cormorant Garamond",serif}
-#bookArchive .archive-datecase-seal{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:145px;border:2px double #9b5961;color:#74343f;text-align:center;transform:rotate(-3deg)}
-#bookArchive .archive-datecase-seal span{font:600 10px/1.4 "DM Sans",sans-serif;letter-spacing:.12em}
-#bookArchive .archive-datecase-seal b{font:500 28px/.9 "Cormorant Garamond",serif;letter-spacing:.03em}
-#bookArchive .archive-guess{display:flex;gap:10px;flex-wrap:wrap;align-items:stretch;margin-top:15px}
-#bookArchive .archive-guess input{flex:1 1 210px;min-width:0;padding:13px 15px;border:1px solid #a87b57;background:#fff5e3;color:#4b302a;font:20px "Cormorant Garamond",serif}
-#bookArchive .archive-guess button{padding:11px 24px;border:1px solid #612639;background:#612639;color:#f7e5c7;font:500 11px "DM Sans",sans-serif;letter-spacing:.14em}
+#bookArchive .archive-datecase-seal{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;width:150px;height:150px;border:2px solid #8d4646;border-radius:50%;outline:1px solid #8d4646;outline-offset:-8px;color:#74343f;text-align:center;transform:rotate(-8deg)}
+#bookArchive .archive-datecase-seal span{font:600 9px/1.3 "DM Sans",sans-serif;letter-spacing:.09em}
+#bookArchive .archive-datecase-seal b{font:500 25px/.9 "Cormorant Garamond",serif;letter-spacing:.03em}
+#bookArchive .archive-guess{display:flex;gap:16px;flex-wrap:wrap;align-items:end;margin-top:8px}
+#bookArchive .archive-guess input{flex:1 1 210px;min-width:0;padding:12px 2px;border:0;border-bottom:1px solid #a77e51;border-radius:0;background:transparent;color:#4b302a;font:italic 27px "Cormorant Garamond",serif}
+#bookArchive .archive-guess input::placeholder{color:#957963}
+#bookArchive .archive-guess button{padding:12px 4px;border:0;border-bottom:1px solid #7b503b;background:transparent;color:#673a34;font:500 11px "DM Sans",sans-serif;letter-spacing:.14em}
+#bookArchive .archive-guess button:hover{color:#a16542;border-bottom-color:#a16542}
 #bookArchive .archive-guess :focus-visible{outline:2px solid #612639;outline-offset:2px}
-#bookArchive .archive-puzzle-progress{min-height:26px;margin:16px 0 0;font:12px/1.5 "DM Sans",sans-serif;color:#713b43}
-#bookArchive .archive-puzzle-result{border-top:1px solid #b58c64;padding-top:18px;margin-top:10px;text-align:center}
+#bookArchive .archive-puzzle-progress{min-height:26px;margin:20px 0 0;font:12px/1.5 "DM Sans",sans-serif;color:#713b43}
+#bookArchive .archive-puzzle-result{border-top:1px solid #b58c64;padding-top:20px;margin-top:20px;text-align:center}
 #bookArchive .archive-puzzle-date{font:clamp(30px,5vw,52px) "Cormorant Garamond",serif;color:#612639;margin:4px 0}
 #bookArchive .archive-puzzle-result p:last-child{font:13px/1.5 "DM Sans",sans-serif;margin:5px}
-@media(max-width:650px){#bookArchive .archive-datecase{grid-template-columns:1fr;gap:18px}#bookArchive .archive-datecase-seal{max-width:240px;width:100%;min-height:120px;margin:auto}#bookArchive .archive-datecase strong{font-size:32px}}
+@media(max-width:650px){#bookArchive .archive-datecase{grid-template-columns:1fr;gap:18px}#bookArchive .archive-datecase-seal{width:125px;height:125px;margin:auto}#bookArchive .archive-datecase strong{font-size:32px}}
+
 /* Exhibit 3: museum records replace the former standalone constellation image */
 #conversationExhibit{background:radial-gradient(ellipse at 50% 30%,#573323 0%,#301719 55%,#150d11 100%);color:#f4e4ce}
 #conversationExhibit .conversation-archive-scroll{position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:78px clamp(20px,5vw,65px) 45px;text-align:center}
