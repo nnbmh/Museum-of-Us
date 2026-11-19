@@ -5306,21 +5306,22 @@ button {
 #bookArchive .archive-datecase small{font:10px "DM Sans",sans-serif;letter-spacing:.16em}
 #bookArchive .archive-datecase strong{display:block;margin:10px 0;font:italic 38px "Cormorant Garamond",serif}
 #bookArchive .archive-datecase p{max-width:480px;margin:0;font:italic 21px/1.3 "Cormorant Garamond",serif}
+#bookArchive .archive-datecase-body{min-width:0}
 #bookArchive .archive-datecase-seal{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;width:150px;height:150px;border:2px solid #8d4646;border-radius:50%;outline:1px solid #8d4646;outline-offset:-8px;color:#74343f;text-align:center;transform:rotate(-8deg)}
 #bookArchive .archive-datecase-seal span{font:600 9px/1.3 "DM Sans",sans-serif;letter-spacing:.09em}
 #bookArchive .archive-datecase-seal b{font:500 25px/.9 "Cormorant Garamond",serif;letter-spacing:.03em}
-#bookArchive .archive-guess{display:flex;gap:16px;flex-wrap:wrap;align-items:end;margin-top:8px}
-#bookArchive .archive-guess input{flex:1 1 210px;min-width:0;padding:12px 2px;border:0;border-bottom:1px solid #a77e51;border-radius:0;background:transparent;color:#4b302a;font:italic 27px "Cormorant Garamond",serif}
+#bookArchive .archive-guess{display:flex;gap:10px 16px;flex-wrap:wrap;align-items:end;margin-top:26px}
+#bookArchive .archive-guess label{flex-basis:100%;font:600 10px "DM Sans",sans-serif;letter-spacing:.16em;color:#755746}
+#bookArchive .archive-guess input{flex:1 1 175px;min-width:0;padding:9px 2px;border:0;border-bottom:1px solid #a77e51;border-radius:0;background:transparent;color:#4b302a;font:italic 25px "Cormorant Garamond",serif}
 #bookArchive .archive-guess input::placeholder{color:#957963}
-#bookArchive .archive-guess button{padding:12px 4px;border:0;border-bottom:1px solid #7b503b;background:transparent;color:#673a34;font:500 11px "DM Sans",sans-serif;letter-spacing:.14em}
+#bookArchive .archive-guess button{padding:12px 4px;border:0;border-bottom:1px solid #7b503b;background:transparent;color:#673a34;font:500 10px "DM Sans",sans-serif;letter-spacing:.11em}
 #bookArchive .archive-guess button:hover{color:#a16542;border-bottom-color:#a16542}
 #bookArchive .archive-guess :focus-visible{outline:2px solid #612639;outline-offset:2px}
-#bookArchive .archive-puzzle-progress{min-height:26px;margin:20px 0 0;font:12px/1.5 "DM Sans",sans-serif;color:#713b43}
+#bookArchive .archive-datecase .archive-puzzle-progress{min-height:20px;margin:11px 0 0;font:11px/1.5 "DM Sans",sans-serif;color:#713b43}
 #bookArchive .archive-puzzle-result{border-top:1px solid #b58c64;padding-top:20px;margin-top:20px;text-align:center}
 #bookArchive .archive-puzzle-date{font:clamp(30px,5vw,52px) "Cormorant Garamond",serif;color:#612639;margin:4px 0}
 #bookArchive .archive-puzzle-result p:last-child{font:13px/1.5 "DM Sans",sans-serif;margin:5px}
 @media(max-width:650px){#bookArchive .archive-datecase{grid-template-columns:1fr;gap:18px}#bookArchive .archive-datecase-seal{width:125px;height:125px;margin:auto}#bookArchive .archive-datecase strong{font-size:32px}}
-
 /* Exhibit 3: museum records replace the former standalone constellation image */
 #conversationExhibit{background:radial-gradient(ellipse at 50% 30%,#573323 0%,#301719 55%,#150d11 100%);color:#f4e4ce}
 #conversationExhibit .conversation-archive-scroll{position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:78px clamp(20px,5vw,65px) 45px;text-align:center}
@@ -5872,16 +5873,20 @@ button {
         <section class="archive-puzzle" aria-label="The sealed date in the archive">
           <span class="archive-kicker">ARCHIVE DATE / SEALED</span>
           <h3>When did this begin?</h3>
-          <p class="archive-puzzle-intro">The date of the first date is held in Exhibit 2. This record belongs to the Friday just before that week began. Put the two together and file the date you think I first noticed your profile.</p>
+          <p class="archive-puzzle-intro">Find our first date in Exhibit 2. This entry was recorded the Friday before it.</p>
           <div class="archive-datecase" aria-label="Archive record with a sealed date">
-            <div><small>MUZZ / PROFILE OBSERVATION</small><strong>Faris</strong><p>The About section. The British passport. The thought that maybe I should say hello.</p></div>
+            <div class="archive-datecase-body">
+              <small>MUZZ / PROFILE OBSERVATION</small><strong>Faris</strong>
+              <p>The About section. The British passport. The thought that maybe I should say hello.</p>
+              <form class="archive-guess" onsubmit="guessArchiveDate(event)">
+                <label for="archiveDateGuess">DATE OF THIS ENTRY</label>
+                <input id="archiveDateGuess" type="text" autocomplete="off" inputmode="text" aria-label="Guess the date when the story began" placeholder="Day Month Year" required>
+                <button type="submit">FILE YOUR GUESS →</button>
+              </form>
+              <p class="archive-puzzle-progress" id="archivePuzzleProgress" role="status" aria-live="polite">Enter the full date to open this archive entry.</p>
+            </div>
             <div class="archive-datecase-seal"><span>RECORDED</span><b>DATE<br>SEALED</b><span>FRIDAY BEFORE<br>OUR FIRST DATE</span></div>
           </div>
-          <p class="archive-puzzle-progress" id="archivePuzzleProgress" role="status" aria-live="polite">Enter the full date to open this archive entry.</p>
-          <form class="archive-guess" onsubmit="guessArchiveDate(event)">
-            <input id="archiveDateGuess" type="text" autocomplete="off" inputmode="text" aria-label="Guess the date when the story began" placeholder="Day Month Year" required>
-            <button type="submit">FILE YOUR GUESS →</button>
-          </form>
           <div class="archive-puzzle-result" id="archivePuzzleResult" hidden>
             <span class="archive-kicker">ARCHIVE DATE RECOVERED</span>
             <div class="archive-puzzle-date">3 May 2024</div>
