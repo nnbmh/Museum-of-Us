@@ -5707,6 +5707,39 @@ button {
 #gallery3Room .g3-floor-point { position:relative;bottom:var(--rise);flex:none;width:clamp(42px,3.2vw,52px);height:clamp(42px,3.2vw,52px);border:1px solid #b9945e;border-radius:50%;background:radial-gradient(circle,#fff5dc 0%,#d9bb88 28%,#a57c49 68%,#6e523b 100%);box-shadow:0 2px 12px #3f291744,inset 0 0 0 3px #f7e8c899;color:#172238;font:600 15px Georgia,serif;cursor:pointer;pointer-events:auto;touch-action:manipulation; }
 #gallery3Room .g3-floor-point.seen { background:radial-gradient(circle,#fffdfa,#f2d7a0 60%,#b88e55);box-shadow:0 0 16px #e9ca8a; }
 #gallery3Room .g3-floor-point:focus-visible { outline:2px solid #fff;outline-offset:3px; }
+#gallery3Room .g3-final-plaque {
+  position:absolute;left:43.25%;top:71.6%;width:13.5%;height:4.1%;
+  z-index:10;display:flex;align-items:center;justify-content:center;
+  border:2px solid #a87d48;border-radius:7px;
+  background:linear-gradient(#fff0ce,#e6ca93);
+  box-shadow:0 3px 9px rgba(28,19,10,.35),inset 0 0 0 2px #fff4d8;
+  color:#332919;text-align:center;
+  font:italic 600 clamp(11px,1.45vw,20px)/1 "Cormorant Garamond",Georgia,serif;
+  opacity:0;transform:translateY(5px);transition:opacity .7s ease,transform .7s ease;
+  pointer-events:none;
+}
+#gallery3Room .g3-final-line {
+  position:absolute;left:22%;top:77.3%;width:56%;z-index:10;
+  color:#182b41;text-align:center;
+  text-shadow:0 1px 5px #fff,0 0 12px #fff;
+  font:italic 500 clamp(15px,1.65vw,22px)/1.15 "Cormorant Garamond",Georgia,serif;
+  opacity:0;transform:translateY(6px);transition:opacity .8s ease .4s,transform .8s ease .4s;
+  pointer-events:none;
+}
+#gallery3Room.g3-complete .g3-final-plaque,
+#gallery3Room.g3-complete .g3-final-line { opacity:1;transform:translateY(0); }
+#gallery3Room.g3-complete .g3-floor-point {
+  animation:g3FinalPointGlow 1.8s ease-out both;
+}
+@keyframes g3FinalPointGlow {
+  0% { box-shadow:0 0 16px #e9ca8a; }
+  40% { box-shadow:0 0 30px 10px rgba(255,226,157,.9),0 0 48px rgba(255,239,187,.75); }
+  100% { box-shadow:0 0 18px 3px rgba(243,211,143,.7); }
+}
+@media (prefers-reduced-motion:reduce) {
+  #gallery3Room .g3-final-plaque,#gallery3Room .g3-final-line { transition:none; }
+  #gallery3Room.g3-complete .g3-floor-point { animation:none;box-shadow:0 0 18px 3px rgba(243,211,143,.7); }
+}
 #gallery3Room .g3-floor-hint { position:absolute;bottom:1.5%;left:0;width:100%;text-align:center;z-index:8;pointer-events:none;color:#273447;text-shadow:0 1px 5px #fff,0 0 10px #fff;font:500 clamp(10px,1vw,13px) "DM Sans",sans-serif;letter-spacing:.17em; }
 #gallery3Room .g3-portrait-panel[hidden] { display:none; }
 /* Muted dusty blue museum panel, centred over the portrait. */
@@ -6445,6 +6478,8 @@ button {
     <button class="g3-floor-point" style="--point:4;--rise:0px" onclick="revealGallery3(4)" aria-label="Reveal the fifth part of the portrait">V</button>
   </div>
   <div class="g3-floor-hint">✧ TAP THE FIVE POINTS ON THE FLOOR ✧</div>
+  <div class="g3-final-plaque" aria-hidden="true">The Faris I Love</div>
+  <p class="g3-final-line" aria-live="polite">I know I don’t always say these things when I notice them… but this is how I see you, sayang.</p>
   <div id="g3PortraitPanel" class="g3-portrait-panel" hidden role="dialog" aria-modal="true" aria-labelledby="g3PortraitTitle">
     <small id="g3PortraitLabel">THE FARIS I KNOW</small>
     <h2 id="g3PortraitTitle">Through My Eyes</h2>
@@ -7862,6 +7897,7 @@ const g3PortraitNotes=[
 ];
 const g3PortraitSeen=new Set();
 let g3NoteTimer=null;
+let g3FinalShown=false;
 function showG3PortraitHint(){
   clearTimeout(g3NoteTimer);
   document.getElementById("g3PortraitLabel").textContent="THE FARIS I KNOW";
@@ -7896,6 +7932,10 @@ function closeG3PortraitPanel(){
   clearTimeout(g3NoteTimer);
   g3NoteTimer=null;
   document.getElementById("g3PortraitPanel").hidden=true;
+  if(g3PortraitSeen.size===5 && !g3FinalShown){
+    g3FinalShown=true;
+    document.getElementById("gallery3Room").classList.add("g3-complete");
+  }
 }
 
 /* Gallery IV: the empty case is the final exhibit, revealed in three beats. */
