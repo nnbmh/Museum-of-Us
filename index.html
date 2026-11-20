@@ -5709,10 +5709,10 @@ button {
 #gallery3Room .g3-floor-point:focus-visible { outline:2px solid #fff;outline-offset:3px; }
 #gallery3Room .g3-floor-hint { position:absolute;bottom:1.5%;left:0;width:100%;text-align:center;z-index:8;pointer-events:none;color:#273447;text-shadow:0 1px 5px #fff,0 0 10px #fff;font:500 clamp(10px,1vw,13px) "DM Sans",sans-serif;letter-spacing:.17em; }
 #gallery3Room .g3-portrait-panel[hidden] { display:none; }
-/* A quiet note beside the portrait, using the gallery's own colours. */
+/* A centered museum note using the gallery's own colours. */
 #gallery3Room .g3-portrait-panel {
-  position:absolute;z-index:35;right:clamp(18px,3vw,42px);bottom:clamp(18px,3.5vh,38px);
-  width:min(420px,32vw);max-height:min(52dvh,460px);
+  position:absolute;z-index:35;left:50%;top:50%;
+  transform:translate(-50%,-50%);width:min(480px,calc(100% - 36px));max-height:70dvh;
   overflow-y:auto;overscroll-behavior:contain;
   padding:26px 30px 22px;
   background:linear-gradient(145deg,rgba(18,37,59,.98),rgba(12,28,47,.98));
@@ -5743,18 +5743,11 @@ button {
 #gallery3Room .g3-portrait-panel button:hover { color:#fff5df;border-color:#fff5df; }
 #gallery3Room .g3-portrait-panel button:focus-visible { outline:2px solid #e5cfa8;outline-offset:4px; }
 @keyframes g3PlacardIn {
-  from { opacity:0;transform:translateY(8px); }
-  to { opacity:1;transform:translateY(0); }
-}
-@media (max-width:900px) {
-  #gallery3Room .g3-portrait-panel {
-    left:50%;right:auto;bottom:12px;transform:translateX(-50%);
-    width:min(560px,calc(100% - 24px));max-height:49dvh;
-    animation:none;
-  }
+  from { opacity:0;transform:translate(-50%,calc(-50% + 8px)); }
+  to { opacity:1;transform:translate(-50%,-50%); }
 }
 @media (max-width:600px) {
-  #gallery3Room .g3-portrait-panel { padding:19px 23px 16px; }
+  #gallery3Room .g3-portrait-panel { width:calc(100% - 24px);max-height:72dvh;padding:19px 23px 16px; }
   #gallery3Room .g3-portrait-panel h2 { margin:7px 0 10px;padding-bottom:8px; }
   #gallery3Room .g3-portrait-panel p { font-size:14px;line-height:1.5; }
   #gallery3Room .g3-portrait-panel button { margin-top:12px; }
