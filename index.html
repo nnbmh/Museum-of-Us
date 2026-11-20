@@ -7861,7 +7861,9 @@ const g3PortraitNotes=[
 "I love the little kisses you give me on my forehead when we’re together. You probably don’t think much of them, but I do… they always make me feel so loved."
 ];
 const g3PortraitSeen=new Set();
+let g3NoteTimer=null;
 function showG3PortraitHint(){
+  clearTimeout(g3NoteTimer);
   document.getElementById("g3PortraitLabel").textContent="THE FARIS I KNOW";
   document.getElementById("g3PortraitTitle").textContent="Through My Eyes";
   document.getElementById("g3PortraitText").textContent="Tap the five points on the floor to discover the little pieces I see in you.";
@@ -7869,12 +7871,15 @@ function showG3PortraitHint(){
 }
 function revealGallery3(i){
   if(i<0||i>=g3PortraitNotes.length)return;
+  clearTimeout(g3NoteTimer);
+  const panel=document.getElementById("g3PortraitPanel");
+  panel.hidden=true;
   g3PortraitSeen.add(i);
   const revealSteps=[
-    {opacity:.38,blur:"18px"},
-    {opacity:.58,blur:"13px"},
-    {opacity:.75,blur:"8px"},
-    {opacity:.9,blur:"4px"},
+    {opacity:.88,blur:"10px"},
+    {opacity:1,blur:"6px"},
+    {opacity:1,blur:"3px"},
+    {opacity:1,blur:"1px"},
     {opacity:1,blur:"0px"}
   ];
   const step=revealSteps[Math.min(g3PortraitSeen.size,5)-1];
@@ -7885,9 +7890,13 @@ function revealGallery3(i){
   document.getElementById("g3PortraitLabel").textContent="CURATOR'S NOTE · "+String(i+1).padStart(2,"0")+" / 05";
   document.getElementById("g3PortraitTitle").textContent="The Faris I Know";
   document.getElementById("g3PortraitText").textContent=g3PortraitNotes[i];
-  document.getElementById("g3PortraitPanel").hidden=false;
+  g3NoteTimer=setTimeout(()=>{panel.hidden=false;g3NoteTimer=null},1450);
 }
-function closeG3PortraitPanel(){document.getElementById("g3PortraitPanel").hidden=true}
+function closeG3PortraitPanel(){
+  clearTimeout(g3NoteTimer);
+  g3NoteTimer=null;
+  document.getElementById("g3PortraitPanel").hidden=true;
+}
 
 /* Gallery IV: the empty case is the final exhibit, revealed in three beats. */
 function openGallery4Room(){
