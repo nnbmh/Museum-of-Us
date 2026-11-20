@@ -5711,8 +5711,8 @@ button {
 #gallery3Room .g3-portrait-panel[hidden] { display:none; }
 /* A low museum placard leaves the changing portrait visible above it. */
 #gallery3Room .g3-portrait-panel {
-  position:absolute;z-index:35;left:50%;bottom:clamp(18px,3.5vh,38px);
-  transform:translateX(-50%);width:min(670px,calc(100% - 36px));
+  position:absolute;z-index:35;right:clamp(18px,3vw,42px);bottom:clamp(18px,3.5vh,38px);
+  width:min(410px,30vw);
   max-height:min(46dvh,390px);overflow-y:auto;overscroll-behavior:contain;
   padding:clamp(22px,3vw,32px) clamp(24px,4vw,48px) 22px;
   background:linear-gradient(145deg,#fff9ee 0%,#f4e9d9 62%,#e9d7bb 100%);
@@ -5745,12 +5745,19 @@ button {
 #gallery3Room .g3-portrait-panel button:hover { color:#263852;border-color:#263852; }
 #gallery3Room .g3-portrait-panel button:focus-visible { outline:2px solid #8a663e;outline-offset:4px; }
 @keyframes g3PlacardIn {
-  from { opacity:0;transform:translate(-50%,9px); }
-  to { opacity:1;transform:translate(-50%,0); }
+  from { opacity:0;transform:translateY(9px); }
+  to { opacity:1;transform:translateY(0); }
+}
+@media (max-width:900px) {
+  #gallery3Room .g3-portrait-panel {
+    left:50%;right:auto;bottom:12px;transform:translateX(-50%);
+    width:min(670px,calc(100% - 24px));max-height:49dvh;
+    animation:none;
+  }
 }
 @media (max-width:600px) {
   #gallery3Room .g3-portrait-panel {
-    bottom:12px;width:calc(100% - 24px);max-height:49dvh;
+    padding:18px 23px 17px;
     padding:18px 23px 17px;
   }
   #gallery3Room .g3-portrait-panel h2 { margin:7px 0 9px; }
