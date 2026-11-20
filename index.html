@@ -5709,11 +5709,57 @@ button {
 #gallery3Room .g3-floor-point:focus-visible { outline:2px solid #fff;outline-offset:3px; }
 #gallery3Room .g3-floor-hint { position:absolute;bottom:1.5%;left:0;width:100%;text-align:center;z-index:8;pointer-events:none;color:#273447;text-shadow:0 1px 5px #fff,0 0 10px #fff;font:500 clamp(10px,1vw,13px) "DM Sans",sans-serif;letter-spacing:.17em; }
 #gallery3Room .g3-portrait-panel[hidden] { display:none; }
-#gallery3Room .g3-portrait-panel { position:absolute;z-index:35;top:50%;left:50%;transform:translate(-50%,-50%);width:min(480px,90vw);max-height:85dvh;overflow:auto;padding:30px;background:#101b2eeF;border:1px solid #dbba81;box-shadow:0 0 0 100vmax #07101dbb,0 12px 50px #0008;text-align:center;color:#f8ebd8; }
-#gallery3Room .g3-portrait-panel small { letter-spacing:.2em;color:#dcbf8e; }
-#gallery3Room .g3-portrait-panel h2 { font:italic 32px "Cormorant Garamond",serif;color:#ecd4a2; }
-#gallery3Room .g3-portrait-panel p { line-height:1.65; }
-#gallery3Room .g3-portrait-panel button { border:0;background:transparent;color:#eed3a4;padding:12px;cursor:pointer; }
+/* A low museum placard leaves the changing portrait visible above it. */
+#gallery3Room .g3-portrait-panel {
+  position:absolute;z-index:35;left:50%;bottom:clamp(18px,3.5vh,38px);
+  transform:translateX(-50%);width:min(670px,calc(100% - 36px));
+  max-height:min(46dvh,390px);overflow-y:auto;overscroll-behavior:contain;
+  padding:clamp(22px,3vw,32px) clamp(24px,4vw,48px) 22px;
+  background:linear-gradient(145deg,#fff9ee 0%,#f4e9d9 62%,#e9d7bb 100%);
+  border:1px solid #aa8350;border-radius:3px;
+  box-shadow:0 0 0 100vmax rgba(7,16,29,.36),0 18px 52px rgba(4,12,25,.55),inset 0 0 0 6px rgba(255,252,246,.86),inset 0 0 0 7px rgba(178,143,93,.38);
+  text-align:center;color:#2f3442;
+  animation:g3PlacardIn .32s ease-out both;
+}
+#gallery3Room .g3-portrait-panel::before {
+  content:"✦";display:block;margin:0 auto 7px;color:#a57c47;
+  font:17px/1 "Cormorant Garamond",Georgia,serif;
+}
+#gallery3Room .g3-portrait-panel small {
+  display:block;color:#866442;font:600 10px/1.4 "DM Sans",sans-serif;
+  letter-spacing:.22em;
+}
+#gallery3Room .g3-portrait-panel h2 {
+  margin:8px 0 12px;color:#263852;
+  font:italic 500 clamp(25px,3vw,33px)/1.1 "Cormorant Garamond",Georgia,serif;
+}
+#gallery3Room .g3-portrait-panel p {
+  max-width:560px;margin:0 auto;color:#3f3a38;
+  font:400 clamp(14px,1.45vw,16px)/1.65 "DM Sans",sans-serif;
+}
+#gallery3Room .g3-portrait-panel button {
+  display:inline-block;margin-top:15px;padding:8px 4px 4px;
+  border:0;border-bottom:1px solid #a78152;background:transparent;
+  color:#735336;cursor:pointer;
+}
+#gallery3Room .g3-portrait-panel button:hover { color:#263852;border-color:#263852; }
+#gallery3Room .g3-portrait-panel button:focus-visible { outline:2px solid #8a663e;outline-offset:4px; }
+@keyframes g3PlacardIn {
+  from { opacity:0;transform:translate(-50%,9px); }
+  to { opacity:1;transform:translate(-50%,0); }
+}
+@media (max-width:600px) {
+  #gallery3Room .g3-portrait-panel {
+    bottom:12px;width:calc(100% - 24px);max-height:49dvh;
+    padding:18px 23px 17px;
+  }
+  #gallery3Room .g3-portrait-panel h2 { margin:7px 0 9px; }
+  #gallery3Room .g3-portrait-panel p { font-size:14px;line-height:1.52; }
+  #gallery3Room .g3-portrait-panel button { margin-top:10px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  #gallery3Room .g3-portrait-panel { animation:none; }
+}
 @media(max-width:600px){#gallery3Room .g3-floor-points{left:20%;width:60%;bottom:8%}#gallery3Room .g3-floor-point{width:42px;height:42px;font-size:12px}#gallery3Room .g3-floor-hint{bottom:1%;font-size:9px}}
 
 #gallery4Room .g4-portrait-tap { left:37%!important;top:42%!important;width:26%!important;height:46%!important; }
