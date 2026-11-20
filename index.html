@@ -221,6 +221,13 @@ button {
   animation: lobbyReveal 3s ease-out both;
 }
 
+/* Returning from Gallery IV shows the lobby at rest. */
+#lobby.returning-from-gallery .lobby-art {
+  animation: none;
+  transform: none;
+  filter: none;
+}
+
 /* Initial arrival into the lobby */
 
 @keyframes lobbyReveal {
@@ -6502,13 +6509,25 @@ function switchMuseumRooms(fromId, toId) {
   const from = document.getElementById(fromId);
   const to = document.getElementById(toId);
   if (from === to) return;
+
+  // A fast second doorway tap must not leave an older room active underneath.
+  document.querySelectorAll(".scene.active").forEach(scene => {
+    if (scene !== from && scene !== to) {
+      scene.classList.remove("active");
+      scene.style.zIndex = "";
+      scene.style.pointerEvents = "";
+    }
+  });
   to.style.zIndex = "12";
+  to.style.pointerEvents = "none";
   to.classList.add("active");
   from.style.pointerEvents = "none";
   museumRoomHandoff = setTimeout(() => {
-    from.classList.remove("active");
-    from.style.pointerEvents = "";
-    to.style.zIndex = "";
+    document.querySelectorAll(".scene").forEach(scene => {
+      if (scene !== to) scene.classList.remove("active");
+      scene.style.zIndex = "";
+      scene.style.pointerEvents = "";
+    });
     museumRoomHandoff = null;
   }, window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 20 : 1050);
 }
@@ -6544,6 +6563,7 @@ function beginExploring() {
   }
 
   button.disabled = true;
+  lobby.classList.remove("returning-from-gallery");
 
   /* Same animation as entering the museum */
 
@@ -7821,8 +7841,9 @@ function returnToLobbyFrom4(){
 closeGallery4Panel();
 closeGallery4Letter();
 const lobby=document.getElementById("lobby");
-// The lobby's entrance animation is one-shot; reset it when revisiting from Gallery IV.
+// Return to the still lobby, without replaying its entrance animation.
 lobby.classList.remove("entering-gallery");
+lobby.classList.add("returning-from-gallery");
 const exploreButton=lobby.querySelector(".explore-button");
 if(exploreButton)exploreButton.disabled=false;
 switchMuseumRooms("gallery4Room","lobby");
