@@ -4883,6 +4883,21 @@ button {
 .g4-panel .g4-panel-close:focus-visible,.g4-panel .g4-panel-action:focus-visible{outline:2px solid #8d704f;outline-offset:4px}
 @media(max-width:600px){.g4-floor-markers{width:60vw;bottom:10%}.g4-marker{width:32px;height:32px}.g4-hint{bottom:4%;font-size:11px}.g4-door-left{left:9%;width:13%}.g4-door-right{right:9%;width:13%}.g4-sign-left,.g4-sign-right{width:12%}}
 
+/* Gallery IV finale: a full letter, separate from the short exhibit reveal. */
+.g4-letter[hidden]{display:none}
+.g4-letter{position:absolute;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:max(20px,env(safe-area-inset-top)) 18px max(20px,env(safe-area-inset-bottom));background:rgba(15,29,46,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);animation:g4LetterIn .5s ease both}
+.g4-letter-paper{position:relative;width:min(760px,100%);max-height:100%;overflow-y:auto;overscroll-behavior:contain;padding:clamp(34px,5vw,64px) clamp(25px,6vw,74px);border:1px solid #c5a675;background:#f8f2e8;color:#423a35;box-shadow:0 20px 80px #08111f9c,inset 0 0 0 7px #ede1d0;scrollbar-color:#b79a73 transparent}
+.g4-letter-paper::before{content:"✦";display:block;margin-bottom:10px;text-align:center;color:#a68151;font-size:19px}
+.g4-letter-heading{margin:0 0 35px;text-align:center;color:#6c5361;font:italic 500 clamp(31px,5vw,45px)/1.1 "Cormorant Garamond",Georgia,serif}
+.g4-letter-copy{max-width:610px;margin:0 auto;font:400 clamp(15px,1.45vw,17px)/1.8 "DM Sans",sans-serif}
+.g4-letter-copy p{margin:0 0 1.45em}
+.g4-letter-copy p:last-child{margin-bottom:0}
+.g4-letter-close{position:absolute;right:18px;top:13px;width:38px;height:38px;border:0;background:transparent;color:#735b49;font:30px/1 "Cormorant Garamond",serif;cursor:pointer}
+.g4-letter-close:focus-visible{outline:2px solid #9b744f;outline-offset:2px}
+@keyframes g4LetterIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:600px){.g4-letter{padding:0}.g4-letter-paper{width:100%;max-height:100%;min-height:100%;padding:60px 25px 48px}.g4-letter-copy{font-size:15px;line-height:1.72}.g4-letter-heading{margin-bottom:26px}}
+@media(prefers-reduced-motion:reduce){.g4-letter{animation:none}}
+
 /* ==========================================
    GALLERY I — EXHIBIT 2: OUR FIRST DATE
    Tap watch → date → OKC notification → memory
@@ -6459,6 +6474,22 @@ button {
 <p id="g4PanelText"></p>
 <button id="g4PanelAction" class="g4-panel-action" type="button" onclick="advanceGallery4Exhibit()">LOOK CLOSER →</button>
 </div>
+<div id="g4Letter" class="g4-letter" hidden role="dialog" aria-modal="true" aria-labelledby="g4LetterHeading">
+  <article class="g4-letter-paper" tabindex="-1">
+    <button class="g4-letter-close" type="button" onclick="closeGallery4Letter()" aria-label="Close anniversary letter">×</button>
+    <h2 id="g4LetterHeading" class="g4-letter-heading">A letter for you</h2>
+    <div class="g4-letter-copy">
+      <p>Sayang... happy anniversary ❤️</p>
+      <p>If you asked me to pick my favourite moment with you, I don’t think I could. I’d probably start with one, remember something else halfway through, and end up telling you five different stories HAHAHA. There have been so many times when I’ve looked at you and thought, I really want to remember this. Even when all we were doing was talking, laughing, or sitting together a little longer than we planned.</p>
+      <p>I really love being your girlfriend. I love that you’re the person I can send a completely pointless thought to and still want to tell the whole story when we call later. I love hearing about your day, even if we’ve both had a boring one. And I love how easily I can go from laughing at you to wanting a hug from you. I probably don’t say that last part enough because then you’ll be smug HAHAHA, but I mean it.</p>
+      <p>I hope you know you don’t have to make every moment with me special. I’m happy when we’re out doing something together, but I’m happy when we’re just sitting beside each other too. After all the time we’ve spent on opposite ends of a call, I still get this little feeling of “oh, you’re really here” when I look over and see you. I don’t think I’ll get tired of that anytime soon.</p>
+      <p>I made this for you because I wanted you to see how much of our time together I’ve kept with me. The funny bits, the little things, the days that became important without us knowing they would. And I wanted you to have something you could come back to and remember that every room in here exists because I was happy to be there with you.</p>
+      <p>I hope you feel loved when you’re with me. I hope you feel it when I’m holding your hand, when I’m laughing at you, when I’m asking you to stay with me a little longer. And on the days when I don’t quite get the words out right, I hope you still know that I want to be here. I want you, and I want us.</p>
+      <p>There are so many things I still want to do with you. Some big, some really ordinary. I want more trips together, more meals where we take forever to decide what to eat, more mornings where I get to wake up beside you and annoy you before you’ve even properly opened your eyes HAHAHA. I want to keep finding out what our life together feels like outside of a screen.</p>
+      <p>I’m really glad I get to love you, sayang. My feelings for you have grown so much deeper since the last time I saw you. I don’t know if you’ll notice it, but I feel it, and I can’t wait to show you. I’m glad you’re the person I get to share all these moments with, and I want so many more... cooking together, laughing until one of us can’t breathe, and finding more little things that feel like ours. Happy anniversary… I love you so much ❤️</p>
+    </div>
+  </article>
+</div>
 </section>
 
 <script>
@@ -7777,13 +7808,16 @@ closeG3Preview();
 closeG3PortraitPanel();
 switchMuseumRooms("gallery3Room","gallery4Room");
 closeGallery4Panel();
+closeGallery4Letter();
 }
 function returnToGallery3From4(){
 closeGallery4Panel();
+closeGallery4Letter();
 switchMuseumRooms("gallery4Room","gallery3Room");
 }
 function returnToLobbyFrom4(){
 closeGallery4Panel();
+closeGallery4Letter();
 const lobby=document.getElementById("lobby");
 // The lobby's entrance animation is one-shot; reset it when revisiting from Gallery IV.
 lobby.classList.remove("entering-gallery");
@@ -7801,7 +7835,7 @@ let gallery4Stage=0;
 const gallery4Beats=[
   {label:"CATALOGUE NOTE · 001",title:"Nothing inside?",text:"The final display case is empty. That isn't a mistake.",action:"THEN WHERE IS IT? →"},
   {label:"CATALOGUE NOTE · 002",title:"It can't go behind glass.",text:"The other rooms could hold things that already happened. This one is still happening.",action:"ONE LAST THING →"},
-  {label:"GALLERY IV · RIGHT HERE",title:"Right Here",text:"Look up from the screen for a moment. I'm here with you. This is the part we get to make together.",action:"BACK TO THE GALLERY →"}
+  {label:"GALLERY IV · RIGHT HERE",title:"Right Here",text:"Look up from the screen for a moment. I'm here with you. This is the part we get to make together.",action:"READ MY LETTER →"}
 ];
 function renderGallery4Exhibit(){
   const beat=gallery4Beats[gallery4Stage];
@@ -7812,9 +7846,22 @@ function renderGallery4Exhibit(){
 }
 function advanceGallery4Exhibit(){
   if(gallery4Stage<gallery4Beats.length-1){gallery4Stage++;renderGallery4Exhibit();}
-  else closeGallery4Panel();
+  else {closeGallery4Panel();openGallery4Letter();}
 }
 function closeGallery4Panel(){document.getElementById("g4Panel").hidden=true}
+function openGallery4Letter(){
+  const letter=document.getElementById("g4Letter");
+  letter.hidden=false;
+  letter.querySelector(".g4-letter-paper").scrollTop=0;
+  letter.querySelector(".g4-letter-close").focus({preventScroll:true});
+}
+function closeGallery4Letter(){
+  const letter=document.getElementById("g4Letter");
+  letter.hidden=true;
+}
+document.addEventListener("keydown",event=>{
+  if(event.key==="Escape"&&!document.getElementById("g4Letter").hidden)closeGallery4Letter();
+});
 </script>
 
 </body>
