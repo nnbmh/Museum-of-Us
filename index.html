@@ -7789,11 +7789,11 @@ function closeG3Connection() {
 
 /* Gallery III: five separate points reveal five parts of the portrait story. */
 const g3PortraitNotes=[
-"There's the side of you that makes me laugh, sometimes without even trying.",
-"There's the way you think things through, and how much you care about getting them right.",
-"There's the version of you that keeps trying, even on days when you can't see much to be proud of.",
-"There's the person I get to be silly with, quiet with, and completely myself around.",
-"And there's you. Not a finished masterpiece. Not someone who has to have everything figured out. Just the person I love."
+"Even when you have a million and one things to do, you still make time to Discord with me. You put everything else off until I’ve gone to bed… I know that probably makes your day longer, but I notice it. I love that you want to spend that time with me.",
+"You used to tell me you’re not sweet… but then you go out of your comfort zone to do things for me because you know how much they’d mean to me. I notice the effort, sayang. You’re a lot sweeter than you think.",
+"I love that fake offended face you give me when I tease you. You’ll try to keep it up, but then you start laughing… or throw something right back at me.",
+"I told you a long time ago that I like hugs… and you remembered. Now you’re always giving me hugs when we’re together. I know I don’t show it, but I love being in your arms. I always wish I could stay there a little longer.",
+"I love the little kisses you give me on my forehead when we’re together. You probably don’t think much of them, but I do… they always make me feel so loved."
 ];
 const g3PortraitSeen=new Set();
 function showG3PortraitHint(){
@@ -7819,7 +7819,7 @@ function revealGallery3(i){
   document.querySelectorAll(".g3-floor-point")[i].classList.add("seen");
   document.getElementById("g3PortraitLabel").textContent="CURATOR'S NOTE · "+String(i+1).padStart(2,"0")+" / 05";
   document.getElementById("g3PortraitTitle").textContent="The Faris I Know";
-  document.getElementById("g3PortraitText").textContent=g3PortraitNotes[i]+(g3PortraitSeen.size===5?" Every little piece belongs to the same person.":"");
+  document.getElementById("g3PortraitText").textContent=g3PortraitNotes[i];
   document.getElementById("g3PortraitPanel").hidden=false;
 }
 function closeG3PortraitPanel(){document.getElementById("g3PortraitPanel").hidden=true}
