@@ -5709,56 +5709,56 @@ button {
 #gallery3Room .g3-floor-point:focus-visible { outline:2px solid #fff;outline-offset:3px; }
 #gallery3Room .g3-floor-hint { position:absolute;bottom:1.5%;left:0;width:100%;text-align:center;z-index:8;pointer-events:none;color:#273447;text-shadow:0 1px 5px #fff,0 0 10px #fff;font:500 clamp(10px,1vw,13px) "DM Sans",sans-serif;letter-spacing:.17em; }
 #gallery3Room .g3-portrait-panel[hidden] { display:none; }
-/* Gallery text appears as a softly lit inscription, without a hard-edged card. */
+/* Muted dusty blue museum panel, centred over the portrait. */
 #gallery3Room .g3-portrait-panel {
   position:absolute;z-index:35;left:50%;top:50%;
-  transform:translate(-50%,-50%);width:min(700px,calc(100% - 28px));max-height:76dvh;
+  transform:translate(-50%,-50%);width:min(610px,calc(100% - 32px));max-height:76dvh;
   overflow-y:auto;overscroll-behavior:contain;
-  padding:clamp(38px,5vw,60px) clamp(42px,7vw,88px);
-  background:radial-gradient(ellipse at center,rgba(8,23,42,.99) 0%,rgba(9,25,45,.98) 48%,rgba(9,25,45,.88) 70%,rgba(9,25,45,0) 100%);
-  border:0;border-radius:0;
-  box-shadow:0 0 0 100vmax rgba(5,14,27,.47);
-  color:#f6e9cf;text-align:center;
+  padding:clamp(28px,4vw,42px) clamp(30px,5vw,58px);
+  background:linear-gradient(155deg,#d7e0e1 0%,#beced3 55%,#aabfc9 100%);
+  border:1px solid #ad8758;border-radius:3px;
+  box-shadow:0 0 0 100vmax rgba(10,22,38,.22),0 20px 48px rgba(5,16,31,.35),inset 0 0 0 6px rgba(246,245,237,.65),inset 0 0 0 7px rgba(151,118,75,.55);
+  color:#20354a;text-align:center;
   animation:g3PlacardIn .28s ease-out both;
 }
 #gallery3Room .g3-portrait-panel::before {
-  content:"✦";display:block;margin:0 auto 12px;
-  color:#d6b77f;font:18px/1 "Cormorant Garamond",Georgia,serif;
+  content:"✦";display:block;margin:0 auto 9px;
+  color:#987342;font:17px/1 "Cormorant Garamond",Georgia,serif;
 }
 #gallery3Room .g3-portrait-panel small {
-  display:block;color:#d6ba8a;font:600 10px/1.4 "DM Sans",sans-serif;
-  letter-spacing:.23em;
+  display:block;color:#65533f;font:600 10px/1.4 "DM Sans",sans-serif;
+  letter-spacing:.21em;
 }
 #gallery3Room .g3-portrait-panel h2 {
-  margin:13px auto 18px;padding:0 0 15px;
-  border-bottom:1px solid rgba(211,179,122,.55);
-  color:#f0d8a9;
-  font:italic 500 clamp(32px,3.4vw,43px)/1.08 "Cormorant Garamond",Georgia,serif;
+  margin:10px auto 16px;padding:0 0 13px;
+  border-bottom:1px solid rgba(131,103,67,.48);
+  color:#20354a;
+  font:italic 500 clamp(31px,3.3vw,40px)/1.08 "Cormorant Garamond",Georgia,serif;
 }
 #gallery3Room .g3-portrait-panel p {
-  margin:0 auto;max-width:530px;color:#fff5e8;
-  font:400 clamp(20px,2.1vw,24px)/1.34 "Cormorant Garamond",Georgia,serif;
+  margin:0 auto;max-width:500px;color:#25384a;
+  font:400 clamp(20px,2vw,23px)/1.34 "Cormorant Garamond",Georgia,serif;
   text-wrap:pretty;
 }
 #gallery3Room .g3-portrait-panel button {
-  display:inline-block;margin-top:22px;padding:7px 2px 5px;
-  border:0;border-bottom:1px solid rgba(215,185,135,.72);
-  background:transparent;color:#e6cb9c;cursor:pointer;
+  display:inline-block;margin-top:20px;padding:7px 2px 5px;
+  border:0;border-bottom:1px solid #816544;
+  background:transparent;color:#34465a;cursor:pointer;
 }
-#gallery3Room .g3-portrait-panel button:hover { color:#fff4df;border-color:#fff4df; }
-#gallery3Room .g3-portrait-panel button:focus-visible { outline:2px solid #e6cb9c;outline-offset:4px; }
+#gallery3Room .g3-portrait-panel button:hover { color:#172b42;border-color:#172b42; }
+#gallery3Room .g3-portrait-panel button:focus-visible { outline:2px solid #816544;outline-offset:4px; }
 @keyframes g3PlacardIn {
   from { opacity:0;transform:translate(-50%,calc(-50% + 8px)); }
   to { opacity:1;transform:translate(-50%,-50%); }
 }
 @media (max-width:600px) {
   #gallery3Room .g3-portrait-panel {
-    width:calc(100% - 16px);max-height:80dvh;
-    padding:30px 32px;
+    width:calc(100% - 20px);max-height:78dvh;
+    padding:25px 29px;
   }
-  #gallery3Room .g3-portrait-panel h2 { margin:10px auto 13px;padding-bottom:11px; }
-  #gallery3Room .g3-portrait-panel p { font-size:20px;line-height:1.28; }
-  #gallery3Room .g3-portrait-panel button { margin-top:15px; }
+  #gallery3Room .g3-portrait-panel h2 { margin:8px auto 12px;padding-bottom:10px; }
+  #gallery3Room .g3-portrait-panel p { font-size:19px;line-height:1.3; }
+  #gallery3Room .g3-portrait-panel button { margin-top:14px; }
 }
 @media (prefers-reduced-motion:reduce) {
   #gallery3Room .g3-portrait-panel { animation:none; }
