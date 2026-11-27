@@ -6021,10 +6021,10 @@ button {
 #conversationExhibit .conversation-scroll {
   position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;
   display:flex;flex-direction:column;justify-content:center;
-  padding:76px 22px 40px;-webkit-overflow-scrolling:touch;
+  padding:70px 22px 28px;-webkit-overflow-scrolling:touch;
 }
 #conversationExhibit .conversation-heading {
-  position:relative;text-align:center;max-width:720px;margin:0 auto 22px;
+  position:relative;text-align:center;max-width:740px;margin:0 auto 17px;
 }
 #conversationExhibit .conversation-heading span {
   color:#d6ae75;font:500 10px "DM Sans",sans-serif;letter-spacing:.24em;
@@ -6034,17 +6034,24 @@ button {
   font:italic 500 clamp(49px,6vw,74px)/1 "Cormorant Garamond",Georgia,serif;
 }
 #conversationExhibit .conversation-heading p {
-  margin:9px auto 0;max-width:650px;color:#e3cfaf;
-  font:clamp(19px,2.1vw,24px)/1.25 "Cormorant Garamond",Georgia,serif;
+  margin:9px auto 0;max-width:680px;color:#e3cfaf;
+  font:clamp(19px,2.1vw,24px)/1.22 "Cormorant Garamond",Georgia,serif;
 }
 #conversationExhibit .conversation-case {
-  position:relative;isolation:isolate;width:min(1060px,100%);height:min(550px,58vh);min-height:440px;
+  --conversation-progress:0%;
+  position:relative;isolation:isolate;width:min(1060px,100%);height:min(535px,57vh);min-height:430px;
   margin:0 auto;overflow:hidden;text-align:center;
   border:1px solid #d2ac72;
   background:
     radial-gradient(ellipse at 50% 10%,#d6a46a40,transparent 50%),
     linear-gradient(100deg,#24150fbf,#4b3023e5 50%,#24150fbf);
   box-shadow:0 0 0 5px #9e744435,0 0 0 7px #f7d99b26,inset 0 0 45px #110b08bb,0 24px 70px #100907b8;
+  transition:background 1s ease,box-shadow 1s ease;
+}
+#conversationExhibit .conversation-case[data-phase="3"],
+#conversationExhibit .conversation-case[data-phase="4"] {
+  background:radial-gradient(ellipse at 50% 22%,#a4764670,transparent 61%),linear-gradient(100deg,#382217,#503323 50%,#382217);
+  box-shadow:0 0 0 5px #ad844b43,0 0 0 7px #f7d99b36,inset 0 0 45px #110b08a0,0 24px 70px #100907b8;
 }
 #conversationExhibit .conversation-case::before {
   content:"";position:absolute;z-index:8;inset:10px;
@@ -6056,7 +6063,7 @@ button {
   pointer-events:none;
 }
 #conversationExhibit .conversation-case-top {
-  position:absolute;z-index:5;top:24px;left:0;right:0;
+  position:absolute;z-index:5;top:23px;left:0;right:0;
   color:#e4c699;font:500 10px "DM Sans",sans-serif;letter-spacing:.21em;
 }
 #conversationExhibit .conversation-figures {
@@ -6065,61 +6072,68 @@ button {
   pointer-events:none;
 }
 #conversationExhibit .conversation-person {
-  display:none;position:relative;z-index:2;width:44%;height:75%;
-  background-image:url("exhibit-3-gilded-couple.png");background-repeat:no-repeat;
-  background-size:auto 100%;filter:drop-shadow(0 0 16px #e6bf7970);
+  display:none;position:relative;z-index:2;width:47%;height:60%;
+  background-image:url("exhibit-3-gilded-couple.png");background-repeat:no-repeat;background-size:auto 100%;
+  filter:drop-shadow(0 0 16px #e6bf7970);
 }
-#conversationExhibit .conversation-person-left { margin-left:-4%;background-position:left bottom; }
-#conversationExhibit .conversation-person-right { margin-right:-4%;background-position:right bottom; }
+#conversationExhibit .conversation-person-left {background-position:left bottom;}
+#conversationExhibit .conversation-person-right {background-position:right bottom;}
 #conversationExhibit .conversation-bridge {
-  position:absolute;z-index:1;left:24%;right:24%;top:52%;height:1px;
+  position:absolute;z-index:1;left:25%;right:25%;top:56%;height:1px;
   background:linear-gradient(90deg,transparent,#cda76c88,transparent);
 }
 #conversationExhibit .conversation-bridge span {
-  display:block;width:0;height:100%;
+  display:block;width:var(--conversation-progress);height:100%;
   background:linear-gradient(90deg,#d4aa69,#fff0c7);
-  box-shadow:0 0 16px 4px #f3d2958c;transition:width .7s ease;
+  box-shadow:0 0 16px 4px #f3d2958c;transition:width .2s linear;
 }
-#conversationExhibit .conversation-bubbles {
-  position:absolute;z-index:4;inset:13% 28% 27%;pointer-events:none;
+#conversationExhibit .conversation-echoes {
+  position:absolute;z-index:3;inset:0;pointer-events:none;
 }
-#conversationExhibit .conversation-bubble {
-  position:absolute;display:flex;align-items:center;justify-content:center;gap:10px;
-  width:clamp(116px,37%,175px);min-height:65px;padding:8px 12px;
-  border:1px solid #e3c38b;border-radius:23px 23px 23px 5px;
-  background:linear-gradient(135deg,#fff3d7e8,#e6c797e8);
-  color:#583b26;box-shadow:0 0 25px #e8b8743d,0 10px 25px #140d09a8;
-  cursor:pointer;pointer-events:auto;
-  transition:transform .25s ease,background .25s ease,box-shadow .25s ease;
+#conversationExhibit .conversation-echo {
+  position:absolute;display:flex;flex-direction:column;gap:7px;
+  width:clamp(80px,13%,150px);padding:13px 14px;
+  border:1px solid #e5c59295;border-radius:18px 18px 18px 4px;
+  background:linear-gradient(140deg,#faebcbba,#e4c08a9e);
+  box-shadow:0 6px 22px #10080577,0 0 21px #f6d49630;
+  opacity:0;transform:translateY(15px) scale(.92);
+  transition:opacity .7s ease,transform .7s ease;
 }
-#conversationExhibit .conversation-bubble::after {
-  content:"";position:absolute;bottom:-8px;left:14px;
-  width:13px;height:13px;background:#e6c797;transform:rotate(45deg);
-  border-right:1px solid #e3c38b;border-bottom:1px solid #e3c38b;
+#conversationExhibit .conversation-echo:nth-child(even) {border-radius:18px 18px 4px 18px;}
+#conversationExhibit .conversation-echo i {
+  display:block;height:3px;border-radius:3px;background:#9d795098;
 }
-#conversationExhibit .conversation-bubble:nth-child(1) {left:3%;top:7%;transform:rotate(-5deg);}
-#conversationExhibit .conversation-bubble:nth-child(2) {right:8%;top:38%;transform:rotate(4deg);border-radius:23px 23px 5px 23px;}
-#conversationExhibit .conversation-bubble:nth-child(2)::after {left:auto;right:14px;}
-#conversationExhibit .conversation-bubble:nth-child(3) {left:17%;bottom:0;transform:rotate(-2deg);}
-#conversationExhibit .conversation-bubble:hover {box-shadow:0 0 32px #ffe0a493,0 10px 25px #140d09a8;}
-#conversationExhibit .conversation-bubble.selected {background:#fff7e7;box-shadow:0 0 30px #ffe2a4a8;}
-#conversationExhibit .conversation-bubble.discovered {border-color:#fff3d9;}
-#conversationExhibit .conversation-bubble span {
-  color:#8a6443;font:600 10px "DM Sans",sans-serif;letter-spacing:.12em;
+#conversationExhibit .conversation-echo i:last-child {width:58%;}
+#conversationExhibit .echo-one {left:37%;top:22%;transform:translateY(15px) rotate(-4deg);}
+#conversationExhibit .echo-two {right:33%;top:32%;transform:translateY(15px) rotate(4deg);}
+#conversationExhibit .echo-three {left:42%;top:43%;transform:translateY(15px) rotate(-2deg);}
+#conversationExhibit .echo-four {right:37%;top:54%;transform:translateY(15px) rotate(3deg);}
+#conversationExhibit .echo-five {left:39%;top:64%;transform:translateY(15px) rotate(-3deg);}
+#conversationExhibit .conversation-case[data-phase="1"] .echo-one,
+#conversationExhibit .conversation-case[data-phase="2"] .echo-one,
+#conversationExhibit .conversation-case[data-phase="2"] .echo-two,
+#conversationExhibit .conversation-case[data-phase="2"] .echo-three,
+#conversationExhibit .conversation-case[data-phase="3"] .conversation-echo,
+#conversationExhibit .conversation-case[data-phase="4"] .conversation-echo {
+  opacity:1;transform:translateY(0) rotate(0);
 }
-#conversationExhibit .conversation-bubble strong {
-  font:italic 500 clamp(20px,2.1vw,26px)/1 "Cormorant Garamond",Georgia,serif;
+#conversationExhibit .conversation-case[data-phase="3"] .conversation-echo,
+#conversationExhibit .conversation-case[data-phase="4"] .conversation-echo {
+  background:linear-gradient(140deg,#fff3d6d9,#e9c892c4);
 }
-#conversationExhibit .conversation-bubble.discovered span::after {content:" ✦";}
-#conversationExhibit .conversation-bubble:focus-visible {outline:2px solid #fff4d7;outline-offset:5px;}
-#conversationExhibit .conversation-piece-text {
-  position:absolute;z-index:5;bottom:23px;left:24%;right:24%;
-  min-height:55px;margin:0;color:#f7e5c3;text-shadow:0 2px 6px #140c08;
-  font:italic clamp(20px,2.3vw,27px)/1.12 "Cormorant Garamond",Georgia,serif;
+#conversationExhibit .conversation-moment {
+  position:absolute;z-index:5;bottom:18px;left:24%;right:24%;
+  color:#f7e5c3;text-shadow:0 2px 7px #140c08;
+}
+#conversationExhibit .conversation-moment span {
+  color:#e3be85;font:500 10px "DM Sans",sans-serif;letter-spacing:.2em;
+}
+#conversationExhibit .conversation-moment p {
+  margin:6px 0 0;font:italic clamp(21px,2.4vw,29px)/1.13 "Cormorant Garamond",Georgia,serif;
 }
 #conversationExhibit .conversation-final[hidden] {display:none;}
 #conversationExhibit .conversation-final {
-  position:absolute;z-index:6;inset:20% 23% 16%;
+  position:absolute;z-index:6;inset:19% 22% 17%;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   padding:20px;background:radial-gradient(ellipse,#3a2418f5,#281911ed 80%);
   border-top:1px solid #e8c486;border-bottom:1px solid #e8c486;
@@ -6130,36 +6144,77 @@ button {
   color:#e9c991;font:500 clamp(18px,2.2vw,25px) "DM Sans",sans-serif;letter-spacing:.21em;
 }
 #conversationExhibit .conversation-final p {
-  max-width:530px;margin:18px 0 0;color:#fff1d6;
-  font:italic clamp(25px,3vw,39px)/1.1 "Cormorant Garamond",Georgia,serif;
+  max-width:570px;margin:18px 0 0;color:#fff1d6;
+  font:italic clamp(25px,3vw,37px)/1.1 "Cormorant Garamond",Georgia,serif;
 }
-#conversationExhibit.conversation-complete .conversation-bubbles {opacity:.25;pointer-events:none;}
-#conversationExhibit.conversation-complete .conversation-piece-text {opacity:0;}
+#conversationExhibit.conversation-complete .conversation-moment {opacity:0;}
+#conversationExhibit .conversation-control {
+  --conversation-progress:0%;
+  position:relative;width:min(790px,100%);margin:19px auto 0;text-align:center;
+}
+#conversationExhibit .conversation-control label {
+  display:block;color:#e8d1ae;
+  font:italic 24px "Cormorant Garamond",Georgia,serif;
+}
+#conversationExhibit .conversation-control input[type="range"] {
+  display:block;width:100%;height:42px;margin:7px 0 0;
+  appearance:none;-webkit-appearance:none;background:transparent;cursor:pointer;touch-action:none;
+}
+#conversationExhibit .conversation-control input[type="range"]::-webkit-slider-runnable-track {
+  height:5px;border-radius:10px;
+  background:linear-gradient(to right,#edc98d var(--conversation-progress),#806447 var(--conversation-progress));
+  box-shadow:0 0 0 1px #dbb77970;
+}
+#conversationExhibit .conversation-control input[type="range"]::-moz-range-track {
+  height:5px;border-radius:10px;background:#806447;box-shadow:0 0 0 1px #dbb77970;
+}
+#conversationExhibit .conversation-control input[type="range"]::-moz-range-progress {
+  height:5px;border-radius:10px;background:#edc98d;
+}
+#conversationExhibit .conversation-control input[type="range"]::-webkit-slider-thumb {
+  appearance:none;-webkit-appearance:none;width:30px;height:30px;margin-top:-13px;
+  border:3px solid #fff1d4;border-radius:50%;
+  background:radial-gradient(circle,#fff9df 0 20%,#e5b876 22% 60%,#886037 70%);
+  box-shadow:0 0 0 5px #cf9f5855,0 0 20px #f7d69ca6;
+}
+#conversationExhibit .conversation-control input[type="range"]::-moz-range-thumb {
+  width:26px;height:26px;border:3px solid #fff1d4;border-radius:50%;
+  background:#e5b876;box-shadow:0 0 0 5px #cf9f5855,0 0 20px #f7d69ca6;
+}
+#conversationExhibit .conversation-control input[type="range"]:focus-visible {outline:2px solid #fff1d4;outline-offset:5px;}
+#conversationExhibit .conversation-ends {
+  display:flex;justify-content:space-between;margin-top:-2px;color:#c9aa7d;
+  font:500 10px "DM Sans",sans-serif;letter-spacing:.17em;
+}
 #conversationExhibit .exhibit-back {position:fixed;z-index:30;left:20px;top:16px;color:#fff0d2;}
 @media(max-width:650px) {
-  #conversationExhibit .conversation-scroll {justify-content:flex-start;padding:82px 14px 25px;}
-  #conversationExhibit .conversation-heading {margin-bottom:20px;}
-  #conversationExhibit .conversation-heading h2 {font-size:51px;}
-  #conversationExhibit .conversation-case {height:570px;min-height:0;}
-  #conversationExhibit .conversation-case-top {font-size:8px;letter-spacing:.08em;top:21px;}
+  #conversationExhibit .conversation-scroll {justify-content:flex-start;padding:75px 14px 30px;}
+  #conversationExhibit .conversation-heading {margin-bottom:17px;}
+  #conversationExhibit .conversation-heading h2 {font-size:50px;}
+  #conversationExhibit .conversation-heading p {font-size:19px;}
+  #conversationExhibit .conversation-case {height:510px;min-height:0;}
+  #conversationExhibit .conversation-case-top {font-size:8px;letter-spacing:.08em;top:19px;}
   #conversationExhibit .conversation-figures {background:none;}
-  #conversationExhibit .conversation-person {display:block;width:47%;height:60%;align-self:end;}
-  #conversationExhibit .conversation-person-left {margin-left:-2%;}
-  #conversationExhibit .conversation-person-right {margin-right:-2%;}
-  #conversationExhibit .conversation-bubbles {inset:15% 16% 30%;}
-  #conversationExhibit .conversation-bubble {width:52%;min-height:62px;padding:7px;gap:5px;}
-  #conversationExhibit .conversation-bubble strong {font-size:20px;}
-  #conversationExhibit .conversation-bubble:nth-child(1) {left:-4%;top:4%;}
-  #conversationExhibit .conversation-bubble:nth-child(2) {right:-4%;top:39%;}
-  #conversationExhibit .conversation-bubble:nth-child(3) {left:1%;bottom:0;}
-  #conversationExhibit .conversation-piece-text {left:10%;right:10%;bottom:23px;font-size:22px;}
-  #conversationExhibit .conversation-final {inset:22% 9% 19%;padding:12px;}
+  #conversationExhibit .conversation-person {display:block;width:48%;height:59%;align-self:end;}
+  #conversationExhibit .conversation-person-left {margin-left:-4%;}
+  #conversationExhibit .conversation-person-right {margin-right:-4%;}
+  #conversationExhibit .conversation-echo {width:22%;padding:9px 7px;gap:5px;}
+  #conversationExhibit .echo-one {left:26%;top:23%;}
+  #conversationExhibit .echo-two {right:23%;top:32%;}
+  #conversationExhibit .echo-three {left:40%;top:42%;}
+  #conversationExhibit .echo-four {right:31%;top:53%;}
+  #conversationExhibit .echo-five {left:29%;top:64%;}
+  #conversationExhibit .conversation-moment {left:8%;right:8%;bottom:22px;}
+  #conversationExhibit .conversation-moment p {font-size:22px;}
+  #conversationExhibit .conversation-final {inset:21% 7% 19%;padding:12px;}
   #conversationExhibit .conversation-final span {font-size:15px;}
-  #conversationExhibit .conversation-final p {font-size:29px;}
+  #conversationExhibit .conversation-final p {font-size:28px;}
+  #conversationExhibit .conversation-control {margin-top:20px;}
+  #conversationExhibit .conversation-control label {font-size:22px;}
 }
 @media(prefers-reduced-motion:reduce) {
   #conversationExhibit .conversation-bridge span,
-  #conversationExhibit .conversation-bubble {transition:none;}
+  #conversationExhibit .conversation-echo {transition:none;}
 }
 
 </style>
@@ -6515,31 +6570,36 @@ button {
     <header class="conversation-heading">
       <span>GALLERY I · EXHIBIT 3</span>
       <h2>Becoming Us</h2>
-      <p>One Telegram conversation that carried on into morning. Touch the messages to follow it.</p>
+      <p>There wasn't one question that changed everything. We arrived there while talking.</p>
     </header>
-    <div class="conversation-case">
-      <div class="conversation-case-top" aria-hidden="true">✦ &nbsp; THE NIGHT WE BECAME US &nbsp; ✦</div>
+    <div class="conversation-case" id="conversationCase" data-phase="0">
+      <div class="conversation-case-top" aria-hidden="true">✦ &nbsp; THE CONVERSATION THAT CARRIED ON &nbsp; ✦</div>
       <div class="conversation-figures" aria-hidden="true">
         <div class="conversation-person conversation-person-left"></div>
         <div class="conversation-bridge"><span id="conversationBridgeFill"></span></div>
         <div class="conversation-person conversation-person-right"></div>
       </div>
-      <div class="conversation-bubbles" role="group" aria-label="Three pieces of the conversation">
-        <button type="button" class="conversation-bubble" data-piece="0" onclick="openConversationPiece(0)" aria-pressed="false">
-          <span>01</span><strong>Late night</strong>
-        </button>
-        <button type="button" class="conversation-bubble" data-piece="1" onclick="openConversationPiece(1)" aria-pressed="false">
-          <span>02</span><strong>Past midnight</strong>
-        </button>
-        <button type="button" class="conversation-bubble" data-piece="2" onclick="openConversationPiece(2)" aria-pressed="false">
-          <span>03</span><strong>Morning</strong>
-        </button>
+      <div class="conversation-echoes" aria-hidden="true">
+        <span class="conversation-echo echo-one"><i></i><i></i></span>
+        <span class="conversation-echo echo-two"><i></i><i></i></span>
+        <span class="conversation-echo echo-three"><i></i><i></i></span>
+        <span class="conversation-echo echo-four"><i></i><i></i></span>
+        <span class="conversation-echo echo-five"><i></i><i></i></span>
       </div>
-      <div id="conversationPieceText" class="conversation-piece-text" role="status" aria-live="polite">Tap the floating messages.</div>
+      <div class="conversation-moment" role="status" aria-live="polite">
+        <span id="conversationPhase">LATE NIGHT</span>
+        <p id="conversationPieceText">The conversation begins.</p>
+      </div>
       <div id="conversationFinal" class="conversation-final" hidden>
         <span>13 JULY 2024</span>
-        <p>Somewhere in that long conversation, we chose each other. And it became us. ♡</p>
+        <p>We didn't arrive there because of one question. We kept talking, and somewhere along the way, we chose each other. ♡</p>
       </div>
+    </div>
+    <div class="conversation-control">
+      <label for="conversationTimeline">Move through the conversation</label>
+      <input id="conversationTimeline" type="range" min="0" max="100" value="0"
+        oninput="updateConversationTimeline(this.value)" aria-valuetext="Late night">
+      <div class="conversation-ends" aria-hidden="true"><span>LATE NIGHT</span><span>EARLY MORNING</span></div>
     </div>
   </div>
 </section>
@@ -7208,31 +7268,34 @@ function closeWatch() {
 
 
 /* Exhibit 3 uses only the known shape of the July conversation, never invented quotes. */
-const conversationPieces = [
-  "We were talking on Telegram late into the night.",
-  "The conversation kept going into the early morning.",
-  "That was when we decided to be exclusive."
+const conversationMoments = [
+  { from: 0, phase: "LATE NIGHT", text: "The conversation begins." },
+  { from: 16, phase: "STILL TALKING", text: "One message leads to another." },
+  { from: 39, phase: "PAST MIDNIGHT", text: "Midnight passes. The conversation keeps going." },
+  { from: 65, phase: "INTO MORNING", text: "Somewhere along the way, we find ourselves on the same page." },
+  { from: 100, phase: "13 JULY 2024", text: "By morning, we had chosen each other." }
 ];
-const discoveredConversations = new Set();
 function openConversation() { startGallery1ExhibitZoom("conversation"); }
 function enterConversationExhibit() {
   document.getElementById("conversationExhibit").classList.add("active");
+  document.getElementById("conversationTimeline").value = 0;
+  updateConversationTimeline(0);
 }
-function openConversationPiece(index) {
-  const piece = conversationPieces[index];
-  if (!piece) return;
-  discoveredConversations.add(index);
-  document.getElementById("conversationPieceText").textContent = piece;
-  document.querySelectorAll("#conversationExhibit .conversation-bubble").forEach((button, number) => {
-    button.classList.toggle("selected", number === index);
-    button.classList.toggle("discovered", discoveredConversations.has(number));
-    button.setAttribute("aria-pressed", String(number === index));
-  });
-  document.getElementById("conversationBridgeFill").style.width = (discoveredConversations.size / conversationPieces.length * 100) + "%";
-  if (discoveredConversations.size === conversationPieces.length) {
-    document.getElementById("conversationFinal").hidden = false;
-    document.getElementById("conversationExhibit").classList.add("conversation-complete");
-  }
+function updateConversationTimeline(value) {
+  const progress = Math.max(0, Math.min(100, Number(value) || 0));
+  const caseElement = document.getElementById("conversationCase");
+  const timeline = document.getElementById("conversationTimeline");
+  const moment = [...conversationMoments].reverse().find(item => progress >= item.from);
+  const phaseIndex = conversationMoments.indexOf(moment);
+  caseElement.dataset.phase = String(phaseIndex);
+  caseElement.style.setProperty("--conversation-progress", progress + "%");
+  timeline.style.setProperty("--conversation-progress", progress + "%");
+  timeline.setAttribute("aria-valuetext", moment.phase.toLowerCase());
+  document.getElementById("conversationPhase").textContent = moment.phase;
+  document.getElementById("conversationPieceText").textContent = moment.text;
+  const complete = progress >= 100;
+  document.getElementById("conversationFinal").hidden = !complete;
+  document.getElementById("conversationExhibit").classList.toggle("conversation-complete", complete);
 }
 function closeConversation() {
   document.getElementById("conversationExhibit").classList.remove("active");
