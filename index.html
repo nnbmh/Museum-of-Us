@@ -6003,6 +6003,125 @@ button {
   color:#322219;border-bottom-color:#62452e;
 }
 
+
+/* Exhibit 3 — the exchange, kept inside a single glass display. */
+#conversationExhibit {
+  background:#1c100d;color:#f5e8d0;
+}
+#conversationExhibit .conversation-room-art {
+  position:absolute;inset:0;
+  background:url("gallery-1-date-free-connected-floor.jpg") center/100% 100% no-repeat;
+  transform:scale(1.72) translate(-21.5%,-12.5%);
+  filter:brightness(.46) blur(5px);
+}
+#conversationExhibit .conversation-room-shade {
+  position:absolute;inset:0;background:radial-gradient(ellipse at center,#2d1911aa,#160d0ce8 76%);
+}
+#conversationExhibit .conversation-scroll {
+  position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;
+  padding:75px 22px 44px;-webkit-overflow-scrolling:touch;
+}
+#conversationExhibit .conversation-heading {
+  position:relative;text-align:center;max-width:690px;margin:0 auto 24px;
+}
+#conversationExhibit .conversation-heading span {
+  color:#dfbd87;font:500 10px "DM Sans",sans-serif;letter-spacing:.24em;
+}
+#conversationExhibit .conversation-heading h2 {
+  margin:5px 0 2px;color:#fff0d2;
+  font:italic 500 clamp(45px,6vw,70px)/1 "Cormorant Garamond",Georgia,serif;
+}
+#conversationExhibit .conversation-heading p {
+  margin:7px auto 0;max-width:600px;color:#e4d0b2;
+  font:clamp(19px,2.1vw,24px)/1.25 "Cormorant Garamond",Georgia,serif;
+}
+#conversationExhibit .conversation-case {
+  position:relative;max-width:950px;margin:0 auto;
+  padding:22px clamp(22px,4vw,55px) 30px;
+  border:1px solid #bc965e;
+  background:linear-gradient(150deg,#352319ee,#251813f5 60%,#39251af2);
+  box-shadow:0 0 0 6px #b38d5940,inset 0 0 0 3px #e3c79722,0 24px 50px #0c0706aa;
+  text-align:center;
+}
+#conversationExhibit .conversation-case::before {
+  content:"";position:absolute;inset:8px;border:1px solid #b9945a70;pointer-events:none;
+}
+#conversationExhibit .conversation-case-top {
+  color:#d3af77;font:500 10px "DM Sans",sans-serif;letter-spacing:.17em;
+}
+#conversationExhibit .conversation-figures {
+  position:relative;display:flex;justify-content:space-between;align-items:end;
+  max-width:720px;height:198px;margin:8px auto -52px;pointer-events:none;
+}
+#conversationExhibit .conversation-person {
+  position:relative;z-index:1;width:155px;height:205px;filter:drop-shadow(0 0 13px #d9b57b33);
+}
+#conversationExhibit .conversation-person-right { transform:scaleX(-1); }
+#conversationExhibit .conversation-bridge {
+  position:absolute;left:18%;right:18%;top:57%;height:1px;background:#b5915a55;
+}
+#conversationExhibit .conversation-bridge span {
+  display:block;width:0;height:100%;background:#f1d49d;
+  box-shadow:0 0 10px 2px #f0ce8a99;transition:width .55s ease;
+}
+#conversationExhibit .conversation-bubbles {
+  position:relative;z-index:2;display:flex;justify-content:center;gap:12px;
+  max-width:690px;margin:0 auto;
+}
+#conversationExhibit .conversation-bubble {
+  flex:1;min-width:0;min-height:92px;padding:14px 12px;
+  border:1px solid #c7a36b;border-radius:18px 18px 18px 3px;
+  background:linear-gradient(#f9efd9,#e9d2ad);color:#3d2a20;
+  box-shadow:0 9px 19px #100a0888;cursor:pointer;
+}
+#conversationExhibit .conversation-bubble:nth-child(2) { border-radius:18px 18px 3px 18px;transform:translateY(-20px); }
+#conversationExhibit .conversation-bubble:nth-child(3) { border-radius:18px 18px 18px 3px; }
+#conversationExhibit .conversation-bubble span {
+  display:block;color:#8a6340;font:600 10px "DM Sans",sans-serif;letter-spacing:.12em;
+}
+#conversationExhibit .conversation-bubble strong {
+  display:block;margin-top:5px;font:italic 500 clamp(21px,2.4vw,29px)/1.05 "Cormorant Garamond",Georgia,serif;
+}
+#conversationExhibit .conversation-bubble:hover,
+#conversationExhibit .conversation-bubble.selected { background:#fff6e3;border-color:#ffe0a2; }
+#conversationExhibit .conversation-bubble.discovered span::after { content:" · OPENED"; }
+#conversationExhibit .conversation-bubble:focus-visible { outline:2px solid #fff0d2;outline-offset:3px; }
+#conversationExhibit .conversation-piece-text {
+  min-height:42px;max-width:650px;margin:20px auto 0;color:#f2dfbd;
+  font:italic clamp(21px,2.4vw,27px)/1.2 "Cormorant Garamond",Georgia,serif;
+}
+#conversationExhibit .conversation-final[hidden] { display:none; }
+#conversationExhibit .conversation-final {
+  position:relative;left:auto;bottom:auto;max-width:650px;margin:16px auto 0;
+  padding:19px 20px 4px;border-top:1px solid #d0aa70;opacity:1;transform:none;
+}
+#conversationExhibit .conversation-final span {
+  color:#e1bd84;font:500 12px "DM Sans",sans-serif;letter-spacing:.2em;
+}
+#conversationExhibit .conversation-final p {
+  margin:7px 0;color:#fff0d2;
+  font:italic clamp(24px,2.8vw,34px)/1.12 "Cormorant Garamond",Georgia,serif;
+}
+#conversationExhibit .exhibit-back {
+  position:fixed;z-index:30;left:20px;top:16px;color:#fff0d2;
+}
+@media(max-width:650px) {
+  #conversationExhibit .conversation-scroll { padding:72px 14px 28px; }
+  #conversationExhibit .conversation-heading { margin-bottom:17px; }
+  #conversationExhibit .conversation-case { padding:18px 17px 23px; }
+  #conversationExhibit .conversation-case-top { font-size:8px;letter-spacing:.08em; }
+  #conversationExhibit .conversation-figures { height:154px;margin-bottom:-28px; }
+  #conversationExhibit .conversation-person { width:105px;height:150px; }
+  #conversationExhibit .conversation-bubbles { gap:6px; }
+  #conversationExhibit .conversation-bubble { min-height:78px;padding:10px 5px; }
+  #conversationExhibit .conversation-bubble strong { font-size:19px; }
+  #conversationExhibit .conversation-bubble:nth-child(2) { transform:translateY(-12px); }
+  #conversationExhibit .conversation-piece-text { font-size:21px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  #conversationExhibit .conversation-bridge span { transition:none; }
+}
+
 </style>
 </head>
 
@@ -6346,101 +6465,54 @@ button {
      EXHIBIT 03 — CONVERSATION
 ========================================== -->
 
-<section id="conversationExhibit" class="scene">
-  <!-- No separate close-up image: Gallery I zooms into its existing display. -->
-  <div class="conversation-archive-scroll">
-    <div class="conversation-archive-header">
-      <span>GALLERY I / EXHIBIT 3 / 13 JULY 2024</span>
-      <h2>Becoming Us</h2>
-      <p>Somewhere along all those conversations, something started to feel different.</p>
-    </div>
-    <div class="conversation-archive-subtitle">THE CONVERSATION ARCHIVES · OPEN EACH RECORD</div>
-    <div class="conversation-stars"><button class="conversation-star" onclick="openConversationCard(0)" aria-label="Open The Random Things archive">
-  <span class="conversation-index">RECORD 01</span>
-  <span class="conversation-name">The Random Things</span>
-  <span class="conversation-open">OPEN RECORD ↗</span>
-</button>
-<button class="conversation-star" onclick="openConversationCard(1)" aria-label="Open The Teasing archive">
-  <span class="conversation-index">RECORD 02</span>
-  <span class="conversation-name">The Teasing</span>
-  <span class="conversation-open">OPEN RECORD ↗</span>
-</button>
-<button class="conversation-star" onclick="openConversationCard(2)" aria-label="Open The Questions archive">
-  <span class="conversation-index">RECORD 03</span>
-  <span class="conversation-name">The Questions</span>
-  <span class="conversation-open">OPEN RECORD ↗</span>
-</button>
-<button class="conversation-star" onclick="openConversationCard(3)" aria-label="Open The Familiarity archive">
-  <span class="conversation-index">RECORD 04</span>
-  <span class="conversation-name">The Familiarity</span>
-  <span class="conversation-open">OPEN RECORD ↗</span>
-</button>
-<button class="conversation-star" onclick="openConversationCard(4)" aria-label="Open The Little Moments archive">
-  <span class="conversation-index">RECORD 05</span>
-  <span class="conversation-name">The Little Moments</span>
-  <span class="conversation-open">OPEN RECORD ↗</span>
-</button></div>
-    <div id="conversationHint" class="conversation-hint">Open all five records to complete this exhibit.</div>
-    <div id="conversationFinal" class="conversation-final">
-      <p>i don't think there was one particular conversation that changed everything. it was just all the little ones in between.</p>
-      <span>SOMEWHERE ALONG THE WAY, IT BECAME US.</span>
-    </div>
-  </div>
-
-  <!-- ARCHIVAL CARD -->
-
-  <div
-    id="conversationCardOverlay"
-    class="conversation-card-overlay"
-    onclick="closeConversationCard(event)">
-
-    <div
-      class="conversation-card"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="conversationCardTitle"
-      onclick="event.stopPropagation()">
-
-      <button
-        class="conversation-card-close"
-        onclick="closeConversationCard()"
-        aria-label="Close conversation card">
-        ×
-      </button>
-
-      <div
-        id="conversationCardNumber"
-        class="conversation-card-number">
-        ARCHIVE FRAGMENT 01
-      </div>
-
-      <h3 id="conversationCardTitle">
-        The Random Things
-      </h3>
-
-      <div class="conversation-card-divider"></div>
-
-      <div
-        id="conversationCardText"
-        class="conversation-card-text">
-        Conversation coming soon.
-      </div>
-
-      <div class="conversation-card-divider"></div>
-
-    </div>
-
-  </div>
-
-
-  <!-- RETURN NAVIGATION -->
-
-  <button
-    class="exhibit-back"
-    onclick="closeConversation()">
-    <span class="back-arrow">←</span> GALLERY I
+<section id="conversationExhibit" class="scene" aria-label="Gallery I Exhibit 3 — Becoming Us">
+  <div class="conversation-room-art" aria-hidden="true"></div>
+  <div class="conversation-room-shade" aria-hidden="true"></div>
+  <button class="exhibit-back" type="button" onclick="closeConversation()">
+    <span class="back-arrow" aria-hidden="true">←</span> GALLERY I
   </button>
-
+  <div class="conversation-scroll">
+    <header class="conversation-heading">
+      <span>GALLERY I · EXHIBIT 3</span>
+      <h2>Becoming Us</h2>
+      <p>One conversation carried on from late night into morning. Follow the three pieces of that night.</p>
+    </header>
+    <div class="conversation-case">
+      <div class="conversation-case-top" aria-hidden="true">✦ &nbsp; A CONVERSATION BETWEEN TWO PEOPLE &nbsp; ✦</div>
+      <div class="conversation-figures" aria-hidden="true">
+        <svg class="conversation-person conversation-person-left" viewBox="0 0 180 240">
+          <path d="M53 101c-8-13-10-32-2-47 6-13 20-21 37-21 18 0 33 10 38 26 4 14 1 30-8 42-2 14-13 28-28 28-17 0-29-13-31-28Z" fill="#aa8252"/>
+          <path d="M53 72c-10-24 3-49 36-51 33-1 47 18 42 43-9-8-18-15-26-17-15 11-32 11-52 11Z" fill="#5b3925"/>
+          <path d="M90 132c-38 0-66 26-71 81h145c-5-55-33-81-74-81Z" fill="#735032"/>
+          <path d="M22 211h139" stroke="#d9b57b" stroke-width="3"/>
+        </svg>
+        <div class="conversation-bridge"><span id="conversationBridgeFill"></span></div>
+        <svg class="conversation-person conversation-person-right" viewBox="0 0 180 240">
+          <path d="M56 110c-13-31-13-74 10-88 11-7 32-8 45 0 24 14 26 58 10 90-6 15-17 25-32 25-16 0-27-10-33-27Z" fill="#583827"/>
+          <path d="M62 71c0-23 12-37 29-37 20 0 30 16 30 38v22c0 24-13 41-31 41-17 0-28-15-28-40Z" fill="#b58b5b"/>
+          <path d="M55 76c1-36 15-55 37-55 27 0 42 20 34 58-7-22-20-29-29-30-12 14-25 19-42 17Z" fill="#4d3124"/>
+          <path d="M90 139c-40 0-66 27-72 74h145c-7-47-32-74-73-74Z" fill="#745038"/>
+          <path d="M22 211h139" stroke="#d9b57b" stroke-width="3"/>
+        </svg>
+      </div>
+      <div class="conversation-bubbles" role="group" aria-label="Three pieces of the conversation">
+        <button type="button" class="conversation-bubble" data-piece="0" onclick="openConversationPiece(0)" aria-pressed="false">
+          <span>01</span><strong>Late that night</strong>
+        </button>
+        <button type="button" class="conversation-bubble" data-piece="1" onclick="openConversationPiece(1)" aria-pressed="false">
+          <span>02</span><strong>Still talking</strong>
+        </button>
+        <button type="button" class="conversation-bubble" data-piece="2" onclick="openConversationPiece(2)" aria-pressed="false">
+          <span>03</span><strong>By morning</strong>
+        </button>
+      </div>
+      <div id="conversationPieceText" class="conversation-piece-text" role="status" aria-live="polite">Tap each part of the conversation.</div>
+      <div id="conversationFinal" class="conversation-final" hidden>
+        <span>13 JULY 2024</span>
+        <p>Somewhere in that long conversation, we chose each other. And it became us. ♡</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ==========================================
@@ -7106,151 +7178,36 @@ function closeWatch() {
 ========================================== */
 
 
-/* Temporary conversation content
-
-   Later, we only need to replace these
-   placeholders with actual Telegram messages.
-*/
-
-const conversationFragments = [
-
-  {
-    title: "The Random Things",
-    text: "A collection of the unexpected, completely random things we somehow ended up talking about."
-  },
-
-  {
-    title: "The Teasing",
-    text: "The little jokes, playful arguments, and moments when we couldn't resist annoying each other."
-  },
-
-  {
-    title: "The Questions",
-    text: "The conversations where we gradually learned more about the person on the other side of the screen."
-  },
-
-  {
-    title: "The Familiarity",
-    text: "The ordinary conversations that slowly started feeling familiar."
-  },
-
-  {
-    title: "The Little Moments",
-    text: "The small exchanges that might not have seemed important at the time."
-  }
-
+/* Exhibit 3 uses only the known shape of the July conversation, never invented quotes. */
+const conversationPieces = [
+  "We were talking on Telegram late into the night.",
+  "The conversation kept going into the early morning.",
+  "That was when we decided to be exclusive."
 ];
-
-
-/* Track discovered fragments */
-
 const discoveredConversations = new Set();
-
-
-/* Enter exhibit */
-
 function openConversation() { startGallery1ExhibitZoom("conversation"); }
 function enterConversationExhibit() {
   document.getElementById("conversationExhibit").classList.add("active");
 }
-
-/* Open archival card */
-
-function openConversationCard(index) {
-
-  const fragment = conversationFragments[index];
-
-  if (!fragment) return;
-
-  const overlay = document.getElementById(
-    "conversationCardOverlay"
-  );
-
-  const number = document.getElementById(
-    "conversationCardNumber"
-  );
-
-  const title = document.getElementById(
-    "conversationCardTitle"
-  );
-
-  const text = document.getElementById(
-    "conversationCardText"
-  );
-
-  number.textContent =
-    `ARCHIVE FRAGMENT ${String(index + 1).padStart(2, "0")}`;
-
-  title.textContent = fragment.title;
-
-  text.textContent = fragment.text;
-
-  overlay.classList.add("visible");
-
-  /* Mark star as discovered */
-
+function openConversationPiece(index) {
+  const piece = conversationPieces[index];
+  if (!piece) return;
   discoveredConversations.add(index);
-
-  const stars = document.querySelectorAll(
-    ".conversation-star"
-  );
-
-  stars[index].classList.add("discovered");
-
-  /* Hide initial hint */
-
-  document.getElementById(
-    "conversationHint"
-  ).classList.add("hidden");
-
-}
-
-
-/* Close archival card */
-
-function closeConversationCard(event) {
-
-  if (
-    event &&
-    event.target !== document.getElementById(
-      "conversationCardOverlay"
-    )
-  ) {
-    return;
+  document.getElementById("conversationPieceText").textContent = piece;
+  document.querySelectorAll("#conversationExhibit .conversation-bubble").forEach((button, number) => {
+    button.classList.toggle("selected", number === index);
+    button.classList.toggle("discovered", discoveredConversations.has(number));
+    button.setAttribute("aria-pressed", String(number === index));
+  });
+  document.getElementById("conversationBridgeFill").style.width = (discoveredConversations.size / conversationPieces.length * 100) + "%";
+  if (discoveredConversations.size === conversationPieces.length) {
+    document.getElementById("conversationFinal").hidden = false;
+    document.getElementById("conversationExhibit").classList.add("conversation-complete");
   }
-
-  document.getElementById(
-    "conversationCardOverlay"
-  ).classList.remove("visible");
-
-  /* Check if all five fragments were discovered */
-
-  if (discoveredConversations.size === 5) {
-
-    setTimeout(() => {
-
-      document.getElementById(
-        "conversationFinal"
-      ).classList.add("visible");
-
-    }, 700);
-
-  }
-
 }
-
-
-/* Return to Gallery I */
-
 function closeConversation() {
-  document.getElementById("conversationCardOverlay")
-    .classList.remove("visible");
-
-  document.getElementById("conversationExhibit")
-    .classList.remove("active");
-
-  document.getElementById("gallery1")
-    .classList.add("active");
+  document.getElementById("conversationExhibit").classList.remove("active");
+  document.getElementById("gallery1").classList.add("active");
 }
 
 /* ==========================================
