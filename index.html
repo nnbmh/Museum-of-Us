@@ -6217,6 +6217,98 @@ button {
   #conversationExhibit .conversation-echo {transition:none;}
 }
 
+
+/* Exhibit 3: an ivory museum surround and a readable final caption. */
+#conversationExhibit {
+  background:#eee9df;
+  color:#4b443d;
+}
+#conversationExhibit .conversation-room-art {
+  background:linear-gradient(140deg,#fbf8f0,#ded8cb 60%,#f5efe4);
+  transform:none;
+  filter:none;
+}
+#conversationExhibit .conversation-room-shade {
+  background:radial-gradient(ellipse at 50% 26%,#fffdf2c9,transparent 72%);
+}
+#conversationExhibit .conversation-heading span {color:#947647;}
+#conversationExhibit .conversation-heading h2 {color:#3d4245;}
+#conversationExhibit .conversation-heading p {color:#655e55;}
+#conversationExhibit .conversation-case {
+  background:radial-gradient(ellipse at 50% 15%,#64737c,#3b474e 67%,#2d383e);
+  box-shadow:0 0 0 5px #a88b5a45,0 0 0 7px #faf1daaa,inset 0 0 48px #1c272ba8,0 24px 55px #635c4c55;
+}
+#conversationExhibit .conversation-case[data-phase="3"],
+#conversationExhibit .conversation-case[data-phase="4"] {
+  background:radial-gradient(ellipse at 50% 18%,#88949a,#46545b 68%,#303d43);
+  box-shadow:0 0 0 5px #ae8d5b55,0 0 0 7px #faf1dadd,inset 0 0 45px #1c272b88,0 24px 55px #635c4c55;
+}
+#conversationExhibit .conversation-case-top {color:#f1ddb5;}
+#conversationExhibit .conversation-moment,
+#conversationExhibit .conversation-moment span {color:#fff1d2;}
+#conversationExhibit .conversation-final {
+  width:auto;
+  max-width:none;
+  box-sizing:border-box;
+  background:linear-gradient(135deg,#f9f3e8f7,#e8dfcff7);
+  border:1px solid #c9a66e;
+  box-shadow:0 15px 35px #19212677,inset 0 0 0 5px #fffaf2a8;
+  pointer-events:none;
+}
+#conversationExhibit .conversation-final span {
+  display:block;
+  margin:0;
+  color:#8b683b;
+}
+#conversationExhibit .conversation-final p {
+  color:#3e4143;
+  text-shadow:none;
+}
+#conversationExhibit .conversation-control label {color:#4b4d4c;}
+#conversationExhibit .conversation-ends {color:#796b55;}
+#conversationExhibit .conversation-control input[type="range"]::-webkit-slider-runnable-track {
+  background:linear-gradient(to right,#ba9154 var(--conversation-progress),#b4aca0 var(--conversation-progress));
+  box-shadow:0 0 0 1px #927a57a0;
+}
+#conversationExhibit .conversation-control input[type="range"]::-moz-range-track {background:#b4aca0;}
+#conversationExhibit .exhibit-back {color:#4d4b47;text-shadow:none;}
+@media(max-width:650px) {
+  #conversationExhibit .conversation-scroll {padding:80px 14px 30px;}
+  #conversationExhibit .conversation-case {height:520px;}
+  #conversationExhibit .conversation-figures {
+    background:url("exhibit-3-gilded-couple.png") center 57px/100% auto no-repeat;
+  }
+  #conversationExhibit .conversation-person {display:none;}
+  #conversationExhibit .conversation-bridge {top:48%;}
+  #conversationExhibit .conversation-echo {width:20%;padding:8px 6px;}
+  #conversationExhibit .echo-one {left:29%;top:21%;}
+  #conversationExhibit .echo-two {right:28%;top:28%;}
+  #conversationExhibit .echo-three {left:40%;top:35%;}
+  #conversationExhibit .echo-four {right:32%;top:43%;}
+  #conversationExhibit .echo-five {left:31%;top:51%;}
+  #conversationExhibit .conversation-moment {left:7%;right:7%;bottom:25px;}
+  #conversationExhibit .conversation-moment p {font-size:23px;}
+  #conversationExhibit .conversation-final {
+    inset:auto 6% 7%;
+    width:88%;
+    max-height:48%;
+    min-height:180px;
+    height:auto;
+    padding:17px 16px;
+    overflow:auto;
+    justify-content:center;
+  }
+  #conversationExhibit .conversation-final span {
+    font-size:13px;
+    letter-spacing:.17em;
+  }
+  #conversationExhibit .conversation-final p {
+    margin:12px 0 0;
+    font-size:clamp(21px,5.5vw,26px);
+    line-height:1.12;
+  }
+}
+
 </style>
 </head>
 
@@ -6592,7 +6684,7 @@ button {
       </div>
       <div id="conversationFinal" class="conversation-final" hidden>
         <span>13 JULY 2024</span>
-        <p>Somewhere in all that talking, it became clear: it was you and me, and we wanted to keep it that way. ♡</p>
+        <p>Nothing happened all at once. We just kept talking, and by morning, we'd chosen each other. ♡</p>
       </div>
     </div>
     <div class="conversation-control">
