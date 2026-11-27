@@ -6012,115 +6012,151 @@ button {
   position:absolute;inset:0;
   background:url("gallery-1-date-free-connected-floor.jpg") center/100% 100% no-repeat;
   transform:scale(1.72) translate(-21.5%,-12.5%);
-  filter:brightness(.46) blur(5px);
+  filter:brightness(.4) blur(8px);
 }
 #conversationExhibit .conversation-room-shade {
-  position:absolute;inset:0;background:radial-gradient(ellipse at center,#2d1911aa,#160d0ce8 76%);
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 42%,#4930239c,#1a100de8 76%);
 }
 #conversationExhibit .conversation-scroll {
   position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;
-  padding:75px 22px 44px;-webkit-overflow-scrolling:touch;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:76px 22px 40px;-webkit-overflow-scrolling:touch;
 }
 #conversationExhibit .conversation-heading {
-  position:relative;text-align:center;max-width:690px;margin:0 auto 24px;
+  position:relative;text-align:center;max-width:720px;margin:0 auto 22px;
 }
 #conversationExhibit .conversation-heading span {
-  color:#dfbd87;font:500 10px "DM Sans",sans-serif;letter-spacing:.24em;
+  color:#d6ae75;font:500 10px "DM Sans",sans-serif;letter-spacing:.24em;
 }
 #conversationExhibit .conversation-heading h2 {
-  margin:5px 0 2px;color:#fff0d2;
-  font:italic 500 clamp(45px,6vw,70px)/1 "Cormorant Garamond",Georgia,serif;
+  margin:6px 0 4px;color:#fff0d2;
+  font:italic 500 clamp(49px,6vw,74px)/1 "Cormorant Garamond",Georgia,serif;
 }
 #conversationExhibit .conversation-heading p {
-  margin:7px auto 0;max-width:600px;color:#e4d0b2;
+  margin:9px auto 0;max-width:650px;color:#e3cfaf;
   font:clamp(19px,2.1vw,24px)/1.25 "Cormorant Garamond",Georgia,serif;
 }
 #conversationExhibit .conversation-case {
-  position:relative;max-width:950px;margin:0 auto;
-  padding:22px clamp(22px,4vw,55px) 30px;
-  border:1px solid #bc965e;
-  background:linear-gradient(150deg,#352319ee,#251813f5 60%,#39251af2);
-  box-shadow:0 0 0 6px #b38d5940,inset 0 0 0 3px #e3c79722,0 24px 50px #0c0706aa;
-  text-align:center;
+  position:relative;isolation:isolate;width:min(1060px,100%);height:min(550px,58vh);min-height:440px;
+  margin:0 auto;overflow:hidden;text-align:center;
+  border:1px solid #d2ac72;
+  background:
+    radial-gradient(ellipse at 50% 10%,#d6a46a40,transparent 50%),
+    linear-gradient(100deg,#24150fbf,#4b3023e5 50%,#24150fbf);
+  box-shadow:0 0 0 5px #9e744435,0 0 0 7px #f7d99b26,inset 0 0 45px #110b08bb,0 24px 70px #100907b8;
 }
 #conversationExhibit .conversation-case::before {
-  content:"";position:absolute;inset:8px;border:1px solid #b9945a70;pointer-events:none;
+  content:"";position:absolute;z-index:8;inset:10px;
+  border:1px solid #f0d29d66;pointer-events:none;
+}
+#conversationExhibit .conversation-case::after {
+  content:"";position:absolute;z-index:7;inset:0;
+  background:linear-gradient(113deg,transparent 15%,#fff8dc0c 22%,transparent 33%,transparent 69%,#fff8dc0b 76%,transparent 82%);
+  pointer-events:none;
 }
 #conversationExhibit .conversation-case-top {
-  color:#d3af77;font:500 10px "DM Sans",sans-serif;letter-spacing:.17em;
+  position:absolute;z-index:5;top:24px;left:0;right:0;
+  color:#e4c699;font:500 10px "DM Sans",sans-serif;letter-spacing:.21em;
 }
 #conversationExhibit .conversation-figures {
-  position:relative;display:flex;justify-content:space-between;align-items:end;
-  max-width:720px;height:205px;margin:12px auto 14px;pointer-events:none;
+  position:absolute;inset:0;display:flex;justify-content:space-between;align-items:end;
+  pointer-events:none;
 }
 #conversationExhibit .conversation-person {
-  position:relative;z-index:1;width:175px;height:205px;filter:sepia(.55) saturate(.9) drop-shadow(0 0 18px #d9b57b66);
+  position:relative;z-index:2;width:clamp(205px,25%,275px);height:88%;
+  filter:drop-shadow(0 0 16px #e6bf7970);
 }
-#conversationExhibit .conversation-person-right { transform:scaleX(-1); }
+#conversationExhibit .conversation-person-left { margin-left:3%; }
+#conversationExhibit .conversation-person-right { margin-right:3%;transform:scaleX(-1); }
 #conversationExhibit .conversation-bridge {
-  position:absolute;left:18%;right:18%;top:48%;height:1px;background:#b5915a55;
+  position:absolute;z-index:1;left:24%;right:24%;top:52%;height:1px;
+  background:linear-gradient(90deg,transparent,#cda76c88,transparent);
 }
 #conversationExhibit .conversation-bridge span {
-  display:block;width:0;height:100%;background:#f1d49d;
-  box-shadow:0 0 10px 2px #f0ce8a99;transition:width .55s ease;
+  display:block;width:0;height:100%;
+  background:linear-gradient(90deg,#d4aa69,#fff0c7);
+  box-shadow:0 0 16px 4px #f3d2958c;transition:width .7s ease;
 }
 #conversationExhibit .conversation-bubbles {
-  position:relative;z-index:2;display:flex;justify-content:center;gap:12px;
-  max-width:690px;margin:0 auto;
+  position:absolute;z-index:4;inset:13% 28% 27%;pointer-events:none;
 }
 #conversationExhibit .conversation-bubble {
-  flex:1;min-width:0;min-height:92px;padding:14px 12px;
-  border:1px solid #c7a36b;border-radius:18px 18px 18px 3px;
-  background:linear-gradient(#f9efd9,#e9d2ad);color:#3d2a20;
-  box-shadow:0 9px 19px #100a0888;cursor:pointer;
+  position:absolute;display:flex;align-items:center;justify-content:center;gap:10px;
+  width:clamp(116px,37%,175px);min-height:65px;padding:8px 12px;
+  border:1px solid #e3c38b;border-radius:23px 23px 23px 5px;
+  background:linear-gradient(135deg,#fff3d7e8,#e6c797e8);
+  color:#583b26;box-shadow:0 0 25px #e8b8743d,0 10px 25px #140d09a8;
+  cursor:pointer;pointer-events:auto;
+  transition:transform .25s ease,background .25s ease,box-shadow .25s ease;
 }
-#conversationExhibit .conversation-bubble:nth-child(2) { border-radius:18px 18px 3px 18px;transform:translateY(-20px); }
-#conversationExhibit .conversation-bubble:nth-child(3) { border-radius:18px 18px 18px 3px; }
+#conversationExhibit .conversation-bubble::after {
+  content:"";position:absolute;bottom:-8px;left:14px;
+  width:13px;height:13px;background:#e6c797;transform:rotate(45deg);
+  border-right:1px solid #e3c38b;border-bottom:1px solid #e3c38b;
+}
+#conversationExhibit .conversation-bubble:nth-child(1) {left:3%;top:7%;transform:rotate(-5deg);}
+#conversationExhibit .conversation-bubble:nth-child(2) {right:0;top:38%;transform:rotate(4deg);border-radius:23px 23px 5px 23px;}
+#conversationExhibit .conversation-bubble:nth-child(2)::after {left:auto;right:14px;}
+#conversationExhibit .conversation-bubble:nth-child(3) {left:17%;bottom:0;transform:rotate(-2deg);}
+#conversationExhibit .conversation-bubble:hover {box-shadow:0 0 32px #ffe0a493,0 10px 25px #140d09a8;}
+#conversationExhibit .conversation-bubble.selected {background:#fff7e7;box-shadow:0 0 30px #ffe2a4a8;}
+#conversationExhibit .conversation-bubble.discovered {border-color:#fff3d9;}
 #conversationExhibit .conversation-bubble span {
-  display:block;color:#8a6340;font:600 10px "DM Sans",sans-serif;letter-spacing:.12em;
+  color:#8a6443;font:600 10px "DM Sans",sans-serif;letter-spacing:.12em;
 }
 #conversationExhibit .conversation-bubble strong {
-  display:block;margin-top:5px;font:italic 500 clamp(21px,2.4vw,29px)/1.05 "Cormorant Garamond",Georgia,serif;
+  font:italic 500 clamp(20px,2.1vw,26px)/1 "Cormorant Garamond",Georgia,serif;
 }
-#conversationExhibit .conversation-bubble:hover,
-#conversationExhibit .conversation-bubble.selected { background:#fff6e3;border-color:#ffe0a2; }
-#conversationExhibit .conversation-bubble.discovered span::after { content:" · OPENED"; }
-#conversationExhibit .conversation-bubble:focus-visible { outline:2px solid #fff0d2;outline-offset:3px; }
+#conversationExhibit .conversation-bubble.discovered span::after {content:" ✦";}
+#conversationExhibit .conversation-bubble:focus-visible {outline:2px solid #fff4d7;outline-offset:5px;}
 #conversationExhibit .conversation-piece-text {
-  min-height:42px;max-width:650px;margin:20px auto 0;color:#f2dfbd;
-  font:italic clamp(21px,2.4vw,27px)/1.2 "Cormorant Garamond",Georgia,serif;
+  position:absolute;z-index:5;bottom:23px;left:24%;right:24%;
+  min-height:55px;margin:0;color:#f7e5c3;text-shadow:0 2px 6px #140c08;
+  font:italic clamp(20px,2.3vw,27px)/1.12 "Cormorant Garamond",Georgia,serif;
 }
-#conversationExhibit .conversation-final[hidden] { display:none; }
+#conversationExhibit .conversation-final[hidden] {display:none;}
 #conversationExhibit .conversation-final {
-  position:relative;left:auto;bottom:auto;max-width:650px;margin:16px auto 0;
-  padding:19px 20px 4px;border-top:1px solid #d0aa70;opacity:1;transform:none;visibility:visible;
+  position:absolute;z-index:6;inset:20% 23% 16%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:20px;background:radial-gradient(ellipse,#3a2418f5,#281911ed 80%);
+  border-top:1px solid #e8c486;border-bottom:1px solid #e8c486;
+  box-shadow:0 0 55px #e5b96e41;
+  opacity:1;transform:none;visibility:visible;
 }
 #conversationExhibit .conversation-final span {
-  color:#e1bd84;font:500 12px "DM Sans",sans-serif;letter-spacing:.2em;
+  color:#e9c991;font:500 clamp(18px,2.2vw,25px) "DM Sans",sans-serif;letter-spacing:.21em;
 }
 #conversationExhibit .conversation-final p {
-  margin:7px 0;color:#fff0d2;
-  font:italic clamp(24px,2.8vw,34px)/1.12 "Cormorant Garamond",Georgia,serif;
+  max-width:530px;margin:18px 0 0;color:#fff1d6;
+  font:italic clamp(25px,3vw,39px)/1.1 "Cormorant Garamond",Georgia,serif;
 }
-#conversationExhibit .exhibit-back {
-  position:fixed;z-index:30;left:20px;top:16px;color:#fff0d2;
-}
+#conversationExhibit.conversation-complete .conversation-bubbles {opacity:.25;pointer-events:none;}
+#conversationExhibit.conversation-complete .conversation-piece-text {opacity:0;}
+#conversationExhibit .exhibit-back {position:fixed;z-index:30;left:20px;top:16px;color:#fff0d2;}
 @media(max-width:650px) {
-  #conversationExhibit .conversation-scroll { padding:72px 14px 28px; }
-  #conversationExhibit .conversation-heading { margin-bottom:17px; }
-  #conversationExhibit .conversation-case { padding:18px 17px 23px; }
-  #conversationExhibit .conversation-case-top { font-size:8px;letter-spacing:.08em; }
-  #conversationExhibit .conversation-figures { height:154px;margin-bottom:10px; }
-  #conversationExhibit .conversation-person { width:105px;height:150px; }
-  #conversationExhibit .conversation-bubbles { gap:6px; }
-  #conversationExhibit .conversation-bubble { min-height:78px;padding:10px 5px; }
-  #conversationExhibit .conversation-bubble strong { font-size:19px; }
-  #conversationExhibit .conversation-bubble:nth-child(2) { transform:translateY(-12px); }
-  #conversationExhibit .conversation-piece-text { font-size:21px; }
-  #conversationExhibit .conversation-final { padding-top:14px; }
+  #conversationExhibit .conversation-scroll {justify-content:flex-start;padding:82px 14px 25px;}
+  #conversationExhibit .conversation-heading {margin-bottom:20px;}
+  #conversationExhibit .conversation-heading h2 {font-size:51px;}
+  #conversationExhibit .conversation-case {height:570px;min-height:0;}
+  #conversationExhibit .conversation-case-top {font-size:8px;letter-spacing:.08em;top:21px;}
+  #conversationExhibit .conversation-person {width:42%;height:63%;align-self:end;}
+  #conversationExhibit .conversation-person-left {margin-left:-9%;}
+  #conversationExhibit .conversation-person-right {margin-right:-9%;}
+  #conversationExhibit .conversation-bubbles {inset:15% 16% 30%;}
+  #conversationExhibit .conversation-bubble {width:52%;min-height:62px;padding:7px;gap:5px;}
+  #conversationExhibit .conversation-bubble strong {font-size:20px;}
+  #conversationExhibit .conversation-bubble:nth-child(1) {left:-4%;top:4%;}
+  #conversationExhibit .conversation-bubble:nth-child(2) {right:-4%;top:39%;}
+  #conversationExhibit .conversation-bubble:nth-child(3) {left:1%;bottom:0;}
+  #conversationExhibit .conversation-piece-text {left:10%;right:10%;bottom:23px;font-size:22px;}
+  #conversationExhibit .conversation-final {inset:22% 9% 19%;padding:12px;}
+  #conversationExhibit .conversation-final span {font-size:15px;}
+  #conversationExhibit .conversation-final p {font-size:29px;}
 }
 @media(prefers-reduced-motion:reduce) {
-  #conversationExhibit .conversation-bridge span { transition:none; }
+  #conversationExhibit .conversation-bridge span,
+  #conversationExhibit .conversation-bubble {transition:none;}
 }
 
 </style>
@@ -6476,38 +6512,41 @@ button {
     <header class="conversation-heading">
       <span>GALLERY I · EXHIBIT 3</span>
       <h2>Becoming Us</h2>
-      <p>One conversation carried on from late night into morning. Follow the three pieces of that night.</p>
+      <p>One Telegram conversation that carried on into morning. Touch the messages to follow it.</p>
     </header>
     <div class="conversation-case">
-      <div class="conversation-case-top" aria-hidden="true">✦ &nbsp; A CONVERSATION BETWEEN TWO PEOPLE &nbsp; ✦</div>
+      <div class="conversation-case-top" aria-hidden="true">✦ &nbsp; THE NIGHT WE BECAME US &nbsp; ✦</div>
       <div class="conversation-figures" aria-hidden="true">
-        <svg class="conversation-person conversation-person-left" viewBox="0 0 180 240">
-          <path d="M53 101c-8-13-10-32-2-47 6-13 20-21 37-21 18 0 33 10 38 26 4 14 1 30-8 42-2 14-13 28-28 28-17 0-29-13-31-28Z" fill="#aa8252"/>
-          <path d="M53 72c-10-24 3-49 36-51 33-1 47 18 42 43-9-8-18-15-26-17-15 11-32 11-52 11Z" fill="#5b3925"/>
-          <path d="M90 132c-38 0-66 26-71 81h145c-5-55-33-81-74-81Z" fill="#735032"/>
-          <path d="M22 211h139" stroke="#d9b57b" stroke-width="3"/>
+        <svg class="conversation-person conversation-person-left" viewBox="0 0 240 320">
+          <defs>
+            <linearGradient id="conversationGoldLeft" x1="0" x2="1"><stop stop-color="#624326"/><stop offset=".52" stop-color="#dbb978"/><stop offset="1" stop-color="#8d6234"/></linearGradient>
+          </defs>
+          <path d="M1 321c8-71 40-109 91-119l9-24c-17-13-30-33-31-63-8-10-10-28-2-36 2-45 29-69 68-69 49 0 76 35 69 82l11 18-12 10-11 2c-3 27-16 52-41 65l8 18c51 11 80 51 82 116Z" fill="url(#conversationGoldLeft)" stroke="#f1d49e" stroke-width="2"/>
+          <path d="M66 105c-5-52 22-91 69-93 40-2 71 30 70 78-20-19-35-24-49-27-18 23-45 31-90 42Z" fill="#40291c" stroke="#ad8048" stroke-width="2"/>
+          <path d="M84 207c39 26 83 26 111 0" fill="none" stroke="#f5dca9" stroke-opacity=".6" stroke-width="2"/>
         </svg>
         <div class="conversation-bridge"><span id="conversationBridgeFill"></span></div>
-        <svg class="conversation-person conversation-person-right" viewBox="0 0 180 240">
-          <path d="M56 110c-13-31-13-74 10-88 11-7 32-8 45 0 24 14 26 58 10 90-6 15-17 25-32 25-16 0-27-10-33-27Z" fill="#583827"/>
-          <path d="M62 71c0-23 12-37 29-37 20 0 30 16 30 38v22c0 24-13 41-31 41-17 0-28-15-28-40Z" fill="#b58b5b"/>
-          <path d="M55 76c1-36 15-55 37-55 27 0 42 20 34 58-7-22-20-29-29-30-12 14-25 19-42 17Z" fill="#4d3124"/>
-          <path d="M90 139c-40 0-66 27-72 74h145c-7-47-32-74-73-74Z" fill="#745038"/>
-          <path d="M22 211h139" stroke="#d9b57b" stroke-width="3"/>
+        <svg class="conversation-person conversation-person-right" viewBox="0 0 240 320">
+          <defs>
+            <linearGradient id="conversationGoldRight" x1="0" x2="1"><stop stop-color="#69492c"/><stop offset=".56" stop-color="#deb978"/><stop offset="1" stop-color="#906135"/></linearGradient>
+          </defs>
+          <path d="M2 321c5-64 32-105 82-117l12-24c-19-16-29-39-31-64-8-12-7-27 2-36 0-46 25-71 67-71 43 0 70 29 69 75l12 22-12 12-12 3c-4 30-18 51-41 64l9 19c48 11 75 53 81 117Z" fill="url(#conversationGoldRight)" stroke="#f3d6a2" stroke-width="2"/>
+          <path d="M58 96c-6-52 24-89 76-89 43 0 69 34 69 80-19-16-33-25-49-31-20 23-51 35-96 40Z" fill="#473020" stroke="#b99156" stroke-width="2"/>
+          <path d="M84 209c37 24 79 24 111-1" fill="none" stroke="#f5dca9" stroke-opacity=".6" stroke-width="2"/>
         </svg>
       </div>
       <div class="conversation-bubbles" role="group" aria-label="Three pieces of the conversation">
         <button type="button" class="conversation-bubble" data-piece="0" onclick="openConversationPiece(0)" aria-pressed="false">
-          <span>01</span><strong>Late that night</strong>
+          <span>01</span><strong>Late night</strong>
         </button>
         <button type="button" class="conversation-bubble" data-piece="1" onclick="openConversationPiece(1)" aria-pressed="false">
-          <span>02</span><strong>Still talking</strong>
+          <span>02</span><strong>Still here</strong>
         </button>
         <button type="button" class="conversation-bubble" data-piece="2" onclick="openConversationPiece(2)" aria-pressed="false">
-          <span>03</span><strong>By morning</strong>
+          <span>03</span><strong>Morning</strong>
         </button>
       </div>
-      <div id="conversationPieceText" class="conversation-piece-text" role="status" aria-live="polite">Tap each part of the conversation.</div>
+      <div id="conversationPieceText" class="conversation-piece-text" role="status" aria-live="polite">Tap the floating messages.</div>
       <div id="conversationFinal" class="conversation-final" hidden>
         <span>13 JULY 2024</span>
         <p>Somewhere in that long conversation, we chose each other. And it became us. ♡</p>
