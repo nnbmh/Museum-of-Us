@@ -6122,7 +6122,7 @@ button {
   background:linear-gradient(140deg,#fff3d6d9,#e9c892c4);
 }
 #conversationExhibit .conversation-moment {
-  position:absolute;z-index:5;bottom:18px;left:24%;right:24%;
+  position:absolute;z-index:5;bottom:18px;left:29%;right:29%;
   color:#f7e5c3;text-shadow:0 2px 7px #140c08;
 }
 #conversationExhibit .conversation-moment span {
@@ -6570,7 +6570,7 @@ button {
     <header class="conversation-heading">
       <span>GALLERY I · EXHIBIT 3</span>
       <h2>Becoming Us</h2>
-      <p>There wasn't one question that changed everything. We arrived there while talking.</p>
+      <p>A conversation that carried on into morning, and changed what we were to each other.</p>
     </header>
     <div class="conversation-case" id="conversationCase" data-phase="0">
       <div class="conversation-case-top" aria-hidden="true">✦ &nbsp; THE CONVERSATION THAT CARRIED ON &nbsp; ✦</div>
@@ -6592,7 +6592,7 @@ button {
       </div>
       <div id="conversationFinal" class="conversation-final" hidden>
         <span>13 JULY 2024</span>
-        <p>We didn't arrive there because of one question. We kept talking, and somewhere along the way, we chose each other. ♡</p>
+        <p>Somewhere in all that talking, it became clear: it was you and me, and we wanted to keep it that way. ♡</p>
       </div>
     </div>
     <div class="conversation-control">
@@ -7269,11 +7269,11 @@ function closeWatch() {
 
 /* Exhibit 3 uses only the known shape of the July conversation, never invented quotes. */
 const conversationMoments = [
-  { from: 0, phase: "LATE NIGHT", text: "The conversation begins." },
-  { from: 16, phase: "STILL TALKING", text: "One message leads to another." },
-  { from: 39, phase: "PAST MIDNIGHT", text: "Midnight passes. The conversation keeps going." },
-  { from: 65, phase: "INTO MORNING", text: "Somewhere along the way, we find ourselves on the same page." },
-  { from: 100, phase: "13 JULY 2024", text: "By morning, we had chosen each other." }
+  { from: 0, phase: "LATE NIGHT", text: "Late that night, we were still talking." },
+  { from: 16, phase: "STILL TALKING", text: "The replies kept coming." },
+  { from: 39, phase: "PAST MIDNIGHT", text: "Midnight passed without the conversation ending." },
+  { from: 65, phase: "INTO MORNING", text: "Somewhere along the way, we understood what we wanted." },
+  { from: 100, phase: "EARLY MORNING", text: "By morning, we had chosen to be exclusive." }
 ];
 function openConversation() { startGallery1ExhibitZoom("conversation"); }
 function enterConversationExhibit() {
@@ -7295,6 +7295,7 @@ function updateConversationTimeline(value) {
   document.getElementById("conversationPieceText").textContent = moment.text;
   const complete = progress >= 100;
   document.getElementById("conversationFinal").hidden = !complete;
+  document.querySelector("#conversationExhibit .conversation-moment").setAttribute("aria-hidden", String(complete));
   document.getElementById("conversationExhibit").classList.toggle("conversation-complete", complete);
 }
 function closeConversation() {
