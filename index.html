@@ -6051,14 +6051,14 @@ button {
 }
 #conversationExhibit .conversation-figures {
   position:relative;display:flex;justify-content:space-between;align-items:end;
-  max-width:720px;height:198px;margin:8px auto -52px;pointer-events:none;
+  max-width:720px;height:205px;margin:12px auto 14px;pointer-events:none;
 }
 #conversationExhibit .conversation-person {
-  position:relative;z-index:1;width:155px;height:205px;filter:drop-shadow(0 0 13px #d9b57b33);
+  position:relative;z-index:1;width:175px;height:205px;filter:sepia(.55) saturate(.9) drop-shadow(0 0 18px #d9b57b66);
 }
 #conversationExhibit .conversation-person-right { transform:scaleX(-1); }
 #conversationExhibit .conversation-bridge {
-  position:absolute;left:18%;right:18%;top:57%;height:1px;background:#b5915a55;
+  position:absolute;left:18%;right:18%;top:48%;height:1px;background:#b5915a55;
 }
 #conversationExhibit .conversation-bridge span {
   display:block;width:0;height:100%;background:#f1d49d;
@@ -6093,7 +6093,7 @@ button {
 #conversationExhibit .conversation-final[hidden] { display:none; }
 #conversationExhibit .conversation-final {
   position:relative;left:auto;bottom:auto;max-width:650px;margin:16px auto 0;
-  padding:19px 20px 4px;border-top:1px solid #d0aa70;opacity:1;transform:none;
+  padding:19px 20px 4px;border-top:1px solid #d0aa70;opacity:1;transform:none;visibility:visible;
 }
 #conversationExhibit .conversation-final span {
   color:#e1bd84;font:500 12px "DM Sans",sans-serif;letter-spacing:.2em;
@@ -6110,13 +6110,14 @@ button {
   #conversationExhibit .conversation-heading { margin-bottom:17px; }
   #conversationExhibit .conversation-case { padding:18px 17px 23px; }
   #conversationExhibit .conversation-case-top { font-size:8px;letter-spacing:.08em; }
-  #conversationExhibit .conversation-figures { height:154px;margin-bottom:-28px; }
+  #conversationExhibit .conversation-figures { height:154px;margin-bottom:10px; }
   #conversationExhibit .conversation-person { width:105px;height:150px; }
   #conversationExhibit .conversation-bubbles { gap:6px; }
   #conversationExhibit .conversation-bubble { min-height:78px;padding:10px 5px; }
   #conversationExhibit .conversation-bubble strong { font-size:19px; }
   #conversationExhibit .conversation-bubble:nth-child(2) { transform:translateY(-12px); }
   #conversationExhibit .conversation-piece-text { font-size:21px; }
+  #conversationExhibit .conversation-final { padding-top:14px; }
 }
 @media(prefers-reduced-motion:reduce) {
   #conversationExhibit .conversation-bridge span { transition:none; }
