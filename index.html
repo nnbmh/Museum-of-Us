@@ -5825,6 +5825,184 @@ button {
   font: 500 clamp(14px, 1.65vw, 18px) "Cormorant Garamond", Georgia, serif !important;
   letter-spacing: .08em !important;
 }
+
+/* Gallery I Exhibit 1 — an ivory archive displayed within the walnut gallery. */
+#bookArchive {
+  background:radial-gradient(ellipse at 50% 15%,#66432f 0%,#321e16 58%,#1b110d 100%);
+}
+#bookArchive .archive-scroll {
+  padding:74px clamp(12px,3vw,36px) 38px;
+}
+#bookArchive .archive-paper {
+  display:grid;
+  grid-template-columns:minmax(190px,230px) minmax(0,1fr);
+  column-gap:0;
+  max-width:1120px;
+  min-height:calc(100dvh - 116px);
+  margin:0 auto;
+  padding:0;
+  background:#f5ecdd;
+  border:1px solid #c7a777;
+  outline:0;
+  box-shadow:0 22px 65px #110a0780,inset 0 0 0 5px #fff8ea;
+  color:#3d2b25;
+}
+#bookArchive .archive-paper::before { display:none; }
+#bookArchive .archive-letterhead {
+  grid-column:1 / -1;
+  padding:35px clamp(26px,4vw,54px) 28px;
+  background:linear-gradient(120deg,#fff9ed,#f0e1c9);
+  border-bottom:1px solid #c6a574;
+  text-align:left;
+}
+#bookArchive .archive-brand {
+  color:#69432b;
+  font-size:clamp(22px,3vw,32px);
+  letter-spacing:.13em;
+}
+#bookArchive .archive-exhibit-name {
+  margin-top:8px;color:#34261f;font-size:clamp(17px,2vw,23px);
+}
+#bookArchive .archive-file-number { color:#846748; }
+#bookArchive .archive-tabs {
+  grid-column:1;
+  display:flex;
+  flex-direction:column;
+  align-self:stretch;
+  gap:8px;
+  margin:0;
+  padding:31px 16px;
+  background:linear-gradient(160deg,#503122,#352219);
+  border:0;
+  border-right:1px solid #ae8555;
+}
+#bookArchive .archive-tab {
+  width:100%;
+  padding:17px 15px;
+  border:0;
+  border-left:3px solid transparent;
+  background:transparent;
+  color:#e3cdae;
+  font:500 clamp(13px,1.3vw,15px)/1.4 "Cormorant Garamond",Georgia,serif;
+  letter-spacing:.03em;
+  text-align:left;
+  cursor:pointer;
+}
+#bookArchive .archive-tab:hover { color:#fff3db;background:#ffffff12; }
+#bookArchive .archive-tab.selected {
+  background:#f2e5d0;
+  border-left-color:#c49958;
+  border-bottom:0;
+  color:#3d2b25;
+  box-shadow:0 3px 12px #10090440;
+}
+#bookArchive .archive-tab:focus-visible { outline:2px solid #e8c895;outline-offset:2px; }
+#bookArchive .archive-record {
+  grid-column:2;min-width:0;
+  padding:34px clamp(24px,3.7vw,52px) 42px;
+  background:#f5ecdd;
+  color:#3d2b25;
+}
+#bookArchive .archive-kicker { color:#8c6846; }
+#bookArchive h2 { color:#452c20; }
+#bookArchive .archive-deck { color:#614b3d; }
+#bookArchive .archive-description { color:#55453b; }
+#bookArchive .archive-evidence {
+  background:#fffaf0;
+  border:1px solid #c4a578;
+  color:#473026;
+  box-shadow:0 5px 14px #57392419;
+}
+#bookArchive .archive-evidence:hover,
+#bookArchive .archive-evidence:focus-visible {
+  background:#fffdf7;border-color:#936939;
+}
+#bookArchive .archive-evidence-label,
+#bookArchive .archive-evidence-prompt,
+#bookArchive .archive-seal { color:#8a6342; }
+#bookArchive .archive-handwritten {
+  background:#efe0c7;border-color:#c6a478;color:#3d2b25;
+}
+#bookArchive .archive-puzzle {
+  margin-top:42px;border-top-color:#b5966b;
+}
+#bookArchive .archive-puzzle h3 { color:#493225; }
+#bookArchive .archive-puzzle-intro { color:#665044; }
+#bookArchive .archive-datecase {
+  background:#fff9ed;border-color:#c6a579;color:#4b3329;
+  box-shadow:0 8px 22px #5739241f,inset 0 0 0 5px #f4e8d2;
+}
+#bookArchive .archive-puzzle-date { color:#684026; }
+#bookArchive .archive-assessment {
+  background:#fffaf0;border-color:#c4a578;
+}
+#bookArchive .archive-assessment h3 {
+  color:#61452d;border-bottom-color:#c6a579;
+}
+#bookArchive .archive-checkrow { border-bottom-color:#d4bea0; }
+#bookArchive .archive-checkrow span:last-child,
+#bookArchive .archive-checkrow em,
+#bookArchive .archive-first-move strong { color:#875c33; }
+#bookArchive .archive-first-move { border-top-color:#b5966b; }
+#bookArchive .archive-footer {
+  grid-column:1 / -1;
+  margin:0;
+  padding:20px 30px;
+  background:#eee0c9;
+  border-top:1px solid #c6a579;
+  color:#80664b;
+}
+#bookArchive .archive-back { color:#fff1d9; }
+@media(max-width:760px) {
+  #bookArchive .archive-scroll { padding:62px 10px 24px; }
+  #bookArchive .archive-paper { grid-template-columns:minmax(0,1fr);min-height:0; }
+  #bookArchive .archive-letterhead { grid-column:1;padding:28px 24px 22px; }
+  #bookArchive .archive-tabs {
+    grid-column:1;flex-direction:row;gap:0;
+    padding:10px 14px;border-right:0;border-bottom:1px solid #ae8555;
+  }
+  #bookArchive .archive-tab {
+    flex:1;min-width:0;
+    padding:12px 8px;
+    border-left:0;border-bottom:2px solid transparent;
+    text-align:center;
+  }
+  #bookArchive .archive-tab.selected { border-bottom:2px solid #c49958; }
+  #bookArchive .archive-record { grid-column:1;padding:28px 24px 36px; }
+  #bookArchive .archive-footer { grid-column:1; }
+}
+@media(max-width:440px) {
+  #bookArchive .archive-letterhead { padding:26px 19px 20px; }
+  #bookArchive .archive-brand { font-size:22px; }
+  #bookArchive .archive-tabs { padding:8px; }
+  #bookArchive .archive-tab { font-size:12px;line-height:1.25; }
+  #bookArchive .archive-record { padding:25px 19px 34px; }
+  #bookArchive .archive-datecase { padding:20px 16px; }
+}
+
+/* Gallery III notes — warm ivory placards against the midnight blue room. */
+#gallery3Room .g3-portrait-panel {
+  background:linear-gradient(145deg,#fff9ec 0%,#f3e7d2 62%,#e7d5b7 100%);
+  border:1px solid #b58e5d;
+  box-shadow:0 0 0 100vmax rgba(8,16,29,.35),
+    0 24px 55px rgba(5,12,24,.45),
+    inset 0 0 0 6px rgba(255,251,241,.72),
+    inset 0 0 0 7px rgba(153,111,61,.48);
+  color:#3e2e25;
+}
+#gallery3Room .g3-portrait-panel::before { color:#a47b45; }
+#gallery3Room .g3-portrait-panel small { color:#866743; }
+#gallery3Room .g3-portrait-panel h2 {
+  color:#533926;border-bottom-color:rgba(153,111,61,.45);
+}
+#gallery3Room .g3-portrait-panel p { color:#3e3028; }
+#gallery3Room .g3-portrait-panel button {
+  color:#62452e;border-bottom-color:#9d784d;
+}
+#gallery3Room .g3-portrait-panel button:hover {
+  color:#322219;border-bottom-color:#62452e;
+}
+
 </style>
 </head>
 
