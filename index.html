@@ -6061,14 +6061,16 @@ button {
 }
 #conversationExhibit .conversation-figures {
   position:absolute;inset:0;display:flex;justify-content:space-between;align-items:end;
+  background:url("exhibit-3-gilded-couple.png") center bottom/contain no-repeat;
   pointer-events:none;
 }
 #conversationExhibit .conversation-person {
-  position:relative;z-index:2;width:clamp(205px,25%,275px);height:88%;
-  filter:drop-shadow(0 0 16px #e6bf7970);
+  display:none;position:relative;z-index:2;width:44%;height:75%;
+  background-image:url("exhibit-3-gilded-couple.png");background-repeat:no-repeat;
+  background-size:auto 100%;filter:drop-shadow(0 0 16px #e6bf7970);
 }
-#conversationExhibit .conversation-person-left { margin-left:3%; }
-#conversationExhibit .conversation-person-right { margin-right:3%;transform:scaleX(-1); }
+#conversationExhibit .conversation-person-left { margin-left:-4%;background-position:left bottom; }
+#conversationExhibit .conversation-person-right { margin-right:-4%;background-position:right bottom; }
 #conversationExhibit .conversation-bridge {
   position:absolute;z-index:1;left:24%;right:24%;top:52%;height:1px;
   background:linear-gradient(90deg,transparent,#cda76c88,transparent);
@@ -6140,9 +6142,10 @@ button {
   #conversationExhibit .conversation-heading h2 {font-size:51px;}
   #conversationExhibit .conversation-case {height:570px;min-height:0;}
   #conversationExhibit .conversation-case-top {font-size:8px;letter-spacing:.08em;top:21px;}
-  #conversationExhibit .conversation-person {width:42%;height:63%;align-self:end;}
-  #conversationExhibit .conversation-person-left {margin-left:-9%;}
-  #conversationExhibit .conversation-person-right {margin-right:-9%;}
+  #conversationExhibit .conversation-figures {background:none;}
+  #conversationExhibit .conversation-person {display:block;width:47%;height:60%;align-self:end;}
+  #conversationExhibit .conversation-person-left {margin-left:-2%;}
+  #conversationExhibit .conversation-person-right {margin-right:-2%;}
   #conversationExhibit .conversation-bubbles {inset:15% 16% 30%;}
   #conversationExhibit .conversation-bubble {width:52%;min-height:62px;padding:7px;gap:5px;}
   #conversationExhibit .conversation-bubble strong {font-size:20px;}
@@ -6517,23 +6520,9 @@ button {
     <div class="conversation-case">
       <div class="conversation-case-top" aria-hidden="true">✦ &nbsp; THE NIGHT WE BECAME US &nbsp; ✦</div>
       <div class="conversation-figures" aria-hidden="true">
-        <svg class="conversation-person conversation-person-left" viewBox="0 0 240 320">
-          <defs>
-            <linearGradient id="conversationGoldLeft" x1="0" x2="1"><stop stop-color="#624326"/><stop offset=".52" stop-color="#dbb978"/><stop offset="1" stop-color="#8d6234"/></linearGradient>
-          </defs>
-          <path d="M1 321c8-71 40-109 91-119l9-24c-17-13-30-33-31-63-8-10-10-28-2-36 2-45 29-69 68-69 49 0 76 35 69 82l11 18-12 10-11 2c-3 27-16 52-41 65l8 18c51 11 80 51 82 116Z" fill="url(#conversationGoldLeft)" stroke="#f1d49e" stroke-width="2"/>
-          <path d="M66 105c-5-52 22-91 69-93 40-2 71 30 70 78-20-19-35-24-49-27-18 23-45 31-90 42Z" fill="#40291c" stroke="#ad8048" stroke-width="2"/>
-          <path d="M84 207c39 26 83 26 111 0" fill="none" stroke="#f5dca9" stroke-opacity=".6" stroke-width="2"/>
-        </svg>
+        <div class="conversation-person conversation-person-left"></div>
         <div class="conversation-bridge"><span id="conversationBridgeFill"></span></div>
-        <svg class="conversation-person conversation-person-right" viewBox="0 0 240 320">
-          <defs>
-            <linearGradient id="conversationGoldRight" x1="0" x2="1"><stop stop-color="#69492c"/><stop offset=".56" stop-color="#deb978"/><stop offset="1" stop-color="#906135"/></linearGradient>
-          </defs>
-          <path d="M2 321c5-64 32-105 82-117l12-24c-19-16-29-39-31-64-8-12-7-27 2-36 0-46 25-71 67-71 43 0 70 29 69 75l12 22-12 12-12 3c-4 30-18 51-41 64l9 19c48 11 75 53 81 117Z" fill="url(#conversationGoldRight)" stroke="#f3d6a2" stroke-width="2"/>
-          <path d="M58 96c-6-52 24-89 76-89 43 0 69 34 69 80-19-16-33-25-49-31-20 23-51 35-96 40Z" fill="#473020" stroke="#b99156" stroke-width="2"/>
-          <path d="M84 209c37 24 79 24 111-1" fill="none" stroke="#f5dca9" stroke-opacity=".6" stroke-width="2"/>
-        </svg>
+        <div class="conversation-person conversation-person-right"></div>
       </div>
       <div class="conversation-bubbles" role="group" aria-label="Three pieces of the conversation">
         <button type="button" class="conversation-bubble" data-piece="0" onclick="openConversationPiece(0)" aria-pressed="false">
